@@ -6,6 +6,16 @@ abstract class _Theme {
   static final _buttonShape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(16),
   );
+
+  static const _inputPadding =
+      EdgeInsets.symmetric(vertical: 12, horizontal: 16);
+  static final _inputBorderRadius = BorderRadius.circular(16);
+  static final _cardTheme = CardTheme(
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16),
+    ),
+  );
   static ThemeData get theme {
     return ThemeData(
       backgroundColor: AppColors.white,
@@ -46,6 +56,17 @@ abstract class _Theme {
           shape: _buttonShape,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: _inputBorderRadius,
+          borderSide: const BorderSide(
+            width: 1,
+            color: AppColors.purple900,
+          ),
+        ),
+        contentPadding: _inputPadding,
+      ),
+      cardTheme: _cardTheme,
     );
   }
 
@@ -66,7 +87,8 @@ abstract class _Theme {
         surface: AppColors.purple800,
         onSurface: AppColors.white,
       ),
-        appBarTheme: const AppBarTheme(
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         foregroundColor: AppColors.white,
         backgroundColor: AppColors.purple900,
         elevation: 0,
@@ -79,6 +101,7 @@ abstract class _Theme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          primary: AppColors.white,
           padding: _buttonPadding,
           shape: _buttonShape,
         ),
@@ -89,6 +112,16 @@ abstract class _Theme {
           shape: _buttonShape,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColors.purple400,
+        filled: true,
+        border: OutlineInputBorder(
+          borderRadius: _inputBorderRadius,
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: _inputPadding,
+      ),
+      cardTheme: _cardTheme,
       brightness: Brightness.dark,
     );
   }

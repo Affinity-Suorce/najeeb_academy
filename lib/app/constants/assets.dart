@@ -10,4 +10,6 @@ class _Images {
   const _Images(this._parent);
 
   String boarding(int index) => '$_parent/$_path/boarding_$index.png';
+  String get middleSchool => '$_parent/$_path/middle_school.jpg';
+  String get highSchool => '$_parent/$_path/high_school.jpg';
 }

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
-import 'package:najeeb_academy/app/widgets/adaptive_text_button.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/secondary_button.dart';
+
 import 'widgets/boarding_widget.dart';
 import 'widgets/indicator.dart';
 
 class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
 
-  const WelcomePage({Key? key}) : super(key: key);
-
+class _WelcomePageState extends State<WelcomePage> {
   static const _titles = [
     'دورات عديدة مجانية\nدورات تجريبية',
     'تعلم\nسريع وسهل',
@@ -20,11 +25,6 @@ class WelcomePage extends StatefulWidget {
     'الدراسة حسب\nخطة الدراسة ، اجعل الدراسة\nأكثر تحفيزًا',
   ];
 
-  @override
-  State<WelcomePage> createState() => _WelcomePageState();
-}
-
-class _WelcomePageState extends State<WelcomePage> {
   late final PageController _controller;
   int _currentPageIndex = 0;
 
@@ -34,7 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
     _controller = PageController();
   }
 
-  int get _lastIndex => WelcomePage._titles.length - 1;
+  int get _lastIndex => _titles.length - 1;
 
   bool get _isLastPage => _currentPageIndex == _lastIndex;
 
@@ -56,16 +56,15 @@ class _WelcomePageState extends State<WelcomePage> {
                 },
                 itemBuilder: (context, index) => BoardingWidget(
                   imagePath: Assets.images.boarding(index),
-                  title: WelcomePage._titles[index],
-                  subtitle: WelcomePage._subtitles[index],
+                  title: _titles[index],
+                  subtitle: _subtitles[index],
                 ),
-                itemCount: WelcomePage._titles.length,
+                itemCount: _titles.length,
               ),
             ),
             const Spacer(),
             Center(
-              child: Indicator(
-                  controller: _controller, length: WelcomePage._titles.length),
+              child: Indicator(controller: _controller, length: _titles.length),
             ),
             const Spacer(),
             Row(
@@ -74,10 +73,12 @@ class _WelcomePageState extends State<WelcomePage> {
                 Expanded(
                   child: _isLastPage
                       ? SecondaryButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            DI.router.push(const RegisterRoute());
+                          },
                           child: const Text('إنشاء حساب'),
                         )
-                      : AdaptiveTextButton(
+                      : TextButton(
                           onPressed: _skip,
                           child: const Text('تخطي'),
                         ),
