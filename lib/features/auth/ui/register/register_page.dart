@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_class_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_communication_info_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_personal_info_step.dart';
@@ -58,6 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: CloseButton(onPressed: ()=> Navigator.pop(context)),
         title: const Text('إنشاء حساب'),
       ),
       body: Column(
