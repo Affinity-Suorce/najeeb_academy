@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
+import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
 
-class RegisterCommunicationInfoStep extends StatefulWidget {
-  const RegisterCommunicationInfoStep({
+class RegisterPasswordStep extends StatefulWidget {
+  const RegisterPasswordStep({
     super.key,
     this.onLastFieldSubmitted,
   });
   final ValueChanged<String>? onLastFieldSubmitted;
 
   @override
-  State<RegisterCommunicationInfoStep> createState() =>
-      _RegisterCommunicationInfoStepState();
+  State<RegisterPasswordStep> createState() => _RegisterPasswordStepState();
 }
 
-class _RegisterCommunicationInfoStepState
-    extends State<RegisterCommunicationInfoStep>
+class _RegisterPasswordStepState extends State<RegisterPasswordStep>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
@@ -23,24 +22,16 @@ class _RegisterCommunicationInfoStepState
       child: Column(
         children: [
           const Spacer(),
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'الجوال',
+          const PasswordFormField(
+            decoration: InputDecoration(
+              hintText: 'كلمة مرور الحساب',
             ),
             autofocus: true,
-            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
-          TextFormField(
+          PasswordFormField(
             decoration: const InputDecoration(
-              hintText: 'الهاتف الثابت',
-            ),
-            textInputAction: TextInputAction.next,
-          ),
-          const SizedBox(height: 16),
-          TextFormField(
-            decoration: const InputDecoration(
-              hintText: 'جوال ولي الأمر',
+              hintText: 'أعد كلمة المرور',
             ),
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,

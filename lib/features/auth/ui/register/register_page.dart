@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_class_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_communication_info_step.dart';
+import 'package:najeeb_academy/features/auth/ui/register/widgets/register_password_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_personal_info_step.dart';
+import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 
 import 'widgets/register_bottom_buttons.dart';
 import 'widgets/register_header.dart';
@@ -19,6 +20,7 @@ class _RegisterPageState extends State<RegisterPage> {
     'أختر صفك',
     'المعلومات الشخصية',
     'معلومات التواصل',
+    'كلمة المرور'
   ];
 
   late final PageController _controller;
@@ -58,10 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: CloseButton(onPressed: ()=> Navigator.pop(context)),
-        title: const Text('إنشاء حساب'),
-      ),
+      appBar: const AuthAppBar('إنشاء حساب'),
       body: Column(
         children: [
           RegisterHeader(
@@ -83,10 +82,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: PageView(
                   controller: _controller,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    RegisterClassStep(),
-                    RegisterPersonalInfoStep(),
-                    RegisterCommunicationInfoStep(),
+                  children: [
+                    const RegisterClassStep(),
+                    RegisterPersonalInfoStep(
+                      onLastFieldSubmitted: (_) => _nextPage(),
+                    ),
+                    RegisterCommunicationInfoStep(
+                      onLastFieldSubmitted: (_) => _nextPage(),
+                    ),
+                    RegisterPasswordStep(
+                      onLastFieldSubmitted: (_) => _register(),
+                    ),
                   ],
                   onPageChanged: (index) {
                     setState(() {

@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'register_form_step.dart';
 
 class RegisterPersonalInfoStep extends StatefulWidget {
-  const RegisterPersonalInfoStep({super.key});
+  const RegisterPersonalInfoStep({
+    super.key,
+    this.onLastFieldSubmitted,
+  });
+  final ValueChanged<String>? onLastFieldSubmitted;
 
   @override
   State<RegisterPersonalInfoStep> createState() =>
@@ -24,18 +28,23 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
             decoration: const InputDecoration(
               hintText: 'الاسم الأول',
             ),
+            autofocus: true,
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'اسم الأب',
             ),
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'الكنية',
             ),
+            textInputAction: TextInputAction.go,
+            onFieldSubmitted: widget.onLastFieldSubmitted,
           ),
           const Spacer(),
         ],

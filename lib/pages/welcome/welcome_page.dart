@@ -88,7 +88,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_isLastPage /*login*/) {
-                        //
+                        DI.router.push(const LoginRoute());
+
                         return;
                       }
                       _nextPage();
