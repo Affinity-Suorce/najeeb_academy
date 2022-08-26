@@ -16,6 +16,14 @@ abstract class _Theme {
       borderRadius: BorderRadius.circular(16),
     ),
   );
+  static const _bottomSheetTheme = BottomSheetThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(16),
+      ),
+    ),
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+  );
   static ThemeData get theme {
     return ThemeData(
       backgroundColor: AppColors.white,
@@ -67,6 +75,7 @@ abstract class _Theme {
         contentPadding: _inputPadding,
       ),
       cardTheme: _cardTheme,
+      bottomSheetTheme: _bottomSheetTheme,
     );
   }
 
@@ -122,6 +131,7 @@ abstract class _Theme {
         contentPadding: _inputPadding,
       ),
       cardTheme: _cardTheme,
+      bottomSheetTheme: _bottomSheetTheme,
       brightness: Brightness.dark,
     );
   }

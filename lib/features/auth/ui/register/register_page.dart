@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
+import 'package:najeeb_academy/features/auth/ui/register/widgets/confirm_send_message_to_number_bottom_sheet.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_class_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_communication_info_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_password_step.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_personal_info_step.dart';
+import 'package:najeeb_academy/features/auth/ui/register/widgets/register_verify_mobile_step.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 
 import 'widgets/register_bottom_buttons.dart';
@@ -20,7 +23,8 @@ class _RegisterPageState extends State<RegisterPage> {
     'أختر صفك',
     'المعلومات الشخصية',
     'معلومات التواصل',
-    'كلمة المرور'
+    'كلمة المرور',
+    'التأكد من رقم الجوال',
   ];
 
   late final PageController _controller;
@@ -91,6 +95,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       onLastFieldSubmitted: (_) => _nextPage(),
                     ),
                     RegisterPasswordStep(
+                      onLastFieldSubmitted: (_) => _nextPage(),
+                    ),
+                    RegisterVerifyMobileStep(
+                      verifyCodeLength: 4,
                       onLastFieldSubmitted: (_) => _register(),
                     ),
                   ],
@@ -114,7 +122,18 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  void _nextPage() => _toPage(_currentPageIndex + 1);
+  Future<void> _nextPage() async {
+    final isToSendMessageScreen = _currentPageIndex == 3;
+    if (isToSendMessageScreen) {
+      final confirmed = await const ConfirmSendMessageToNumberBottomSheet(
+                  number: '0987654321')
+              .showAsBottomSheet<bool>(context) ??
+          false;
+      if (!confirmed) return;
+    }
+    _toPage(_currentPageIndex + 1);
+  }
+
   void _prevPage() => _toPage(_currentPageIndex - 1);
 
   void _toPage(int page) {

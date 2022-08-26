@@ -46,6 +46,8 @@ dependencies:
   auto_route: ^5.0.1
   flutter_native_splash: ^2.2.8
   percent_indicator: ^4.2.2
+  pin_code_fields: ^7.4.0
+  # numeric_keyboard: ^1.1.0
 
 dev_dependencies:
   flutter_test:
