@@ -50,11 +50,19 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
                   inactiveColor: theme.textTheme.caption?.color,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                autoFocus: true,
                 autoDismissKeyboard: true,
                 appContext: context,
                 length: widget.verifyCodeLength,
+                autoFocus: true,
+                showCursor: true,
                 readOnly: true,
+                keyboardType: TextInputType.none,
+                beforeTextPaste: (input) {
+                  if (input == null) return false;
+                  final number = int.tryParse(input);
+                  return number != null &&
+                      number.toString().length == widget.verifyCodeLength;
+                },
                 onChanged: (_) {},
               ),
             ),

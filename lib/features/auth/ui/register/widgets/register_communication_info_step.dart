@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
+import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field.dart';
 
 class RegisterCommunicationInfoStep extends StatefulWidget {
   const RegisterCommunicationInfoStep({
@@ -23,12 +24,11 @@ class _RegisterCommunicationInfoStepState
       child: Column(
         children: [
           const Spacer(),
-          TextFormField(
-            decoration: const InputDecoration(
+          const SyrianMobileFormField(
+            decoration: InputDecoration(
               hintText: 'الجوال',
             ),
             autofocus: true,
-            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
           TextFormField(
@@ -38,7 +38,7 @@ class _RegisterCommunicationInfoStepState
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
-          TextFormField(
+          SyrianMobileFormField(
             decoration: const InputDecoration(
               hintText: 'جوال ولي الأمر',
             ),
