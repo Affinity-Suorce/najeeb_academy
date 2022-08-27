@@ -23,9 +23,7 @@ class _$AppRouter extends RootStackRouter {
     },
     LoginRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: LoginPage(),
-          fullscreenDialog: true);
+          routeData: routeData, child: const LoginPage(), fullscreenDialog: true);
     },
     RegisterRoute.name: (routeData) {
       return AdaptivePage<dynamic>(

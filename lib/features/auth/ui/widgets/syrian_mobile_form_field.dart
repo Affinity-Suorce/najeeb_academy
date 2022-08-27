@@ -8,25 +8,34 @@ class SyrianMobileFormField extends StatelessWidget {
     this.textInputAction = TextInputAction.next,
     this.autofocus = false,
     this.onFieldSubmitted,
+    this.onChanged,
     this.required = true,
+    this.controller,
+    this.onSaved,
   });
+  final FormFieldSetter<String>? onSaved;
   final bool required;
   final InputDecoration? decoration;
   final TextInputAction textInputAction;
   final bool autofocus;
   final ValueChanged<String>? onFieldSubmitted;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: decoration,
+      controller: controller,
       autofocus: autofocus,
       textInputAction: textInputAction,
       onFieldSubmitted: onFieldSubmitted,
       keyboardType: TextInputType.phone,
+      onChanged: onChanged,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\+?[0-9]*$')),
       ],
+      onSaved: onSaved,
       validator: (input) {
         if (input == null || input.trim().isEmpty) {
           return required ? 'رقم الجوال مطلوب' : null;

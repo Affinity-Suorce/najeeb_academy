@@ -12,4 +12,5 @@ class _Images {
   String boarding(int index) => '$_parent/$_path/boarding_$index.png';
   String get middleSchool => '$_parent/$_path/middle_school.jpg';
   String get highSchool => '$_parent/$_path/high_school.jpg';
+  String get loginImage => '$_parent/$_path/login_image.png';
 }

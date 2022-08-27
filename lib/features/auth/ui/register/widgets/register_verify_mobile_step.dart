@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/widgets/numeric_keyboard.dart';
+import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class RegisterVerifyMobileStep extends StatefulWidget {
   const RegisterVerifyMobileStep({
@@ -31,10 +33,12 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
     super.build(context);
     final theme = Theme.of(context);
     return RegisterFormStep(
+      formKey: context.read<RegisterFormService>().formsKeys[4],
       child: Column(
         children: [
           const Spacer(),
-          const Text('تم إرسال رمز التفعيل إلى 0987654321'),
+          Text(
+              'تم إرسال رمز التفعيل إلى ${context.read<RegisterFormService>().mobile}'),
           const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -62,6 +66,12 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
                   final number = int.tryParse(input);
                   return number != null &&
                       number.toString().length == widget.verifyCodeLength;
+                },
+                validator: (input) {
+                  if (input == null || input.trim().isEmpty) {
+                    return 'الرجاء إدخال رمز التحقق';
+                  }
+                  return null;
                 },
                 onChanged: (_) {},
               ),

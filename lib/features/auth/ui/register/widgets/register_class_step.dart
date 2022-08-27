@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
+import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
+import 'package:provider/provider.dart';
 
 class RegisterClassStep extends StatefulWidget {
   const RegisterClassStep({super.key});
@@ -13,12 +16,31 @@ class RegisterClassStep extends StatefulWidget {
 class _RegisterClassStepState extends State<RegisterClassStep>
     with AutomaticKeepAliveClientMixin {
   int? selectedClass;
+  bool get showErrorMessage {
+    final currentClass = selectedClass;
+    return currentClass == null || currentClass > 1 || currentClass < 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return RegisterFormStep(
+      formKey: context.read<RegisterFormService>().formsKeys[0],
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox.shrink(
+            child: TextFormField(
+              readOnly: true,
+              validator: (_) {
+                if (showErrorMessage) {
+                  context.showFailSnackBar('الرجاء اختيار الصف');
+                  return '';
+                }
+                return null;
+              },
+            ),
+          ),
           const Spacer(),
           Expanded(
             flex: 3,
@@ -72,8 +94,6 @@ class _ClassItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // final background = selected ? AppColors.orange700 : AppColors.orange50;
-    // final foreground = selected ? AppColors.orange50 : AppColors.orange700;
     final background = selected ? Colors.green : null;
     final foreground = selected ? AppColors.white : null;
     final imageColor = selected ? null : const Color(0x44000000);

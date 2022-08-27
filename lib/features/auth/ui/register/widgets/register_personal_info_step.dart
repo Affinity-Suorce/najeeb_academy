@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
+import 'package:provider/provider.dart';
 
 import 'register_form_step.dart';
 
@@ -20,6 +22,7 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
   Widget build(BuildContext context) {
     super.build(context);
     return RegisterFormStep(
+      formKey: context.read<RegisterFormService>().formsKeys[1],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,6 +31,7 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
             decoration: const InputDecoration(
               hintText: 'الاسم الأول',
             ),
+            validator: validator,
             autofocus: true,
             textInputAction: TextInputAction.next,
           ),
@@ -36,6 +40,7 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
             decoration: const InputDecoration(
               hintText: 'اسم الأب',
             ),
+            validator: validator,
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
@@ -43,6 +48,7 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
             decoration: const InputDecoration(
               hintText: 'الكنية',
             ),
+            validator: validator,
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,
           ),
@@ -50,6 +56,12 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
         ],
       ),
     );
+  }
+
+  String? validator(String? input) {
+    if (input == null || input.trim().isEmpty) return 'هذا الحقل مطلوب';
+    if (input.trim().length < 2) return 'أقل طول ممكن هو محرفين';
+    return null;
   }
 
   @override

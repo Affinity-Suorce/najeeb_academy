@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/widgets/secondary_button.dart';
+import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
+import 'package:provider/provider.dart';
 
 class RegisterBottomButtons extends StatelessWidget {
-  final VoidCallback nextPage;
-  final VoidCallback prevPage;
-  final bool isLastPage;
-  final VoidCallback register;
   const RegisterBottomButtons({
     super.key,
-    required this.nextPage,
-    required this.prevPage,
-    required this.isLastPage,
-    required this.register,
   });
 
   @override
   Widget build(BuildContext context) {
+    final service = context.read<RegisterFormService>();
+    final watchService = context.watch<RegisterFormService>();
     return BottomAppBar(
       elevation: 0,
       color: Colors.transparent,
@@ -25,7 +21,9 @@ class RegisterBottomButtons extends StatelessWidget {
           children: [
             Expanded(
               child: SecondaryButton(
-                onPressed: prevPage,
+                onPressed: watchService.currentPageIndex == 0
+                    ? null
+                    : service.prevPage,
                 child: const Text('رجوع'),
               ),
             ),
@@ -33,12 +31,14 @@ class RegisterBottomButtons extends StatelessWidget {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
-                  if (isLastPage) {
-                    return register();
+                  if (watchService.isLastPage) {
+                    service.register();
+                    return;
                   }
-                  nextPage();
+                  service.nextPage(context);
                 },
-                child: Text(isLastPage ? 'إنشاء الحساب' : 'التالي'),
+                child:
+                    Text(watchService.isLastPage ? 'إنشاء الحساب' : 'التالي'),
               ),
             ),
           ],

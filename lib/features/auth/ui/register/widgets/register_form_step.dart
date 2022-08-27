@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class RegisterFormStep extends StatelessWidget {
   final Widget child;
+  final GlobalKey<FormState>? formKey;
   const RegisterFormStep({
     super.key,
+    this.formKey,
     required this.child,
   });
 
@@ -14,7 +16,12 @@ class RegisterFormStep extends StatelessWidget {
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverFillRemaining(
-            child: child,
+            child: formKey == null
+                ? child
+                : Form(
+                    key: formKey,
+                    child: child,
+                  ),
           ),
         ),
       ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPasswordStep extends StatefulWidget {
   const RegisterPasswordStep({
@@ -15,17 +17,24 @@ class RegisterPasswordStep extends StatefulWidget {
 
 class _RegisterPasswordStepState extends State<RegisterPasswordStep>
     with AutomaticKeepAliveClientMixin {
+  String _password = '';
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return RegisterFormStep(
+      formKey: context.read<RegisterFormService>().formsKeys[3],
       child: Column(
         children: [
           const Spacer(),
-          const PasswordFormField(
-            decoration: InputDecoration(
+          PasswordFormField(
+            decoration: const InputDecoration(
               hintText: 'كلمة مرور الحساب',
             ),
+            onChanged: (input) {
+              setState(() {
+                _password = input;
+              });
+            },
             autofocus: true,
           ),
           const SizedBox(height: 16),
@@ -33,6 +42,12 @@ class _RegisterPasswordStepState extends State<RegisterPasswordStep>
             decoration: const InputDecoration(
               hintText: 'أعد كلمة المرور',
             ),
+            validator: (input) {
+              if (_password.trim() != input.trim()) {
+                return 'كملة المرور غير متطابقة';
+              }
+              return null;
+            },
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,
           ),
