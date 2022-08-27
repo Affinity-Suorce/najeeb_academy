@@ -128,6 +128,13 @@ abstract class _Theme {
           borderRadius: _inputBorderRadius,
           borderSide: BorderSide.none,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: _inputBorderRadius,
+          borderSide: const BorderSide(
+            width: 0.5,
+            color: AppColors.indigo,
+          ),
+        ),
         contentPadding: _inputPadding,
       ),
       cardTheme: _cardTheme,

@@ -40,7 +40,7 @@ class SyrianMobileFormField extends StatelessWidget {
         if (input == null || input.trim().isEmpty) {
           return required ? 'رقم الجوال مطلوب' : null;
         }
-        if (!RegExp(r'^((\+|00)?9639|0?9)([3-6]|[8,2])\d{7}$')
+        if (!RegExp(r'^((\+|00)?9639|0?9)([3-6]|[8,9])\d{7}$')
             .hasMatch(input)) {
           return 'الرجاء إدخال رقم جوال صالح';
         }

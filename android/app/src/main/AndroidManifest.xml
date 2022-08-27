@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sy.academy.najeeb.najeeb_academy">
+    package="com.ysh.najeeb_academy">
    <application
-        android:label="najeeb_academy"
+        android:label="نجيب"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

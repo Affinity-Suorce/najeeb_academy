@@ -37,8 +37,19 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
       child: Column(
         children: [
           const Spacer(),
-          Text(
-              'تم إرسال رمز التفعيل إلى ${context.read<RegisterFormService>().mobile}'),
+          RichText(
+            text: TextSpan(
+              children: [
+                const TextSpan(text: 'تم إرسال رمز التفعيل إلى الرقم '),
+                TextSpan(
+                  text: context.read<RegisterFormService>().mobile,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 16),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -50,8 +61,9 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
                 controller: _controller,
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  activeColor: theme.colorScheme.primary,
-                  inactiveColor: theme.textTheme.caption?.color,
+                  activeFillColor: theme.inputDecorationTheme.fillColor,
+                  borderWidth:
+                      theme.inputDecorationTheme.border?.borderSide.width,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 autoDismissKeyboard: true,
@@ -67,15 +79,19 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
                   return number != null &&
                       number.toString().length == widget.verifyCodeLength;
                 },
+                errorTextDirection: TextDirection.rtl,
+                errorTextSpace: 24,
                 validator: (input) {
-                  if (input == null || input.trim().isEmpty) {
+                  if (input == null ||
+                      input.trim().length < widget.verifyCodeLength) {
                     return 'الرجاء إدخال رمز التحقق';
                   }
                   return null;
                 },
-                onChanged: (input) {
+                onChanged: (_) {},
+                onSaved: (input) {
                   context.read<RegisterFormService>().verifyMobileCode =
-                      input.trim();
+                      input?.trim();
                 },
               ),
             ),
@@ -101,7 +117,7 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
 
   @override
   void dispose() {
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 

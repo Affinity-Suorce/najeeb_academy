@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
@@ -14,10 +15,17 @@ part 'app_theme.dart';
 
 class NajeebAcademyApp extends StatelessWidget {
   static Future<void> init() async {
+    FlutterNativeSplash.preserve(
+        widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
+
     _Localization.initLocalization();
     await DI.init();
     await SystemChrome.setPreferredOrientations(
         AppOrientation.defaultOrientation);
+    Future.delayed(
+      const Duration(milliseconds: 200),
+      () => FlutterNativeSplash.remove(),
+    );
   }
 
   const NajeebAcademyApp({Key? key}) : super(key: key);
