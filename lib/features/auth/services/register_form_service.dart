@@ -62,9 +62,21 @@ class RegisterFormService extends ChangeNotifier {
   }
 
   int? studentClass;
-  String? firstName, lastName, mobile, landline, parentMobile;
+  String? firstName,
+      fatherName,
+      lastName,
+      mobile,
+      landline,
+      parentMobile,
+      password,
+      confirmedPassword,
+      verifyMobileCode;
 
   Future<void> register() async {
-    //
+    for (final formKey in formsKeys) {
+      formKey.currentState?.save();
+    }
+    print(
+        'first name: $firstName\nlast name: $lastName\nmobile: $mobile\nlandline: $landline\nparent mobile: $parentMobile\npassword: $password\nconfirm password: $confirmedPassword\nverify code: $verifyMobileCode');
   }
 }

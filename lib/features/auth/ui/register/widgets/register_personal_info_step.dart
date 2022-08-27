@@ -32,6 +32,9 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
               hintText: 'الاسم الأول',
             ),
             validator: validator,
+            onSaved: (input) {
+              context.read<RegisterFormService>().firstName = input?.trim();
+            },
             autofocus: true,
             textInputAction: TextInputAction.next,
           ),
@@ -41,6 +44,9 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
               hintText: 'اسم الأب',
             ),
             validator: validator,
+            onSaved: (input) {
+              context.read<RegisterFormService>().fatherName = input?.trim();
+            },
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
@@ -49,6 +55,9 @@ class _RegisterPersonalInfoStepState extends State<RegisterPersonalInfoStep>
               hintText: 'الكنية',
             ),
             validator: validator,
+            onSaved: (input) {
+              context.read<RegisterFormService>().lastName = input?.trim();
+            },
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,
           ),

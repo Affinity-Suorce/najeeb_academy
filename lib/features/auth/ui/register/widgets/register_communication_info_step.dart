@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/auth/services/register_form_service.dart';
 import 'package:najeeb_academy/features/auth/ui/register/widgets/register_form_step.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field.dart';
@@ -41,6 +42,13 @@ class _RegisterCommunicationInfoStepState
             decoration: const InputDecoration(
               hintText: 'الهاتف الثابت',
             ),
+            onSaved: (input) {
+              context.read<RegisterFormService>().landline = input?.trim();
+            },
+            keyboardType: TextInputType.phone,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
             textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
@@ -48,6 +56,9 @@ class _RegisterCommunicationInfoStepState
             decoration: const InputDecoration(
               hintText: 'جوال ولي الأمر',
             ),
+            onSaved: (input) {
+              context.read<RegisterFormService>().parentMobile = input?.trim();
+            },
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,
           ),

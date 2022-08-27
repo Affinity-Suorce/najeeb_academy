@@ -73,7 +73,10 @@ class _RegisterVerifyMobileStepState extends State<RegisterVerifyMobileStep>
                   }
                   return null;
                 },
-                onChanged: (_) {},
+                onChanged: (input) {
+                  context.read<RegisterFormService>().verifyMobileCode =
+                      input.trim();
+                },
               ),
             ),
           ),

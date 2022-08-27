@@ -39,6 +39,10 @@ class _RegisterClassStepState extends State<RegisterClassStep>
                 }
                 return null;
               },
+              onSaved: (_) {
+                context.read<RegisterFormService>().studentClass =
+                    selectedClass;
+              },
             ),
           ),
           const Spacer(),

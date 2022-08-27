@@ -17,7 +17,7 @@ class RegisterPasswordStep extends StatefulWidget {
 
 class _RegisterPasswordStepState extends State<RegisterPasswordStep>
     with AutomaticKeepAliveClientMixin {
-  String _password = '';
+  // String _password = '';
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -31,9 +31,7 @@ class _RegisterPasswordStepState extends State<RegisterPasswordStep>
               hintText: 'كلمة مرور الحساب',
             ),
             onChanged: (input) {
-              setState(() {
-                _password = input;
-              });
+              context.read<RegisterFormService>().password = input.trim();
             },
             autofocus: true,
           ),
@@ -43,10 +41,15 @@ class _RegisterPasswordStepState extends State<RegisterPasswordStep>
               hintText: 'أعد كلمة المرور',
             ),
             validator: (input) {
-              if (_password.trim() != input.trim()) {
+              if (context.read<RegisterFormService>().password?.trim() !=
+                  input.trim()) {
                 return 'كملة المرور غير متطابقة';
               }
               return null;
+            },
+            onSaved: (input) {
+              context.read<RegisterFormService>().confirmedPassword =
+                  input?.trim();
             },
             textInputAction: TextInputAction.go,
             onFieldSubmitted: widget.onLastFieldSubmitted,
