@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/main_page.dart';
 
 class LoginFormService extends ChangeNotifier {
   LoginFormService({
@@ -13,6 +16,7 @@ class LoginFormService extends ChangeNotifier {
     if (formState != null && formState.validate()) {
       formState.save();
       print('mobile: $mobile\npassword: $password');
+      // DI.router.push(const MainRoute());
     }
   }
 

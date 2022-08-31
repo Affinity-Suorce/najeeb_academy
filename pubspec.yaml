@@ -35,7 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.5
   timeago:
     git:
       url: https://github.com/ysh-work/timeago.dart.git
@@ -48,6 +48,15 @@ dependencies:
   percent_indicator: ^4.2.2
   pin_code_fields: ^7.4.0
   provider: ^6.0.3
+  video_player: ^2.4.7
+  wakelock: ^0.6.2
+  auto_orientation: ^2.2.1
+  native_device_orientation: ^0.4.3
+  font_awesome_flutter: ^10.1.0
+  linked_scroll_controller: ^0.2.0
+  flutter_svg: ^1.1.4
+  persistent_bottom_nav_bar: ^4.0.2
+  flutter_zoom_drawer: ^3.0.3
 
 dev_dependencies:
   flutter_test:
@@ -58,7 +67,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  # flutter_lints: ^2.0.0
   auto_route_generator: ^5.0.1
   build_runner: ^2.2.0
 
@@ -81,6 +90,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -98,6 +108,12 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Janna
+      fonts:
+        - asset: assets/fonts/Janna LT Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Janna LT Regular.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
