@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
-import 'package:najeeb_academy/app/widgets/secondary_button.dart';
 
 import 'widgets/boarding_widget.dart';
 import 'widgets/indicator.dart';
@@ -15,15 +15,15 @@ class WelcomePage extends StatefulWidget {
 
 class _WelcomePageState extends State<WelcomePage> {
   static const _titles = [
-    'دورات عديدة مجانية\nدورات تجريبية',
-    'تعلم\nسريع وسهل',
-    'أنشئ خطة دراسية\nخاصة بك',
+    'نجيب معك\nلتبدأ النجاح وتصل إلى حلمك',
+    'نجيب ينظم وقتك\nويضع لك خطتك الدراسية',
+    'اجعل الدراسة أكثر تحفيزاً\nأكثر تميزاً وأكثر متعة وابدأ خطوتك الأولى معنا',
   ];
-  static const _subtitles = [
-    'دورات مجانية لك\nجد طريقك إلى التعلم',
-    'تعلم سريع وسهل\nفي أي وقت لمساعدتك\nلتحسين المهارات المختلفة',
-    'الدراسة حسب\nخطة الدراسة ، اجعل الدراسة\nأكثر تحفيزًا',
-  ];
+  // static const _subtitles = [
+  //   'دورات مجانية لك\nجد طريقك إلى التعلم',
+  //   'تعلم سريع وسهل\nفي أي وقت لمساعدتك\nلتحسين المهارات المختلفة',
+  //   'الدراسة حسب\nخطة الدراسة ، اجعل الدراسة\nأكثر تحفيزًا',
+  // ];
 
   late final PageController _controller;
   int _currentPageIndex = 0;
@@ -44,9 +44,8 @@ class _WelcomePageState extends State<WelcomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            const Spacer(flex: 2),
+            16.verticalSpace,
             Expanded(
-              flex: 10,
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (index) {
@@ -57,38 +56,38 @@ class _WelcomePageState extends State<WelcomePage> {
                 itemBuilder: (context, index) => BoardingWidget(
                   imagePath: Assets.images.boarding(index),
                   title: _titles[index],
-                  subtitle: _subtitles[index],
+                  // subtitle: _subtitles[index],
                 ),
                 itemCount: _titles.length,
               ),
             ),
-            const Spacer(),
+            16.verticalSpace,
             Center(
               child: Indicator(controller: _controller, length: _titles.length),
             ),
-            const Spacer(),
+            16.verticalSpace,
             Row(
               children: [
-                const SizedBox(width: 24),
+                12.horizontalSpace,
                 Expanded(
                   child: _isLastPage
-                      ? SecondaryButton(
+                      ? OutlinedButton(
                           onPressed: () {
-                            DI.router.push(const RegisterRoute());
+                            // DI.router.push(const RegisterRoute());
                           },
-                          child: const Text('إنشاء حساب'),
+                          child: const Text('ابدأ'),
                         )
                       : TextButton(
                           onPressed: _skip,
                           child: const Text('تخطي'),
                         ),
                 ),
-                const SizedBox(width: 24),
+                12.horizontalSpace,
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
                       if (_isLastPage /*login*/) {
-                        DI.router.push(const LoginRoute());
+                        DI.router.push(LoginRoute());
 
                         return;
                       }
@@ -97,10 +96,10 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: Text(_isLastPage ? 'تسجيل الدخول' : 'التالي'),
                   ),
                 ),
-                const SizedBox(width: 24),
+                12.horizontalSpace,
               ],
             ),
-            const Spacer(),
+            16.verticalSpace,
           ],
         ),
       ),

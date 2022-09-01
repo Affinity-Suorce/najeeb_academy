@@ -1,31 +1,33 @@
 part of 'app.dart';
 
 abstract class _Theme {
-  static const _buttonPadding =
-      EdgeInsets.symmetric(vertical: 12, horizontal: 32);
+  static final _buttonPadding =
+      EdgeInsets.symmetric(vertical: 12.h, horizontal: 32.w);
   static final _buttonShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(16),
+    borderRadius: BorderRadius.circular(16.r),
   );
 
-  static const _inputPadding =
-      EdgeInsets.symmetric(vertical: 12, horizontal: 16);
+  static final _inputPadding =
+      EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w);
   static final _inputBorderRadius = BorderRadius.circular(16);
   static final _cardTheme = CardTheme(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(16.r),
     ),
   );
-  static const _bottomSheetTheme = BottomSheetThemeData(
+  static final _bottomSheetTheme = BottomSheetThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
-        top: Radius.circular(16),
+        top: Radius.circular(16.r),
       ),
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
   );
   static ThemeData get theme {
     return ThemeData(
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      fontFamily: Assets.fonts.balooBhaijaan2,
       backgroundColor: AppColors.white,
       scaffoldBackgroundColor: AppColors.white,
       colorScheme: const ColorScheme(
@@ -74,72 +76,9 @@ abstract class _Theme {
         ),
         contentPadding: _inputPadding,
       ),
+      textTheme: const TextTheme().apply(fontSizeFactor: 1.sp),
       cardTheme: _cardTheme,
       bottomSheetTheme: _bottomSheetTheme,
-    );
-  }
-
-  static ThemeData get darkTheme {
-    return ThemeData(
-      backgroundColor: AppColors.purple900,
-      scaffoldBackgroundColor: AppColors.purple900,
-      colorScheme: const ColorScheme(
-        brightness: Brightness.dark,
-        primary: AppColors.indigo,
-        onPrimary: AppColors.white,
-        secondary: AppColors.indigo,
-        onSecondary: AppColors.white,
-        error: AppColors.red600,
-        onError: AppColors.white,
-        background: AppColors.purple900,
-        onBackground: AppColors.white,
-        surface: AppColors.purple800,
-        onSurface: AppColors.white,
-      ),
-      appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-        foregroundColor: AppColors.white,
-        backgroundColor: AppColors.purple900,
-        elevation: 0,
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          padding: _buttonPadding,
-          shape: _buttonShape,
-        ),
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          primary: AppColors.white,
-          padding: _buttonPadding,
-          shape: _buttonShape,
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          padding: _buttonPadding,
-          shape: _buttonShape,
-        ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        fillColor: AppColors.purple400,
-        filled: true,
-        border: OutlineInputBorder(
-          borderRadius: _inputBorderRadius,
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: _inputBorderRadius,
-          borderSide: const BorderSide(
-            width: 0.5,
-            color: AppColors.indigo,
-          ),
-        ),
-        contentPadding: _inputPadding,
-      ),
-      cardTheme: _cardTheme,
-      bottomSheetTheme: _bottomSheetTheme,
-      brightness: Brightness.dark,
     );
   }
 

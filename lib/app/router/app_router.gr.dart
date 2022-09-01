@@ -22,13 +22,19 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: const WelcomePage());
     },
     LoginRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-          routeData: routeData, child: const LoginPage(), fullscreenDialog: true);
-    },
-    RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => const LoginRouteArgs());
       return AdaptivePage<dynamic>(
           routeData: routeData,
-          child: const RegisterPage(),
+          child: LoginPage(key: args.key),
+          fullscreenDialog: true);
+    },
+    RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterRouteArgs>(
+          orElse: () => const RegisterRouteArgs());
+      return AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: RegisterPage(key: args.key),
           fullscreenDialog: true);
     }
   };
@@ -51,16 +57,41 @@ class WelcomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [LoginPage]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute() : super(LoginRoute.name, path: '/login');
+class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({Key? key})
+      : super(LoginRoute.name, path: '/login', args: LoginRouteArgs(key: key));
 
   static const String name = 'LoginRoute';
 }
 
+class LoginRouteArgs {
+  const LoginRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key}';
+  }
+}
+
 /// generated route for
 /// [RegisterPage]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute() : super(RegisterRoute.name, path: '/register');
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({Key? key})
+      : super(RegisterRoute.name,
+            path: '/register', args: RegisterRouteArgs(key: key));
 
   static const String name = 'RegisterRoute';
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key}';
+  }
 }

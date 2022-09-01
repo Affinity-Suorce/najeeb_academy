@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/widgets/secondary_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'bottom_sheet_container.dart';
 
@@ -35,7 +35,7 @@ class ConfirmBottomSheet extends StatelessWidget {
       child: Column(
         children: [
           child ?? Text(message!, style: theme.textTheme.headline5),
-          const SizedBox(height: 24),
+          24.verticalSpace,
           Row(
             children: [
               Expanded(
@@ -52,9 +52,9 @@ class ConfirmBottomSheet extends StatelessWidget {
                   child: Text(primaryButtonLabel),
                 ),
               ),
-              const SizedBox(width: 16),
+              16.horizontalSpace,
               Expanded(
-                child: SecondaryButton(
+                child: OutlinedButton(
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },

@@ -18,7 +18,6 @@ part 'app_router.gr.dart';
     ),
     AutoRoute(
       page: RegisterPage,
-      initial: true,
       path: '/register',
       fullscreenDialog: true,
     ),

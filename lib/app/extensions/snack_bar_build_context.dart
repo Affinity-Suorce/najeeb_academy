@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension SnackBarBuildContextExtension on BuildContext {
   // Future<void> copyToClipboard(String text,
@@ -71,7 +72,7 @@ extension SnackBarBuildContextExtension on BuildContext {
             : Row(
                 children: [
                   Icon(icon, color: iconColor),
-                  const SizedBox(width: 12),
+                  12.horizontalSpace,
                   Text(message),
                 ],
               ),

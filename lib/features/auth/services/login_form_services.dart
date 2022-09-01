@@ -1,30 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class LoginFormService extends ChangeNotifier {
-  LoginFormService({
-    this.mobile = '',
-    this.password = '',
-  });
-  final formKey = GlobalKey<FormState>();
-  String mobile;
-  String password;
+  LoginFormService();
+  final formKey = GlobalKey<FormBuilderState>();
+
   Future<void> login() async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
-      formState.save();
-      print('mobile: $mobile\npassword: $password');
+      final username = formState.fields['username']!.value;
+      final password = formState.fields['password']!.value;
+      print('username: $username\npassword: $password');
     }
-  }
-
-  void saveMobile(String? mobile) {
-    if (mobile == null) return;
-    this.mobile = mobile;
-    notifyListeners();
-  }
-
-  void savePassword(String? password) {
-    if (password == null) return;
-    this.password = password;
-    notifyListeners();
   }
 }

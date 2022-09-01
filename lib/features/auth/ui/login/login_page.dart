@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/assets.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/app/widgets/link_text.dart';
+import 'package:najeeb_academy/app/widgets/logo.dart';
 import 'package:najeeb_academy/features/auth/services/login_form_services.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
-import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  LoginPage({Key? key}) : super(key: key);
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  late final LoginFormService service;
-
-  @override
-  void initState() {
-    super.initState();
-    service = LoginFormService();
-  }
+  final service = LoginFormService();
 
   @override
   Widget build(BuildContext context) {
@@ -28,33 +21,59 @@ class _LoginPageState extends State<LoginPage> {
       body: CustomScrollView(
         slivers: [
           SliverFillRemaining(
+            hasScrollBody: false,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              child: Form(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: FormBuilder(
                 key: service.formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Expanded(child: Image.asset(Assets.images.loginImage)),
-                    const Spacer(),
-                    SyrianMobileFormField(
-                      autofocus: true,
-                      decoration: const InputDecoration(hintText: 'رقم الجوال'),
-                      onSaved: service.saveMobile,
+                    Flexible(
+                      flex: 3,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 0.2.sw, vertical: 16.h),
+                          child: const Logo(),
+                        ),
+                      ),
                     ),
-                    const SizedBox(height: 16),
+                    FormBuilderTextField(
+                      name: 'username',
+                      autofocus: true,
+                      decoration:
+                          const InputDecoration(hintText: 'اسم المستخدم'),
+                      textInputAction: TextInputAction.next,
+                      validator: (input) {
+                        if (input == null || input.trim().isEmpty) {
+                          return 'هذا الحقل مطلوب';
+                        }
+                        return null;
+                      },
+                    ),
+                    8.verticalSpace,
                     PasswordFormField(
                       decoration:
                           const InputDecoration(hintText: 'كلمة المرور'),
-                      onSaved: service.savePassword,
                       textInputAction: TextInputAction.go,
                       onFieldSubmitted: (_) => service.login(),
                     ),
-                    const Spacer(),
+                    16.verticalSpace,
                     ElevatedButton(
                       onPressed: service.login,
                       child: const Text('تسجيل الدخول'),
                     ),
+                    8.verticalSpace,
+                    Align(
+                      child: LinkText(
+                        'ليس لديك حساب؟',
+                        onTap: () {
+                          DI.router.replace(RegisterRoute());
+                        },
+                      ),
+                    ),
+                    16.verticalSpace,
                   ],
                 ),
               ),
@@ -63,11 +82,5 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    service.dispose();
-    super.dispose();
   }
 }

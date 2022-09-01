@@ -3,37 +3,43 @@ import 'package:flutter/material.dart';
 class BoardingWidget extends StatelessWidget {
   final String imagePath;
   final String title;
-  final String subtitle;
   const BoardingWidget({
     super.key,
     required this.imagePath,
     required this.title,
-    required this.subtitle,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Column(
-      children: [
-        Image.asset(
-          imagePath,
-          width: 260,
-          height: 260,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: Align(
+        alignment: const Alignment(0, -0.5),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              flex: 2,
+              child: Center(
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            Flexible(
+              child: Center(
+                child: Text(
+                  title,
+                  style: theme.textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(height: 16),
-        Text(
-          title,
-          style: theme.textTheme.titleLarge,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 16),
-        Text(
-          subtitle,
-          style: theme.textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        ),
-      ],
+      ),
     );
   }
 }

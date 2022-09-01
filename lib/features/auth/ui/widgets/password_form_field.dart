@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField({
@@ -10,16 +11,16 @@ class PasswordFormField extends StatefulWidget {
     this.onFieldSubmitted,
     this.onChanged,
     this.controller,
-    this.onSaved,
     this.validator,
+    this.name = 'password',
   });
+  final String name;
   final InputDecoration? decoration;
   final TextInputAction textInputAction;
   final bool autofocus;
-  final ValueChanged<String>? onFieldSubmitted;
-  final ValueChanged<String>? onChanged;
+  final ValueChanged<String?>? onFieldSubmitted;
+  final ValueChanged<String?>? onChanged;
   final TextEditingController? controller;
-  final FormFieldSetter<String>? onSaved;
   final String? Function(String input)? validator;
 
   @override
@@ -31,7 +32,8 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return FormBuilderTextField(
+      name: widget.name,
       obscureText: obscureText,
       controller: widget.controller,
       decoration:
@@ -41,7 +43,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               ),
       autofocus: widget.autofocus,
       textInputAction: widget.textInputAction,
-      onFieldSubmitted: widget.onFieldSubmitted,
+      onSubmitted: widget.onFieldSubmitted,
       keyboardType: TextInputType.visiblePassword,
       onChanged: widget.onChanged,
       validator: (input) {
@@ -60,7 +62,6 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       inputFormatters: [
         FilteringTextInputFormatter.deny(RegExp(r'\s')),
       ],
-      onSaved: widget.onSaved,
     );
   }
 

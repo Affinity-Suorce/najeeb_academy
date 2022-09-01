@@ -1,6 +1,7 @@
 abstract class Assets {
   static const _path = 'assets';
   static const images = _Images(_path);
+  static const fonts = _Fonts();
 }
 
 class _Images {
@@ -10,7 +11,11 @@ class _Images {
   const _Images(this._parent);
 
   String boarding(int index) => '$_parent/$_path/boarding_$index.png';
-  String get middleSchool => '$_parent/$_path/middle_school.jpg';
-  String get highSchool => '$_parent/$_path/high_school.jpg';
-  String get loginImage => '$_parent/$_path/login_image.png';
+  String get logo => '$_parent/$_path/logo.png';
+}
+
+class _Fonts {
+  const _Fonts();
+
+  String get balooBhaijaan2 => 'BalooBhaijaan2';
 }
