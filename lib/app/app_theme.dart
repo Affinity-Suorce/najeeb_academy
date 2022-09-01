@@ -27,7 +27,7 @@ abstract class _Theme {
   static ThemeData get theme {
     return ThemeData(
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      fontFamily: Assets.fonts.balooBhaijaan2,
+      fontFamily: Assets.fonts.janna,
       backgroundColor: AppColors.white,
       scaffoldBackgroundColor: AppColors.white,
       colorScheme: const ColorScheme(

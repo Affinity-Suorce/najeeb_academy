@@ -1,0 +1,1 @@
+enum Quality{Low,Sd,Hd}

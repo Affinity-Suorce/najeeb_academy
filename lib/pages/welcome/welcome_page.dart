@@ -19,11 +19,6 @@ class _WelcomePageState extends State<WelcomePage> {
     'نجيب ينظم وقتك\nويضع لك خطتك الدراسية',
     'اجعل الدراسة أكثر تحفيزاً\nأكثر تميزاً وأكثر متعة وابدأ خطوتك الأولى معنا',
   ];
-  // static const _subtitles = [
-  //   'دورات مجانية لك\nجد طريقك إلى التعلم',
-  //   'تعلم سريع وسهل\nفي أي وقت لمساعدتك\nلتحسين المهارات المختلفة',
-  //   'الدراسة حسب\nخطة الدراسة ، اجعل الدراسة\nأكثر تحفيزًا',
-  // ];
 
   late final PageController _controller;
   int _currentPageIndex = 0;
@@ -56,7 +51,6 @@ class _WelcomePageState extends State<WelcomePage> {
                 itemBuilder: (context, index) => BoardingWidget(
                   imagePath: Assets.images.boarding(index),
                   title: _titles[index],
-                  // subtitle: _subtitles[index],
                 ),
                 itemCount: _titles.length,
               ),
@@ -73,7 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: _isLastPage
                       ? OutlinedButton(
                           onPressed: () {
-                            // DI.router.push(const RegisterRoute());
+                            DI.router.replace(const MainRoute());
                           },
                           child: const Text('ابدأ'),
                         )

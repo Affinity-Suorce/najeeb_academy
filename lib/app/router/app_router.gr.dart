@@ -36,21 +36,28 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: RegisterPage(key: args.key),
           fullscreenDialog: true);
+    },
+    MainRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const MainPage());
     }
   };
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(WelcomeRoute.name, path: '/'),
+        RouteConfig('/#redirect',
+            path: '/', redirectTo: '/welcome', fullMatch: true),
+        RouteConfig(WelcomeRoute.name, path: '/welcome'),
         RouteConfig(LoginRoute.name, path: '/login'),
-        RouteConfig(RegisterRoute.name, path: '/register')
+        RouteConfig(RegisterRoute.name, path: '/register'),
+        RouteConfig(MainRoute.name, path: '/main')
       ];
 }
 
 /// generated route for
 /// [WelcomePage]
 class WelcomeRoute extends PageRouteInfo<void> {
-  const WelcomeRoute() : super(WelcomeRoute.name, path: '/');
+  const WelcomeRoute() : super(WelcomeRoute.name, path: '/welcome');
 
   static const String name = 'WelcomeRoute';
 }
@@ -94,4 +101,12 @@ class RegisterRouteArgs {
   String toString() {
     return 'RegisterRouteArgs{key: $key}';
   }
+}
+
+/// generated route for
+/// [MainPage]
+class MainRoute extends PageRouteInfo<void> {
+  const MainRoute() : super(MainRoute.name, path: '/main');
+
+  static const String name = 'MainRoute';
 }

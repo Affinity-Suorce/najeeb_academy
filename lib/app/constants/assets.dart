@@ -17,5 +17,5 @@ class _Images {
 class _Fonts {
   const _Fonts();
 
-  String get balooBhaijaan2 => 'BalooBhaijaan2';
+  String get janna => 'Janna';
 }
