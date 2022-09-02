@@ -33,7 +33,7 @@ class GoToWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(CupertinoIcons.arrow_uturn_left),
+            Icon(CupertinoIcons.arrow_uturn_right),
             Spacer(),
             Text(
               title,

@@ -23,7 +23,7 @@ class ProgramSection extends StatelessWidget {
                   offset: Offset(6, 6))
             ]),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "برنامج الإسبوع",
@@ -62,21 +62,18 @@ class ProgramSection extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: 34, left: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            "$done/",
-            style: TextStyle(
-              color: Colors.black54,
-              fontSize: 18,
-            ),
+          CircularPercentIndicator(
+            radius: 17.0,
+            lineWidth: 2.5,
+            percent: progress,
+            center: Text(""),
+            progressColor: Colors.green,
           ),
-          Text(
-            "$from",
-            style: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
+          SizedBox(
+            width: 12,
           ),
-          Spacer(),
           Text(
             "$subject",
             style: TextStyle(
@@ -84,15 +81,18 @@ class ProgramSection extends StatelessWidget {
               fontSize: 18,
             ),
           ),
-          SizedBox(
-            width: 12,
+          Spacer(),
+          Text(
+            "$from/",
+            style: TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
           ),
-          CircularPercentIndicator(
-            radius: 17.0,
-            lineWidth: 2.5,
-            percent: progress,
-            center: Text(""),
-            progressColor: Colors.green,
+          Text(
+            "$done",
+            style: TextStyle(
+              color: Colors.black54,
+              fontSize: 18,
+            ),
           ),
         ],
       ),

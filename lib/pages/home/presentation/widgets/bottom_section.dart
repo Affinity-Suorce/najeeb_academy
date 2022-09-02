@@ -36,7 +36,7 @@ class HomePageBottomSection extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
                   'أكاديمية نجيب التعليمية',

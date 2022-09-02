@@ -47,8 +47,18 @@ class TopSection extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    const Text(
+                      "تعلمت اليوم",
+                      textDirection: TextDirection.rtl,
+                      style: TextStyle(
+                        color: Colors.black54,
+                        height: 1,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Spacer(),
                     InkWell(
                       onTap: () {},
                       child: const Material(
@@ -60,24 +70,21 @@ class TopSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Spacer(),
-                    const Text(
-                      "تعلمت اليوم",
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        height: 1,
-                        fontSize: 17,
-                      ),
-                    )
                   ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: const [
+                    Text(
+                      "60min/",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 19,
+                      ),
+                    ),
                     Text(
                       "48min",
                       style: TextStyle(
@@ -85,30 +92,28 @@ class TopSection extends StatelessWidget {
                           fontSize: 26,
                           fontWeight: FontWeight.w700),
                     ),
-                    Text(
-                      "/60min",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 19,
-                      ),
-                    )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 10,
-                child: SliderTheme(
-                    data: SliderThemeData(
-                        trackShape: GradientRectSliderTrackShape(
-                            gradient: gradient, darkenInactive: false),
-                        thumbShape: SliderComponentShape.noThumb,
-                        trackHeight: 6),
-                    child: Slider(
-                      min: 0,
-                      max: 10,
-                      value: 10,
-                      onChanged: (double value) {},
-                    )),
+              Directionality(
+                textDirection: TextDirection.ltr,
+                child: SizedBox(
+                  height: 10,
+                  child: SliderTheme(
+                      data: SliderThemeData(
+                          activeTickMarkColor: Colors.white,
+                          trackShape: GradientRectSliderTrackShape(
+                              gradient: gradient, darkenInactive: false),
+                          thumbShape: SliderComponentShape.noThumb,
+                          activeTrackColor: Colors.white,
+                          trackHeight: 6),
+                      child: Slider(
+                        min: 0,
+                        max: 10,
+                        value: 7.5,
+                        onChanged: (double value) {},
+                      )),
+                ),
               ),
             ],
           ),

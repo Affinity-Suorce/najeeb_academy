@@ -15,7 +15,7 @@ class LecturesPage extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(12, 55, 12, 0),
+                padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
                 child: TopSection(),
               ),
               SizedBox(

@@ -58,6 +58,7 @@ class _Backlayer extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         controller: scrollController,
         child: Column(
           children: [
@@ -84,11 +85,12 @@ class _FrontLayer extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
         controller: scrollController,
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 55, 12, 0),
+              padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
               child: TopSection(),
             ),
             SizedBox(

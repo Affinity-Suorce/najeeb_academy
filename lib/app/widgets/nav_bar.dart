@@ -11,17 +11,6 @@ class Navbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () {
-            ZoomDrawer.of(context)!.open();
-          },
-          child: Icon(
-            Icons.menu_rounded,
-            color: color,
-            size: 35,
-          ),
-        ),
-        Spacer(),
         Container(
           child: Text(
             title,
@@ -33,7 +22,18 @@ class Navbar extends StatelessWidget {
             ),
             textDirection: TextDirection.rtl,
           ),
-        )
+        ),
+        Spacer(),
+        InkWell(
+          onTap: () {
+            ZoomDrawer.of(context)!.open();
+          },
+          child: Icon(
+            Icons.menu_rounded,
+            color: color,
+            size: 35,
+          ),
+        ),
       ],
     );
   }
