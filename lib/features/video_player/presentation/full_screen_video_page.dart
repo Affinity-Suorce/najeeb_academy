@@ -20,8 +20,8 @@ class FullScreenVideoPage extends StatefulWidget {
 class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
   @override
   void initState() {
-    // SystemChrome.setPreferredOrientations(
-    //     [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     super.initState();
   }
 

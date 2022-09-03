@@ -62,12 +62,17 @@ class VideoSection extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => FullScreenVideoPage(
-                        changeVideo: changeVideo,
-                        controller: controller,
-                      )
-                    ));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) => FullScreenVideoPage(
+                                  changeVideo: changeVideo,
+                                  controller: controller,
+                                )))
+                        .then((value) => {
+                              SystemChrome.setPreferredOrientations([
+                                DeviceOrientation.portraitUp,
+                              ])
+                            });
                   },
                   child: Icon(
                     CupertinoIcons.fullscreen,
