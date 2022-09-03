@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
           SliverFillRemaining(
             hasScrollBody: false,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: FormBuilder(
                 key: service.formKey,
                 child: Column(

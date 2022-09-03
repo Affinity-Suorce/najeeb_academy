@@ -62,7 +62,7 @@ class _WelcomePageState extends State<WelcomePage> {
             16.verticalSpace,
             Row(
               children: [
-                12.horizontalSpace,
+                8.horizontalSpace,
                 Expanded(
                   child: _isLastPage
                       ? OutlinedButton(
@@ -76,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           child: const Text('تخطي'),
                         ),
                 ),
-                12.horizontalSpace,
+                8.horizontalSpace,
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -90,7 +90,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     child: Text(_isLastPage ? 'تسجيل الدخول' : 'التالي'),
                   ),
                 ),
-                12.horizontalSpace,
+                8.horizontalSpace,
               ],
             ),
             16.verticalSpace,

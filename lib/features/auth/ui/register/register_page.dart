@@ -31,7 +31,7 @@ class RegisterPage extends StatelessWidget {
             body: CustomScrollView(
               slivers: [
                 SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   sliver: SliverFillRemaining(
                     hasScrollBody: false,
                     child: FormBuilder(
@@ -159,6 +159,7 @@ class RegisterPage extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
+                          12.verticalSpace,
                           ElevatedButton(
                             onPressed: () {},
                             child: const Text('إنشاء الحساب'),
