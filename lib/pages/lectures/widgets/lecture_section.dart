@@ -1,10 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
+import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
+import 'package:najeeb_academy/pages/lectures/widgets/wheel_date_picker_bottom_sheet.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-class LectureSection extends StatelessWidget {
+class LectureSection extends StatefulWidget {
   const LectureSection({Key? key}) : super(key: key);
+
+  @override
+  State<LectureSection> createState() => _LectureSectionState();
+}
+
+class _LectureSectionState extends State<LectureSection> {
+  late DateTime day;
+
+  @override
+  void initState() {
+    super.initState();
+    day = DateTimeHelper.today;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +31,46 @@ class LectureSection extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "دروس اليوم",
-                style: TextStyle(
-                  height: 1,
-                  color: Colors.black,
-                  fontSize: 22,
-                ),
+            children: [
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "الدروس ${day.agoDate}",
+                    style: TextStyle(
+                      height: 1,
+                      color: Colors.black,
+                      fontSize: 22,
+                    ),
+                  ),
+                  Text(
+                    day.formattedDate,
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                ],
               ),
-              Text(
-                "اختر يوماً آخر",
-                style: TextStyle(
-                  height: 1,
-                  color: AppColors.indigo,
-                  fontSize: 18,
+              GestureDetector(
+                onTap: () async {
+                  final date = await WheelDatePickerBottomSheet(
+                    initialDate: day,
+                  ).showAsBottomSheet<DateTime>(
+                    context,
+                    isScrollControlled: true,
+                  );
+                  if (date != null) {
+                    setState(() {
+                      day = date;
+                    });
+                  }
+                },
+                child: Text(
+                  "اختر يوماً آخر",
+                  style: TextStyle(
+                    height: 1,
+                    color: AppColors.indigo,
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ],
@@ -36,6 +78,7 @@ class LectureSection extends StatelessWidget {
           ListView.separated(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              padding: EdgeInsets.only(top: 8.h),
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return LectureWidget(
