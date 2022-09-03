@@ -33,22 +33,11 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30))),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-                child: Icon(
-                  CupertinoIcons.arrow_left,
-                  size: 30,
-                  color: Colors.black,
-                ),
-              ),
-              Spacer(),
               Text(
                 widget.subject,
                 style: TextStyle(
@@ -58,6 +47,17 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                   fontSize: 30,
                 ),
                 textDirection: TextDirection.rtl,
+              ),
+              Spacer(),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  CupertinoIcons.arrow_left,
+                  size: 30,
+                  color: Colors.black,
+                ),
               ),
             ],
           ),

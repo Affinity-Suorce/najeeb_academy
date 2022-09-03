@@ -96,6 +96,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
           child: Column(
             children: [
               VideoSection(

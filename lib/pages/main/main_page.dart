@@ -30,13 +30,13 @@ class _MainPageState extends State<MainPage> {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
-        title: ("الرئيسية"),
+        title: (" الرئيسية"),
         activeColorPrimary: AppColors.indigo,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.book),
-        title: ("دروسي"),
+        title: (" دروسي"),
         activeColorPrimary: AppColors.indigo,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -51,13 +51,13 @@ class _MainPageState extends State<MainPage> {
       // ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.calendar),
-        title: ("الدفعات"),
+        title: (" الدفعات"),
         activeColorPrimary: AppColors.indigo,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.person),
-        title: ("حسابي"),
+        title: (" حسابي"),
         activeColorPrimary: AppColors.indigo,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

@@ -20,23 +20,15 @@ class VideoWidget extends StatelessWidget {
     return Container(
       height: 65,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          Text(
+            indexFunction(index),
+            style: TextStyle(color: Colors.grey.shade300, fontSize: 36),
+          ),
           SizedBox(
             width: 34,
           ),
-          Container(
-            width: 50,
-            height: 50,
-            child: Icon(
-              isSelected
-                  ? CupertinoIcons.pause_circle_fill
-                  : CupertinoIcons.play_circle_fill,
-              color: AppColors.indigo,
-              size: 60,
-            ),
-          ),
-          Spacer(),
           Column(
             children: [
               Text(
@@ -60,12 +52,20 @@ class VideoWidget extends StatelessWidget {
               ),
             ],
           ),
+          Spacer(),
+          Container(
+            width: 50,
+            height: 50,
+            child: Icon(
+              isSelected
+                  ? CupertinoIcons.pause_circle_fill
+                  : CupertinoIcons.play_circle_fill,
+              color: AppColors.indigo,
+              size: 60,
+            ),
+          ),
           SizedBox(
             width: 34,
-          ),
-          Text(
-            indexFunction(index),
-            style: TextStyle(color: Colors.grey.shade300, fontSize: 36),
           ),
         ],
       ),

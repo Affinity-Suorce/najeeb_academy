@@ -22,10 +22,10 @@ class TopSection extends StatelessWidget {
             textInputAction: TextInputAction.done,
             validator: (p0) => null,
             fillColor: AppColors.searchField,
-            textColor: AppColors.purple100,
+            textColor: AppColors.purple,
             fontSize: 19,
             prefix: const Padding(
-              padding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+              padding: EdgeInsets.fromLTRB(12, 8, 14, 8),
               child: Icon(
                 CupertinoIcons.search,
                 color: AppColors.purple100,
@@ -38,8 +38,9 @@ class TopSection extends StatelessWidget {
                 "assets/icons/filter.png",
               ),
             ),
-            padding: const EdgeInsets.fromLTRB(14, 0, 0, 14),
+            padding: const EdgeInsets.fromLTRB(14, 0, 10, 14),
             hintText: "ابحث عن درس",
+            hintColor: AppColors.purple100,
             textDirection: TextDirection.rtl,
           ),
         )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+
 class SliderSection extends StatelessWidget {
   const SliderSection({Key? key}) : super(key: key);
 
@@ -10,7 +11,7 @@ class SliderSection extends StatelessWidget {
       // color: Colors.,
       child: ListView(
         padding: EdgeInsets.only(right: 24, left: 24),
-        reverse: true,
+        reverse: false,
         scrollDirection: Axis.horizontal,
         children: [
           sliderContainer(context, 1),
@@ -50,7 +51,7 @@ class SliderSection extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.only(right: 8, bottom: 36, top: 12),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -78,7 +79,9 @@ class SliderSection extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7)),
                             side: BorderSide.none,
-                            primary: index == 1 ? AppColors.orange700 : AppColors.purple,
+                            primary: index == 1
+                                ? AppColors.orange700
+                                : AppColors.purple,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 37, vertical: 6),
                             onPrimary: Colors.white),

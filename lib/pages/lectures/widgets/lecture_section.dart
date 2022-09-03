@@ -16,19 +16,19 @@ class LectureSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text(
-                "اختر يوماً آخر",
-                style: TextStyle(
-                  height: 1,
-                  color: AppColors.purple100,
-                  fontSize: 18,
-                ),
-              ),
-              Text(
                 "دروس اليوم",
                 style: TextStyle(
                   height: 1,
                   color: Colors.black,
                   fontSize: 22,
+                ),
+              ),
+              Text(
+                "اختر يوماً آخر",
+                style: TextStyle(
+                  height: 1,
+                  color: AppColors.indigo,
+                  fontSize: 18,
                 ),
               ),
             ],
@@ -87,42 +87,31 @@ class LectureWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              width: 80,
-              height: 80,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(index == 1
-                          ? 'assets/images/physics.png'
-                          : 'assets/images/math.png'),
-                      fit: BoxFit.cover)),
-            ),
-            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(right: 8.0, top: 8),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width * 0.58,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(
-                          "الدرس $index",
-                          style: const TextStyle(
-                            height: 1,
-                            color: AppColors.indigo,
-                            fontSize: 16,
-                          ),
-                        ),
-                        const Spacer(),
                         Text(
                           index == 1 ? "الفيزياء" : "الرياضيات",
                           style: const TextStyle(
                             height: 1,
                             color: Colors.black,
                             fontSize: 22,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          "الدرس $index",
+                          style: const TextStyle(
+                            height: 1,
+                            color: AppColors.indigo,
+                            fontSize: 16,
                           ),
                         ),
                       ],
@@ -132,20 +121,6 @@ class LectureWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          width: 45,
-                          height: 22,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFFEBF0),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: const Center(
-                            child: Text(
-                              '1.5h',
-                              style: TextStyle(color: Color(0XFFFF6905)),
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
@@ -167,6 +142,20 @@ class LectureWidget extends StatelessWidget {
                             ),
                           ),
                         ),
+                        Spacer(),
+                        Container(
+                          width: 45,
+                          height: 22,
+                          decoration: BoxDecoration(
+                              color: const Color(0xFFFFEBF0),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Center(
+                            child: Text(
+                              '1.5h',
+                              style: TextStyle(color: Color(0XFFFF6905)),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -177,7 +166,7 @@ class LectureWidget extends StatelessWidget {
                       child: Row(
                         children: const [
                           Text(
-                            " 127",
+                            "عدد المشاهدات",
                             style: TextStyle(
                               height: 1,
                               color: Colors.black87,
@@ -186,7 +175,7 @@ class LectureWidget extends StatelessWidget {
                           ),
                           Spacer(),
                           Text(
-                            "عدد المشاهدات",
+                            " 127",
                             style: TextStyle(
                               height: 1,
                               color: Colors.black87,
@@ -199,6 +188,17 @@ class LectureWidget extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            Spacer(),
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(index == 1
+                          ? 'assets/images/physics.png'
+                          : 'assets/images/math.png'),
+                      fit: BoxFit.cover)),
             ),
           ],
         ),

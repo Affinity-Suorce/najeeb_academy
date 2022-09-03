@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
       required this.validator,
       this.fillColor = Colors.white,
       this.textColor = Colors.black,
+      this.hintColor = Colors.black,
       this.controller,
       this.fontSize = 14,
       this.padding,
@@ -28,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefix;
   final Color fillColor;
   final Color textColor;
+  final Color hintColor;
   final double fontSize;
   final padding;
   final String hintText;
@@ -56,7 +58,7 @@ class CustomTextFormField extends StatelessWidget {
           prefixIcon: prefix,
           fillColor: fillColor,
           suffixIcon: suffix,hintTextDirection: TextDirection.rtl,
-          hintStyle: TextStyle(color: textColor,)
+          hintStyle: TextStyle(color: hintColor,)
           // prefix: prefix,
           ),
       obscuringCharacter: '*',

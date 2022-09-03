@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 abstract class AppOrientation {
-  static const defaultOrientation = [
+  static const defaultOrientation =<DeviceOrientation> [
     DeviceOrientation.portraitUp,
   ];
   static const videoPageOrientation = [

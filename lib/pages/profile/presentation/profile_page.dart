@@ -11,93 +11,96 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(12, 55, 12, 0),
-              child: Navbar(
-                title: "حسابي",
-                color: Colors.black,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 40, 12, 0),
+                child: Navbar(
+                  title: "حسابي",
+                  color: Colors.black,
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 44,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
-                GoToWidget(
-                  title: "مدفوعاتي",
-                ),
-                GoToWidget(
-                  title: "الرئيسية",
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 34,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 31),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(13)),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0x669e9e9e),
-                        spreadRadius: 1,
-                        blurRadius: 6,
-                        offset: Offset(6, 6))
-                  ]),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(13)),
-                child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      fillColor: Colors.white,
-                      filled: true,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    ),
-                    value: "العربية",
-                    onChanged: (type) {
-                      // onSelect(type);
-                    },
-                    style: const TextStyle(color: Colors.black, fontSize: 18),
-                    items: const [
-                      DropdownMenuItem(
-                        value: "العربية",
-                        child: Text(
-                          "العربية",
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: "الانكليزية",
-                        child: Text(
-                          "الانكليزية",
-                        ),
-                      ),
+              const SizedBox(
+                height: 44,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  GoToWidget(
+                    title: "مدفوعاتي",
+                  ),
+                  GoToWidget(
+                    title: "الرئيسية",
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 34,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 31),
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(13)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0x669e9e9e),
+                          spreadRadius: 1,
+                          blurRadius: 6,
+                          offset: Offset(6, 6))
                     ]),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(13)),
+                  child: DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      ),
+                      value: "العربية",
+                      onChanged: (type) {
+                        // onSelect(type);
+                      },
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
+                      items: const [
+                        DropdownMenuItem(
+                          value: "العربية",
+                          child: Text(
+                            "العربية",
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: "الانكليزية",
+                          child: Text(
+                            "الانكليزية",
+                          ),
+                        ),
+                      ]),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Container(
-                padding: const EdgeInsets.only(
-                    left: 18, right: 18, top: 25, bottom: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    rowWidget('Full name:', 'Adnan Kuzaiz'),
-                    rowWidget('Email:', 'adnankuza@gmail.com'),
-                    rowWidget('Mobile:', '0936289209'),
-                    rowWidget('Phone:', '0116612043'),
-                    rowWidget('Birth date:', '1999/8/2'),
-                    rowWidget('Gender:', 'male'),
-                  ],
-                ))
-          ],
+              const SizedBox(
+                height: 12,
+              ),
+              Container(
+                  padding: const EdgeInsets.only(
+                      left: 18, right: 18, top: 25, bottom: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      rowWidget('Full name:', 'Adnan Kuzaiz'),
+                      rowWidget('Email:', 'adnankuza@gmail.com'),
+                      rowWidget('Mobile:', '0936289209'),
+                      rowWidget('Phone:', '0116612043'),
+                      rowWidget('Birth date:', '1999/8/2'),
+                      rowWidget('Gender:', 'male'),
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
     );
