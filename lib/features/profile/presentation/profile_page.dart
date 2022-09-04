@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
-import 'package:najeeb_academy/pages/profile/presentation/widgets/go_to_widget.dart';
+import 'package:najeeb_academy/features/profile/presentation/widgets/go_to_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

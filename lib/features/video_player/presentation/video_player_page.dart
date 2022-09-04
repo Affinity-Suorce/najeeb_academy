@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/pages/home/presentation/widgets/bottom_section.dart';
+import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/enum.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_section.dart';

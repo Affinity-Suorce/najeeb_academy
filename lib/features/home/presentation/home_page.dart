@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/pages/home/presentation/widgets/bottom_section.dart';
-import 'package:najeeb_academy/pages/home/presentation/widgets/program_section.dart';
-import 'package:najeeb_academy/pages/home/presentation/widgets/slider_section.dart';
-import 'package:najeeb_academy/pages/home/presentation/widgets/top_section.dart';
+import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
+import 'package:najeeb_academy/features/home/presentation/widgets/program_section.dart';
+import 'package:najeeb_academy/features/home/presentation/widgets/slider_section.dart';
+import 'package:najeeb_academy/features/home/presentation/widgets/top_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:najeeb_academy/features/auth/ui/login/login_page.dart';
 import 'package:najeeb_academy/features/auth/ui/register/register_page.dart';
 import 'package:najeeb_academy/pages/welcome/welcome_page.dart';
 
-import '../../pages/main/main_page.dart';
+import '../../main_page.dart';
 
 part 'app_router.gr.dart';
 
