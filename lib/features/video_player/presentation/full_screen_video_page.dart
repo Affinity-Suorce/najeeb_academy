@@ -18,8 +18,10 @@ class FullScreenVideoPage extends StatefulWidget {
 }
 
 class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
+  late bool visible;
   @override
   void initState() {
+    visible = false;
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     super.initState();
@@ -35,21 +37,28 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                  width: double.infinity,
-                  color: Colors.black,
-                  child: widget.controller.value.isInitialized
-                      ? Container(
-                          alignment: Alignment.topCenter,
-                          child: VideoPlayer(widget.controller),
-                        )
-                      : Center(
-                          child: Container(
-                              width: 50,
-                              height: 50,
-                              child: const CircularProgressIndicator(
-                                color: AppColors.lightGrey1,
-                              )))),
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    visible = !visible;
+                  });
+                },
+                child: Container(
+                    width: double.infinity,
+                    color: Colors.black,
+                    child: widget.controller.value.isInitialized
+                        ? Container(
+                            alignment: Alignment.topCenter,
+                            child: VideoPlayer(widget.controller),
+                          )
+                        : Center(
+                            child: Container(
+                                width: 50,
+                                height: 50,
+                                child: const CircularProgressIndicator(
+                                  color: AppColors.lightGrey1,
+                                )))),
+              ),
             ),
             Directionality(
               textDirection: TextDirection.ltr,
@@ -63,111 +72,122 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                     playedColor: AppColors.indigo),
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      CupertinoIcons.fullscreen_exit,
-                      color: Colors.white,
-                      size: 24,
+            Visibility(
+              maintainState: true,
+              maintainAnimation: true,
+              visible: visible,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        CupertinoIcons.fullscreen_exit,
+                        color: Colors.white,
+                        size: 26,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 14,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => QualitySelectorWidget( changeVideo: widget.changeVideo,));
-                    },
-                    child: Icon(
-                      CupertinoIcons.settings_solid,
-                      color: Colors.white,
-                      size: 24,
+                    SizedBox(
+                      width: 14,
                     ),
-                  ),
-                  Spacer(),
-                  InkWell(
-                    onTap: () {
-                      widget.changeVideo!(1);
-                    },
-                    child: Icon(
-                      CupertinoIcons.arrow_right,
-                      color: Colors.white,
-                      size: 28,
+                    InkWell(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => QualitySelectorWidget(
+                                  changeVideo: widget.changeVideo,
+                                ));
+                      },
+                      child: Icon(
+                        CupertinoIcons.settings_solid,
+                        color: Colors.white,
+                        size: 26,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      widget.controller.value.isPlaying
-                          ? widget.controller.pause()
-                          : widget.controller.play();
-                    },
-                    child: Icon(
-                      widget.controller.value.isPlaying
-                          ? CupertinoIcons.pause_fill
-                          : CupertinoIcons.play_arrow_solid,
-                      color: Colors.white,
-                      size: 30,
+                    Spacer(),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            widget.changeVideo!(1);
+                          },
+                          child: Icon(
+                            CupertinoIcons.arrow_right,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              widget.controller.value.isPlaying
+                                  ? widget.controller.pause()
+                                  : widget.controller.play();
+                            });
+                          },
+                          child: Icon(
+                            widget.controller.value.isPlaying
+                                ? CupertinoIcons.pause_fill
+                                : CupertinoIcons.play_arrow_solid,
+                            color: Colors.white,
+                            size: 36,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            widget.changeVideo!(-1);
+                          },
+                          child: Icon(
+                            CupertinoIcons.arrow_left,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      widget.changeVideo!(-1);
-                    },
-                    child: Icon(
-                      CupertinoIcons.arrow_left,
-                      color: Colors.white,
-                      size: 28,
+                    Spacer(),
+                    Text(
+                      widget.controller.value.duration.inHours != 0
+                          ? widget.controller.value.duration.inHours.toString()
+                          : '' +
+                              widget.controller.value.duration.inMinutes
+                                  .toString() +
+                              ':' +
+                              widget.controller.value.duration.inSeconds
+                                  .toString() +
+                              ' / ',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 22, height: 1.1),
                     ),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  Text(
-                    widget.controller.value.duration.inHours != 0
-                        ? widget.controller.value.duration.inHours.toString()
-                        : '' +
-                            widget.controller.value.duration.inMinutes
-                                .toString() +
-                            ':' +
-                            widget.controller.value.duration.inSeconds
-                                .toString() +
-                            ' / ',
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 20, height: 1.1),
-                  ),
-                  Text(
-                    widget.controller.value.duration.inHours != 0
-                        ? widget.controller.value.position.inHours.toString()
-                        : '' +
-                            widget.controller.value.position.inMinutes
-                                .toString() +
-                            ':' +
-                            widget.controller.value.position.inSeconds
-                                .toString(),
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 20, height: 1.1),
-                  ),
-                  SizedBox(
-                    width: 14,
-                  ),
-                ],
+                    Text(
+                      widget.controller.value.duration.inHours != 0
+                          ? widget.controller.value.position.inHours.toString()
+                          : '' +
+                              widget.controller.value.position.inMinutes
+                                  .toString() +
+                              ':' +
+                              widget.controller.value.position.inSeconds
+                                  .toString(),
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 22, height: 1.1),
+                    ),
+                    SizedBox(
+                      width: 14,
+                    ),
+                  ],
+                ),
               ),
             )
           ],
