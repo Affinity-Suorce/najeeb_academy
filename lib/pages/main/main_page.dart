@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
+import 'package:najeeb_academy/pages/courses/courses_page.dart';
 import 'package:najeeb_academy/pages/home/presentation/home_page.dart';
 import 'package:najeeb_academy/pages/lectures/lectures_page.dart';
-import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 import 'package:najeeb_academy/pages/profile/presentation/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -20,6 +21,7 @@ class _MainPageState extends State<MainPage> {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
+      const CoursesPage(),
       const LecturesPage(),
       const PaymentsPage(),
       const ProfilePage()
@@ -31,6 +33,12 @@ class _MainPageState extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: (" الرئيسية"),
+        activeColorPrimary: AppColors.indigo,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.rectangle_stack),
+        title: (" الدورات"),
         activeColorPrimary: AppColors.indigo,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
@@ -91,11 +99,11 @@ class _MainPageState extends State<MainPage> {
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
         duration: Duration(milliseconds: 200),
-        curve: Curves.ease,
+        curve: Curves.easeInOut,
       ),
       screenTransitionAnimation: const ScreenTransitionAnimation(
         animateTabTransition: true,
-        curve: Curves.ease,
+        curve: Curves.easeInOut,
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style1,
