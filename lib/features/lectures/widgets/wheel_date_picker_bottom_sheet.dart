@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
+import 'package:najeeb_academy/app/widgets/button.dart';
 
 class WheelDatePickerBottomSheet extends StatefulWidget {
   final DateTime initialDate;
@@ -62,12 +64,12 @@ class _WheelDatePickerBottomSheetState
               },
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context, currentDate);
-            },
-            child: Text('اختيار'),
-          ),
+          CustomElevatedButton(
+            buttonColor: AppColors.indigo,
+            title: "اختيار",
+            verticalPadding: 6,
+            horizantalPadding: MediaQuery.of(context).size.width * 0.36,
+          )
         ],
       ),
     );
