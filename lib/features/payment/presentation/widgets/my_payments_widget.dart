@@ -1,114 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 
 class MyPaymentsWidget extends StatelessWidget {
-  const MyPaymentsWidget({Key? key}) : super(key: key);
-
+  const MyPaymentsWidget({
+    Key? key,
+    this.isSubscription = false,
+    this.installment = 1,
+    this.billId = 111111,
+    this.course = 'الصف التاسع',
+    this.paidAmount = 125000,
+    this.remaining = 50000,
+    this.fromDate = "2/2/2020",
+    this.toDate = "2/2/2021",
+  }) : super(key: key);
+  final bool isSubscription;
+  final int billId;
+  final int installment;
+  final String course;
+  final int paidAmount;
+  final int remaining;
+  final String fromDate;
+  final String toDate;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      padding: const EdgeInsets.fromLTRB(24, 0, 24, 3),
       child: Column(
         children: [
           Container(
-            padding:
-                const EdgeInsets.only(right: 12, bottom: 18, top: 8, left: 12),
-            width: double.infinity,
-            height: 120,
-            color: Colors.pink.shade100,
+            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0, top: 8),
-                  child: Container(
-                    color: Colors.amber,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "الرياضيات",
-                              style: const TextStyle(
-                                height: 1,
-                                color: Colors.black,
-                                fontSize: 22,
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "الدرس ",
-                              style: const TextStyle(
-                                height: 1,
-                                color: AppColors.indigo,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Text(
-                                "قانون نيوتن الأول",
-                                style: const TextStyle(
-                                  height: 1,
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              width: 45,
-                              height: 22,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xFFFFEBF0),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Center(
-                                child: Text(
-                                  '1.5h',
-                                  style: TextStyle(color: Color(0XFFFF6905)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: Row(
-                            children: const [
-                              Text(
-                                "عدد المشاهدات",
-                                style: TextStyle(
-                                  height: 1,
-                                  color: Colors.black87,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              Spacer(),
-                              Text(
-                                " 127",
-                                style: TextStyle(
-                                  height: 1,
-                                  color: Colors.black87,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      !isSubscription
+                          ? Text('القسط:', style: textStyle1)
+                          : SizedBox.shrink(),
+                      Text('رقم الفاتورة:', style: textStyle1),
+                      Text('الدورة:', style: textStyle1),
+                      Text('المبلغ المدفوع:', style: textStyle1),
+                      Text('المبلغ المتبقي:', style: textStyle1),
+                      Text('من تاريخ:', style: textStyle1),
+                      Text('إلى تاريخ', style: textStyle1),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      !isSubscription
+                          ? Text(installment.toString(), style: textStyle2)
+                          : SizedBox.shrink(),
+                      Text(
+                        billId.toString(),
+                        style: textStyle2,
+                      ),
+                      Text(
+                        course,
+                        style: textStyle2,
+                      ),
+                      Text(
+                        paidAmount.toString(),
+                        style: textStyle2,
+                      ),
+                      Text(
+                        remaining.toString(),
+                        style: textStyle2,
+                      ),
+                      Text(
+                        fromDate,
+                        style: textStyle2,
+                      ),
+                      Text(
+                        toDate,
+                        style: textStyle2,
+                      ),
+                    ],
                   ),
                 ),
               ],
