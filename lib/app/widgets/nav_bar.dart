@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class Navbar extends StatelessWidget {
-  Navbar({Key? key, this.title = "أهلاً ,أحمد", this.color = Colors.white})
+  Navbar(
+      {Key? key,
+      this.title = "أهلاً ,أحمد",
+      this.color = Colors.white,
+      this.withdrawer = true})
       : super(key: key);
   final String title;
   final Color color;
+  final bool withdrawer;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,16 +29,18 @@ class Navbar extends StatelessWidget {
           ),
         ),
         Spacer(),
-        InkWell(
-          onTap: () {
-            ZoomDrawer.of(context)!.open();
-          },
-          child: Icon(
-            Icons.menu_rounded,
-            color: color,
-            size: 35,
-          ),
-        ),
+        withdrawer
+            ? InkWell(
+                onTap: () {
+                  ZoomDrawer.of(context)!.open();
+                },
+                child: Icon(
+                  Icons.menu_rounded,
+                  color: color,
+                  size: 35,
+                ),
+              )
+            : SizedBox.shrink(),
       ],
     );
   }
