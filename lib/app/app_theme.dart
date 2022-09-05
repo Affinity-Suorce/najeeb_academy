@@ -78,6 +78,15 @@ abstract class _Theme {
       ),
       textTheme: const TextTheme().apply(fontSizeFactor: 1.sp),
       cardTheme: _cardTheme,
+      tabBarTheme: const TabBarTheme(
+        labelColor: AppColors.purple900,
+        indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(
+            width: 2,
+            color: AppColors.indigo,
+          ),
+        ),
+      ),
       bottomSheetTheme: _bottomSheetTheme,
     );
   }

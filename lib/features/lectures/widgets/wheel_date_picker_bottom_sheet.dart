@@ -41,13 +41,13 @@ class _WheelDatePickerBottomSheetState
                 onPressed: () {
                   Navigator.pop(context, DateTimeHelper.today);
                 },
-                child: Text('اليوم'),
+                child: const Text('اليوم'),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('إلغاء'),
+                child: const Text('إلغاء'),
               ),
             ],
           ),
@@ -68,6 +68,9 @@ class _WheelDatePickerBottomSheetState
             buttonColor: AppColors.indigo,
             title: "اختيار",
             verticalPadding: 6,
+            onPressed: () {
+              Navigator.pop(context, currentDate);
+            },
             horizantalPadding: MediaQuery.of(context).size.width * 0.36,
           )
         ],

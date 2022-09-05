@@ -9,7 +9,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? iconColor;
   final String? title;
   final IconData? icon;
-  final OnPressed? onpressed;
+  final OnPressed? onPressed;
   final double? horizantalPadding;
   final double? verticalPadding;
 
@@ -21,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.iconColor,
     this.title,
     this.icon,
-    this.onpressed,
+    this.onPressed,
     this.horizantalPadding,
     this.verticalPadding,
   }) : super(key: key);
@@ -29,12 +29,7 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onpressed == null ? () {} : onpressed!,
-      child: Text(
-        title == null ? 'Button' : title!,
-        style: TextStyle(
-            color: textColor, fontSize: 20, fontWeight: FontWeight.w500),
-      ),
+      onPressed: onPressed == null ? () {} : onPressed!,
       // style: ElevatedButton.styleFrom(
       //     primary: buttonColor,
       //     fixedSize: Size(50, 54),
@@ -48,7 +43,7 @@ class CustomElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-          side: BorderSide(
+          side: const BorderSide(
             color: Colors.transparent,
             width: 0,
           ),
@@ -57,6 +52,11 @@ class CustomElevatedButton extends StatelessWidget {
               horizontal: horizantalPadding ?? 16,
               vertical: verticalPadding ?? 16),
           onPrimary: splashColor),
+      child: Text(
+        title == null ? 'Button' : title!,
+        style: TextStyle(
+            color: textColor, fontSize: 20, fontWeight: FontWeight.w500),
+      ),
     );
   }
 }

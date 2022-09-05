@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 import 'package:najeeb_academy/features/courses/courses_page.dart';
 import 'package:najeeb_academy/features/home/presentation/home_page.dart';
 import 'package:najeeb_academy/features/lectures/lectures_page.dart';
+import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 import 'package:najeeb_academy/features/profile/presentation/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -92,8 +92,8 @@ class _MainPageState extends State<MainPage> {
       stateManagement: true,
       hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
-         boxShadow: [
-          BoxShadow(
+        boxShadow: [
+          const BoxShadow(
               color: Color(0x669e9e9e),
               spreadRadius: 1,
               blurRadius: 6,

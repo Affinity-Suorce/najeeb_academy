@@ -2,9 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:najeeb_academy/features/auth/ui/login/login_page.dart';
 import 'package:najeeb_academy/features/auth/ui/register/register_page.dart';
-import 'package:najeeb_academy/pages/welcome/welcome_page.dart';
+import 'package:najeeb_academy/features/courses/courses_page.dart';
+import 'package:najeeb_academy/features/welcome/welcome_page.dart';
 
-import '../../main_page.dart';
+import '../../features/main/main_page.dart';
 
 part 'app_router.gr.dart';
 
@@ -31,6 +32,10 @@ part 'app_router.gr.dart';
       path: '/main',
       page: MainPage,
     ),
+    AutoRoute(
+      path: '/courses',
+      page: CoursesPage,
+    )
   ],
 )
 class AppRouter extends _$AppRouter {}
