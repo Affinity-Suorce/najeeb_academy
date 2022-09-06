@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/core/helpers/funcs.dart';
-import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -26,9 +24,9 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(16, 24, 16, 26),
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 26),
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30))),
@@ -40,7 +38,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
             children: [
               Text(
                 widget.subject,
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.4,
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
@@ -48,12 +46,12 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                 ),
                 textDirection: TextDirection.rtl,
               ),
-              Spacer(),
+              const Spacer(),
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
                 },
-                child: Icon(
+                child: const Icon(
                   CupertinoIcons.arrow_left,
                   size: 30,
                   color: Colors.black,
@@ -61,10 +59,10 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
-          Text(
+          const Text(
             "24 درس",
             style: TextStyle(
               height: 1.4,
@@ -73,9 +71,9 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
             ),
             textDirection: TextDirection.rtl,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
@@ -94,7 +92,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                 );
               },
               separatorBuilder: (context, index) {
-                return SizedBox(
+                return const SizedBox(
                   height: 22,
                 );
               },

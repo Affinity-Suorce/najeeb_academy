@@ -8,8 +8,8 @@ class QualitySelectorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.grey.shade900,
-      insetPadding: EdgeInsets.fromLTRB(1, 20, 1, 24),
-      contentPadding: EdgeInsets.fromLTRB(1, 20, 1, 24),
+      insetPadding: const EdgeInsets.fromLTRB(1, 20, 1, 24),
+      contentPadding: const EdgeInsets.fromLTRB(1, 20, 1, 24),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -20,7 +20,7 @@ class QualitySelectorWidget extends StatelessWidget {
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+              children: const [
                 Text(
                   'منخفضة',
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -32,7 +32,7 @@ class QualitySelectorWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             color: Colors.white,
           ),
           InkWell(
@@ -42,7 +42,7 @@ class QualitySelectorWidget extends StatelessWidget {
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+              children: const [
                 Text(
                   'متوسطة',
                   style: TextStyle(fontSize: 20, color: Colors.white),
@@ -54,7 +54,7 @@ class QualitySelectorWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             color: Colors.white,
           ),
           InkWell(
@@ -64,7 +64,7 @@ class QualitySelectorWidget extends StatelessWidget {
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+              children: const [
                 Text(
                   'عالية',
                   style: TextStyle(fontSize: 20, color: Colors.white),

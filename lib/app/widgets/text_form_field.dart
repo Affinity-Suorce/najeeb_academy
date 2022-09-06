@@ -15,6 +15,7 @@ class CustomTextFormField extends StatelessWidget {
       this.hintColor = Colors.black,
       this.controller,
       this.fontSize = 14,
+      this.keyboardType=TextInputType.emailAddress,
       this.padding,
       this.hintText = '',
       this.textDirection = TextDirection.ltr})
@@ -28,10 +29,11 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffix;
   final Widget? prefix;
   final Color fillColor;
+  final TextInputType keyboardType;
   final Color textColor;
   final Color hintColor;
   final double fontSize;
-  final padding;
+  final EdgeInsetsGeometry? padding;
   final String hintText;
   final TextDirection textDirection;
   @override
@@ -39,21 +41,21 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14.0)),
               borderSide: BorderSide.none),
-          enabledBorder: OutlineInputBorder(
+          enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14.0)),
               borderSide: BorderSide.none),
           disabledBorder: InputBorder.none,
-          errorBorder: OutlineInputBorder(
+          errorBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14.0)),
               borderSide: BorderSide(
                 color: Colors.red,
               )),
           hintText: hintText,
           contentPadding:
-              padding ?? EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding ?? const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
           filled: true,
           prefixIcon: prefix,
           fillColor: fillColor,
@@ -68,7 +70,7 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: fontSize),
       textDirection: textDirection,
       obscureText: isObscur ?? false,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: keyboardType,
       textInputAction: textInputAction,
       validator: validator,
       onSaved: onSaved,

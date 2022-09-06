@@ -6,16 +6,16 @@ class SliderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 230,
       // color: Colors.,
       child: ListView(
-        padding: EdgeInsets.only(right: 24, left: 24),
+        padding: const EdgeInsets.only(right: 24, left: 24),
         reverse: false,
         scrollDirection: Axis.horizontal,
         children: [
           sliderContainer(context, 1),
-          SizedBox(
+          const SizedBox(
             width: 12,
           ),
           sliderContainer(context, 2)
@@ -28,7 +28,7 @@ class SliderSection extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: 340,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.blue50,
         borderRadius: BorderRadius.all(Radius.circular(18)),
       ),
@@ -38,7 +38,7 @@ class SliderSection extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
               width: 170,
-              margin: EdgeInsets.only(left: 10),
+              margin: const EdgeInsets.only(left: 10),
               child: Image.asset(
                 index == 1
                     ? 'assets/images/illustration1.png'
@@ -49,7 +49,7 @@ class SliderSection extends StatelessWidget {
           ),
           Container(
               width: double.infinity,
-              padding: EdgeInsets.only(right: 8, bottom: 36, top: 12),
+              padding: const EdgeInsets.only(right: 8, bottom: 36, top: 12),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,22 +59,15 @@ class SliderSection extends StatelessWidget {
                           ? "دروسك تنتظرك\n ما الذي ترغب في تعلمه"
                           : "يمكنك مشاهدة دروس جميع المواد\nلتعويض ما قد\nفاتك ",
                       textDirection: TextDirection.rtl,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.w700),
                     ),
                     Container(
-                      margin: EdgeInsets.only(right: 8),
+                      margin: const EdgeInsets.only(right: 8),
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: Text(
-                          index == 1 ? 'ابدأ الآن' : 'اختر اليوم',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        ),
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7)),
@@ -82,9 +75,16 @@ class SliderSection extends StatelessWidget {
                             primary: index == 1
                                 ? AppColors.orange700
                                 : AppColors.purple,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 37, vertical: 6),
                             onPrimary: Colors.white),
+                        child: Text(
+                          index == 1 ? 'ابدأ الآن' : 'اختر اليوم',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     )
                   ]))

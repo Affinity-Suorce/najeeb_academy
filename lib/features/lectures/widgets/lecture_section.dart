@@ -38,7 +38,7 @@ class _LectureSectionState extends State<LectureSection> {
                 children: [
                   Text(
                     "الدروس ${day.agoDate}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       height: 1,
                       color: Colors.black,
                       fontSize: 22,
@@ -64,7 +64,7 @@ class _LectureSectionState extends State<LectureSection> {
                     });
                   }
                 },
-                child: Text(
+                child: const Text(
                   "اختر يوماً آخر",
                   style: TextStyle(
                     height: 1,
@@ -106,7 +106,7 @@ class LectureWidget extends StatelessWidget {
       onTap: () {
         pushNewScreen(
           context,
-          screen: VideoPlayerPage(
+          screen: const VideoPlayerPage(
             subject: "الرياضيات",
           ),
           withNavBar: false, // OPTIONAL VALUE. True by default.
@@ -148,7 +148,7 @@ class LectureWidget extends StatelessWidget {
                             fontSize: 22,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "الدرس $index",
                           style: const TextStyle(
@@ -185,7 +185,7 @@ class LectureWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Container(
                           width: 45,
                           height: 22,
@@ -232,7 +232,7 @@ class LectureWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               width: 80,
               height: 80,

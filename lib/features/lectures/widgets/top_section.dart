@@ -11,7 +11,7 @@ class TopSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Navbar(
+        const Navbar(
           title: "دروسي",
           color: Colors.black,
         ),

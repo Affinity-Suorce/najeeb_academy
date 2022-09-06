@@ -13,7 +13,7 @@ class LecturesPage extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: const [
               Padding(
                 padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
                 child: TopSection(),

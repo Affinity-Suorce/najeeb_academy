@@ -15,8 +15,8 @@ class ProfilePage extends StatelessWidget {
           textDirection: TextDirection.ltr,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 40, 12, 0),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
                 child: Navbar(
                   title: "حسابي",
                   color: Colors.black,
