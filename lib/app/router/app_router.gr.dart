@@ -44,6 +44,10 @@ class _$AppRouter extends RootStackRouter {
     CoursesRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const CoursesPage());
+    },
+    AllCoursesRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+          routeData: routeData, child: const AllCoursesPage());
     }
   };
 
@@ -55,7 +59,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(LoginRoute.name, path: '/login'),
         RouteConfig(RegisterRoute.name, path: '/register'),
         RouteConfig(MainRoute.name, path: '/main'),
-        RouteConfig(CoursesRoute.name, path: '/courses')
+        RouteConfig(CoursesRoute.name, path: '/courses'),
+        RouteConfig(AllCoursesRoute.name, path: '/all-courses')
       ];
 }
 
@@ -122,4 +127,12 @@ class CoursesRoute extends PageRouteInfo<void> {
   const CoursesRoute() : super(CoursesRoute.name, path: '/courses');
 
   static const String name = 'CoursesRoute';
+}
+
+/// generated route for
+/// [AllCoursesPage]
+class AllCoursesRoute extends PageRouteInfo<void> {
+  const AllCoursesRoute() : super(AllCoursesRoute.name, path: '/all-courses');
+
+  static const String name = 'AllCoursesRoute';
 }

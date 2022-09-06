@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class Navbar extends StatelessWidget {
-  Navbar(
+  const Navbar(
       {Key? key,
       this.title = "أهلاً ,أحمد",
       this.color = Colors.white,
@@ -16,19 +16,17 @@ class Navbar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          child: Text(
-            title,
-            style: TextStyle(
-              height: 1.4,
-              color: color,
-              fontWeight: FontWeight.w700,
-              fontSize: 30,
-            ),
-            textDirection: TextDirection.rtl,
+        Text(
+          title,
+          style: TextStyle(
+            height: 1.4,
+            color: color,
+            fontWeight: FontWeight.w700,
+            fontSize: 30,
           ),
+          textDirection: TextDirection.rtl,
         ),
-        Spacer(),
+        const Spacer(),
         withdrawer
             ? InkWell(
                 onTap: () {
@@ -40,7 +38,7 @@ class Navbar extends StatelessWidget {
                   size: 35,
                 ),
               )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
       ],
     );
   }

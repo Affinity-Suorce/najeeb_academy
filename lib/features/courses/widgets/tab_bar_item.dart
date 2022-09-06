@@ -19,17 +19,13 @@ class TabBarItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            child: SizedBox(
+          SizedBox(
+            width: imageSize.r,
+            height: imageSize.r,
+            child: Image.asset(
+              imagePath,
               width: imageSize.r,
               height: imageSize.r,
-              child: Image.network(
-                imagePath,
-                width: imageSize.r,
-                height: imageSize.r,
-              ),
             ),
           ),
           8.horizontalSpace,

@@ -99,7 +99,7 @@ class _LectureSectionState extends State<LectureSection> {
 
 class LectureWidget extends StatelessWidget {
   const LectureWidget({Key? key, this.index = 1}) : super(key: key);
-  final index;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return InkWell(
