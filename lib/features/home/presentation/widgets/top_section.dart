@@ -11,7 +11,7 @@ class TopSection extends StatelessWidget {
         LinearGradient(colors: <Color>[Colors.white, Colors.red.shade500]);
     return Column(
       children: [
-        Navbar(),
+        const Navbar(),
         Container(
           alignment: Alignment.centerRight,
           child: const Text(
@@ -58,7 +58,7 @@ class TopSection extends StatelessWidget {
                         fontSize: 17,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                       onTap: () {},
                       child: const Material(

@@ -17,7 +17,7 @@ class VideoWidget extends StatelessWidget {
   final double length;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 65,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -26,24 +26,24 @@ class VideoWidget extends StatelessWidget {
             indexFunction(index),
             style: TextStyle(color: Colors.grey.shade300, fontSize: 36),
           ),
-          SizedBox(
+          const SizedBox(
             width: 34,
           ),
           Column(
             children: [
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.4,
                   color: Colors.black54,
                   fontSize: 24,
                 ),
                 textDirection: TextDirection.rtl,
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 "${length.toStringAsFixed(2)}h",
-                style: TextStyle(
+                style: const TextStyle(
                   height: 1.4,
                   color: AppColors.indigo,
                   fontSize: 20,
@@ -52,8 +52,8 @@ class VideoWidget extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
-          Container(
+          const Spacer(),
+          SizedBox(
             width: 50,
             height: 50,
             child: Icon(
@@ -64,7 +64,7 @@ class VideoWidget extends StatelessWidget {
               size: 60,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 34,
           ),
         ],

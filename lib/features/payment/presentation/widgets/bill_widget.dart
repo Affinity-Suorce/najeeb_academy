@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 
-class MyPaymentsWidget extends StatelessWidget {
-  const MyPaymentsWidget({
+class BillWidget extends StatelessWidget {
+  const BillWidget({
     Key? key,
     this.isSubscription = false,
     this.installment = 1,
@@ -37,14 +36,14 @@ class MyPaymentsWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       !isSubscription
-                          ? Text('القسط:', style: textStyle1)
-                          : SizedBox.shrink(),
-                      Text('رقم الفاتورة:', style: textStyle1),
-                      Text('الدورة:', style: textStyle1),
-                      Text('المبلغ المدفوع:', style: textStyle1),
-                      Text('المبلغ المتبقي:', style: textStyle1),
-                      Text('من تاريخ:', style: textStyle1),
-                      Text('إلى تاريخ', style: textStyle1),
+                          ? const Text('القسط:', style: textStyle1)
+                          : const SizedBox.shrink(),
+                      const Text('رقم الفاتورة:', style: textStyle1),
+                      const Text('الدورة:', style: textStyle1),
+                      const Text('المبلغ المدفوع:', style: textStyle1),
+                      const Text('المبلغ المتبقي:', style: textStyle1),
+                      const Text('من تاريخ:', style: textStyle1),
+                      const Text('إلى تاريخ', style: textStyle1),
                     ],
                   ),
                 ),
@@ -54,7 +53,7 @@ class MyPaymentsWidget extends StatelessWidget {
                     children: [
                       !isSubscription
                           ? Text(installment.toString(), style: textStyle2)
-                          : SizedBox.shrink(),
+                          : const SizedBox.shrink(),
                       Text(
                         billId.toString(),
                         style: textStyle2,
@@ -85,7 +84,7 @@ class MyPaymentsWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider()
+          const Divider()
         ],
       ),
     );

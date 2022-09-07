@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
 
 class GoToWidget extends StatelessWidget {
   const GoToWidget({Key? key, required this.title}) : super(key: key);
@@ -17,10 +16,10 @@ class GoToWidget extends StatelessWidget {
         // );
       },
       child: Container(
-        padding: EdgeInsets.only(right: 12, bottom: 13, top: 13, left: 12),
+        padding: const EdgeInsets.only(right: 12, bottom: 13, top: 13, left: 12),
         width: 160,
         height: 80,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(13)),
             boxShadow: [
@@ -33,11 +32,11 @@ class GoToWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Icon(CupertinoIcons.arrow_uturn_right),
-            Spacer(),
+            const Icon(CupertinoIcons.arrow_uturn_right),
+            const Spacer(),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 height: 1,
                 color: Colors.black,
                 fontSize: 22,

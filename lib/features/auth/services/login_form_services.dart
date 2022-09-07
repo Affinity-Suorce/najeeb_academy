@@ -10,7 +10,7 @@ class LoginFormService extends ChangeNotifier {
     if (formState != null && formState.validate()) {
       final username = formState.fields['username']!.value;
       final password = formState.fields['password']!.value;
-      print('username: $username\npassword: $password');
+      debugPrint('username: $username\npassword: $password');
     }
   }
 }

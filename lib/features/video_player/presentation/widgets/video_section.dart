@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/video_player/enum.dart';
 import 'package:najeeb_academy/features/video_player/presentation/full_screen_video_page.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/quality_selector_widget.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoSection extends StatelessWidget {
-  VideoSection({
+  const VideoSection({
     Key? key,
     required this.changeVideo,
     required this.controller,
@@ -33,11 +32,11 @@ class VideoSection extends StatelessWidget {
                         alignment: Alignment.topCenter,
                         child: VideoPlayer(controller),
                       )
-                    : Center(
-                        child: Container(
+                    : const Center(
+                        child: SizedBox(
                             width: 50,
                             height: 50,
-                            child: const CircularProgressIndicator(
+                            child: CircularProgressIndicator(
                               color: AppColors.lightGrey1,
                             )))),
           ),
@@ -46,15 +45,15 @@ class VideoSection extends StatelessWidget {
             child: VideoProgressIndicator(
               controller,
               allowScrubbing: true,
-              padding: EdgeInsets.all(0),
-              colors: VideoProgressColors(
+              padding: const EdgeInsets.all(0),
+              colors: const VideoProgressColors(
                   bufferedColor: Colors.grey,
                   backgroundColor: Colors.black,
                   playedColor: AppColors.indigo),
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
             width: double.infinity,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -74,13 +73,13 @@ class VideoSection extends StatelessWidget {
                               ])
                             });
                   },
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.fullscreen,
                     color: Colors.white,
                     size: 24,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 14,
                 ),
                 InkWell(
@@ -90,24 +89,24 @@ class VideoSection extends StatelessWidget {
                         builder: (context) =>
                             QualitySelectorWidget(changeVideo: changeVideo));
                   },
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.settings_solid,
                     color: Colors.white,
                     size: 24,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: () {
                     changeVideo!(1);
                   },
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.arrow_right,
                     color: Colors.white,
                     size: 28,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 18,
                 ),
                 InkWell(
@@ -124,44 +123,37 @@ class VideoSection extends StatelessWidget {
                     size: 30,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 18,
                 ),
                 InkWell(
                   onTap: () {
                     changeVideo!(-1);
                   },
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.arrow_left,
                     color: Colors.white,
                     size: 28,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 18,
                 ),
                 Text(
                   controller.value.duration.inHours != 0
                       ? controller.value.duration.inHours.toString()
-                      : '' +
-                          controller.value.duration.inMinutes.toString() +
-                          ':' +
-                          controller.value.duration.inSeconds.toString() +
-                          ' / ',
+                      : '${controller.value.duration.inMinutes}:${controller.value.duration.inSeconds} / ',
                   style:
-                      TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
+                      const TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
                 ),
                 Text(
                   controller.value.duration.inHours != 0
                       ? controller.value.position.inHours.toString()
-                      : '' +
-                          controller.value.position.inMinutes.toString() +
-                          ':' +
-                          controller.value.position.inSeconds.toString(),
+                      : '${controller.value.position.inMinutes}:${controller.value.position.inSeconds}',
                   style:
-                      TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
+                      const TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 14,
                 ),
               ],

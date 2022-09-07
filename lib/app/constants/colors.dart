@@ -15,7 +15,7 @@ abstract class AppColors {
   static const purple = Color(0xFF440687);
   static const searchField = Color(0XFFF4F3FD);
 
-  static const indigo = Color(0xFF3D5CFF);
+  static const indigo = Color(0xFF1479FF);
 
   static const orange50 = Color(0xFFFFEBF0);
   static const orange700 = Color(0xFFFF6905);

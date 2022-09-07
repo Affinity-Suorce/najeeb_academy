@@ -9,10 +9,10 @@ class ProgramSection extends StatelessWidget {
     return Material(
       elevation: 0,
       child: Container(
-        padding: EdgeInsets.only(right: 8, bottom: 36, top: 12),
+        padding: const EdgeInsets.only(right: 8, bottom: 36, top: 12),
         width: MediaQuery.of(context).size.width * 0.9,
         // height: 230,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(13)),
             boxShadow: [
@@ -25,18 +25,18 @@ class ProgramSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "برنامج الإسبوع",
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 22,
                   fontWeight: FontWeight.w700),
             ),
-            SizedBox(
+            const SizedBox(
               height: 2,
             ),
             ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
@@ -60,7 +60,7 @@ class ProgramSection extends StatelessWidget {
       int from = 40,
       double progress = 0.0}) {
     return Padding(
-      padding: EdgeInsets.only(right: 34, left: 20),
+      padding: const EdgeInsets.only(right: 34, left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -68,28 +68,28 @@ class ProgramSection extends StatelessWidget {
             radius: 17.0,
             lineWidth: 2.5,
             percent: progress,
-            center: Text(""),
+            center: const Text(""),
             progressColor: Colors.green,
           ),
-          SizedBox(
+          const SizedBox(
             width: 12,
           ),
           Text(
-            "$subject",
-            style: TextStyle(
+            subject,
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             "$from/",
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
           ),
           Text(
             "$done",
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black54,
               fontSize: 18,
             ),

@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
-import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
 import 'package:najeeb_academy/app/widgets/button.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
 import 'package:najeeb_academy/app/widgets/text_form_field.dart';
-import 'package:najeeb_academy/features/payment/presentation/widgets/my_payments_widget.dart';
+import 'package:najeeb_academy/features/payment/presentation/widgets/bill_widget.dart';
+import 'package:najeeb_academy/features/payment/presentation/widgets/payment_dialog.dart';
 
 const TextStyle textStyle1 = TextStyle(
   color: AppColors.purple,
@@ -31,10 +30,20 @@ class PaymentsPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return const PaymentDialog();
+                });
+          },
+          child: const Icon(CupertinoIcons.add),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
+              const Padding(
                 padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
                 child: Navbar(
                   title: "مدفوعاتي",
@@ -42,10 +51,10 @@ class PaymentsPage extends StatelessWidget {
                   withdrawer: false,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
-              TabBar(
+              const TabBar(
                 indicatorColor: AppColors.purple,
                 indicatorPadding: EdgeInsets.symmetric(horizontal: 84),
                 tabs: [
@@ -69,10 +78,10 @@ class PaymentsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.74,
                 child: TabBarView(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     children: [
                       listViewWidget(context, 6, 1),
                       listViewWidget(context, 2, 2),
@@ -87,24 +96,24 @@ class PaymentsPage extends StatelessWidget {
 
   Widget listViewWidget(context, count, type) {
     return Padding(
-      padding: EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: 12),
       child: Column(
         children: [
           searchField(context),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Expanded(
             child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 itemBuilder: (context, index) => type == 1
-                    ? MyPaymentsWidget()
-                    : MyPaymentsWidget(
+                    ? const BillWidget()
+                    : const BillWidget(
                         isSubscription: true,
                       ),
-                separatorBuilder: (context, index) => SizedBox(
+                separatorBuilder: (context, index) => const SizedBox(
                       height: 0,
                     ),
                 itemCount: count),
@@ -138,7 +147,7 @@ Widget searchField(BuildContext context) {
           onTap: () async {
             final filter = await BottomSheetContainer(
               draggable: false,
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 40),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
@@ -180,7 +189,7 @@ Widget searchField(BuildContext context) {
                             )
                           ]),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 24,
                     ),
                     CustomElevatedButton(

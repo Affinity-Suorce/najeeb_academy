@@ -51,11 +51,11 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                             alignment: Alignment.topCenter,
                             child: VideoPlayer(widget.controller),
                           )
-                        : Center(
-                            child: Container(
+                        : const Center(
+                            child: SizedBox(
                                 width: 50,
                                 height: 50,
-                                child: const CircularProgressIndicator(
+                                child: CircularProgressIndicator(
                                   color: AppColors.lightGrey1,
                                 )))),
               ),
@@ -65,8 +65,8 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
               child: VideoProgressIndicator(
                 widget.controller,
                 allowScrubbing: true,
-                padding: EdgeInsets.all(0),
-                colors: VideoProgressColors(
+                padding: const EdgeInsets.all(0),
+                colors: const VideoProgressColors(
                     bufferedColor: Colors.grey,
                     backgroundColor: Colors.black,
                     playedColor: AppColors.indigo),
@@ -77,7 +77,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
               maintainAnimation: true,
               visible: visible,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -87,13 +87,13 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(
+                      child: const Icon(
                         CupertinoIcons.fullscreen_exit,
                         color: Colors.white,
                         size: 26,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 14,
                     ),
                     InkWell(
@@ -104,26 +104,26 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                                   changeVideo: widget.changeVideo,
                                 ));
                       },
-                      child: Icon(
+                      child: const Icon(
                         CupertinoIcons.settings_solid,
                         color: Colors.white,
                         size: 26,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Row(
                       children: [
                         InkWell(
                           onTap: () {
                             widget.changeVideo!(1);
                           },
-                          child: Icon(
+                          child: const Icon(
                             CupertinoIcons.arrow_right,
                             color: Colors.white,
                             size: 30,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 18,
                         ),
                         InkWell(
@@ -142,14 +142,14 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                             size: 36,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 18,
                         ),
                         InkWell(
                           onTap: () {
                             widget.changeVideo!(-1);
                           },
-                          child: Icon(
+                          child: const Icon(
                             CupertinoIcons.arrow_left,
                             color: Colors.white,
                             size: 30,
@@ -157,33 +157,22 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       widget.controller.value.duration.inHours != 0
                           ? widget.controller.value.duration.inHours.toString()
-                          : '' +
-                              widget.controller.value.duration.inMinutes
-                                  .toString() +
-                              ':' +
-                              widget.controller.value.duration.inSeconds
-                                  .toString() +
-                              ' / ',
-                      style: TextStyle(
+                          : '${widget.controller.value.duration.inMinutes}:${widget.controller.value.duration.inSeconds} / ',
+                      style: const TextStyle(
                           color: Colors.white, fontSize: 22, height: 1.1),
                     ),
                     Text(
                       widget.controller.value.duration.inHours != 0
                           ? widget.controller.value.position.inHours.toString()
-                          : '' +
-                              widget.controller.value.position.inMinutes
-                                  .toString() +
-                              ':' +
-                              widget.controller.value.position.inSeconds
-                                  .toString(),
-                      style: TextStyle(
+                          : '${widget.controller.value.position.inMinutes}:${widget.controller.value.position.inSeconds}',
+                      style: const TextStyle(
                           color: Colors.white, fontSize: 22, height: 1.1),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 14,
                     ),
                   ],

@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
-import 'package:najeeb_academy/features/video_player/enum.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_section.dart';
-import 'package:najeeb_academy/features/video_player/presentation/widgets/video_widget.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
-  VideoPlayerPage({Key? key, required this.subject}) : super(key: key);
+  const VideoPlayerPage({Key? key, required this.subject}) : super(key: key);
   final String subject;
 
   @override
@@ -93,10 +88,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
-      body: Container(
+      body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: const ClampingScrollPhysics(),
           child: Column(
             children: [
               VideoSection(

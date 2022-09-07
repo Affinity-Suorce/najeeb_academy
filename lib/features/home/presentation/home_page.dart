@@ -51,14 +51,14 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _Backlayer extends StatelessWidget {
-  _Backlayer({Key? key, this.scrollController}) : super(key: key);
+  const _Backlayer({Key? key, this.scrollController}) : super(key: key);
   final ScrollController? scrollController;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         controller: scrollController,
         child: Column(
           children: [
@@ -77,7 +77,7 @@ class _Backlayer extends StatelessWidget {
 }
 
 class _FrontLayer extends StatelessWidget {
-  _FrontLayer({Key? key, this.scrollController}) : super(key: key);
+  const _FrontLayer({Key? key, this.scrollController}) : super(key: key);
   final ScrollController? scrollController;
   @override
   Widget build(BuildContext context) {
@@ -85,10 +85,10 @@ class _FrontLayer extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         controller: scrollController,
         child: Column(
-          children: [
+          children: const [
             Padding(
               padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
               child: TopSection(),

@@ -3,7 +3,6 @@ import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import '../../video_player/presentation/video_player_page.dart';
-import '../models/course.dart';
 
 class LectureWidget extends StatelessWidget {
   const LectureWidget({Key? key, required this.lecture}) : super(key: key);
