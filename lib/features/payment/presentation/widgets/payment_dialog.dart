@@ -40,7 +40,7 @@ class PaymentDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(children: [
-                Text(
+                const Text(
                   'أدخل رقم الفاتورة',
                   textDirection: TextDirection.rtl,
                   style: TextStyle(
@@ -48,7 +48,7 @@ class PaymentDialog extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.w700),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: () => Navigator.pop(context),
                   child: Icon(

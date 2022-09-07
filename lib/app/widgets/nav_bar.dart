@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar(
@@ -27,18 +26,18 @@ class Navbar extends StatelessWidget {
           textDirection: TextDirection.rtl,
         ),
         const Spacer(),
-        withdrawer
-            ? InkWell(
-                onTap: () {
-                  ZoomDrawer.of(context)!.open();
-                },
-                child: Icon(
-                  Icons.menu_rounded,
-                  color: color,
-                  size: 35,
-                ),
-              )
-            : const SizedBox.shrink(),
+        // withdrawer
+        //     ? InkWell(
+        //         onTap: () {
+        //           ZoomDrawer.of(context)!.open();
+        //         },
+        //         child: Icon(
+        //           Icons.menu_rounded,
+        //           color: color,
+        //           size: 35,
+        //         ),
+        //       )
+        //     : const SizedBox.shrink(),
       ],
     );
   }

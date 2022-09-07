@@ -25,7 +25,7 @@ class NajeebAcademyApp extends StatelessWidget {
     await DI.init();
     await SystemChrome.setPreferredOrientations(
         AppOrientation.defaultOrientation);
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual);
     Future.delayed(
       const Duration(milliseconds: 500),
       () => FlutterNativeSplash.remove(),
