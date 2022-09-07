@@ -52,110 +52,126 @@ class RegisterPage extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                child: FormBuilderTextField(
-                                  name: 'first_name',
-                                  autofocus: true,
-                                  decoration: const InputDecoration(
-                                    hintText: 'الاسم الأول',
+                                child: Card(
+                                  child: FormBuilderTextField(
+                                    name: 'first_name',
+                                    autofocus: true,
+                                    decoration: const InputDecoration(
+                                      hintText: 'الاسم الأول',
+                                    ),
+                                    textInputAction: TextInputAction.next,
                                   ),
-                                  textInputAction: TextInputAction.next,
                                 ),
                               ),
                               8.horizontalSpace,
                               Expanded(
-                                child: FormBuilderTextField(
-                                  name: 'last_name',
-                                  decoration: const InputDecoration(
-                                    hintText: 'الكنية',
+                                child: Card(
+                                  child: FormBuilderTextField(
+                                    name: 'last_name',
+                                    decoration: const InputDecoration(
+                                      hintText: 'الكنية',
+                                    ),
+                                    textInputAction: TextInputAction.next,
                                   ),
-                                  textInputAction: TextInputAction.next,
                                 ),
                               ),
                             ],
                           ),
                           8.verticalSpace,
-                          FormBuilderTextField(
-                            name: 'father_name',
-                            decoration: const InputDecoration(
-                              hintText: 'اسم الأب',
+                          Card(
+                            child: FormBuilderTextField(
+                              name: 'father_name',
+                              decoration: const InputDecoration(
+                                hintText: 'اسم الأب',
+                              ),
+                              textInputAction: TextInputAction.next,
                             ),
-                            textInputAction: TextInputAction.next,
                           ),
                           8.verticalSpace,
-                          const SyrianMobileFormField(
-                            decoration: InputDecoration(
-                              hintText: 'الجوال',
+                          const Card(
+                            child: SyrianMobileFormField(
+                              decoration: InputDecoration(
+                                hintText: 'الجوال',
+                              ),
                             ),
                           ),
                           8.verticalSpace,
                           Row(
                             children: [
                               Expanded(
-                                child: FormBuilderTextField(
-                                  name: 'landline',
-                                  decoration: const InputDecoration(
-                                    hintText: 'الهاتف الأرضي',
+                                child: Card(
+                                  child: FormBuilderTextField(
+                                    name: 'landline',
+                                    decoration: const InputDecoration(
+                                      hintText: 'الهاتف الأرضي',
+                                    ),
+                                    textInputAction: TextInputAction.next,
+                                    keyboardType: TextInputType.phone,
                                   ),
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.phone,
                                 ),
                               ),
                               8.horizontalSpace,
                               Expanded(
-                                child: FormBuilderDropdown<Governorate>(
-                                  name: 'governorate',
-                                  items: Governorate.all
-                                      .map(
-                                        (e) => DropdownMenuItem(
-                                          value: e,
-                                          child: Text(e.name),
-                                        ),
-                                      )
-                                      .toList(),
-                                  decoration: const InputDecoration(
-                                    hintText: 'المحافظة',
+                                child: Card(
+                                  child: FormBuilderDropdown<Governorate>(
+                                    name: 'governorate',
+                                    items: Governorate.all
+                                        .map(
+                                          (e) => DropdownMenuItem(
+                                            value: e,
+                                            child: Text(e.name),
+                                          ),
+                                        )
+                                        .toList(),
+                                    decoration: const InputDecoration(
+                                      hintText: 'المحافظة',
+                                    ),
                                   ),
                                 ),
                               )
                             ],
                           ),
                           8.verticalSpace,
-                          SyrianMobileFormField(
-                            name: 'parent_mobile',
-                            decoration: const InputDecoration(
-                              hintText: 'هاتف ولي الأمر',
+                          Card(
+                            child: SyrianMobileFormField(
+                              name: 'parent_mobile',
+                              decoration: const InputDecoration(
+                                hintText: 'هاتف ولي الأمر',
+                              ),
+                              onFieldSubmitted: (_) {
+                                FocusManager.instance.primaryFocus?.nextFocus();
+                              },
                             ),
-                            onFieldSubmitted: (_) {
-                              FocusManager.instance.primaryFocus?.nextFocus();
-                            },
                           ),
                           8.verticalSpace,
-                          FormBuilderDropdown<StudentClass>(
-                            name: 'class',
-                            items: snapshot.data!
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    value: e,
-                                    child: Row(
-                                      children: [
-                                        Image.asset(
-                                          e.imgUrl,
-                                          width: 28.r,
-                                          height: 28.r,
-                                          cacheWidth: 28.r.toInt(),
-                                          cacheHeight: 28.r.toInt(),
-                                        ),
-                                        8.horizontalSpace,
-                                        Expanded(
-                                          child: Text(e.name),
-                                        ),
-                                      ],
+                          Card(
+                            child: FormBuilderDropdown<StudentClass>(
+                              name: 'class',
+                              items: snapshot.data!
+                                  .map(
+                                    (e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Row(
+                                        children: [
+                                          Image.asset(
+                                            e.imgUrl,
+                                            width: 28.r,
+                                            height: 28.r,
+                                            cacheWidth: 28.r.toInt(),
+                                            cacheHeight: 28.r.toInt(),
+                                          ),
+                                          8.horizontalSpace,
+                                          Expanded(
+                                            child: Text(e.name),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
-                            decoration: const InputDecoration(
-                              hintText: 'الصف',
+                                  )
+                                  .toList(),
+                              decoration: const InputDecoration(
+                                hintText: 'الصف',
+                              ),
                             ),
                           ),
                           const Spacer(),

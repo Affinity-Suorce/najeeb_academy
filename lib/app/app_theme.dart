@@ -12,6 +12,7 @@ abstract class _Theme {
   static final _inputBorderRadius = BorderRadius.circular(16);
   static final _cardTheme = CardTheme(
     clipBehavior: Clip.antiAliasWithSaveLayer,
+    elevation: 5,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(16.r),
     ),
@@ -52,6 +53,7 @@ abstract class _Theme {
         style: ElevatedButton.styleFrom(
           padding: _buttonPadding,
           shape: _buttonShape,
+          elevation: 5,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -69,19 +71,24 @@ abstract class _Theme {
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: _inputBorderRadius,
-          borderSide: const BorderSide(
-            width: 1,
-            color: AppColors.purple900,
-          ),
+          // borderSide: const BorderSide(
+          //   width: 1,
+          //   color: AppColors.purple900,
+          // ),
+
+          borderSide: BorderSide.none,
         ),
+        filled: true,
+        fillColor: AppColors.lightGray,
         contentPadding: _inputPadding,
       ),
       textTheme: const TextTheme().apply(fontSizeFactor: 1.sp),
       cardTheme: _cardTheme,
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme: TabBarTheme(
         labelColor: AppColors.purple900,
         indicator: UnderlineTabIndicator(
-          borderSide: BorderSide(
+          insets: EdgeInsets.symmetric(horizontal: 48.w),
+          borderSide: const BorderSide(
             width: 2,
             color: AppColors.indigo,
           ),

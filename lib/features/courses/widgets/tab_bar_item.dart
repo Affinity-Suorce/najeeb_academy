@@ -14,7 +14,7 @@ class TabBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     const imageSize = 24;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 4.h),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,

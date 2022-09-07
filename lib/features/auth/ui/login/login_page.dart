@@ -30,7 +30,7 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Flexible(
-                      flex: 3,
+                      flex: 2,
                       child: Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -39,25 +39,30 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    FormBuilderTextField(
-                      name: 'username',
-                      autofocus: true,
-                      decoration:
-                          const InputDecoration(hintText: 'اسم المستخدم'),
-                      textInputAction: TextInputAction.next,
-                      validator: (input) {
-                        if (input == null || input.trim().isEmpty) {
-                          return 'هذا الحقل مطلوب';
-                        }
-                        return null;
-                      },
+                    const Spacer(),
+                    Card(
+                      child: FormBuilderTextField(
+                        name: 'username',
+                        autofocus: true,
+                        decoration:
+                            const InputDecoration(hintText: 'اسم المستخدم'),
+                        textInputAction: TextInputAction.next,
+                        validator: (input) {
+                          if (input == null || input.trim().isEmpty) {
+                            return 'هذا الحقل مطلوب';
+                          }
+                          return null;
+                        },
+                      ),
                     ),
                     8.verticalSpace,
-                    PasswordFormField(
-                      decoration:
-                          const InputDecoration(hintText: 'كلمة المرور'),
-                      textInputAction: TextInputAction.go,
-                      onFieldSubmitted: (_) => service.login(),
+                    Card(
+                      child: PasswordFormField(
+                        decoration:
+                            const InputDecoration(hintText: 'كلمة المرور'),
+                        textInputAction: TextInputAction.go,
+                        onFieldSubmitted: (_) => service.login(),
+                      ),
                     ),
                     16.verticalSpace,
                     ElevatedButton(
@@ -73,6 +78,7 @@ class LoginPage extends StatelessWidget {
                         },
                       ),
                     ),
+                    const Spacer(),
                     16.verticalSpace,
                   ],
                 ),

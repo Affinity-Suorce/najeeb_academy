@@ -29,12 +29,10 @@ class BoardingWidget extends StatelessWidget {
               ),
             ),
             Flexible(
-              child: Center(
-                child: Text(
-                  title,
-                  style: theme.textTheme.titleLarge,
-                  textAlign: TextAlign.center,
-                ),
+              child: Text(
+                title,
+                style: theme.textTheme.titleLarge,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

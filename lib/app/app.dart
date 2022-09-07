@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -25,7 +24,7 @@ class NajeebAcademyApp extends StatelessWidget {
     await DI.init();
     await SystemChrome.setPreferredOrientations(
         AppOrientation.defaultOrientation);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     Future.delayed(
       const Duration(milliseconds: 500),
       () => FlutterNativeSplash.remove(),
