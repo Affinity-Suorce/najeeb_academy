@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -48,6 +49,10 @@ class NajeebAcademyApp extends StatelessWidget {
         scrollBehavior: _Theme.scrollBehavior,
         routerDelegate: DI.router.delegate(),
         routeInformationParser: DI.router.defaultRouteParser(),
+        //make text size independent from user text scale settings
+        builder: (context, child) => child == null
+            ? const SizedBox.shrink()
+            : FixedScaleTextWidget(child: child),
       ),
     );
   }
