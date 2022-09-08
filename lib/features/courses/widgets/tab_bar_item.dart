@@ -12,7 +12,7 @@ class TabBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const imageSize = 24;
+    const imageSize = 32;
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 4.h),
       child: Row(

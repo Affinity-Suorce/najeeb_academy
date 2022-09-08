@@ -80,7 +80,7 @@ dev_dependencies:
   #flutter pub run change_app_package_name:main com.ysh.najeeb_academy
 #   flutter_app_name: ^0.1.1
 # flutter_app_name:
-#   name: "نجيب"
+#   name: "najeeb"
 #   #flutter pub run flutter_app_name
 
 # For information on the generic Dart part of this file, see the
