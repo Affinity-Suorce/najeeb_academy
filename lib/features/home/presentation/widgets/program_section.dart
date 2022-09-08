@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/schedule/schedule_widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 
 class ProgramSection extends StatelessWidget {
   const ProgramSection({Key? key}) : super(key: key);

@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
+import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
+import 'package:najeeb_academy/features/video_player/presentation/widgets/video_files_container.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_section.dart';
 import 'package:video_player/video_player.dart';
 
@@ -88,6 +92,17 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          const BottomSheetContainer(
+            child: VideoFilesContainer(),
+          ).showAsBottomSheet<DateTime>(
+            context,
+            isScrollControlled: true,
+          );
+        },
+        child: const Icon(CupertinoIcons.doc_on_doc),
+      ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(

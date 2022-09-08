@@ -143,7 +143,7 @@ Widget scheduleViewBuilder(
   return Stack(
     children: <Widget>[
       Image(
-          image: ExactAssetImage('assets/images/' + monthName + '.png'),
+          image: ExactAssetImage('assets/images/$monthName.png'),
           fit: BoxFit.cover,
           width: details.bounds.width,
           height: details.bounds.height),
@@ -153,7 +153,7 @@ Widget scheduleViewBuilder(
         top: 20,
         bottom: 0,
         child: Text(
-          monthName + ' ' + details.date.year.toString(),
+          '$monthName ${details.date.year}',
           style: const TextStyle(fontSize: 18),
         ),
       )

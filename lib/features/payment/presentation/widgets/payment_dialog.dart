@@ -51,7 +51,7 @@ class PaymentDialog extends StatelessWidget {
                 const Spacer(),
                 InkWell(
                   onTap: () => Navigator.pop(context),
-                  child: Icon(
+                  child: const Icon(
                     CupertinoIcons.arrow_left,
                     color: Colors.black,
                     size: 30,
@@ -64,7 +64,7 @@ class PaymentDialog extends StatelessWidget {
                   return null;
                 },
                 keyboardType: TextInputType.number,
-                padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                 fillColor: AppColors.searchField,
                 hintText: '11******',
               ),

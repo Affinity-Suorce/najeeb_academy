@@ -21,7 +21,6 @@ class LecturesPage extends StatelessWidget {
               SizedBox(
                 height: 28,
               ),
-              // WheelSection(),
               LectureSection(),
             ],
           ),
