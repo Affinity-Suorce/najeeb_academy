@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:najeeb_academy/features/courses/widgets/tab_bar_item.dart';
+import 'package:najeeb_academy/features/courses/data/models/course.dart';
+import 'package:najeeb_academy/features/courses/presentation/widgets/tab_bar_item.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
-import 'models/course.dart';
-import 'widgets/all_courses_floating_action_button.dart';
-import 'widgets/lecture_widget.dart';
-import 'widgets/top_section.dart';
+import '../widgets/all_courses_floating_action_button.dart';
+import '../widgets/lecture_widget.dart';
+import '../widgets/top_section.dart';
 
 class CoursesPage extends StatefulWidget {
   const CoursesPage({super.key});
@@ -37,7 +37,7 @@ class _CoursesPageState extends State<CoursesPage>
             children: [
               const Padding(
                 padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
-                child: TopSection(),
+                child: CoursesTopSection(),
               ),
               const SizedBox(
                 height: 28,

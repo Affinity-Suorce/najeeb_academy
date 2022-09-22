@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/courses/courses_page.dart';
+import 'package:najeeb_academy/features/courses/presentation/pages/courses_page.dart';
 import 'package:najeeb_academy/features/home/presentation/home_page.dart';
 import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/features/courses/data/models/course.dart';
 
-import '../../courses/models/course.dart';
 
 class CourseWidget extends StatelessWidget {
   const CourseWidget({Key? key, required this.course}) : super(key: key);

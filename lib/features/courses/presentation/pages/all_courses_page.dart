@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:najeeb_academy/features/all_courses/widgets/course_widget.dart';
-import 'package:najeeb_academy/features/courses/models/course.dart';
+import 'package:najeeb_academy/features/courses/data/models/course.dart';
+import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
 
-import 'widgets/top_section.dart';
+import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
   const AllCoursesPage({super.key});
@@ -18,7 +18,7 @@ class AllCoursesPage extends StatelessWidget {
           children: [
             const Padding(
               padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
-              child: TopSection(),
+              child: AllCoursesTopSection(),
             ),
             const SizedBox(
               height: 28,

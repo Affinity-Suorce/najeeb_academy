@@ -4,8 +4,8 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
 import 'package:najeeb_academy/app/widgets/text_form_field.dart';
 
-class TopSection extends StatelessWidget {
-  const TopSection({Key? key}) : super(key: key);
+class CoursesTopSection extends StatelessWidget {
+  const CoursesTopSection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

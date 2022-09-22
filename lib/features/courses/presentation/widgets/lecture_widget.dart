@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
+import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import '../../video_player/presentation/video_player_page.dart';
 
 class LectureWidget extends StatelessWidget {
   const LectureWidget({Key? key, required this.lecture}) : super(key: key);
