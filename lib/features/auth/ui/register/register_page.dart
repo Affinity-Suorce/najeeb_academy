@@ -14,7 +14,7 @@ import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
-  final service = RegisterFormService();
+  final service = DI.registerFormServiceFactory();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<StudentClass>>(
@@ -145,12 +145,12 @@ class RegisterPage extends StatelessWidget {
                           ),
                           8.verticalSpace,
                           Card(
-                            child: FormBuilderDropdown<StudentClass>(
+                            child: FormBuilderDropdown<String>(
                               name: 'class',
                               items: snapshot.data!
                                   .map(
                                     (e) => DropdownMenuItem(
-                                      value: e,
+                                      value: e.id,
                                       child: Row(
                                         children: [
                                           Image.asset(

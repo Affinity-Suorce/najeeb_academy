@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:najeeb_academy/core/network/urls.dart';
 
 class LoginFormService extends ChangeNotifier {
-  LoginFormService();
+  final Dio _api;
+  LoginFormService(this._api);
   final formKey = GlobalKey<FormBuilderState>();
 
   Future<void> login() async {
@@ -10,7 +13,18 @@ class LoginFormService extends ChangeNotifier {
     if (formState != null && formState.validate()) {
       final username = formState.fields['username']!.value;
       final password = formState.fields['password']!.value;
-      debugPrint('username: $username\npassword: $password');
+      try {
+        final response = await _api.post(
+          loginUrl,
+          data: {
+            'username': username,
+            'password': password,
+          },
+        );
+        debugPrint(response.data);
+      } on DioError catch (e) {
+        debugPrint(e.message);
+      }
     }
   }
 }
