@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/lectures/lectures_page.dart';
+import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
 import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 

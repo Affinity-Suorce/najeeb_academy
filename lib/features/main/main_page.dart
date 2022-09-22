@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/features/courses/courses_page.dart';
 import 'package:najeeb_academy/features/home/presentation/home_page.dart';
-import 'package:najeeb_academy/features/lectures/lectures_page.dart';
+import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 import 'package:najeeb_academy/features/profile/presentation/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';

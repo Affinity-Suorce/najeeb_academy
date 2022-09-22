@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/features/lectures/widgets/lecture_section.dart';
-import 'package:najeeb_academy/features/lectures/widgets/top_section.dart';
+import 'package:najeeb_academy/features/lectures/presentation/widgets/lecture_section.dart';
+import 'package:najeeb_academy/features/lectures/presentation/widgets/top_section.dart';
 
 class LecturesPage extends StatelessWidget {
   const LecturesPage({Key? key}) : super(key: key);

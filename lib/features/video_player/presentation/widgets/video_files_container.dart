@@ -1,9 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/app/widgets/button.dart';
-import 'package:najeeb_academy/app/widgets/text_form_field.dart';
 
 class VideoFilesContainer extends StatelessWidget {
   const VideoFilesContainer({Key? key}) : super(key: key);
@@ -17,7 +13,7 @@ class VideoFilesContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(children: [
+          Row(children: const [
             Text(
               'ملفات الجلسة:',
               textDirection: TextDirection.rtl,
@@ -27,7 +23,7 @@ class VideoFilesContainer extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
           ]),
-          SizedBox(
+          const SizedBox(
             height: 28,
           ),
           SizedBox(
@@ -37,7 +33,7 @@ class VideoFilesContainer extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 3,
               itemBuilder: (context, index) => fileColumn(index + 1),
-              separatorBuilder: (context, index) => SizedBox(
+              separatorBuilder: (context, index) => const SizedBox(
                 width: 50,
               ),
             ),
@@ -49,7 +45,7 @@ class VideoFilesContainer extends StatelessWidget {
 
   Widget fileColumn(int index) => Column(
         children: [
-          Icon(
+          const Icon(
             FontAwesomeIcons.solidFilePdf,
             color: Colors.red,
             size: 58,
