@@ -5,14 +5,13 @@ import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
-import 'package:najeeb_academy/features/auth/services/login_form_services.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
-  final service = LoginFormService();
+  final service = DI.loginFormServiceFactory();
 
   @override
   Widget build(BuildContext context) {
