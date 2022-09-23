@@ -77,7 +77,7 @@ class _CoursesPageState extends State<CoursesPage>
                       Expanded(
                         child: TabBarView(
                           children: List.generate(
-                            courses[i].subjects!.length,
+                            courses[1].subjects!.length,
                             (index) => ListView.separated(
                               padding: EdgeInsets.symmetric(
                                   vertical: 16.h, horizontal: 16.w),

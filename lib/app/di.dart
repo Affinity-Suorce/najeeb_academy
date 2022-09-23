@@ -25,10 +25,10 @@ abstract class DI {
         },
       ),
     );
-    _.registerFactory<LoginFormService>(() => LoginFormService(api));
-    _.registerFactory<RegisterFormService>(() => RegisterFormService(api));
-    _.registerSingleton<AppRouter>(AppRouter());
-    _.registerLazySingleton<Client>(() => Client());
+    di.registerFactory<LoginFormService>(() => LoginFormService(api));
+    di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
+    di.registerSingleton<AppRouter>(AppRouter());
+    di.registerLazySingleton<Client>(() => Client());
     di.registerLazySingleton<AppRouter>(() => AppRouter());
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
@@ -43,7 +43,7 @@ abstract class DI {
         () => CoursesCubit(di<CoursesRepositories>()));
   }
 
-  static AppRouter get router => _.get<AppRouter>();
-  static LoginFormService loginFormServiceFactory() => _.get<LoginFormService>();
-  static RegisterFormService registerFormServiceFactory() => _.get<RegisterFormService>();
+  static AppRouter get router => di.get<AppRouter>();
+  static LoginFormService loginFormServiceFactory() => di.get<LoginFormService>();
+  static RegisterFormService registerFormServiceFactory() => di.get<RegisterFormService>();
 }
