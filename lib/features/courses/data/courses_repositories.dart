@@ -8,7 +8,7 @@ class CoursesRepositories {
   CoursesDataSource _coursesDataSource;
   CoursesRepositories(this._coursesDataSource);
 
-  Future<Either<Failure, CourseModel>> getMyCourses(bool isAllCourses) async =>
-      await repository<CourseModel>(
+  Future<Either<Failure, List<CourseModel>>> getMyCourses(bool isAllCourses) async =>
+      await repository<List<CourseModel>>(
           () async => await _coursesDataSource.getMyCourses(isAllCourses));
 }

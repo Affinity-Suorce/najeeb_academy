@@ -6,22 +6,22 @@ import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 
 abstract class DI {
-  static GetIt get _ => GetIt.instance;
+  static GetIt get di => GetIt.instance;
 
   static Future<void> init() async {
-    _.registerLazySingleton<AppRouter>(() => AppRouter());
-    _.registerLazySingleton<Client>(() => Client());
+    di.registerLazySingleton<AppRouter>(() => AppRouter());
+    di.registerLazySingleton<Client>(() => Client());
     registerCourses();
   }
 
   static void registerCourses() {
-    _.registerLazySingleton<CoursesDataSource>(
-        () => CoursesDataSource(_<Client>()));
-    _.registerLazySingleton<CoursesRepositories>(
-        () => CoursesRepositories(_<CoursesDataSource>()));
-    _.registerFactory<CoursesCubit>(
-        () => CoursesCubit(_<CoursesRepositories>()));
+    di.registerLazySingleton<CoursesDataSource>(
+        () => CoursesDataSource(di<Client>()));
+    di.registerLazySingleton<CoursesRepositories>(
+        () => CoursesRepositories(di<CoursesDataSource>()));
+    di.registerFactory<CoursesCubit>(
+        () => CoursesCubit(di<CoursesRepositories>()));
   }
 
-  static AppRouter get router => _.get<AppRouter>();
+  static AppRouter get router => di.get<AppRouter>();
 }

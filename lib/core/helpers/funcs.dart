@@ -22,3 +22,14 @@ String getUserName(String text) =>
     text.split("@")[0].split('.')[0].split('-')[0];
 
 String getImageUrl(String imageUrl) => baseUrl + imageUrl;
+
+String getSubjectImage(String subjectName) {
+  switch (subjectName) {
+    case 'اللغة الإنكليزية':
+      return 'physics.png';
+    case 'الرياضيات':
+      return 'math.png';
+    default:
+      return 'physics.png';
+  }
+}

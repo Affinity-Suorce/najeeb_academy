@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +10,7 @@ import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
+import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -40,19 +42,26 @@ class NajeebAcademyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        theme: _Theme.theme,
-        locale: _Localization.locale,
-        localizationsDelegates: _Localization.localizationsDelegates,
-        supportedLocales: _Localization.supportedLocales,
-        scrollBehavior: _Theme.scrollBehavior,
-        routerDelegate: DI.router.delegate(),
-        routeInformationParser: DI.router.defaultRouteParser(),
-        //make text size independent from user text scale settings
-        builder: (context, child) => child == null
-            ? const SizedBox.shrink()
-            : FixedScaleTextWidget(child: child),
+      builder: (context, child) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => DI.di<CoursesCubit>(),
+          ),
+        ],
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: _Theme.theme,
+          locale: _Localization.locale,
+          localizationsDelegates: _Localization.localizationsDelegates,
+          supportedLocales: _Localization.supportedLocales,
+          scrollBehavior: _Theme.scrollBehavior,
+          routerDelegate: DI.router.delegate(),
+          routeInformationParser: DI.router.defaultRouteParser(),
+          //make text size independent from user text scale settings
+          builder: (context, child) => child == null
+              ? const SizedBox.shrink()
+              : FixedScaleTextWidget(child: child),
+        ),
       ),
     );
   }

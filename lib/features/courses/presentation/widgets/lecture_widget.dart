@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/core/helpers/funcs.dart';
+import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 
-class LectureWidget extends StatelessWidget {
-  const LectureWidget({Key? key, required this.lecture}) : super(key: key);
-  final Lecture lecture;
+class SubjectWidget extends StatelessWidget {
+  const SubjectWidget({Key? key, required this.subject}) : super(key: key);
+  final Subject subject;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -16,7 +18,7 @@ class LectureWidget extends StatelessWidget {
           pushNewScreen(
             context,
             screen: VideoPlayerPage(
-              subject: lecture.name,
+              subject: subject.name!,
             ),
             withNavBar: false, // OPTIONAL VALUE. True by default.
             pageTransitionAnimation: PageTransitionAnimation.cupertino,
@@ -32,7 +34,7 @@ class LectureWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.58,
                 child: ListTile(
                   title: Text(
-                    lecture.name,
+                    subject.name!,
                     style: const TextStyle(
                       height: 1,
                       color: Colors.black,
@@ -40,7 +42,7 @@ class LectureWidget extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "عدد الدروس: ${lecture.classesCount}",
+                    "عدد الدروس: ${subject.lectures.length}",
                     style: const TextStyle(
                       height: 1,
                       color: Colors.black87,
@@ -54,7 +56,7 @@ class LectureWidget extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(lecture.imagePath),
+                        image: AssetImage(getSubjectImage(subject.name!)),
                         fit: BoxFit.cover)),
               ),
             ],

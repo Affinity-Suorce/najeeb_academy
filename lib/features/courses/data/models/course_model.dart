@@ -73,8 +73,8 @@ class Subject {
   });
 
   int? id;
-  Name? name;
-  Slug? slug;
+  String? name;
+  String? slug;
   String? cost;
   int? myClassId;
   int? teacherId;
@@ -85,39 +85,32 @@ class Subject {
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
         id: json["id"],
-        name: nameValues.map![json["name"]],
-        slug: slugValues.map![json["slug"]],
+        name: json["name"]??'',
+        slug: json["slug"]??'',
         cost: json["cost"],
         myClassId: json["my_class_id"],
         teacherId: json["teacher_id"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         teacher: teacherValues.map![json["teacher"]],
-        lectures: json["lectures"],
+        lectures: json["lectures"]??[],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": nameValues.reverse[name],
-        "slug": slugValues.reverse[slug],
-        "cost": cost,
-        "my_class_id": myClassId,
-        "teacher_id": teacherId,
-        "created_at": createdAt,
-        "updated_at": updatedAt,
-        "teacher": teacherValues.reverse[teacher],
-        "lectures": lectures,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "id": id,
+  //       "name": nameValues.reverse[name],
+  //       "slug": slugValues.reverse[slug],
+  //       "cost": cost,
+  //       "my_class_id": myClassId,
+  //       "teacher_id": teacherId,
+  //       "created_at": createdAt,
+  //       "updated_at": updatedAt,
+  //       "teacher": teacherValues.reverse[teacher],
+  //       "lectures": lectures,
+  //     };
 }
 
-enum Name { EMPTY, NAME }
 
-final nameValues =
-    EnumValues({"اللغة الإنكليزية": Name.EMPTY, "رياضيات": Name.NAME});
-
-enum Slug { ENG, MATH }
-
-final slugValues = EnumValues({"Eng": Slug.ENG, "Math": Slug.MATH});
 
 enum Teacher { TEACHER_CHIKE }
 

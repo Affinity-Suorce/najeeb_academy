@@ -7,7 +7,7 @@ part 'courses_state.dart';
 
 class CoursesCubit extends Cubit<CoursesState> {
   CoursesRepositories _CoursesRepositories;
-  CoursesCubit(this._CoursesRepositories) : super(AuthInitial());
+  CoursesCubit(this._CoursesRepositories) : super(CoursesInitial());
   Future<void> getMyCourses(bool isAllCourses) async {
     emit(LoadingState());
     final either = await _CoursesRepositories.getMyCourses(isAllCourses);

@@ -4,12 +4,12 @@ abstract class CoursesState {
   const CoursesState();
 }
 
-class AuthInitial extends CoursesState {}
+class CoursesInitial extends CoursesState {}
 
 class LoadingState extends CoursesState {}
 
 class GotCoursesState extends CoursesState {
-  final CourseModel courses;
+  final List<CourseModel> courses;
 
   GotCoursesState(this.courses);
 }
