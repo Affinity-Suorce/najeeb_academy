@@ -20,7 +20,9 @@ class RegisterFormService extends ChangeNotifier {
     ];
   }
 
-  Future<void> register() async {
+  Future<void> register({
+    required void Function(DioError e) onFailed,
+  }) async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
       final firstName = formState.fields['first_name']!.value;
@@ -42,11 +44,12 @@ class RegisterFormService extends ChangeNotifier {
             'landline': landline,
             'governorate': governorate,
             'parent_mobile': parentMobile,
-            'class_id': classId,
+            'my_class_id': classId,
           },
         );
         debugPrint(response.data);
       } on DioError catch (e) {
+        onFailed(e);
         debugPrint(e.message);
       }
     }

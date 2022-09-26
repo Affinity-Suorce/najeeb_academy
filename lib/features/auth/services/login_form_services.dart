@@ -8,7 +8,9 @@ class LoginFormService extends ChangeNotifier {
   LoginFormService(this._api);
   final formKey = GlobalKey<FormBuilderState>();
 
-  Future<void> login() async {
+  Future<void> login({
+    required void Function(DioError e) onFailed,
+  }) async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
       final username = formState.fields['username']!.value;
@@ -23,6 +25,7 @@ class LoginFormService extends ChangeNotifier {
         );
         debugPrint(response.data);
       } on DioError catch (e) {
+        onFailed(e);
         debugPrint(e.message);
       }
     }

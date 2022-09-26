@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
@@ -60,12 +62,14 @@ class LoginPage extends StatelessWidget {
                         decoration:
                             const InputDecoration(hintText: 'كلمة المرور'),
                         textInputAction: TextInputAction.go,
-                        onFieldSubmitted: (_) => service.login(),
+                        onFieldSubmitted: (_) => service.login(
+                            onFailed: (e) => onFailed(context, e)),
                       ),
                     ),
                     16.verticalSpace,
                     ElevatedButton(
-                      onPressed: service.login,
+                      onPressed: () =>
+                          service.login(onFailed: (e) => onFailed(context, e)),
                       child: const Text('تسجيل الدخول'),
                     ),
                     8.verticalSpace,
@@ -87,5 +91,9 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onFailed(BuildContext context, DioError e) {
+    context.showFailSnackBar(e.message);
   }
 }

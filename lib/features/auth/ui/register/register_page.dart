@@ -1,14 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/loading.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
 import 'package:najeeb_academy/features/auth/models/governorate.dart';
 import 'package:najeeb_academy/features/auth/models/student_class.dart';
-import 'package:najeeb_academy/features/auth/services/register_form_services.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field.dart';
 
@@ -177,7 +178,8 @@ class RegisterPage extends StatelessWidget {
                           const Spacer(),
                           12.verticalSpace,
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () => service.register(
+                                onFailed: (e) => onFailed(context, e)),
                             child: const Text('إنشاء الحساب'),
                           ),
                           8.verticalSpace,
@@ -199,5 +201,9 @@ class RegisterPage extends StatelessWidget {
             ),
           );
         });
+  }
+
+  void onFailed(BuildContext context, DioError e) {
+    context.showFailSnackBar(e.message);
   }
 }
