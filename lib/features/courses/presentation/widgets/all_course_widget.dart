@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/features/courses/data/models/course.dart';
-
+import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 
 class CourseWidget extends StatelessWidget {
-  const CourseWidget({Key? key, required this.course}) : super(key: key);
-  final Course course;
+  const CourseWidget({Key? key, required this.subject}) : super(key: key);
+  final Subject subject;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,7 +29,7 @@ class CourseWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.58,
                 child: ListTile(
                   title: Text(
-                    course.title,
+                    subject.name ?? '',
                     style: const TextStyle(
                       height: 1,
                       color: Colors.black,
@@ -41,7 +40,7 @@ class CourseWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "عدد المواد: ${course.lecturesCount}",
+                        "عدد المواد: ${subject.lectures!.length}",
                         style: const TextStyle(
                           height: 1,
                           color: Colors.black87,
@@ -49,7 +48,7 @@ class CourseWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'السعر: ${course.price}',
+                        'السعر: ${subject.cost}',
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.bold,
@@ -65,7 +64,7 @@ class CourseWidget extends StatelessWidget {
                 height: 80,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(course.imagePath),
+                        image: AssetImage('assets/images/logo.png'),
                         fit: BoxFit.contain)),
               ),
             ],

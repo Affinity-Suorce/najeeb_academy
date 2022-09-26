@@ -16,7 +16,7 @@ class ShimmerWidget1 extends StatelessWidget {
       height: height ?? 200,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.2),
+        color: Colors.black.withOpacity(0.3),
         borderRadius: BorderRadius.circular(15),
       ),
     );
@@ -28,22 +28,25 @@ class ShimmerWidget2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.custom(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisExtent: 150,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12),
-        childrenDelegate: SliverChildBuilderDelegate((context, index) {
-          return Container(
+    return Column(
+      children: [
+        ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemBuilder: (context, index) => Container(
+            height: 115,
+            width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(15),
             ),
-          );
-        }, childCount: 4));
+          ),
+          separatorBuilder: (context, index) => SizedBox(
+            height: 20,
+          ),
+          itemCount: 4,
+        ),
+      ],
+    );
   }
 }
-

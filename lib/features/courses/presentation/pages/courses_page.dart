@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
-import 'package:najeeb_academy/features/courses/data/models/course.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/tab_bar_item.dart';
@@ -29,7 +28,13 @@ class _CoursesPageState extends State<CoursesPage>
     super.initState();
     controller = TabController(length: 2, vsync: this);
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
-    coursesCubit.getMyCourses(true);
+    coursesCubit.getMyCourses(false);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -44,58 +49,78 @@ class _CoursesPageState extends State<CoursesPage>
               if (state is LoadingState) {
                 return shimmer(Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: ShimmerWidget1(),
+                  child: Column(
+                    children: const [
+                      SizedBox(
+                        height: 86,
+                      ),
+                      ShimmerWidget1(height: 45),
+                      SizedBox(
+                        height: 28,
+                      ),
+                      ShimmerWidget2(),
+                    ],
+                  ),
                 ));
-                ;
               } else if (state is ErrorState) {
                 return ErrorOccuredTextWidget(
                   message: state.message,
+                  fun: () {
+                    return BlocProvider.of<CoursesCubit>(context)
+                        .getMyCourses(false);
+                  },
                 );
               } else if (state is GotCoursesState) {
                 List<CourseModel> courses = state.courses;
-                return DefaultTabController(
-                  length: courses.length,
-                  child: Column(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
-                        child: CoursesTopSection(),
-                      ),
-                      const SizedBox(
-                        height: 28,
-                      ),
-                      TabBar(
-                        isScrollable: courses.length > 2,
-                        tabs: List.generate(
-                          courses.length,
-                          (i) => TabBarItem(
-                            title: courses[i].name!,
-                            imagePath: 'assets/images/logo.png',
-                          ),
+
+                return Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
+                      child: CoursesTopSection(),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    TabBar(
+                      controller: controller,
+                      isScrollable: courses.length > 2,
+                      tabs: List.generate(
+                        courses.length,
+                        (i) => TabBarItem(
+                          title: courses[i].name!,
+                          imagePath: 'assets/images/logo.png',
                         ),
                       ),
-                      Expanded(
-                        child: TabBarView(
-                          children: List.generate(
-                            courses[1].subjects!.length,
-                            (index) => ListView.separated(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 16.h, horizontal: 16.w),
-                              separatorBuilder: (context, index) =>
-                                  8.verticalSpace,
-                              itemCount: 8,
-                              itemBuilder: (context, i) => SubjectWidget(
-                                subject: courses[i].subjects![index],
-                              ),
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        controller: controller,
+                        children: List.generate(
+                          courses.length,
+                          (index) => ListView.separated(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.h, horizontal: 16.w),
+                            separatorBuilder: (context, index) =>
+                                8.verticalSpace,
+                            itemCount: courses[controller.index].subjects!.length,
+                            itemBuilder: (context, i) => SubjectWidget(
+                              subject:
+                                  courses[controller.index].subjects![index],
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 );
               }
-              return ErrorOccuredTextWidget();
+              return ErrorOccuredTextWidget(
+                fun: () {
+                  return BlocProvider.of<CoursesCubit>(context)
+                      .getMyCourses(false);
+                },
+              );
             }),
       ),
       floatingActionButton: const AllCoursesFloatingActionButton(),

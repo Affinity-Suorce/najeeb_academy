@@ -15,7 +15,9 @@ class CoursesCubit extends Cubit<CoursesState> {
       final errorMessage = getErrorMessage(error);
       emit(ErrorState(errorMessage));
     }, (data) {
-      emit(GotCoursesState(data));
+      isAllCourses
+          ? emit(GotAllCoursesState(data))
+          : emit(GotCoursesState(data));
     });
   }
 }

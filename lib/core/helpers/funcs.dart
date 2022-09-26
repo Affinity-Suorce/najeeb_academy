@@ -6,11 +6,11 @@ String indexFunction(int index) =>
 
 String getErrorMessage(Failure error) {
   if (error is ServerFailure) {
-    return 'Server Is Busy Try Again Later';
+    return 'المخدم متوقف أعد المحاولة لاحقا';
   } else if (error is HttpFailure) {
     return error.message;
   } else {
-    return 'Unknown error occurred... try again later';
+    return 'حدث خطأ غير معروف أعد المحاولة';
   }
 }
 
