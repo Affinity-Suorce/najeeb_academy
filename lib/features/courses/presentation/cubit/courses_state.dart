@@ -13,6 +13,11 @@ class GotCoursesState extends CoursesState {
 
   GotCoursesState(this.courses);
 }
+class GotAllCoursesState extends CoursesState {
+  final List<CourseModel> courses;
+
+  GotAllCoursesState(this.courses);
+}
 class ErrorState extends CoursesState {
   final message;
 

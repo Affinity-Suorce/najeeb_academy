@@ -11,8 +11,9 @@ class CoursesDataSource {
       () => _client.get(
         Uri.parse(isAllCourses ? allCoursesUrl : myCoursesUrl),
         headers: {
+          'Content-Type': 'application/json',
           'Authorization':
-              'Bearer Jr6mCmJEvJh9ihk01SlmqrRkUOcZ4uDeiP0UHXsywg6CIRaUl7VXnsAO1n2sk9nj6dLQuJnrP91ViNEU'
+              'Bearer bTscuwZpv31IH59ahZXIcLKplE3nRQZH7gwJOAxdCBzwqS6xcdcM2xq6AfQCNavajmFG8uhkAvKb7N9Z'
         },
       ),
       courseModelFromJson,

@@ -29,8 +29,6 @@ abstract class DI {
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerLazySingleton<Client>(() => Client());
-    di.registerLazySingleton<AppRouter>(() => AppRouter());
-    di.registerLazySingleton<Client>(() => Client());
     registerCourses();
   }
 

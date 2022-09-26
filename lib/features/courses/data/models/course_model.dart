@@ -4,8 +4,12 @@
 
 import 'dart:convert';
 
-List<CourseModel> courseModelFromJson(String str, bool isAllCourses) =>
-    List<CourseModel>.from(json.decode(str)["data"][isAllCourses ? "my_classes" : "my_class"].map((x) => CourseModel.fromJson(x)));
+List<CourseModel> courseModelFromJson(String str, bool isAllCourses) {
+  print("test: ${json.decode(str)["data"]["my_class"]}");
+  return List<CourseModel>.from(json
+      .decode(str)["data"][isAllCourses ? "my_classes" : "my_class"]
+      .map((x) => CourseModel.fromJson(x)));
+}
 
 // String courseModelToJson(List<CourseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -22,7 +26,7 @@ class CourseModel {
     this.subjects,
   });
 
-  int? id;
+  dynamic id;
   String? name;
   int? classTypeId;
   DateTime? startDate;
@@ -72,12 +76,12 @@ class Subject {
     this.lectures,
   });
 
-  int? id;
+  dynamic id;
   String? name;
   String? slug;
   String? cost;
-  int? myClassId;
-  int? teacherId;
+  dynamic myClassId;
+  dynamic teacherId;
   dynamic createdAt;
   dynamic updatedAt;
   Teacher? teacher;
@@ -85,15 +89,15 @@ class Subject {
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
         id: json["id"],
-        name: json["name"]??'',
-        slug: json["slug"]??'',
+        name: json["name"] ?? '',
+        slug: json["slug"] ?? '',
         cost: json["cost"],
         myClassId: json["my_class_id"],
         teacherId: json["teacher_id"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         teacher: teacherValues.map![json["teacher"]],
-        lectures: json["lectures"]??[],
+        lectures: json["lectures"] ?? [],
       );
 
   // Map<String, dynamic> toJson() => {
@@ -109,8 +113,6 @@ class Subject {
   //       "lectures": lectures,
   //     };
 }
-
-
 
 enum Teacher { TEACHER_CHIKE }
 
