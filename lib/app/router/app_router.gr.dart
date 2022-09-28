@@ -18,8 +18,11 @@ class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     WelcomeRoute.name: (routeData) {
+      final args = routeData.argsAs<WelcomeRouteArgs>();
       return AdaptivePage<dynamic>(
-          routeData: routeData, child: const WelcomePage());
+          routeData: routeData,
+          child: WelcomePage(
+              key: args.key, service: args.service, lastPage: args.lastPage));
     },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
@@ -42,8 +45,11 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData, child: const MainPage());
     },
     AllCoursesRoute.name: (routeData) {
+      final args = routeData.argsAs<AllCoursesRouteArgs>(
+          orElse: () => const AllCoursesRouteArgs());
       return AdaptivePage<dynamic>(
-          routeData: routeData, child: const AllCoursesPage());
+          routeData: routeData,
+          child: AllCoursesPage(key: args.key, onResult: args.onResult));
     },
     VideoPlayerRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -78,7 +84,7 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig('/#redirect',
-            path: '/', redirectTo: '/welcome', fullMatch: true),
+            path: '/', redirectTo: '/login', fullMatch: true),
         RouteConfig(WelcomeRoute.name, path: '/welcome'),
         RouteConfig(LoginRoute.name, path: '/login'),
         RouteConfig(RegisterRoute.name, path: '/register'),
@@ -100,10 +106,31 @@ class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [WelcomePage]
-class WelcomeRoute extends PageRouteInfo<void> {
-  const WelcomeRoute() : super(WelcomeRoute.name, path: '/welcome');
+class WelcomeRoute extends PageRouteInfo<WelcomeRouteArgs> {
+  WelcomeRoute(
+      {Key? key, required WelcomeService service, bool lastPage = false})
+      : super(WelcomeRoute.name,
+            path: '/welcome',
+            args: WelcomeRouteArgs(
+                key: key, service: service, lastPage: lastPage));
 
   static const String name = 'WelcomeRoute';
+}
+
+class WelcomeRouteArgs {
+  const WelcomeRouteArgs(
+      {this.key, required this.service, this.lastPage = false});
+
+  final Key? key;
+
+  final WelcomeService service;
+
+  final bool lastPage;
+
+  @override
+  String toString() {
+    return 'WelcomeRouteArgs{key: $key, service: $service, lastPage: $lastPage}';
+  }
 }
 
 /// generated route for
@@ -158,10 +185,26 @@ class MainRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AllCoursesPage]
-class AllCoursesRoute extends PageRouteInfo<void> {
-  const AllCoursesRoute() : super(AllCoursesRoute.name, path: '/all-courses');
+class AllCoursesRoute extends PageRouteInfo<AllCoursesRouteArgs> {
+  AllCoursesRoute({Key? key, void Function(bool)? onResult})
+      : super(AllCoursesRoute.name,
+            path: '/all-courses',
+            args: AllCoursesRouteArgs(key: key, onResult: onResult));
 
   static const String name = 'AllCoursesRoute';
+}
+
+class AllCoursesRouteArgs {
+  const AllCoursesRouteArgs({this.key, this.onResult});
+
+  final Key? key;
+
+  final void Function(bool)? onResult;
+
+  @override
+  String toString() {
+    return 'AllCoursesRouteArgs{key: $key, onResult: $onResult}';
+  }
 }
 
 /// generated route for

@@ -12,4 +12,7 @@ class UserInfoRepository {
       : _preferences.setString(_tokenKey, token);
 
   String? get token => _preferences.getString(_tokenKey);
+
+  bool get isAuthenticated => token != null;
+  bool get isUnAuthenticated => token == null;
 }

@@ -11,6 +11,7 @@ class AllCoursesFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: null,
       onPressed: () {
         // pushNewScreen(
         //   context,
@@ -18,7 +19,7 @@ class AllCoursesFloatingActionButton extends StatelessWidget {
         //   withNavBar: false,
         //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
         // );
-        DI.router.push(const AllCoursesRoute());
+        DI.router.push(AllCoursesRoute());
       },
       tooltip: 'كل الدورات',
       child: const Icon(CupertinoIcons.rectangle_stack_badge_plus),

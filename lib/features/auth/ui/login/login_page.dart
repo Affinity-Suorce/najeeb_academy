@@ -63,13 +63,15 @@ class LoginPage extends StatelessWidget {
                             const InputDecoration(hintText: 'كلمة المرور'),
                         textInputAction: TextInputAction.go,
                         onFieldSubmitted: (_) => service.login(
+                            context: context,
                             onFailed: (e) => onFailed(context, e)),
                       ),
                     ),
                     16.verticalSpace,
                     ElevatedButton(
-                      onPressed: () =>
-                          service.login(onFailed: (e) => onFailed(context, e)),
+                      onPressed: () => service.login(
+                          context: context,
+                          onFailed: (e) => onFailed(context, e)),
                       child: const Text('تسجيل الدخول'),
                     ),
                     8.verticalSpace,

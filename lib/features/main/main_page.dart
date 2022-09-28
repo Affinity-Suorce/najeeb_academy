@@ -12,6 +12,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
+      inheritNavigatorObservers: true,
       routes: const [
         HomeRoute(),
         CoursesRoute(),
@@ -41,7 +42,7 @@ class MainPage extends StatelessWidget {
                 ),
                 BottomNavyBarItem(
                   icon: const Icon(CupertinoIcons.rectangle_stack),
-                  title: const Text('الدورات'),
+                  title: const Text('دوراتي'),
                   activeColor: AppColors.indigo,
                 ),
                 BottomNavyBarItem(

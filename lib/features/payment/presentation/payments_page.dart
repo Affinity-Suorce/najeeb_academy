@@ -31,6 +31,7 @@ class PaymentsPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
+          heroTag: false,
           onPressed: () {
             showDialog(
                 context: context,
