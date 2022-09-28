@@ -21,14 +21,7 @@ abstract class DI {
     final userInfo = UserInfoRepository(preferences);
 
     final api = Dio()..interceptors.add(AuthInterceptor(userInfo));
-    // Dio(
-    //   BaseOptions(
-    //     headers: {
-    //       if (token != null) 'Authorization': 'Bearer $token',
-    //     },
-    //   ),
-    // );
-    di.registerFactory<LoginFormService>(() => LoginFormService(api));
+    di.registerFactory<LoginFormService>(() => LoginFormService(api,userInfo));
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
     di.registerFactory<WelcomeService>(() => WelcomeService(preferences,userInfo));
     di.registerSingleton<AppRouter>(AppRouter());

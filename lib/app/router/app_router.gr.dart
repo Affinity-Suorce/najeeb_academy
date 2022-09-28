@@ -33,11 +33,10 @@ class _$AppRouter extends RootStackRouter {
           fullscreenDialog: true);
     },
     RegisterRoute.name: (routeData) {
-      final args = routeData.argsAs<RegisterRouteArgs>(
-          orElse: () => const RegisterRouteArgs());
+      final args = routeData.argsAs<RegisterRouteArgs>();
       return AdaptivePage<dynamic>(
           routeData: routeData,
-          child: RegisterPage(key: args.key),
+          child: RegisterPage(key: args.key, subjectIds: args.subjectIds),
           fullscreenDialog: true);
     },
     MainRoute.name: (routeData) {
@@ -156,21 +155,24 @@ class LoginRouteArgs {
 /// generated route for
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
-  RegisterRoute({Key? key})
+  RegisterRoute({Key? key, required List<int> subjectIds})
       : super(RegisterRoute.name,
-            path: '/register', args: RegisterRouteArgs(key: key));
+            path: '/register',
+            args: RegisterRouteArgs(key: key, subjectIds: subjectIds));
 
   static const String name = 'RegisterRoute';
 }
 
 class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key});
+  const RegisterRouteArgs({this.key, required this.subjectIds});
 
   final Key? key;
 
+  final List<int> subjectIds;
+
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key}';
+    return 'RegisterRouteArgs{key: $key, subjectIds: $subjectIds}';
   }
 }
 

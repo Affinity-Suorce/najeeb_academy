@@ -11,7 +11,7 @@ import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
 
   final service = DI.loginFormServiceFactory();
 
@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void onFailed(BuildContext context, DioError e) {
-    context.showFailSnackBar(e.message);
+  void onFailed(BuildContext context, String message) {
+    context.showFailSnackBar(message);
   }
 }

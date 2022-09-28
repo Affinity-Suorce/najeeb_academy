@@ -45,14 +45,6 @@ part 'app_router.gr.dart';
         AutoRoute(path: 'profile', page: ProfilePage),
       ],
     ),
-    // AutoRoute(
-    //   path: '/main',
-    //   page: MainPage,
-    // ),
-    // AutoRoute(
-    //   path: '/courses',
-    //   page: CoursesPage,
-    // ),
     AutoRoute(
       path: '/all-courses',
       page: AllCoursesPage,

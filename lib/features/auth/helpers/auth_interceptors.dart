@@ -7,9 +7,12 @@ class AuthInterceptor extends Interceptor {
   AuthInterceptor(this.userInfo);
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.contentType = 'application/json';
-    if (userInfo.isAuthenticated) {
-      options.headers.addAll({'Authorization': 'Bearer ${userInfo.token}'});
-    }
+    options.headers.addAll({
+      "X-Requested-With": "XMLHttpRequest",
+      'Content-Type': 'application/json',
+      if (userInfo.isAuthenticated) 'Authorization': 'Bearer ${userInfo.token}',
+    });
+
+    return handler.next(options);
   }
 }

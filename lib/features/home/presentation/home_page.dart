@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/program_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/slider_section.dart';
@@ -45,6 +47,13 @@ class _HomePageState extends State<HomePage> {
             scrollController: _front,
           ),
         ],
+      ),
+      //TODO:Remove in production just for testing purposes
+      floatingActionButton: ElevatedButton(
+        child: const Text('إنشاء حساب'),
+        onPressed: () {
+          DI.router.push(RegisterRoute(subjectIds: const [1, 2]));
+        },
       ),
     );
   }

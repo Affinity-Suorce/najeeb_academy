@@ -39,21 +39,21 @@ class NajeebAcademyApp extends StatelessWidget {
 
   const NajeebAcademyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final welcomeService = DI.welcomeServiceFactory();
-    late final List<PageRouteInfo<dynamic>> initialRoutes;
+  List<PageRouteInfo<dynamic>> _getInitialRoutes(
+      WelcomeService welcomeService) {
     switch (welcomeService.userState) {
       case UserState.firstTime:
-        initialRoutes = [WelcomeRoute(service: welcomeService)];
-        break;
+        return [WelcomeRoute(service: welcomeService)];
+
       case UserState.authenticated:
-        initialRoutes = [const MainRoute()];
-        break;
+        return [const MainRoute()];
       case UserState.guest:
-        initialRoutes = [WelcomeRoute(lastPage: true, service: welcomeService)];
-        break;
+        return [WelcomeRoute(lastPage: true, service: welcomeService)];
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -71,7 +71,8 @@ class NajeebAcademyApp extends StatelessWidget {
           localizationsDelegates: _Localization.localizationsDelegates,
           supportedLocales: _Localization.supportedLocales,
           scrollBehavior: _Theme.scrollBehavior,
-          routerDelegate: DI.router.delegate(initialRoutes: initialRoutes),
+          routerDelegate: DI.router.delegate(
+              initialRoutes: _getInitialRoutes(DI.welcomeServiceFactory())),
           routeInformationParser: DI.router.defaultRouteParser(),
           //make text size independent from user text scale settings
           builder: (context, child) => child == null
