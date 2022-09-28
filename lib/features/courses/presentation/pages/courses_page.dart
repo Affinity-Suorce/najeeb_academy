@@ -6,7 +6,6 @@ import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/tab_bar_item.dart';
-import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 import '../widgets/all_courses_floating_action_button.dart';
 import '../widgets/lecture_widget.dart';
@@ -103,7 +102,8 @@ class _CoursesPageState extends State<CoursesPage>
                                 vertical: 16.h, horizontal: 16.w),
                             separatorBuilder: (context, index) =>
                                 8.verticalSpace,
-                            itemCount: courses[controller.index].subjects!.length,
+                            itemCount:
+                                courses[controller.index].subjects!.length,
                             itemBuilder: (context, i) => SubjectWidget(
                               subject:
                                   courses[controller.index].subjects![index],

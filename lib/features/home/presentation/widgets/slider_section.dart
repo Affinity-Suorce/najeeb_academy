@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
-import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 
 class SliderSection extends StatelessWidget {
   const SliderSection({Key? key}) : super(key: key);
@@ -71,16 +71,22 @@ class SliderSection extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 8),
                       child: ElevatedButton(
                         onPressed: () {
-                          pushNewScreen(
-                            context,
-                            screen: index == 1
-                                ? const LecturesPage()
-                                : const VideoPlayerPage(subject: "الرياضيات"),
-                            withNavBar:
-                                false, // OPTIONAL VALUE. True by default.
-                            pageTransitionAnimation:
-                                PageTransitionAnimation.cupertino,
-                          );
+                          if (index == 1) {
+                            //lectures
+                            AutoTabsRouter.of(context).setActiveIndex(2);
+                            return;
+                          }
+                          DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
+                          // pushNewScreen(
+                          //   context,
+                          //   screen: index == 1
+                          //       ? const LecturesPage()
+                          //       : const VideoPlayerPage(subject: "الرياضيات"),
+                          //   withNavBar:
+                          //       false, // OPTIONAL VALUE. True by default.
+                          //   pageTransitionAnimation:
+                          //       PageTransitionAnimation.cupertino,
+                          // );
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(

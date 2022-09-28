@@ -75,9 +75,11 @@ class LoginPage extends StatelessWidget {
                     8.verticalSpace,
                     Align(
                       child: LinkText(
-                        'ليس لديك حساب؟',
+                        'تصفح الدورات',
                         onTap: () {
-                          DI.router.replace(RegisterRoute());
+                          DI.router.replaceAll([
+                            const MainRoute(children: [CoursesRoute()])
+                          ]);
                         },
                       ),
                     ),

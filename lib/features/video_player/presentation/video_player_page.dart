@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
@@ -8,8 +9,13 @@ import 'package:najeeb_academy/features/video_player/presentation/widgets/video_
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
-  const VideoPlayerPage({Key? key, required this.subject}) : super(key: key);
-  final String subject;
+  const VideoPlayerPage({
+    Key? key,
+    // required this.subject,
+    @pathParam required this.id,
+  }) : super(key: key);
+  final String id;
+  String get subject => id;
 
   @override
   State<VideoPlayerPage> createState() => _VideoPlayerPageState();
