@@ -42,7 +42,7 @@ class SubjectWidget extends StatelessWidget {
                     ),
                   ),
                   subtitle: Text(
-                    "عدد الدروس: ${subject.lectures.length}",
+                    "عدد الدروس: ${subject.lectures!.length}",
                     style: const TextStyle(
                       height: 1,
                       color: Colors.black87,
