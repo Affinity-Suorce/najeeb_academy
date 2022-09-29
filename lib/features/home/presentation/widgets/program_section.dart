@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/schedule/schedule_widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class ProgramSection extends StatelessWidget {
   const ProgramSection({Key? key}) : super(key: key);
@@ -14,13 +13,15 @@ class ProgramSection extends StatelessWidget {
       child: InkWell(
         onTap: () {
           SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-          pushNewScreen(
+          Navigator.push(
             context,
-            withNavBar: false,
-            screen: const Scaffold(
-              body: Directionality(
+            MaterialPageRoute(
+              builder: (_) => const Scaffold(
+                body: Directionality(
                   textDirection: TextDirection.ltr,
-                  child: ScheduleViewCalendar()),
+                  child: ScheduleViewCalendar(),
+                ),
+              ),
             ),
           );
         },

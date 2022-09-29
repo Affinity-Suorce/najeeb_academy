@@ -4,6 +4,12 @@ import 'package:najeeb_academy/features/auth/ui/login/login_page.dart';
 import 'package:najeeb_academy/features/auth/ui/register/register_page.dart';
 import 'package:najeeb_academy/features/courses/presentation/pages/all_courses_page.dart';
 import 'package:najeeb_academy/features/courses/presentation/pages/courses_page.dart';
+import 'package:najeeb_academy/features/home/presentation/home_page.dart';
+import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
+import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
+import 'package:najeeb_academy/features/profile/presentation/profile_page.dart';
+import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
+import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:najeeb_academy/features/welcome/welcome_page.dart';
 
 import '../../features/main/main_page.dart';
@@ -15,7 +21,6 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute(
       page: WelcomePage,
-      initial: true,
       path: '/welcome',
     ),
     AutoRoute(
@@ -30,17 +35,21 @@ part 'app_router.gr.dart';
       fullscreenDialog: true,
     ),
     AutoRoute(
-      path: '/main',
+      path: '',
       page: MainPage,
-    ),
-    AutoRoute(
-      path: '/courses',
-      page: CoursesPage,
+      children: [
+        AutoRoute(path: '', page: HomePage),
+        AutoRoute(path: 'courses', page: CoursesPage),
+        AutoRoute(path: 'lectures', page: LecturesPage),
+        AutoRoute(path: 'payments', page: PaymentsPage),
+        AutoRoute(path: 'profile', page: ProfilePage),
+      ],
     ),
     AutoRoute(
       path: '/all-courses',
       page: AllCoursesPage,
     ),
+    AutoRoute(path: '/lectures/video/:id', page: VideoPlayerPage),
   ],
 )
 class AppRouter extends _$AppRouter {}

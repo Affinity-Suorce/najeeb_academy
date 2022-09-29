@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 import 'package:najeeb_academy/features/lectures/presentation/widgets/wheel_date_picker_bottom_sheet.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class LectureSection extends StatefulWidget {
   const LectureSection({Key? key}) : super(key: key);
@@ -104,14 +105,15 @@ class LectureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        pushNewScreen(
-          context,
-          screen: const VideoPlayerPage(
-            subject: "الرياضيات",
-          ),
-          withNavBar: false, // OPTIONAL VALUE. True by default.
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
+        // pushNewScreen(
+        //   context,
+        //   screen: const VideoPlayerPage(
+        //     subject: "الرياضيات",
+        //   ),
+        //   withNavBar: false, // OPTIONAL VALUE. True by default.
+        //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        // );
+        DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
       },
       child: Container(
         padding: const EdgeInsets.only(right: 12, bottom: 18, top: 8, left: 12),

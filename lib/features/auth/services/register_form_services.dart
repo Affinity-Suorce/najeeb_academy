@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:najeeb_academy/app/constants/assets.dart';
+import 'package:najeeb_academy/app/extensions/dialog_build_context.dart';
+import 'package:najeeb_academy/app/widgets/loading.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
-import 'package:najeeb_academy/features/auth/models/student_class.dart';
+import 'package:najeeb_academy/features/auth/ui/register/widgets/registration_complete_dialog.dart';
 
 class RegisterFormService extends ChangeNotifier {
   final Dio _api;
@@ -11,18 +12,27 @@ class RegisterFormService extends ChangeNotifier {
   RegisterFormService(this._api);
   final formKey = GlobalKey<FormBuilderState>();
 
-  Future<List<StudentClass>> get loadData async {
-    Future.delayed(const Duration(milliseconds: 500));
-    return [
-      StudentClass(
-          id: '0', name: 'بكالوريا', imgUrl: Assets.images.boarding(0)),
-      StudentClass(id: '1', name: 'تاسع', imgUrl: Assets.images.boarding(1)),
-    ];
-  }
+  // Future<List<StudentClass>> get loadData async {
+  //   Future.delayed(const Duration(milliseconds: 500));
+  //   return [
+  //     StudentClass(
+  //         id: '0', name: 'بكالوريا', imgUrl: Assets.images.boarding(0)),
+  //     StudentClass(id: '1', name: 'تاسع', imgUrl: Assets.images.boarding(1)),
+  //   ];
+  // }
 
-  Future<void> register() async {
+  Future<void> register({
+    required BuildContext context,
+    required void Function(String message) onFailed,
+    required List<int> subjectIds,
+  }) async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
+      context
+          .showDialog(const Loading(), barrierDismissible: false)
+          .then((value) {
+        // cancelToken.cancel('cancel');
+      });
       final firstName = formState.fields['first_name']!.value;
       final lastName = formState.fields['last_name']!.value;
       final fatherName = formState.fields['father_name']!.value;
@@ -30,24 +40,59 @@ class RegisterFormService extends ChangeNotifier {
       final landline = formState.fields['landline']!.value;
       final governorate = formState.fields['governorate']!.value;
       final parentMobile = formState.fields['parent_mobile']!.value;
-      final classId = formState.fields['class']!.value;
+      final billNumber = formState.fields['bill_number']!.value;
+      final isInstallment = formState.fields['is_installment']!.value;
+      // final classId = formState.fields['class']!.value;
       try {
         final response = await _api.post(
           registerUrl,
           data: {
             'first_name': firstName,
-            'lastName': lastName,
+            'last_name': lastName,
             'father_name': fatherName,
             'mobile': mobile,
             'landline': landline,
-            'governorate': governorate,
-            'parent_mobile': parentMobile,
-            'class_id': classId,
+            'governorate': governorate.id,
+            'parent_phone': parentMobile,
+            // 'my_class_id': classId,
+            'bill_number': billNumber,
+            'is_installment': isInstallment,
+            'subject_id': subjectIds,
+            'my_class_id': 1,
+            'amount_paid': 0,
           },
         );
-        debugPrint(response.data);
+
+        final data = response.data;
+        if (data is Map<String, dynamic>) {
+          if (data.containsKey('data')) {
+            context.showDialog(const RegistrationCompleteDialog(),
+                barrierDismissible: false);
+          }
+        }
       } on DioError catch (e) {
-        debugPrint(e.message);
+        if (e.message != 'cancel') {
+          Navigator.pop(context);
+          final data = e.response?.data;
+          if (data is Map<String, dynamic>) {
+            if (data.containsKey('message') &&
+                data['message'].contains('invalid')) {
+              return onFailed('تم استخدام رقم الفاتورة من قبل');
+            }
+          }
+          if ([
+            DioErrorType.other,
+            DioErrorType.connectTimeout,
+            DioErrorType.receiveTimeout,
+            DioErrorType.sendTimeout,
+          ].contains(e.type)) {
+            return onFailed('لايمكن الاتصال بالشبكة');
+          }
+          print('ysh $e');
+
+          onFailed('حدث خطأ غير متوقع');
+          // onFailed(e.message);
+        }
       }
     }
   }

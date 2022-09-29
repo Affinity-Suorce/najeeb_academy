@@ -64,7 +64,8 @@ class PaymentDialog extends StatelessWidget {
                   return null;
                 },
                 keyboardType: TextInputType.number,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
                 fillColor: AppColors.searchField,
                 hintText: '11******',
               ),

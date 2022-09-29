@@ -3,12 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 
 import 'widgets/boarding_widget.dart';
 import 'widgets/indicator.dart';
 
 class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key});
+  final WelcomeService service;
+  final bool lastPage;
+  const WelcomePage({super.key, required this.service, this.lastPage = false});
   @override
   State<WelcomePage> createState() => _WelcomePageState();
 }
@@ -21,12 +24,13 @@ class _WelcomePageState extends State<WelcomePage> {
   ];
 
   late final PageController _controller;
-  int _currentPageIndex = 0;
+  late int _currentPageIndex;
 
   @override
   void initState() {
     super.initState();
-    _controller = PageController();
+    _currentPageIndex = widget.lastPage ? _lastIndex : 0;
+    _controller = PageController(initialPage: _currentPageIndex);
   }
 
   int get _lastIndex => _titles.length - 1;
@@ -44,6 +48,9 @@ class _WelcomePageState extends State<WelcomePage> {
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (index) {
+                  if (index == _lastIndex) {
+                    widget.service.setIsFirstTime(false);
+                  }
                   setState(() {
                     _currentPageIndex = index;
                   });

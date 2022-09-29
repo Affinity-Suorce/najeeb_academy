@@ -10,7 +10,11 @@ import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatefulWidget {
-  const AllCoursesPage({super.key});
+  final void Function(bool success)? onResult;
+  const AllCoursesPage({
+    super.key,
+    this.onResult,
+  });
 
   @override
   State<AllCoursesPage> createState() => _AllCoursesPageState();
@@ -56,9 +60,9 @@ class _AllCoursesPageState extends State<AllCoursesPage> {
               } else if (state is GotAllCoursesState) {
                 List<CourseModel> courses = state.courses;
                 List<Subject> allSubjects = [];
-                courses.forEach((course) {
+                for (var course in courses) {
                   allSubjects.addAll(course.subjects!);
-                });
+                }
                 return Column(
                   children: [
                     const Padding(
@@ -82,7 +86,7 @@ class _AllCoursesPageState extends State<AllCoursesPage> {
                   ],
                 );
               }
-              return ErrorOccuredTextWidget();
+              return const ErrorOccuredTextWidget();
             }),
       ),
     );

@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
@@ -9,7 +11,7 @@ import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
 
 class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  LoginPage({super.key});
 
   final service = DI.loginFormServiceFactory();
 
@@ -60,20 +62,26 @@ class LoginPage extends StatelessWidget {
                         decoration:
                             const InputDecoration(hintText: 'كلمة المرور'),
                         textInputAction: TextInputAction.go,
-                        onFieldSubmitted: (_) => service.login(),
+                        onFieldSubmitted: (_) => service.login(
+                            context: context,
+                            onFailed: (e) => onFailed(context, e)),
                       ),
                     ),
                     16.verticalSpace,
                     ElevatedButton(
-                      onPressed: service.login,
+                      onPressed: () => service.login(
+                          context: context,
+                          onFailed: (e) => onFailed(context, e)),
                       child: const Text('تسجيل الدخول'),
                     ),
                     8.verticalSpace,
                     Align(
                       child: LinkText(
-                        'ليس لديك حساب؟',
+                        'تصفح الدورات',
                         onTap: () {
-                          DI.router.replace(RegisterRoute());
+                          DI.router.replaceAll([
+                            const MainRoute(children: [CoursesRoute()])
+                          ]);
                         },
                       ),
                     ),
@@ -87,5 +95,9 @@ class LoginPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onFailed(BuildContext context, String message) {
+    context.showFailSnackBar(message);
   }
 }

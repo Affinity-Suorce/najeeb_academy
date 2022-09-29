@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
-import 'package:najeeb_academy/features/lectures/models/lecture.dart';
-import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 
 class SubjectWidget extends StatelessWidget {
   const SubjectWidget({Key? key, required this.subject}) : super(key: key);
@@ -15,14 +13,15 @@ class SubjectWidget extends StatelessWidget {
       elevation: 5,
       child: InkWell(
         onTap: () {
-          pushNewScreen(
-            context,
-            screen: VideoPlayerPage(
-              subject: subject.name!,
-            ),
-            withNavBar: false, // OPTIONAL VALUE. True by default.
-            pageTransitionAnimation: PageTransitionAnimation.cupertino,
-          );
+          DI.router.push(VideoPlayerRoute(id: subject.name!));
+          // pushNewScreen(
+          //   context,
+          //   screen: VideoPlayerPage(
+          //     subject: subject.name!,
+          //   ),
+          //   withNavBar: false, // OPTIONAL VALUE. True by default.
+          //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          // );
         },
         child: Padding(
           padding:

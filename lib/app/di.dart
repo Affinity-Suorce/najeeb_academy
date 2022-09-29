@@ -2,12 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/features/auth/helpers/auth_guard.dart';
+import 'package:najeeb_academy/features/auth/helpers/auth_interceptors.dart';
 import 'package:najeeb_academy/features/auth/repositories/user_info_repository.dart';
 import 'package:najeeb_academy/features/auth/services/login_form_services.dart';
 import 'package:najeeb_academy/features/auth/services/register_form_services.dart';
 import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class DI {
@@ -17,16 +20,10 @@ abstract class DI {
     final preferences = await SharedPreferences.getInstance();
     final userInfo = UserInfoRepository(preferences);
 
-    final token = userInfo.token;
-    final api = Dio(
-      BaseOptions(
-        headers: {
-          if (token != null) 'Authorization': 'Bearer $token',
-        },
-      ),
-    );
-    di.registerFactory<LoginFormService>(() => LoginFormService(api));
+    final api = Dio()..interceptors.add(AuthInterceptor(userInfo));
+    di.registerFactory<LoginFormService>(() => LoginFormService(api,userInfo));
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
+    di.registerFactory<WelcomeService>(() => WelcomeService(preferences,userInfo));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
@@ -42,6 +39,9 @@ abstract class DI {
   }
 
   static AppRouter get router => di.get<AppRouter>();
-  static LoginFormService loginFormServiceFactory() => di.get<LoginFormService>();
-  static RegisterFormService registerFormServiceFactory() => di.get<RegisterFormService>();
+  static LoginFormService loginFormServiceFactory() =>
+      di.get<LoginFormService>();
+  static RegisterFormService registerFormServiceFactory() =>
+      di.get<RegisterFormService>();
+  static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
 }

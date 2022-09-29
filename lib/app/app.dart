@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +10,10 @@ import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -36,6 +39,19 @@ class NajeebAcademyApp extends StatelessWidget {
 
   const NajeebAcademyApp({Key? key}) : super(key: key);
 
+  List<PageRouteInfo<dynamic>> _getInitialRoutes(
+      WelcomeService welcomeService) {
+    switch (welcomeService.userState) {
+      case UserState.firstTime:
+        return [WelcomeRoute(service: welcomeService)];
+
+      case UserState.authenticated:
+        return [const MainRoute()];
+      case UserState.guest:
+        return [WelcomeRoute(lastPage: true, service: welcomeService)];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -55,7 +71,8 @@ class NajeebAcademyApp extends StatelessWidget {
           localizationsDelegates: _Localization.localizationsDelegates,
           supportedLocales: _Localization.supportedLocales,
           scrollBehavior: _Theme.scrollBehavior,
-          routerDelegate: DI.router.delegate(),
+          routerDelegate: DI.router.delegate(
+              initialRoutes: _getInitialRoutes(DI.welcomeServiceFactory())),
           routeInformationParser: DI.router.defaultRouteParser(),
           //make text size independent from user text scale settings
           builder: (context, child) => child == null
