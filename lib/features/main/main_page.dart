@@ -11,20 +11,23 @@ import 'package:najeeb_academy/features/auth/repositories/user_info_repository.d
 class MainPage extends StatelessWidget {
   const MainPage({
     Key? key,
-    this.userInfo,
   }) : super(key: key);
-  final UserInfoRepository? userInfo;
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       inheritNavigatorObservers: true,
-      routes: const [
-        HomeRoute(),
-        CoursesRoute(),
-        LecturesRoute(),
-        PaymentsRoute(),
-        ProfileRoute()
-      ],
+      routes: DI.userInfo.student == null
+          ? [
+              HomeRoute(),
+              LecturesRoute(),
+            ]
+          : [
+              HomeRoute(),
+              CoursesRoute(),
+              LecturesRoute(),
+              PaymentsRoute(),
+              ProfileRoute()
+            ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
         return HomTabOnBackPressed(
@@ -45,26 +48,31 @@ class MainPage extends StatelessWidget {
                   title: const Text('الرئيسية'),
                   activeColor: AppColors.indigo,
                 ),
-                BottomNavyBarItem(
-                  icon: const Icon(CupertinoIcons.rectangle_stack),
-                  title: const Text('دوراتي'),
-                  activeColor: AppColors.indigo,
-                ),
+                DI.userInfo.student == null
+                    ? BottomNavyBarItem(
+                        icon: const SizedBox.shrink(),
+                        title: const Text(''),
+                      )
+                    : BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.rectangle_stack),
+                        title: const Text('دوراتي'),
+                        activeColor: AppColors.indigo,
+                      ),
                 BottomNavyBarItem(
                   icon: const Icon(CupertinoIcons.book),
                   title: const Text('دروسي'),
                   activeColor: AppColors.indigo,
                 ),
-                BottomNavyBarItem(
-                  icon: const Icon(CupertinoIcons.calendar),
-                  title: const Text('الدفعات'),
-                  activeColor: AppColors.indigo,
-                ),
-                BottomNavyBarItem(
-                  icon: const Icon(CupertinoIcons.person),
-                  title: const Text('حسابي'),
-                  activeColor: AppColors.indigo,
-                ),
+                // BottomNavyBarItem(
+                //   icon: const Icon(CupertinoIcons.calendar),
+                //   title: const Text('الدفعات'),
+                //   activeColor: AppColors.indigo,
+                // ),
+                // BottomNavyBarItem(
+                //   icon: const Icon(CupertinoIcons.person),
+                //   title: const Text('حسابي'),
+                //   activeColor: AppColors.indigo,
+                // ),
               ],
             ),
           ),

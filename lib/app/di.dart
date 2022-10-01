@@ -24,10 +24,10 @@ abstract class DI {
     final api = Dio()..interceptors.add(AuthInterceptor(userInfo));
     di.registerFactory<LoginFormService>(() => LoginFormService(api, userInfo));
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
-    di.registerFactory<MainPage>(() => MainPage(userInfo:userInfo));
     di.registerFactory<WelcomeService>(
         () => WelcomeService(preferences, userInfo));
     di.registerSingleton<AppRouter>(AppRouter());
+    di.registerSingleton<UserInfoRepository>(UserInfoRepository(preferences));
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
   }
@@ -42,6 +42,7 @@ abstract class DI {
   }
 
   static AppRouter get router => di.get<AppRouter>();
+  static UserInfoRepository get userInfo => di.get<UserInfoRepository>();
   static LoginFormService loginFormServiceFactory() =>
       di.get<LoginFormService>();
   static RegisterFormService registerFormServiceFactory() =>
