@@ -7,9 +7,7 @@ import 'dart:convert';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 List<CourseModel> courseModelFromJson(String str, bool isAllCourses) {
-  print("test: ${json.decode(str)["data"]["my_class"]}");
-  return List<CourseModel>.from(json
-      .decode(str)["data"][isAllCourses ? "my_classes" : "my_class"]
+  return List<CourseModel>.from(json.decode(str)["data"]["my_classes"]
       .map((x) => CourseModel.fromJson(x)));
 }
 

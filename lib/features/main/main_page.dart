@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       inheritNavigatorObservers: true,
-      routes: DI.userInfo.student == null
+      routes: DI.userInfo.student != null
           ? [
               HomeRoute(),
               LecturesRoute(),
@@ -42,38 +42,46 @@ class MainPage extends StatelessWidget {
               onItemSelected: (index) {
                 tabsRouter.setActiveIndex(index);
               },
-              items: [
-                BottomNavyBarItem(
-                  icon: const Icon(CupertinoIcons.home),
-                  title: const Text('الرئيسية'),
-                  activeColor: AppColors.indigo,
-                ),
-                DI.userInfo.student == null
-                    ? BottomNavyBarItem(
-                        icon: const SizedBox.shrink(),
-                        title: const Text(''),
-                      )
-                    : BottomNavyBarItem(
+              items: DI.userInfo.student != null
+                  ? [
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.home),
+                        title: const Text('الرئيسية'),
+                        activeColor: AppColors.indigo,
+                      ),
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.book),
+                        title: const Text('دروسي'),
+                        activeColor: AppColors.indigo,
+                      ),
+                    ]
+                  : [
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.home),
+                        title: const Text('الرئيسية'),
+                        activeColor: AppColors.indigo,
+                      ),
+                      BottomNavyBarItem(
                         icon: const Icon(CupertinoIcons.rectangle_stack),
                         title: const Text('دوراتي'),
                         activeColor: AppColors.indigo,
                       ),
-                BottomNavyBarItem(
-                  icon: const Icon(CupertinoIcons.book),
-                  title: const Text('دروسي'),
-                  activeColor: AppColors.indigo,
-                ),
-                // BottomNavyBarItem(
-                //   icon: const Icon(CupertinoIcons.calendar),
-                //   title: const Text('الدفعات'),
-                //   activeColor: AppColors.indigo,
-                // ),
-                // BottomNavyBarItem(
-                //   icon: const Icon(CupertinoIcons.person),
-                //   title: const Text('حسابي'),
-                //   activeColor: AppColors.indigo,
-                // ),
-              ],
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.book),
+                        title: const Text('دروسي'),
+                        activeColor: AppColors.indigo,
+                      ),
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.calendar),
+                        title: const Text('الدفعات'),
+                        activeColor: AppColors.indigo,
+                      ),
+                      BottomNavyBarItem(
+                        icon: const Icon(CupertinoIcons.person),
+                        title: const Text('حسابي'),
+                        activeColor: AppColors.indigo,
+                      ),
+                    ],
             ),
           ),
         );

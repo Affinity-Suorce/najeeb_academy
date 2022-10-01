@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -8,19 +9,27 @@ import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
 
 import '../widgets/all_courses_top_section.dart';
-
-class AllCoursesPage extends StatefulWidget {
+class AllCoursesPage extends StatelessWidget {
+  const AllCoursesPage({Key? key, this.onResult,}) : super(key: key);
   final void Function(bool success)? onResult;
-  const AllCoursesPage({
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(create: (context) => DI.di<CoursesCubit>(),child: AllCoursesPageImpl(onResult: onResult,),);
+  }
+}
+class AllCoursesPageImpl extends StatefulWidget {
+  final void Function(bool success)? onResult;
+  const AllCoursesPageImpl({
     super.key,
     this.onResult,
   });
 
   @override
-  State<AllCoursesPage> createState() => _AllCoursesPageState();
+  State<AllCoursesPageImpl> createState() => _AllCoursesPageImplState();
 }
 
-class _AllCoursesPageState extends State<AllCoursesPage> {
+class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
   @override
   void initState() {
     super.initState();

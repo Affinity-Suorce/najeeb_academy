@@ -26,10 +26,18 @@ String getImageUrl(String imageUrl) => baseUrl + imageUrl;
 String getSubjectImage(String subjectName) {
   switch (subjectName) {
     case 'اللغة الإنكليزية':
-      return 'physics.png';
-    case 'الرياضيات':
-      return 'math.png';
+      return 'assets/images/subjects/english.png';
+    case 'كيمياء':
+      return 'assets/images/subjects/chemistry.png';
+    case 'اللغة الفرنسية':
+      return 'assets/images/subjects/french.png';
+    case 'اللغة العربية':
+      return 'assets/images/subjects/arabic.png';
+    case 'فيزيا':
+      return 'assets/images/subjects/physics.png';
+    case 'رياضيات':
+      return 'assets/images/subjects/english.png';
     default:
-      return 'physics.png';
+      return 'assets/images/logo.png';
   }
 }

@@ -8,7 +8,7 @@ import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit
 import 'package:najeeb_academy/features/courses/presentation/widgets/tab_bar_item.dart';
 
 import '../widgets/all_courses_floating_action_button.dart';
-import '../widgets/lecture_widget.dart';
+import '../widgets/subject_widget.dart';
 import '../widgets/top_section.dart';
 
 class CoursesPage extends StatefulWidget {
