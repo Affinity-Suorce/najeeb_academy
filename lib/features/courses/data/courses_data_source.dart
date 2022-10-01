@@ -13,7 +13,7 @@ class CoursesDataSource {
         headers: {
           'Content-Type': 'application/json',
           'Authorization':
-              'Bearer bTscuwZpv31IH59ahZXIcLKplE3nRQZH7gwJOAxdCBzwqS6xcdcM2xq6AfQCNavajmFG8uhkAvKb7N9Z'
+              'Bearer iU0J0HyfsJZoUWhA7yz9awWw3owCiMmuvDedECCXrFrSJoVJzEksSyNTMmzAcUhKwKfcTHycXfOQtAtw'
         },
       ),
       courseModelFromJson,

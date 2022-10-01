@@ -36,12 +36,16 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     false
   ];
 
-  String defaultStream =
-      'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
-  String stream2 =
-      'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
-  String stream3 =
-      'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
+  // String defaultStream =
+  //     'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
+  // String stream2 =
+  //     'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
+  // String stream3 =
+  // 'https://assets.mixkit.co/videos/preview/mixkit-group-of-friends-partying-happily-4640-large.mp4';
+
+  String defaultStream = 'https://www.youtube.com/watch?v=ywB7HERXFaI';
+  String stream2 = 'https://www.youtube.com/watch?v=ywB7HERXFaI';
+  String stream3 = 'https://www.youtube.com/watch?v=ywB7HERXFaI';
 
   @override
   void initState() {

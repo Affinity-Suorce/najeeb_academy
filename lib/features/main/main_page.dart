@@ -3,12 +3,17 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/hom_tab_on_back_pressed.dart';
+import 'package:najeeb_academy/features/auth/repositories/user_info_repository.dart';
 
 class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-
+  const MainPage({
+    Key? key,
+    this.userInfo,
+  }) : super(key: key);
+  final UserInfoRepository? userInfo;
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter(

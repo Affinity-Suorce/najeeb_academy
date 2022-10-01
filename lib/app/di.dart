@@ -10,6 +10,7 @@ import 'package:najeeb_academy/features/auth/services/register_form_services.dar
 import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/main/main_page.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,9 +22,11 @@ abstract class DI {
     final userInfo = UserInfoRepository(preferences);
 
     final api = Dio()..interceptors.add(AuthInterceptor(userInfo));
-    di.registerFactory<LoginFormService>(() => LoginFormService(api,userInfo));
+    di.registerFactory<LoginFormService>(() => LoginFormService(api, userInfo));
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
-    di.registerFactory<WelcomeService>(() => WelcomeService(preferences,userInfo));
+    di.registerFactory<MainPage>(() => MainPage(userInfo:userInfo));
+    di.registerFactory<WelcomeService>(
+        () => WelcomeService(preferences, userInfo));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();

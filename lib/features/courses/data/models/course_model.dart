@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:najeeb_academy/features/lectures/models/lecture.dart';
+
 List<CourseModel> courseModelFromJson(String str, bool isAllCourses) {
   print("test: ${json.decode(str)["data"]["my_class"]}");
   return List<CourseModel>.from(json
@@ -85,7 +87,7 @@ class Subject {
   dynamic createdAt;
   dynamic updatedAt;
   Teacher? teacher;
-  List<LectureModel>? lectures;
+  List<Lecture>? lectures;
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
         id: json["id"],
@@ -98,8 +100,8 @@ class Subject {
         updatedAt: json["updated_at"],
         teacher: teacherValues.map![json["teacher"]],
         lectures: json["lectures"] != null
-            ? List<LectureModel>.from(
-                json["lectures"].map((x) => LectureModel.fromJson(x)))
+            ? List<Lecture>.from(
+                json["lectures"].map((x) => Lecture.fromJson(x)))
             : [],
       );
 
@@ -115,46 +117,6 @@ class Subject {
   //       "teacher": teacherValues.reverse[teacher],
   //       "lectures": lectures,
   //     };
-}
-
-class LectureModel {
-  LectureModel({
-    this.id,
-    this.subjectId,
-    this.name,
-    this.description,
-    this.monthNumber,
-    this.createdAt,
-    this.updatedAt,
-  });
-
-  int? id;
-  int? subjectId;
-  String? name;
-  String? description;
-  int? monthNumber;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-
-  factory LectureModel.fromJson(Map<String, dynamic> json) => LectureModel(
-        id: json["id"],
-        subjectId: json["subject_id"],
-        name: json["name"],
-        description: json["description"],
-        monthNumber: json["month_number"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
-
-  // Map<String, dynamic> toJson() => {
-  //     "id": id,
-  //     "subject_id": subjectId,
-  //     "name": name,
-  //     "description": description,
-  //     "month_number": monthNumber,
-  //     "created_at": createdAt.toIso8601String(),
-  //     "updated_at": updatedAt.toIso8601String(),
-  // };
 }
 
 enum Teacher { TEACHER_CHIKE }
