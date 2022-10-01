@@ -27,7 +27,7 @@ abstract class DI {
     di.registerFactory<WelcomeService>(
         () => WelcomeService(preferences, userInfo));
     di.registerSingleton<AppRouter>(AppRouter());
-    di.registerSingleton<UserInfoRepository>(UserInfoRepository(preferences));
+    di.registerSingleton<UserInfoRepository>(userInfo);
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
   }
