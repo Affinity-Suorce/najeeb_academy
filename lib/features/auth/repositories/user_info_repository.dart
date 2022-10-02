@@ -17,16 +17,15 @@ class UserInfoRepository {
       ? _preferences.remove(_studentKey)
       : _preferences.setString(_studentKey, student.toJson());
 
-  Future<bool> storeFromApi(dynamic data) async {
-    final token = data['data']['token'];
-
-    final user = data['data']['user'];
+  Future<bool> storeFromApiData(dynamic data) async {
+    final token = data['api_token'];
     final student = Student(
-      id: user['id'].toString(),
-      name: user['name'],
-      username: user['username'],
+      id: data['id'].toString(),
+      name: data['name'],
+      username: data['username'],
       token: token,
-      imageUrl: user['photo'],
+      imageUrl: data['photo'],
+      phone: data['phone'],
     );
     return (await Future.wait<bool>([setToken(token), setStudent(student)]))
         .every((success) => success);
@@ -37,6 +36,11 @@ class UserInfoRepository {
     final json = _preferences.getString(_studentKey);
     if (json == null) return null;
     return Student.fromJson(json);
+  }
+
+  Future<bool> logout() async {
+    return (await Future.wait<bool>([setToken(null), setStudent(null)]))
+        .every((success) => success);
   }
 
   bool get isAuthenticated => token != null;

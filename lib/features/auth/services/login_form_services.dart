@@ -53,7 +53,9 @@ class LoginFormService extends ChangeNotifier {
           if (data['data'] == null) {
             return onFailed('لا يمكنك التسجيل حالياً, الرجاء المحاولة لاحقاً');
           }
-          await _userInfo.storeFromApi(data).then((success) {
+          await _userInfo
+              .storeFromApiData(data['data']['user'])
+              .then((success) {
             if (!success) {
               return onFailed('حدث خطأ غير متوقع');
             }

@@ -6,7 +6,6 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/hom_tab_on_back_pressed.dart';
-import 'package:najeeb_academy/features/auth/repositories/user_info_repository.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -16,17 +15,17 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       inheritNavigatorObservers: true,
-      routes: DI.userInfo.student != null
+      routes: DI.userInfo.isUnAuthenticated
           ? [
-              HomeRoute(),
-              LecturesRoute(),
+              const HomeRoute(),
+              const LecturesRoute(),
             ]
           : [
-              HomeRoute(),
-              CoursesRoute(),
-              LecturesRoute(),
-              PaymentsRoute(),
-              ProfileRoute()
+              const HomeRoute(),
+              const CoursesRoute(),
+              const LecturesRoute(),
+              const PaymentsRoute(),
+              const ProfileRoute()
             ],
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -42,7 +41,7 @@ class MainPage extends StatelessWidget {
               onItemSelected: (index) {
                 tabsRouter.setActiveIndex(index);
               },
-              items: DI.userInfo.student != null
+              items: DI.userInfo.isUnAuthenticated
                   ? [
                       BottomNavyBarItem(
                         icon: const Icon(CupertinoIcons.home),

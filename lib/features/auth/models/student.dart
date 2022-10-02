@@ -9,13 +9,15 @@ class Student {
   final String username;
   final String token;
   final String? imageUrl;
+  final String? phone;
 
   Student({
     required this.id,
     required this.name,
     required this.username,
     required this.token,
-    required this.imageUrl,
+    this.imageUrl,
+    this.phone,
   });
 
   NetworkImage? _image;
@@ -33,6 +35,7 @@ class Student {
     String? username,
     String? token,
     String? imageUrl,
+    String? phone,
   }) {
     return Student(
       id: id ?? this.id,
@@ -40,6 +43,7 @@ class Student {
       username: username ?? this.username,
       token: token ?? this.token,
       imageUrl: imageUrl ?? this.imageUrl,
+      phone: phone ?? this.phone,
     );
   }
 
@@ -50,6 +54,7 @@ class Student {
       'username': username,
       'token': token,
       'imageUrl': imageUrl,
+      'phone': phone,
     };
   }
 
@@ -60,36 +65,39 @@ class Student {
       username: map['username'] as String,
       token: map['token'] as String,
       imageUrl: map['imageUrl'] != null ? map['imageUrl'] as String : null,
+      phone: map['phone'] != null ? map['phone'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Student.fromJson(String source) => Student.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Student.fromJson(String source) =>
+      Student.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'Student(id: $id, name: $name, username: $username, token: $token, imageUrl: $imageUrl)';
+    return 'Student(id: $id, name: $name, username: $username, token: $token, imageUrl: $imageUrl, phone: $phone)';
   }
 
   @override
   bool operator ==(covariant Student other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.username == username &&
-      other.token == token &&
-      other.imageUrl == imageUrl;
+
+    return other.id == id &&
+        other.name == name &&
+        other.username == username &&
+        other.token == token &&
+        other.imageUrl == imageUrl &&
+        other.phone == phone;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      username.hashCode ^
-      token.hashCode ^
-      imageUrl.hashCode;
+        name.hashCode ^
+        username.hashCode ^
+        token.hashCode ^
+        imageUrl.hashCode ^
+        phone.hashCode;
   }
 }
