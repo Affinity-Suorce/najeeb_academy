@@ -50,14 +50,20 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: AllCoursesPage(key: args.key, onResult: args.onResult));
     },
-    // VideoPlayerRoute.name: (routeData) {
-    //   final pathParams = routeData.inheritedPathParams;
-    //   final args = routeData.argsAs<VideoPlayerRouteArgs>(
-    //       orElse: () => VideoPlayerRouteArgs(id: pathParams.getString('id')));
-    //   return AdaptivePage<dynamic>(
-    //       routeData: routeData,
-    //       child: VideoPlayerPage(key: args.key, id: args.id,));
-    // },
+    VideoPlayerRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<VideoPlayerRouteArgs>(
+          orElse: () => VideoPlayerRouteArgs(id: pathParams.getString('id')));
+      return AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: VideoPlayerPage(key: args.key, id: args.id));
+    },
+    NotificationsRoute.name: (routeData) {
+      final args = routeData.argsAs<NotificationsRouteArgs>();
+      return AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: NotificationsPage(key: args.key, service: args.service));
+    },
     HomeRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const HomePage());
@@ -99,7 +105,8 @@ class _$AppRouter extends RootStackRouter {
               path: 'profile', parent: MainRoute.name)
         ]),
         RouteConfig(AllCoursesRoute.name, path: '/all-courses'),
-        RouteConfig(VideoPlayerRoute.name, path: '/lectures/video/:id')
+        RouteConfig(VideoPlayerRoute.name, path: '/lectures/video/:id'),
+        RouteConfig(NotificationsRoute.name, path: '/notifications')
       ];
 }
 
@@ -231,6 +238,30 @@ class VideoPlayerRouteArgs {
   @override
   String toString() {
     return 'VideoPlayerRouteArgs{key: $key, id: $id}';
+  }
+}
+
+/// generated route for
+/// [NotificationsPage]
+class NotificationsRoute extends PageRouteInfo<NotificationsRouteArgs> {
+  NotificationsRoute({Key? key, required NotificationsService service})
+      : super(NotificationsRoute.name,
+            path: '/notifications',
+            args: NotificationsRouteArgs(key: key, service: service));
+
+  static const String name = 'NotificationsRoute';
+}
+
+class NotificationsRouteArgs {
+  const NotificationsRouteArgs({this.key, required this.service});
+
+  final Key? key;
+
+  final NotificationsService service;
+
+  @override
+  String toString() {
+    return 'NotificationsRouteArgs{key: $key, service: $service}';
   }
 }
 

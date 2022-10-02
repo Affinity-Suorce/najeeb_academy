@@ -6,9 +6,11 @@ import 'package:najeeb_academy/features/auth/helpers/auth_interceptors.dart';
 import 'package:najeeb_academy/features/auth/repositories/user_info_repository.dart';
 import 'package:najeeb_academy/features/auth/services/login_form_services.dart';
 import 'package:najeeb_academy/features/auth/services/register_form_services.dart';
+import 'package:najeeb_academy/features/auth/services/user_info_service.dart';
 import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,8 +26,10 @@ abstract class DI {
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
     di.registerFactory<WelcomeService>(
         () => WelcomeService(preferences, userInfo));
+    di.registerFactory<NotificationsService>(() => NotificationsService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
+    di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
   }
@@ -41,9 +45,11 @@ abstract class DI {
 
   static AppRouter get router => di.get<AppRouter>();
   static UserInfoRepository get userInfo => di.get<UserInfoRepository>();
+  static UserInfoService get userInfoService => di.get<UserInfoService>();
   static LoginFormService loginFormServiceFactory() =>
       di.get<LoginFormService>();
   static RegisterFormService registerFormServiceFactory() =>
       di.get<RegisterFormService>();
   static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
+  static NotificationsService notificationsServiceFactory() => di.get<NotificationsService>();
 }

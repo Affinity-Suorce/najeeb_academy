@@ -51,9 +51,14 @@ class LoginFormService extends ChangeNotifier {
             return onFailed('خطأ في اسم المستخدم أو كلمة المرور');
           }
           if (data['data'] == null) {
-            return onFailed('الرجاء المحاولة لاحقاً أو التواصل مع فريق الدعم');
+            return onFailed('لا يمكنك التسجيل حالياً, الرجاء المحاولة لاحقاً');
           }
-          await _userInfo.storeFromApi(data).then((success) {
+          await _userInfo
+              .storeFromApiData(data['data']['user'])
+              .then((success) {
+            if (!success) {
+              return onFailed('حدث خطأ غير متوقع');
+            }
             DI.router.replaceAll([const MainRoute()]);
           });
         }

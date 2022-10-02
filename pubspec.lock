@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.0.2"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.3"
   bloc:
     dependency: transitive
     description:
@@ -792,12 +799,10 @@ packages:
   timeago:
     dependency: "direct main"
     description:
-      path: "packages/timeago"
-      ref: HEAD
-      resolved-ref: ae8a1a06f3ef62bbbb0ce843f76ba3069f56a707
-      url: "https://github.com/ysh-work/timeago.dart.git"
-    source: git
-    version: "3.2.2"
+      name: timeago
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.0"
   timezone:
     dependency: transitive
     description:

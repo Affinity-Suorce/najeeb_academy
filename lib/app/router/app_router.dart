@@ -6,6 +6,8 @@ import 'package:najeeb_academy/features/courses/presentation/pages/all_courses_p
 import 'package:najeeb_academy/features/courses/presentation/pages/courses_page.dart';
 import 'package:najeeb_academy/features/home/presentation/home_page.dart';
 import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
+import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
+import 'package:najeeb_academy/features/notifications/ui/notifications_page.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 import 'package:najeeb_academy/features/profile/presentation/profile_page.dart';
 import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
@@ -49,7 +51,11 @@ part 'app_router.gr.dart';
       path: '/all-courses',
       page: AllCoursesPage,
     ),
-    AutoRoute(path: '/lectures/video/:lectureSubject', page: VideoPlayerPage),
+    AutoRoute(path: '/lectures/video/:id', page: VideoPlayerPage),
+    AutoRoute(
+      path: '/notifications',
+      page: NotificationsPage,
+    ),
   ],
 )
 class AppRouter extends _$AppRouter {}

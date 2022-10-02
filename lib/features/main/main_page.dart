@@ -15,7 +15,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       inheritNavigatorObservers: true,
-      routes: DI.userInfo.student != null
+      routes: DI.userInfo.isUnAuthenticated
           ? [
               const HomeRoute(),
               const LecturesRoute(),
@@ -41,7 +41,7 @@ class MainPage extends StatelessWidget {
               onItemSelected: (index) {
                 tabsRouter.setActiveIndex(index);
               },
-              items: DI.userInfo.student != null
+              items: DI.userInfo.isUnAuthenticated
                   ? [
                       BottomNavyBarItem(
                         icon: const Icon(CupertinoIcons.home),
