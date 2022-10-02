@@ -50,7 +50,7 @@ extension DateTimeHelper on DateTime {
     return ago;
   }
 
-  String agoFrom(DateTime date) =>
+  String agoFrom([DateTime? date]) =>
       timeago.format(this, allowFromNow: true, clock: date);
 
   String get formattedDate =>

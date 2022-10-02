@@ -42,6 +42,7 @@ dependencies:
       path: packages/timeago
   intl: ^0.17.0
   get_it: ^7.2.0
+  badges: ^2.0.3
   smooth_page_indicator: ^1.0.0+2
   auto_route: ^5.0.1
   flutter_native_splash: ^2.2.8

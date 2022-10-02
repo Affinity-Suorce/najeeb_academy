@@ -10,7 +10,10 @@ class AuthInterceptor extends Interceptor {
     options.headers.addAll({
       "X-Requested-With": "XMLHttpRequest",
       'Content-Type': 'application/json',
-      if (userInfo.isAuthenticated) 'Authorization': 'Bearer ${userInfo.token}',
+      //TODO: remove in production
+      // if (userInfo.isAuthenticated) 'Authorization': 'Bearer ${userInfo.token}',
+      'Authorization':
+          'Bearer iU0J0HyfsJZoUWhA7yz9awWw3owCiMmuvDedECCXrFrSJoVJzEksSyNTMmzAcUhKwKfcTHycXfOQtAtw',
     });
 
     return handler.next(options);
