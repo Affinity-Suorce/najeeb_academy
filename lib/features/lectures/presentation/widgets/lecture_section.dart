@@ -127,14 +127,13 @@ class LectureWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => 
-                 VideoPlayerPage(
-                  id: "dddddd",
-                  lecture: lecture,
-                  lectureIndex: lectureIndex,
-                  lectureSubject: lectureSubject,
-                )
-                ));
+            MaterialPageRoute(
+                builder: (context) => VideoPlayerPage(
+                      id: "dddddd",
+                      lecture: lecture,
+                      lectureIndex: lectureIndex,
+                      lectureSubject: lectureSubject,
+                    )));
         // DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
       },
       child: Container(
@@ -207,10 +206,11 @@ class LectureWidget extends StatelessWidget {
                                 lecture.description ?? '',
                                 style: const TextStyle(
                                   height: 1,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 18,
                                 ),
                               ),
+                              backgroundColor: Colors.grey,
                             ));
                           },
                           child: Container(

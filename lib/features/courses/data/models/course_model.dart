@@ -6,7 +6,7 @@ import 'dart:convert';
 
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
-List<CourseModel> courseModelFromJson(String str, bool isAllCourses) {
+List<CourseModel> courseModelFromJson(String str) {
   return List<CourseModel>.from(json.decode(str)["data"]["my_classes"]
       .map((x) => CourseModel.fromJson(x)));
 }

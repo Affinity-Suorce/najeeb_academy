@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+// List<Lecture> lectureFromJson(String str) => List<Lecture>.from(json.decode(str).map((x) => Lecture.fromJson(x)));
+Lecture lectureFromJson(String str) =>
+    Lecture.fromJson(json.decode(str)['data']);
+
 class Lecture {
   Lecture({
     this.id,

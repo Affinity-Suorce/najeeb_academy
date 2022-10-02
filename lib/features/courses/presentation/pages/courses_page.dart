@@ -59,7 +59,9 @@ class _CoursesPageState extends State<CoursesPage>
                 );
               } else if (state is GotCoursesState) {
                 List<CourseModel> courses = state.courses;
-
+                ////TODO temp code we have a bug here
+                // if (courses.length == 1) courses.add(courses[0]);
+                ///////
                 return Column(
                   children: [
                     const Padding(

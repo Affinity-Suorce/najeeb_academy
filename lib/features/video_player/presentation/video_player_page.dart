@@ -1,10 +1,14 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
+import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
+import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
+import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_files_container.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_section.dart';
@@ -30,17 +34,23 @@ class VideoPlayerPage extends StatefulWidget {
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late YoutubePlayerController controller;
-  List<bool> states = [];
+  late final VideoCubit videoCubit;
   String defaultStream = 'https://www.youtube.com/watch?v=dfmK3dIihXY';
 
   @override
   void initState() {
     super.initState();
-    _initController(defaultStream);
-    states = List.generate(widget.lectureSubject.lectures!.length, (index) {
-      if (index == widget.lectureIndex) return true;
-      return false;
-    });
+    videoCubit = BlocProvider.of<VideoCubit>(context);
+    videoCubit.getVideo(widget.lecture.id.toString());
+
+    // states = List.generate(widget.lectureSubject.lectures!.length, (index) {
+    //   if (index == widget.lectureIndex) return true;
+    //   return false;
+    // });
+  }
+
+  void getVideo(String lectureId) {
+    videoCubit.getVideo(lectureId);
   }
 
   void _initController(String link) {
@@ -106,71 +116,116 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: controller,
-          showVideoProgressIndicator: true,
-          bottomActions: controller.value.isFullScreen
-              ? [
-                  FullScreenButton(),
-                  PlaybackSpeedButton(),
-                  ProgressBar(isExpanded: true),
-                  CurrentPosition(),
-                  RemainingDuration(),
-                ]
-              : [
-                  CurrentPosition(),
-                  RemainingDuration(),
-                  ProgressBar(isExpanded: true),
-                ],
-        ),
-        builder: (context, player) {
-          return Scaffold(
-            backgroundColor: Colors.grey.shade900,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                const BottomSheetContainer(
-                  child: VideoFilesContainer(),
-                ).showAsBottomSheet<DateTime>(
-                  context,
-                  isScrollControlled: true,
-                );
+    return BlocConsumer<VideoCubit, VideoState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is LoadingState) {
+            return Scaffold(
+                body: Center(
+              child: CircularProgressIndicator(),
+            ));
+          } else if (state is ErrorState) {
+            return ErrorOccuredTextWidget(
+              message: state.message,
+              fun: () {
+                return BlocProvider.of<VideoCubit>(context)
+                    .getVideo(widget.lecture.id.toString());
               },
-              child: const Icon(CupertinoIcons.doc_on_doc),
-            ),
-            body: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(
-                  children: [
-                    VideoSection(
-                      controller: controller,
-                      player: player,
-                      changeVideo: (index) {
-                        //index == 1 >> next video / index == -1 prevrious video
-                        //index == 10 >> 360p / index == 20 >> 480p / index == 30 >> 720p
-                        if (index <= 1) {
-                          states = states.map((e) => false).toList();
-                          // states[index] = true;
-                        }
-                        // _ChangeVideo(stream2);
-                      },
-                    ),
-                    VideoPageBottomSection(
-                        subject: widget.lectureSubject,
-                        lecture: widget.lecture,
-                        states: states,
-                        controller: controller,
-                        changeVideo: (index) {
-                          states = states.map((e) => false).toList();
-                          states[index] = true;
-                          // _ChangeVideo(stream2);
-                        }),
-                  ],
+            );
+          } else if (state is GotVideoState) {
+            Lecture lecture = state.lecture;
+            _initController(lecture.videoUrl ?? "");
+            debugPrint("lectureIdIs:" + lecture.id.toString());
+            return YoutubePlayerBuilder(
+                player: YoutubePlayer(
+                  controller: controller,
+                  showVideoProgressIndicator: true,
+                  bottomActions: controller.value.isFullScreen
+                      ? [
+                          FullScreenButton(),
+                          PlaybackSpeedButton(),
+                          ProgressBar(isExpanded: true),
+                          CurrentPosition(),
+                          RemainingDuration(),
+                        ]
+                      : [
+                          CurrentPosition(),
+                          RemainingDuration(),
+                          ProgressBar(isExpanded: true),
+                        ],
                 ),
-              ),
-            ),
+                builder: (context, player) {
+                  return Scaffold(
+                    backgroundColor: Colors.grey.shade900,
+                    floatingActionButton: FloatingActionButton(
+                      onPressed: () {
+                        const BottomSheetContainer(
+                          child: VideoFilesContainer(),
+                        ).showAsBottomSheet<DateTime>(
+                          context,
+                          isScrollControlled: true,
+                        );
+                      },
+                      child: const Icon(CupertinoIcons.doc_on_doc),
+                    ),
+                    body: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: SingleChildScrollView(
+                        physics: const ClampingScrollPhysics(),
+                        child: Column(
+                          children: [
+                            VideoSection(
+                              controller: controller,
+                              player: player,
+                              changeVideo: (index) {
+                                print(
+                                    "lectureIndex:${widget.lectureIndex}lectureSubject.lectures!.length:${widget.lectureSubject.lectures!.length}indexIs:$index");
+                                if (index == -1) {
+                                  videoCubit.getVideo(widget
+                                      .lectureSubject
+                                      .lectures![widget.lectureIndex == 0
+                                          ? widget.lectureSubject.lectures!
+                                                  .length -
+                                              1
+                                          : widget.lectureIndex - 1]
+                                      .id
+                                      .toString());
+                                } else if (index == 1) {
+                                  videoCubit.getVideo(widget
+                                      .lectureSubject
+                                      .lectures![widget.lectureIndex ==
+                                              widget.lectureSubject.lectures!
+                                                  .length
+                                          ? 0
+                                          : widget.lectureIndex + 1]
+                                      .id
+                                      .toString());
+                                }
+                                // _ChangeVideo(stream2);
+                              },
+                            ),
+                            VideoPageBottomSection(
+                                subject: widget.lectureSubject,
+                                lecture: widget.lecture,
+                                lectureIndex: widget.lectureIndex,
+                                controller: controller,
+                                changeVideo: (index) {
+                                  videoCubit.getVideo(widget
+                                      .lectureSubject.lectures![index].id
+                                      .toString());
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                });
+          }
+          return ErrorOccuredTextWidget(
+            fun: () {
+              return BlocProvider.of<VideoCubit>(context)
+                  .getVideo(widget.lecture.id.toString());
+            },
           );
         });
   }

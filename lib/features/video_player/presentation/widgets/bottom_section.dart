@@ -11,13 +11,13 @@ class VideoPageBottomSection extends StatefulWidget {
       {Key? key,
       required this.subject,
       required this.lecture,
-      required this.states,
+      required this.lectureIndex,
       this.changeVideo,
       required this.controller})
       : super(key: key);
   final Subject subject;
   final Lecture lecture;
-  final List<bool> states;
+  final int lectureIndex;
   final YoutubePlayerController controller;
   Function(int index)? changeVideo;
 
@@ -86,12 +86,12 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    // setState(() {
-                    widget.changeVideo!(index);
-                    // });
+                    setState(() {
+                      widget.changeVideo!(index);
+                    });
                   },
                   child: VideoWidget(
-                    isSelected: widget.states[index],
+                    isSelected: widget.lectureIndex == index,
                     index: index + 1,
                     title: widget.subject.lectures![index].name ?? '',
                   ),

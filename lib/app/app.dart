@@ -13,6 +13,7 @@ import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -62,6 +63,9 @@ class NajeebAcademyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (_) => DI.di<CoursesCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => DI.di<VideoCubit>(),
           ),
         ],
         child: MaterialApp.router(

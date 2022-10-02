@@ -65,10 +65,10 @@ class _VideoSectionState extends State<VideoSection> {
                 ),
                 InkWell(
                   onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => QualitySelectorWidget(
-                            changeVideo: widget.changeVideo));
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) => QualitySelectorWidget(
+                    //         changeVideo: widget.changeVideo));
                   },
                   child: const Icon(
                     CupertinoIcons.settings_solid,

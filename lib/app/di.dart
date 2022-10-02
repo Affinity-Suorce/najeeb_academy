@@ -11,6 +11,9 @@ import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
+import 'package:najeeb_academy/features/video_player/data/video_data_source.dart';
+import 'package:najeeb_academy/features/video_player/data/video_repository.dart';
+import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +35,7 @@ abstract class DI {
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
+    registerVideo();
   }
 
   static void registerCourses() {
@@ -43,6 +47,14 @@ abstract class DI {
         () => CoursesCubit(di<CoursesRepositories>()));
   }
 
+  static void registerVideo() {
+    di.registerLazySingleton<VideoDataSource>(
+        () => VideoDataSource(di<Client>()));
+    di.registerLazySingleton<VideoRepositories>(
+        () => VideoRepositories(di<VideoDataSource>()));
+    di.registerFactory<VideoCubit>(() => VideoCubit(di<VideoRepositories>()));
+  }
+
   static AppRouter get router => di.get<AppRouter>();
   static UserInfoRepository get userInfo => di.get<UserInfoRepository>();
   static UserInfoService get userInfoService => di.get<UserInfoService>();
@@ -51,5 +63,6 @@ abstract class DI {
   static RegisterFormService registerFormServiceFactory() =>
       di.get<RegisterFormService>();
   static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
-  static NotificationsService notificationsServiceFactory() => di.get<NotificationsService>();
+  static NotificationsService notificationsServiceFactory() =>
+      di.get<NotificationsService>();
 }
