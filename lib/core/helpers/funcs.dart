@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:najeeb_academy/core/error/failures.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
+import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 
 String indexFunction(int index) =>
     index <= 9 ? "0$index".toString() : index.toString();
@@ -33,11 +35,22 @@ String getSubjectImage(String subjectName) {
       return 'assets/images/subjects/french.png';
     case 'اللغة العربية':
       return 'assets/images/subjects/arabic.png';
-    case 'فيزيا':
+    case 'فيزياء':
       return 'assets/images/subjects/physics.png';
     case 'رياضيات':
-      return 'assets/images/subjects/english.png';
+      return 'assets/images/subjects/math.png';
     default:
       return 'assets/images/logo.png';
   }
+}
+
+// int getLectureIndex(int index) {
+
+// }
+Subject getLectureSubject(List<Subject> subjects, int lectureSubjectId) {
+  Subject? temp;
+  subjects.forEach((subject) {
+    if (subject.id == lectureSubjectId) temp = subject;
+  });
+  return temp ?? subjects[0];
 }

@@ -5,7 +5,7 @@ import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 
 class CoursesRepositories {
-  CoursesDataSource _coursesDataSource;
+  final CoursesDataSource _coursesDataSource;
   CoursesRepositories(this._coursesDataSource);
 
   Future<Either<Failure, List<CourseModel>>> getMyCourses(bool isAllCourses) async =>

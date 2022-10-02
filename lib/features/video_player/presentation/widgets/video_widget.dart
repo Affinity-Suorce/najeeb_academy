@@ -5,16 +5,11 @@ import 'package:najeeb_academy/core/helpers/funcs.dart';
 
 class VideoWidget extends StatelessWidget {
   const VideoWidget(
-      {Key? key,
-      this.index = 01,
-      this.isSelected = false,
-      this.title = '',
-      this.length = 1.5})
+      {Key? key, this.index = 01, this.isSelected = false, this.title = ''})
       : super(key: key);
   final int index;
   final String title;
   final bool isSelected;
-  final double length;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -42,7 +37,7 @@ class VideoWidget extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                "${length.toStringAsFixed(2)}h",
+                "120 مشاهدة",
                 style: const TextStyle(
                   height: 1.4,
                   color: AppColors.indigo,

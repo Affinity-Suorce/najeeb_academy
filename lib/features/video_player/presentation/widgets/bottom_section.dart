@@ -1,19 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
+import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_widget.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPageBottomSection extends StatefulWidget {
   VideoPageBottomSection(
       {Key? key,
       required this.subject,
+      required this.lecture,
       required this.states,
       this.changeVideo,
       required this.controller})
       : super(key: key);
-  final String subject;
+  final Subject subject;
+  final Lecture lecture;
   final List<bool> states;
-  final VideoPlayerController controller;
+  final YoutubePlayerController controller;
   Function(int index)? changeVideo;
 
   @override
@@ -24,6 +29,8 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints:
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.7),
       padding: const EdgeInsets.fromLTRB(16, 24, 16, 26),
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -37,7 +44,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                widget.subject,
+                widget.subject.name ?? '',
                 style: const TextStyle(
                   height: 1.4,
                   color: Colors.black,
@@ -62,9 +69,9 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
           const SizedBox(
             height: 8,
           ),
-          const Text(
-            "24 درس",
-            style: TextStyle(
+          Text(
+            widget.subject.lectures!.length.toString(),
+            style: const TextStyle(
               height: 1.4,
               color: Colors.black54,
               fontSize: 20,
@@ -86,8 +93,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                   child: VideoWidget(
                     isSelected: widget.states[index],
                     index: index + 1,
-                    length: index * 1.1,
-                    title: 'التكامل',
+                    title: widget.subject.lectures![index].name ?? '',
                   ),
                 );
               },
@@ -96,7 +102,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                   height: 22,
                 );
               },
-              itemCount: 10)
+              itemCount: widget.subject.lectures!.length)
         ],
       ),
     );

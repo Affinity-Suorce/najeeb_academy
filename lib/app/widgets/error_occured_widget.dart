@@ -10,7 +10,7 @@ class ErrorOccuredTextWidget extends StatelessWidget {
   final Future<void> Function()? fun;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 200,
       child: Center(
@@ -18,14 +18,14 @@ class ErrorOccuredTextWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              message + "!!",
-              style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 28),
+              "$message!!",
+              style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 28),
             ),
             InkWell(
               onTap: () {
                 if (fun != null) fun!();
               },
-              child: Text(
+              child: const Text(
                 "أعد المحاولة",
                 style: TextStyle(color: Colors.indigo, fontSize: 25),
               ),

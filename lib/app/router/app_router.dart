@@ -49,7 +49,7 @@ part 'app_router.gr.dart';
       path: '/all-courses',
       page: AllCoursesPage,
     ),
-    AutoRoute(path: '/lectures/video/:id', page: VideoPlayerPage),
+    AutoRoute(path: '/lectures/video/:lectureSubject', page: VideoPlayerPage),
   ],
 )
 class AppRouter extends _$AppRouter {}

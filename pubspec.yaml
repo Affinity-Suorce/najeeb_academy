@@ -68,6 +68,7 @@ dependencies:
   flutter_bloc: ^8.1.1
   dio: ^4.0.6
   shimmer: ^2.0.0
+  youtube_player_flutter: ^8.1.0
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +102,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/subjects/
+    - assets/images/calendar/
     - assets/icons/
 
   # To add assets to your application, add an assets section, like this:

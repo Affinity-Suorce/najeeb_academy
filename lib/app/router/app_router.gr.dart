@@ -50,14 +50,14 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: AllCoursesPage(key: args.key, onResult: args.onResult));
     },
-    VideoPlayerRoute.name: (routeData) {
-      final pathParams = routeData.inheritedPathParams;
-      final args = routeData.argsAs<VideoPlayerRouteArgs>(
-          orElse: () => VideoPlayerRouteArgs(id: pathParams.getString('id')));
-      return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: VideoPlayerPage(key: args.key, id: args.id));
-    },
+    // VideoPlayerRoute.name: (routeData) {
+    //   final pathParams = routeData.inheritedPathParams;
+    //   final args = routeData.argsAs<VideoPlayerRouteArgs>(
+    //       orElse: () => VideoPlayerRouteArgs(id: pathParams.getString('id')));
+    //   return AdaptivePage<dynamic>(
+    //       routeData: routeData,
+    //       child: VideoPlayerPage(key: args.key, id: args.id,));
+    // },
     HomeRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
           routeData: routeData, child: const HomePage());

@@ -5,12 +5,20 @@ import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
-import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
+import 'package:najeeb_academy/core/helpers/funcs.dart';
+import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
+import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/lectures/presentation/widgets/wheel_date_picker_bottom_sheet.dart';
+import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 
 class LectureSection extends StatefulWidget {
-  const LectureSection({Key? key}) : super(key: key);
-
+  const LectureSection({
+    Key? key,
+    required this.lectures,
+    required this.subjects,
+  }) : super(key: key);
+  final List<Lecture> lectures;
+  final List<Subject> subjects;
   @override
   State<LectureSection> createState() => _LectureSectionState();
 }
@@ -82,8 +90,13 @@ class _LectureSectionState extends State<LectureSection> {
               padding: EdgeInsets.only(top: 8.h),
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
+                Subject lectureSubject = getLectureSubject(
+                    widget.subjects, widget.lectures[index].subjectId ?? 1);
                 return LectureWidget(
-                  index: index + 1,
+                  lecture: widget.lectures[index],
+                  lectureIndex: lectureSubject.lectures!.indexWhere(
+                      (lecture) => lecture.id == widget.lectures[index].id),
+                  lectureSubject: lectureSubject,
                 );
               },
               separatorBuilder: (context, index) {
@@ -91,7 +104,7 @@ class _LectureSectionState extends State<LectureSection> {
                   height: 22,
                 );
               },
-              itemCount: 5)
+              itemCount: widget.lectures.length)
         ],
       ),
     );
@@ -99,21 +112,30 @@ class _LectureSectionState extends State<LectureSection> {
 }
 
 class LectureWidget extends StatelessWidget {
-  const LectureWidget({Key? key, this.index = 1}) : super(key: key);
-  final int index;
+  const LectureWidget(
+      {Key? key,
+      required this.lecture,
+      required this.lectureIndex,
+      required this.lectureSubject})
+      : super(key: key);
+  final Lecture lecture;
+  final Subject lectureSubject;
+  final int lectureIndex;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // pushNewScreen(
-        //   context,
-        //   screen: const VideoPlayerPage(
-        //     subject: "الرياضيات",
-        //   ),
-        //   withNavBar: false, // OPTIONAL VALUE. True by default.
-        //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        // );
-        DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => 
+                 VideoPlayerPage(
+                  id: "dddddd",
+                  lecture: lecture,
+                  lectureIndex: lectureIndex,
+                  lectureSubject: lectureSubject,
+                )
+                ));
+        // DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
       },
       child: Container(
         padding: const EdgeInsets.only(right: 12, bottom: 18, top: 8, left: 12),
@@ -143,7 +165,7 @@ class LectureWidget extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          index == 1 ? "الفيزياء" : "الرياضيات",
+                          lectureSubject.name ?? '  ',
                           style: const TextStyle(
                             height: 1,
                             color: Colors.black,
@@ -152,7 +174,7 @@ class LectureWidget extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          "الدرس $index",
+                          "الدرس ${lectureIndex + 1}", /////////// add getlectureindex()
                           style: const TextStyle(
                             height: 1,
                             color: AppColors.indigo,
@@ -169,17 +191,7 @@ class LectureWidget extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: Text(
-                            index == 1
-                                ? "قانون نيوتن الأول"
-                                : index == 2
-                                    ? "الاشتقاق"
-                                    : index == 3
-                                        ? "التكامل"
-                                        : index == 4
-                                            ? "اللوغاريتم"
-                                            : index == 5
-                                                ? "المتتاليات"
-                                                : "",
+                            lecture.name ?? '  ',
                             style: const TextStyle(
                               height: 1,
                               color: Colors.black,
@@ -188,16 +200,30 @@ class LectureWidget extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        Container(
-                          width: 45,
-                          height: 22,
-                          decoration: BoxDecoration(
-                              color: const Color(0xFFFFEBF0),
-                              borderRadius: BorderRadius.circular(10)),
-                          child: const Center(
-                            child: Text(
-                              '1.5h',
-                              style: TextStyle(color: Color(0XFFFF6905)),
+                        InkWell(
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                lecture.description ?? '',
+                                style: const TextStyle(
+                                  height: 1,
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ));
+                          },
+                          child: Container(
+                            width: 45,
+                            height: 22,
+                            decoration: BoxDecoration(
+                                color: const Color(0xFFFFEBF0),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Center(
+                              child: Text(
+                                "الوصف",
+                                style: TextStyle(color: Color(0XFFFF6905)),
+                              ),
                             ),
                           ),
                         ),
@@ -240,9 +266,8 @@ class LectureWidget extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(index == 1
-                          ? 'assets/images/physics.png'
-                          : 'assets/images/math.png'),
+                      image: AssetImage(
+                          getSubjectImage(lectureSubject.name ?? '')),
                       fit: BoxFit.cover)),
             ),
           ],

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
 import 'package:najeeb_academy/core/error/excpetions.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 

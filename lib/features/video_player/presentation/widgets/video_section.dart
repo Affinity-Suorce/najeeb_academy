@@ -5,20 +5,29 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/features/video_player/presentation/full_screen_video_page.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/quality_selector_widget.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoSection extends StatelessWidget {
+class VideoSection extends StatefulWidget {
   const VideoSection({
     Key? key,
     required this.changeVideo,
     required this.controller,
+    required this.player,
   }) : super(key: key);
 
-  final VideoPlayerController controller;
+  final YoutubePlayerController controller;
+  final Widget player;
   final Function(int index)? changeVideo;
+
+  @override
+  State<VideoSection> createState() => _VideoSectionState();
+}
+
+class _VideoSectionState extends State<VideoSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.36,
+      height: MediaQuery.of(context).size.height * 0.324,
       width: MediaQuery.of(context).size.width,
       color: Colors.grey.shade900,
       child: Column(
@@ -27,30 +36,12 @@ class VideoSection extends StatelessWidget {
             child: Container(
                 width: double.infinity,
                 color: Colors.black,
-                child: controller.value.isInitialized
-                    ? Container(
-                        alignment: Alignment.topCenter,
-                        child: VideoPlayer(controller),
-                      )
-                    : const Center(
-                        child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                              color: AppColors.lightGrey1,
-                            )))),
-          ),
-          Directionality(
-            textDirection: TextDirection.ltr,
-            child: VideoProgressIndicator(
-              controller,
-              allowScrubbing: true,
-              padding: const EdgeInsets.all(0),
-              colors: const VideoProgressColors(
-                  bufferedColor: Colors.grey,
-                  backgroundColor: Colors.black,
-                  playedColor: AppColors.indigo),
-            ),
+                child: Container(
+                  child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: AspectRatio(
+                          aspectRatio: 16 / 9, child: widget.player)),
+                )),
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
@@ -61,17 +52,7 @@ class VideoSection extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                            builder: (context) => FullScreenVideoPage(
-                                  changeVideo: changeVideo,
-                                  controller: controller,
-                                )))
-                        .then((value) => {
-                              SystemChrome.setPreferredOrientations([
-                                DeviceOrientation.portraitUp,
-                              ])
-                            });
+                    widget.controller.toggleFullScreenMode();
                   },
                   child: const Icon(
                     CupertinoIcons.fullscreen,
@@ -86,8 +67,8 @@ class VideoSection extends StatelessWidget {
                   onTap: () {
                     showDialog(
                         context: context,
-                        builder: (context) =>
-                            QualitySelectorWidget(changeVideo: changeVideo));
+                        builder: (context) => QualitySelectorWidget(
+                            changeVideo: widget.changeVideo));
                   },
                   child: const Icon(
                     CupertinoIcons.settings_solid,
@@ -95,10 +76,13 @@ class VideoSection extends StatelessWidget {
                     size: 24,
                   ),
                 ),
+                const SizedBox(
+                  width: 14,
+                ),
                 const Spacer(),
                 InkWell(
                   onTap: () {
-                    changeVideo!(1);
+                    widget.changeVideo!(1);
                   },
                   child: const Icon(
                     CupertinoIcons.arrow_right,
@@ -111,14 +95,16 @@ class VideoSection extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    controller.value.isPlaying
-                        ? controller.pause()
-                        : controller.play();
+                    setState(() {
+                      widget.controller.value.isPlaying
+                          ? widget.controller.pause()
+                          : widget.controller.play();
+                    });
                   },
                   child: Icon(
-                    controller.value.isPlaying
-                        ? CupertinoIcons.pause_fill
-                        : CupertinoIcons.play_arrow_solid,
+                    widget.controller.value.isPlaying
+                        ? CupertinoIcons.play_arrow_solid
+                        : CupertinoIcons.pause_fill,
                     color: Colors.white,
                     size: 30,
                   ),
@@ -128,7 +114,7 @@ class VideoSection extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    changeVideo!(-1);
+                    widget.changeVideo!(-1);
                   },
                   child: const Icon(
                     CupertinoIcons.arrow_left,
@@ -138,20 +124,6 @@ class VideoSection extends StatelessWidget {
                 ),
                 const SizedBox(
                   width: 18,
-                ),
-                Text(
-                  controller.value.duration.inHours != 0
-                      ? controller.value.duration.inHours.toString()
-                      : '${controller.value.duration.inMinutes}:${controller.value.duration.inSeconds} / ',
-                  style:
-                      const TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
-                ),
-                Text(
-                  controller.value.duration.inHours != 0
-                      ? controller.value.position.inHours.toString()
-                      : '${controller.value.position.inMinutes}:${controller.value.position.inSeconds}',
-                  style:
-                      const TextStyle(color: Colors.white, fontSize: 20, height: 1.1),
                 ),
                 const SizedBox(
                   width: 14,

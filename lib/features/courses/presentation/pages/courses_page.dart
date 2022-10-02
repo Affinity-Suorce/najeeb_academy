@@ -46,21 +46,9 @@ class _CoursesPageState extends State<CoursesPage>
             listener: (context, state) {},
             builder: (context, state) {
               if (state is LoadingState) {
-                return shimmer(Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: const [
-                      SizedBox(
-                        height: 86,
-                      ),
-                      ShimmerWidget1(height: 45),
-                      SizedBox(
-                        height: 28,
-                      ),
-                      ShimmerWidget2(),
-                    ],
-                  ),
-                ));
+                return shimmer(const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    child: ShimmerWidget3()));
               } else if (state is ErrorState) {
                 return ErrorOccuredTextWidget(
                   message: state.message,

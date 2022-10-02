@@ -9,15 +9,25 @@ import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
 
 import '../widgets/all_courses_top_section.dart';
+
 class AllCoursesPage extends StatelessWidget {
-  const AllCoursesPage({Key? key, this.onResult,}) : super(key: key);
+  const AllCoursesPage({
+    Key? key,
+    this.onResult,
+  }) : super(key: key);
   final void Function(bool success)? onResult;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => DI.di<CoursesCubit>(),child: AllCoursesPageImpl(onResult: onResult,),);
+    return BlocProvider(
+      create: (context) => DI.di<CoursesCubit>(),
+      child: AllCoursesPageImpl(
+        onResult: onResult,
+      ),
+    );
   }
 }
+
 class AllCoursesPageImpl extends StatefulWidget {
   final void Function(bool success)? onResult;
   const AllCoursesPageImpl({
@@ -47,21 +57,9 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
             listener: (context, state) {},
             builder: (context, state) {
               if (state is LoadingState) {
-                return shimmer(Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Column(
-                    children: const [
-                      SizedBox(
-                        height: 60,
-                      ),
-                      ShimmerWidget1(height: 40),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      ShimmerWidget2(),
-                    ],
-                  ),
-                ));
+                return shimmer(const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
+                    child: ShimmerWidget3()));
               } else if (state is ErrorState) {
                 return ErrorOccuredTextWidget(
                   message: state.message,
