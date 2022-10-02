@@ -31,8 +31,10 @@ class NotificationWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsetsDirectional.only(end: 8.w, bottom: 8.h),
-            child: Text(notification.createdAt.toLocal().agoFrom(),
-                textAlign: TextAlign.end),
+            child: Text(
+              notification.createdAt.toLocal().agoFrom(),
+              textAlign: TextAlign.end,
+            ),
             // Text(notification.updateAt.agoFrom(), textAlign: TextAlign.end),
           ),
         ],

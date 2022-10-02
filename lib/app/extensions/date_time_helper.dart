@@ -55,4 +55,9 @@ extension DateTimeHelper on DateTime {
 
   String get formattedDate =>
       DateFormat(DateTimeConstants.dateFormat, 'en').format(this);
+
+  String get formattedTime =>
+      DateFormat(DateTimeConstants.timeFormat, 'en').format(this);
+  String get formattedDateTime =>
+      DateFormat(DateTimeConstants.dateTimeFormat, 'en').format(this);
 }
