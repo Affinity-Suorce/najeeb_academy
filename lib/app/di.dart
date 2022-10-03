@@ -11,6 +11,7 @@ import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
+import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:najeeb_academy/features/video_player/data/video_data_source.dart';
 import 'package:najeeb_academy/features/video_player/data/video_repository.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
@@ -30,6 +31,7 @@ abstract class DI {
     di.registerFactory<WelcomeService>(
         () => WelcomeService(preferences, userInfo));
     di.registerFactory<NotificationsService>(() => NotificationsService(api));
+    di.registerFactory<PaymentsService>(() => PaymentsService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
@@ -65,4 +67,5 @@ abstract class DI {
   static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
   static NotificationsService notificationsServiceFactory() =>
       di.get<NotificationsService>();
+  static PaymentsService paymentsServiceFactory() => di.get<PaymentsService>();
 }

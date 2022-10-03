@@ -26,11 +26,6 @@ class NotificationsService extends ChangeNotifier {
             notificationsJson.reversed.map((notificationJson) {
           return NotificationModel.fromMap(notificationJson);
         }));
-        // notifications.sort(((a, b) {
-        //   if(a.seen ^ b.seen){
-
-        //   }
-        // }))
         notifyListeners();
         return true;
       }
