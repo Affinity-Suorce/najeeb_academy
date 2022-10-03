@@ -36,7 +36,10 @@ class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<RegisterRouteArgs>();
       return AdaptivePage<dynamic>(
           routeData: routeData,
-          child: RegisterPage(key: args.key, subjectIds: args.subjectIds),
+          child: RegisterPage(
+              key: args.key,
+              subjectsIds: args.subjectsIds,
+              myClassesIds: args.myClassesIds),
           fullscreenDialog: true);
     },
     MainRoute.name: (routeData) {
@@ -50,14 +53,16 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: AllCoursesPage(key: args.key, onResult: args.onResult));
     },
-    // VideoPlayerRoute.name: (routeData) {
-    //   final pathParams = routeData.inheritedPathParams;
-    //   final args = routeData.argsAs<VideoPlayerRouteArgs>(
-    //       orElse: () => VideoPlayerRouteArgs(id: pathParams.getString('id')));
-    //   return AdaptivePage<dynamic>(
-    //       routeData: routeData,
-    //       child: VideoPlayerPage(key: args.key, id: args.id));
-    // },
+    VideoPlayerRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoPlayerRouteArgs>();
+      return AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: VideoPlayerPage(
+              key: args.key,
+              lectureSubject: args.lectureSubject,
+              lecture: args.lecture,
+              lectureIndex: args.lectureIndex));
+    },
     NotificationsRoute.name: (routeData) {
       final args = routeData.argsAs<NotificationsRouteArgs>();
       return AdaptivePage<dynamic>(
@@ -162,24 +167,33 @@ class LoginRouteArgs {
 /// generated route for
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
-  RegisterRoute({Key? key, required List<int> subjectIds})
+  RegisterRoute(
+      {Key? key,
+      required List<int> subjectsIds,
+      required List<int> myClassesIds})
       : super(RegisterRoute.name,
             path: '/register',
-            args: RegisterRouteArgs(key: key, subjectIds: subjectIds));
+            args: RegisterRouteArgs(
+                key: key,
+                subjectsIds: subjectsIds,
+                myClassesIds: myClassesIds));
 
   static const String name = 'RegisterRoute';
 }
 
 class RegisterRouteArgs {
-  const RegisterRouteArgs({this.key, required this.subjectIds});
+  const RegisterRouteArgs(
+      {this.key, required this.subjectsIds, required this.myClassesIds});
 
   final Key? key;
 
-  final List<int> subjectIds;
+  final List<int> subjectsIds;
+
+  final List<int> myClassesIds;
 
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key, subjectIds: $subjectIds}';
+    return 'RegisterRouteArgs{key: $key, subjectsIds: $subjectsIds, myClassesIds: $myClassesIds}';
   }
 }
 
@@ -219,25 +233,40 @@ class AllCoursesRouteArgs {
 /// generated route for
 /// [VideoPlayerPage]
 class VideoPlayerRoute extends PageRouteInfo<VideoPlayerRouteArgs> {
-  VideoPlayerRoute({Key? key, required String id})
+  VideoPlayerRoute(
+      {Key? key,
+      required Subject lectureSubject,
+      required Lecture lecture,
+      required int lectureIndex})
       : super(VideoPlayerRoute.name,
             path: '/lectures/video/:id',
-            args: VideoPlayerRouteArgs(key: key, id: id),
-            rawPathParams: {'id': id});
+            args: VideoPlayerRouteArgs(
+                key: key,
+                lectureSubject: lectureSubject,
+                lecture: lecture,
+                lectureIndex: lectureIndex));
 
   static const String name = 'VideoPlayerRoute';
 }
 
 class VideoPlayerRouteArgs {
-  const VideoPlayerRouteArgs({this.key, required this.id});
+  const VideoPlayerRouteArgs(
+      {this.key,
+      required this.lectureSubject,
+      required this.lecture,
+      required this.lectureIndex});
 
   final Key? key;
 
-  final String id;
+  final Subject lectureSubject;
+
+  final Lecture lecture;
+
+  final int lectureIndex;
 
   @override
   String toString() {
-    return 'VideoPlayerRouteArgs{key: $key, id: $id}';
+    return 'VideoPlayerRouteArgs{key: $key, lectureSubject: $lectureSubject, lecture: $lecture, lectureIndex: $lectureIndex}';
   }
 }
 

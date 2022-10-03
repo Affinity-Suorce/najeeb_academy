@@ -13,7 +13,10 @@ class SubjectWidget extends StatelessWidget {
       elevation: 5,
       child: InkWell(
         onTap: () {
-          DI.router.push(VideoPlayerRoute(id: subject.name!));
+          DI.router.push(VideoPlayerRoute(
+              lectureSubject: subject,
+              lecture: subject.lectures!.first,
+              lectureIndex: 0));
           // pushNewScreen(
           //   context,
           //   screen: VideoPlayerPage(

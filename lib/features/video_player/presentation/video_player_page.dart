@@ -1,11 +1,9 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
-import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
@@ -17,16 +15,13 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class VideoPlayerPage extends StatefulWidget {
   const VideoPlayerPage({
     Key? key,
-    @pathParam required this.lectureSubject,
-    @pathParam required this.lecture,
-    @pathParam required this.lectureIndex,
-    @pathParam required this.id,
+    required this.lectureSubject,
+    required this.lecture,
+    required this.lectureIndex,
   }) : super(key: key);
-  final String id;
   final Lecture lecture;
   final Subject lectureSubject;
   final int lectureIndex;
-  String get subject => id;
 
   @override
   State<VideoPlayerPage> createState() => _VideoPlayerPageState();
@@ -120,7 +115,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is LoadingState) {
-            return Scaffold(
+            return const Scaffold(
                 body: Center(
               child: CircularProgressIndicator(),
             ));
@@ -135,7 +130,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
             _initController(lecture.videoUrl ?? "");
-            debugPrint("lectureIdIs:" + lecture.id.toString());
+            debugPrint("lectureIdIs:${lecture.id}");
             return YoutubePlayerBuilder(
                 player: YoutubePlayer(
                   controller: controller,
@@ -143,7 +138,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   bottomActions: controller.value.isFullScreen
                       ? [
                           FullScreenButton(),
-                          PlaybackSpeedButton(),
+                          const PlaybackSpeedButton(),
                           ProgressBar(isExpanded: true),
                           CurrentPosition(),
                           RemainingDuration(),

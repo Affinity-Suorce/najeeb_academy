@@ -24,7 +24,8 @@ class RegisterFormService extends ChangeNotifier {
   Future<void> register({
     required BuildContext context,
     required void Function(String message) onFailed,
-    required List<int> subjectIds,
+    required List<int> subjectsIds,
+    required List<int> myClassesIds,
   }) async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
@@ -41,7 +42,7 @@ class RegisterFormService extends ChangeNotifier {
       final governorate = formState.fields['governorate']!.value;
       final parentMobile = formState.fields['parent_mobile']!.value;
       final billNumber = formState.fields['bill_number']!.value;
-      final isInstallment = formState.fields['is_installment']!.value;
+      // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
       try {
         final response = await _api.post(
@@ -54,11 +55,10 @@ class RegisterFormService extends ChangeNotifier {
             'landline': landline,
             'governorate': governorate.id,
             'parent_phone': parentMobile,
-            // 'my_class_id': classId,
+            'my_class_id': myClassesIds,
             'bill_number': billNumber,
-            'is_installment': isInstallment,
-            'subject_id': subjectIds,
-            'my_class_id': 1,
+            // 'is_installment': isInstallment,
+            'subject_id': subjectsIds,
             'amount_paid': 0,
           },
         );

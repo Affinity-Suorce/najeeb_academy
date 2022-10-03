@@ -7,15 +7,16 @@ import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
 import 'package:najeeb_academy/features/auth/models/governorate.dart';
-import 'package:najeeb_academy/features/auth/ui/register/widgets/is_installment_field.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field.dart';
 
 class RegisterPage extends StatelessWidget {
-  final List<int> subjectIds;
+  final List<int> subjectsIds;
+  final List<int> myClassesIds;
   RegisterPage({
     super.key,
-    required this.subjectIds,
+    required this.subjectsIds,
+    required this.myClassesIds,
   });
   final service = DI.registerFormServiceFactory();
   @override
@@ -62,6 +63,20 @@ class RegisterPage extends StatelessWidget {
                               decoration: const InputDecoration(
                                 hintText: 'الاسم الأول',
                               ),
+                              validator: (input) {
+                                if (input == null || input.trim().isEmpty) {
+                                  return 'هذا الحقل مطلوب';
+                                }
+                                if (input.codeUnits.any((char) =>
+                                    (char < 1569 && char != 32) ||
+                                    char > 1610)) {
+                                  return 'الرجاء إدخال الاسم باللغة العربية';
+                                }
+                                if (input.trim().length < 2) {
+                                  return 'يجب إدخال حرفين على الأقل';
+                                }
+                                return null;
+                              },
                               textInputAction: TextInputAction.next,
                             ),
                           ),
@@ -74,6 +89,20 @@ class RegisterPage extends StatelessWidget {
                               decoration: const InputDecoration(
                                 hintText: 'الكنية',
                               ),
+                              validator: (input) {
+                                if (input == null || input.trim().isEmpty) {
+                                  return 'هذا الحقل مطلوب';
+                                }
+                                if (input.codeUnits.any((char) =>
+                                    (char < 1569 && char != 32) ||
+                                    char > 1610)) {
+                                  return 'الرجاء إدخال الاسم باللغة العربية';
+                                }
+                                if (input.trim().length < 2) {
+                                  return 'يجب إدخال حرفين على الأقل';
+                                }
+                                return null;
+                              },
                               textInputAction: TextInputAction.next,
                             ),
                           ),
@@ -88,6 +117,19 @@ class RegisterPage extends StatelessWidget {
                           hintText: 'اسم الأب',
                         ),
                         textInputAction: TextInputAction.next,
+                        validator: (input) {
+                          if (input == null || input.trim().isEmpty) {
+                            return null;
+                          }
+                          if (input.codeUnits.any((char) =>
+                              (char < 1569 && char != 32) || char > 1610)) {
+                            return 'الرجاء إدخال الاسم باللغة العربية';
+                          }
+                          if (input.trim().length < 2) {
+                            return 'يجب إدخال حرفين على الأقل';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     8.verticalSpace,
@@ -118,6 +160,7 @@ class RegisterPage extends StatelessWidget {
                           child: Card(
                             child: FormBuilderDropdown<Governorate>(
                               name: 'governorate',
+                              initialValue: Governorate.all.first,
                               items: Governorate.all
                                   .map(
                                     (e) => DropdownMenuItem(
@@ -157,7 +200,8 @@ class RegisterPage extends StatelessWidget {
                         onSubmitted: (_) => service.register(
                           context: context,
                           onFailed: (message) => onFailed(context, message),
-                          subjectIds: subjectIds,
+                          subjectsIds: subjectsIds,
+                          myClassesIds: myClassesIds,
                         ),
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
@@ -167,8 +211,9 @@ class RegisterPage extends StatelessWidget {
                         },
                       ),
                     ),
-                    8.verticalSpace,
-                    const IsInstallmentField(),
+                    // 8.verticalSpace,
+                    // const IsInstallmentField(),
+
                     // 8.verticalSpace,
                     // Card(
                     //   child: FormBuilderDropdown<String>(
@@ -206,7 +251,8 @@ class RegisterPage extends StatelessWidget {
                       onPressed: () => service.register(
                         context: context,
                         onFailed: (message) => onFailed(context, message),
-                        subjectIds: subjectIds,
+                        subjectsIds: subjectsIds,
+                        myClassesIds: myClassesIds,
                       ),
                       child: const Text('إنشاء الحساب'),
                     ),

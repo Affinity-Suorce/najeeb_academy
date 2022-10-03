@@ -78,7 +78,7 @@ class _CoursesPageState extends State<CoursesPage>
                         courses.length,
                         (i) => TabBarItem(
                           title: courses[i].name!,
-                          imagePath: 'assets/images/logo.png',
+                          // imagePath: 'assets/images/logo.png',
                         ),
                       ),
                     ),

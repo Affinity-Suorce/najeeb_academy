@@ -104,7 +104,8 @@ class _HomePageState extends State<HomePage> {
           floatingActionButton: ElevatedButton(
             child: const Text('إنشاء حساب'),
             onPressed: () {
-              DI.router.push(RegisterRoute(subjectIds: const [1, 2]));
+              DI.router.push(RegisterRoute(
+                  myClassesIds: const [1], subjectsIds: const [1, 2]));
             },
           ),
         );

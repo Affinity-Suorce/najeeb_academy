@@ -129,7 +129,6 @@ class LectureWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => VideoPlayerPage(
-                      id: "dddddd",
                       lecture: lecture,
                       lectureIndex: lectureIndex,
                       lectureSubject: lectureSubject,
