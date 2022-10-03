@@ -58,6 +58,7 @@ class RegisterFormService extends ChangeNotifier {
             'my_class_id': myClassesIds,
             'bill_number': billNumber,
             // 'is_installment': isInstallment,
+            'is_installment': 0,
             'subject_id': subjectsIds,
             'amount_paid': 0,
           },
