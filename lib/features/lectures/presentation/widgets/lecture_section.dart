@@ -4,6 +4,7 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -200,17 +201,8 @@ class LectureWidget extends StatelessWidget {
                         const Spacer(),
                         InkWell(
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                lecture.description ?? '',
-                                style: const TextStyle(
-                                  height: 1,
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              backgroundColor: Colors.grey,
-                            ));
+                            context
+                                .showBasicSnackBar(lecture.description ?? '');
                           },
                           child: Container(
                             width: 45,

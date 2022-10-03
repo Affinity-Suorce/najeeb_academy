@@ -16,7 +16,7 @@ class AllCoursesTopSection extends StatelessWidget {
             BackButton(),
             Expanded(
               child: Navbar(
-                title: "كل الدورات",
+                title: "اختر المواد",
                 color: Colors.black,
               ),
             ),

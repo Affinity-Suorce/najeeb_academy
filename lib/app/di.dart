@@ -10,6 +10,7 @@ import 'package:najeeb_academy/features/auth/services/user_info_service.dart';
 import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/courses/services/course_service.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
 import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:najeeb_academy/features/video_player/data/video_data_source.dart';
@@ -34,6 +35,9 @@ abstract class DI {
     di.registerFactory<PaymentsService>(() => PaymentsService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
+    di.registerLazySingleton<CoursesServices>(
+      () => CoursesServices(),
+    );
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
     di.registerLazySingleton<Client>(() => Client());
     registerCourses();
@@ -58,6 +62,7 @@ abstract class DI {
   }
 
   static AppRouter get router => di.get<AppRouter>();
+  static CoursesServices get coursesServices => di.get<CoursesServices>();
   static UserInfoRepository get userInfo => di.get<UserInfoRepository>();
   static UserInfoService get userInfoService => di.get<UserInfoService>();
   static LoginFormService loginFormServiceFactory() =>

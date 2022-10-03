@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
+import 'package:najeeb_academy/app/widgets/button.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
-
+import 'package:expandable/expandable.dart';
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
@@ -40,11 +43,13 @@ class AllCoursesPageImpl extends StatefulWidget {
 }
 
 class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
+  ExpandableController? expandableController;
   @override
   void initState() {
     super.initState();
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
     coursesCubit.getMyCourses(true);
+    expandableController = ExpandableController(initialExpanded: false);
   }
 
   @override
@@ -70,32 +75,82 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                 for (var course in courses) {
                   allSubjects.addAll(course.subjects!);
                 }
-                return Column(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
-                      child: AllCoursesTopSection(),
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 16.h, horizontal: 16.w),
-                        separatorBuilder: (context, index) => 8.verticalSpace,
-                        itemCount: allSubjects.length,
-                        itemBuilder: (context, i) => CourseWidget(
-                          subject: allSubjects[i],
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
+                        child: AllCoursesTopSection(),
+                      ),
+                      const SizedBox(
+                        height: 28,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 12.h, horizontal: 12.w),
+                          separatorBuilder: (context, index) =>
+                              12.verticalSpace,
+                          itemCount: courses.length,
+                          itemBuilder: (context, i) => Material(
+                            color: Colors.white,
+                            elevation: 5,
+                            borderRadius: BorderRadius.circular(15),
+                            child: ExpandablePanel(
+                              controller:
+                                  ExpandableController(initialExpanded: true),
+                              header: CourseExpandableHeaderWidget(
+                                course: courses[i],
+                              ),
+                              collapsed: const SizedBox.shrink(),
+                              expanded: CourseExpandableBodyWidget(
+                                  course: courses[i]),
+                            ),
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CustomElevatedButton(
+                                onPressed: () {
+                                  validateSelection();
+                                  ///TODO Implement navigation to register page
+                                  ///Get the selected subjectIds[] , coursesIds[] from
+                                  ///DI.coursesServices.getSelectedCourses / DI.coursesServices.getSelectedSubjects
+                                  debugPrint(
+                                      "courses:${DI.coursesServices.getSelectedCourses} subjects:${DI.coursesServices.getSelectedSubjects}");
+                                },
+                                buttonColor: AppColors.indigo,
+                                verticalPadding: 8,
+                                title: 'إشترك',
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }
               return const ErrorOccuredTextWidget();
             }),
       ),
     );
+  }
+
+  void validateSelection() {
+    if (DI.coursesServices.getSelectedCourses.isEmpty &&
+        DI.coursesServices.getSelectedSubjects.isEmpty) {
+      context.showBasicSnackBar('الرجاء اختيار أحد المواد للإستمرار');
+    }
   }
 }

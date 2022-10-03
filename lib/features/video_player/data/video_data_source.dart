@@ -1,4 +1,5 @@
 import 'package:http/http.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/core/network/data_source.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
@@ -12,8 +13,7 @@ class VideoDataSource {
         Uri.parse(videoUrl(videoId)),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':
-              'Bearer Iz51G5pkejpI8oioDdIWLuZIPDJoU7sdsPuCDbFMnJudXjna47K7RItncTPAhcJi8kidt9CdFeqvbeCB'
+          'Authorization': 'Bearer ${DI.userInfo.token}'
         },
       ),
       lectureFromJson,

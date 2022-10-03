@@ -35,6 +35,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void initState() {
     super.initState();
+    _initController("https://www.youtube.com/watch?v=AjWfY7SnMBI");
     videoCubit = BlocProvider.of<VideoCubit>(context);
     videoCubit.getVideo(widget.lecture.id.toString());
 

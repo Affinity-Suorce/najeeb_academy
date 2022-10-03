@@ -67,6 +67,7 @@ dependencies:
   dio: ^4.0.6
   shimmer: ^2.0.0
   youtube_player_flutter: ^8.1.0
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:

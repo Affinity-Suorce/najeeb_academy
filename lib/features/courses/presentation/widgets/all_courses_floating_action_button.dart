@@ -19,7 +19,7 @@ class AllCoursesFloatingActionButton extends StatelessWidget {
         //   withNavBar: false,
         //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
         // );
-        DI.router.push(AllCoursesRoute());
+        DI.router.push(AllCoursesRoute()).then((value) => DI.coursesServices.resetLists());
       },
       tooltip: 'كل الدورات',
       child: const Icon(CupertinoIcons.rectangle_stack_badge_plus),
