@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_widget.dart';
-import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPageBottomSection extends StatefulWidget {
@@ -89,6 +88,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                     setState(() {
                       widget.changeVideo!(index);
                     });
+                    debugPrint("ConditionIs:${widget.lectureIndex}");
                   },
                   child: VideoWidget(
                     isSelected: widget.lectureIndex == index,

@@ -4,15 +4,17 @@ import 'package:flutter/services.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/quality_selector_widget.dart';
 import 'package:video_player/video_player.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class FullScreenVideoPage extends StatefulWidget {
   const FullScreenVideoPage({
     Key? key,
-    required this.changeVideo,
+    // required this.changeVideo,
     required this.controller,
   }) : super(key: key);
-  final VideoPlayerController controller;
-  final Function(int index)? changeVideo;
+  final YoutubePlayerController controller;
+  // final Function(int index)? changeVideo;
   @override
   State<FullScreenVideoPage> createState() => _FullScreenVideoPageState();
 }
@@ -44,40 +46,29 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                   });
                 },
                 child: Container(
-                    width: double.infinity,
-                    color: Colors.black,
-                    child: widget.controller.value.isInitialized
-                        ? Container(
-                            alignment: Alignment.topCenter,
-                            child: VideoPlayer(widget.controller),
-                          )
-                        : const Center(
-                            child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color: AppColors.lightGrey1,
-                                )))),
-              ),
-            ),
-            Directionality(
-              textDirection: TextDirection.ltr,
-              child: VideoProgressIndicator(
-                widget.controller,
-                allowScrubbing: true,
-                padding: const EdgeInsets.all(0),
-                colors: const VideoProgressColors(
-                    bufferedColor: Colors.grey,
-                    backgroundColor: Colors.black,
-                    playedColor: AppColors.indigo),
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: YoutubePlayer(
+                    controller: widget.controller,
+                    showVideoProgressIndicator: true,
+                    bottomActions:[
+                          FullScreenButton(),
+                          const PlaybackSpeedButton(),
+                          ProgressBar(isExpanded: true),
+                          CurrentPosition(),
+                          RemainingDuration(),
+                        ],
+                  ),
+                ),
               ),
             ),
             Visibility(
               maintainState: true,
               maintainAnimation: true,
-              visible: visible,
+              visible: false,
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
                 width: double.infinity,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -98,11 +89,11 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) => QualitySelectorWidget(
-                                  changeVideo: widget.changeVideo,
-                                ));
+                        // showDialog(
+                        //     context: context,
+                        //     builder: (context) => QualitySelectorWidget(
+                        //           changeVideo: widget.changeVideo,
+                        //         ));
                       },
                       child: const Icon(
                         CupertinoIcons.settings_solid,
@@ -115,7 +106,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            widget.changeVideo!(1);
+                            // widget.changeVideo!(1);
                           },
                           child: const Icon(
                             CupertinoIcons.arrow_right,
@@ -147,7 +138,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            widget.changeVideo!(-1);
+                            // widget.changeVideo!(-1);
                           },
                           child: const Icon(
                             CupertinoIcons.arrow_left,
@@ -156,24 +147,6 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                           ),
                         ),
                       ],
-                    ),
-                    const Spacer(),
-                    Text(
-                      widget.controller.value.duration.inHours != 0
-                          ? widget.controller.value.duration.inHours.toString()
-                          : '${widget.controller.value.duration.inMinutes}:${widget.controller.value.duration.inSeconds} / ',
-                      style: const TextStyle(
-                          color: Colors.white, fontSize: 22, height: 1.1),
-                    ),
-                    Text(
-                      widget.controller.value.duration.inHours != 0
-                          ? widget.controller.value.position.inHours.toString()
-                          : '${widget.controller.value.position.inMinutes}:${widget.controller.value.position.inSeconds}',
-                      style: const TextStyle(
-                          color: Colors.white, fontSize: 22, height: 1.1),
-                    ),
-                    const SizedBox(
-                      width: 14,
                     ),
                   ],
                 ),

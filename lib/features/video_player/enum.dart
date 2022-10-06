@@ -1,1 +1,0 @@
-enum Quality{low,sd,hd}

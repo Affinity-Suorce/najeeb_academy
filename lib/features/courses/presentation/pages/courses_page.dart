@@ -87,16 +87,22 @@ class _CoursesPageState extends State<CoursesPage>
                         controller: controller,
                         children: List.generate(
                           courses.length,
-                          (index) => ListView.separated(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 16.h, horizontal: 16.w),
-                            separatorBuilder: (context, index) =>
-                                8.verticalSpace,
-                            itemCount:
-                                courses[controller.index].subjects!.length,
-                            itemBuilder: (context, i) => SubjectWidget(
-                              subject:
-                                  courses[controller.index].subjects![index],
+                          (index) => RefreshIndicator(
+                            onRefresh: () {
+                              return BlocProvider.of<CoursesCubit>(context)
+                                  .getMyCourses(false);
+                            },
+                            child: ListView.separated(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16.h, horizontal: 16.w),
+                              separatorBuilder: (context, index) =>
+                                  8.verticalSpace,
+                              itemCount:
+                                  courses[controller.index].subjects!.length,
+                              itemBuilder: (context, i) => SubjectWidget(
+                                subject:
+                                    courses[controller.index].subjects![index],
+                              ),
                             ),
                           ),
                         ),

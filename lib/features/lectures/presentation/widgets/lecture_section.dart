@@ -126,14 +126,10 @@ class LectureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => VideoPlayerPage(
-                      lecture: lecture,
-                      lectureIndex: lectureIndex,
-                      lectureSubject: lectureSubject,
-                    )));
+        DI.router.push(VideoPlayerRoute(
+            lectureSubject: lectureSubject,
+            lecture: lecture,
+            lectureIndex: lectureIndex));
         // DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
       },
       child: Container(

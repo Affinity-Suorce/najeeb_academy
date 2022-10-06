@@ -31,18 +31,16 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   late YoutubePlayerController controller;
   late final VideoCubit videoCubit;
   String defaultStream = 'https://www.youtube.com/watch?v=dfmK3dIihXY';
+  bool isFullScreen = false;
+  int customLectureIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    customLectureIndex = widget.lectureIndex;
     _initController("https://www.youtube.com/watch?v=AjWfY7SnMBI");
     videoCubit = BlocProvider.of<VideoCubit>(context);
     videoCubit.getVideo(widget.lecture.id.toString());
-
-    // states = List.generate(widget.lectureSubject.lectures!.length, (index) {
-    //   if (index == widget.lectureIndex) return true;
-    //   return false;
-    // });
   }
 
   void getVideo(String lectureId) {
@@ -71,44 +69,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     controller.dispose();
     super.dispose();
   }
-  // void _initController(String link) {
-  //   controller = VideoPlayerController.network(
-  //     link,
-  //     videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-  //   )
-  //     ..addListener(() => setState(() {}))
-  //     ..setLooping(true)
-  //     ..initialize().then((_) {
-  //       setState(() {});
-  //       controller!.play();
-  //       //   seekTo(int.parse(widget.playlist.elements[currentClipIndex].Bal));
-  //       //   seeking = false;
-  //       // });
-  //     });
-  // }
-
-  // void _ChangeVideo(String videoPath) async {
-  //   if (controller == null) {
-  //     // If there was no controller, just create a new one
-  //     _initController(videoPath);
-  //   }
-  //   WidgetsBinding.instance.addPostFrameCallback((_) async {
-  //     // await controller!.dispose();
-
-  //     // Initing new controller
-  //     _initController(videoPath);
-  //   });
-
-  //   // controller?.addListener(() {
-  //   //   setState(() {
-  //   //     _playBackTime = _controller?.value.position.inSeconds;
-  //   //   });
-  //   // });
-  //   // _initializeVideoPlayerFuture = _controller?.initialize().then((_) {
-  //   // _controller?.seekTo(newCurrentPosition!);
-  //   // _controller?.play();
-  //   // });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -130,9 +90,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             );
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
-            _initController(lecture.videoUrl ?? "");
+            if (controller.initialVideoId !=
+                YoutubePlayer.convertUrlToId(lecture.videoUrl ?? "")) {
+              _initController(lecture.videoUrl ?? "");
+            }
             debugPrint("lectureIdIs:${lecture.id}");
             return YoutubePlayerBuilder(
+                onEnterFullScreen: () => isFullScreen = true,
+                onExitFullScreen: () => isFullScreen = false,
                 player: YoutubePlayer(
                   controller: controller,
                   showVideoProgressIndicator: true,
@@ -148,6 +113,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                           CurrentPosition(),
                           RemainingDuration(),
                           ProgressBar(isExpanded: true),
+                          const PlaybackSpeedButton(),
                         ],
                 ),
                 builder: (context, player) {
@@ -155,8 +121,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                     backgroundColor: Colors.grey.shade900,
                     floatingActionButton: FloatingActionButton(
                       onPressed: () {
-                        const BottomSheetContainer(
-                          child: VideoFilesContainer(),
+                        BottomSheetContainer(
+                          child: VideoFilesContainer(
+                              lectureFiles: widget.lecture.filesPdf ?? []),
                         ).showAsBottomSheet<DateTime>(
                           context,
                           isScrollControlled: true,
@@ -174,8 +141,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                               controller: controller,
                               player: player,
                               changeVideo: (index) {
-                                print(
-                                    "lectureIndex:${widget.lectureIndex}lectureSubject.lectures!.length:${widget.lectureSubject.lectures!.length}indexIs:$index");
+                                // print(
+                                //     "lectureIndex:${widget.lectureIndex}lectureSubject.lectures!.length:${widget.lectureSubject.lectures!.length}indexIs:$index");
                                 if (index == -1) {
                                   videoCubit.getVideo(widget
                                       .lectureSubject
@@ -203,9 +170,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                             VideoPageBottomSection(
                                 subject: widget.lectureSubject,
                                 lecture: widget.lecture,
-                                lectureIndex: widget.lectureIndex,
+                                lectureIndex: customLectureIndex,
                                 controller: controller,
                                 changeVideo: (index) {
+                                  customLectureIndex = index;
                                   videoCubit.getVideo(widget
                                       .lectureSubject.lectures![index].id
                                       .toString());
