@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 
 class CoursesServices {
-  List _coursesIds = [];
-  List _subjectsIds = [];
+  List<int> _coursesIds = [];
+  List<int> _subjectsIds = [];
   void setCoursesids(int courseId) {
     if (_coursesIds.every((element) => element != courseId)) {
       _coursesIds.add(courseId);
@@ -37,6 +37,6 @@ class CoursesServices {
     _subjectsIds = [];
   }
 
-  List get getSelectedCourses => _coursesIds;
-  List get getSelectedSubjects => _subjectsIds;
+  List<int> get getSelectedCourses => _coursesIds;
+  List<int> get getSelectedSubjects => _subjectsIds;
 }

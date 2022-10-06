@@ -101,13 +101,13 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           //TODO:Remove in production just for testing purposes
-          floatingActionButton: ElevatedButton(
-            child: const Text('إنشاء حساب'),
-            onPressed: () {
-              DI.router.push(RegisterRoute(
-                  myClassesIds: const [1], subjectsIds: const [1, 2]));
-            },
-          ),
+          // floatingActionButton: ElevatedButton(
+          //   child: const Text('إنشاء حساب'),
+          //   onPressed: () {
+          //     DI.router.push(RegisterRoute(
+          //         myClassesIds: const [1], subjectsIds: const [1, 2]));
+          //   },
+          // ),
         );
       }),
     );

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar(
-      {Key? key,
-      this.title = "أهلاً ,أحمد",
-      this.color = Colors.white,
-      this.withdrawer = true})
+      {Key? key, this.title, this.color = Colors.white, this.withdrawer = true})
       : super(key: key);
-  final String title;
+  final String? title;
   final Color color;
   final bool withdrawer;
   @override
@@ -16,7 +14,7 @@ class Navbar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          title,
+          title ?? getTitle(),
           style: TextStyle(
             height: 1.4,
             color: color,
@@ -40,5 +38,11 @@ class Navbar extends StatelessWidget {
         //     : const SizedBox.shrink(),
       ],
     );
+  }
+
+  String getTitle() {
+    return DI.userInfo.isUnAuthenticated
+        ? title!
+        : "أهلاً ${DI.userInfo.student?.name}";
   }
 }

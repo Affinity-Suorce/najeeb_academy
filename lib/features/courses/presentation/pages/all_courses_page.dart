@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/button.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
@@ -123,9 +124,13 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                               child: CustomElevatedButton(
                                 onPressed: () {
                                   validateSelection();
-                                  ///TODO Implement navigation to register page
-                                  ///Get the selected subjectIds[] , coursesIds[] from
-                                  ///DI.coursesServices.getSelectedCourses / DI.coursesServices.getSelectedSubjects
+                                  if (DI.userInfo.isUnAuthenticated) {
+                                    DI.router.push(RegisterRoute(
+                                        myClassesIds: DI
+                                            .coursesServices.getSelectedCourses,
+                                        subjectsIds: DI.coursesServices
+                                            .getSelectedSubjects));
+                                  }
                                   debugPrint(
                                       "courses:${DI.coursesServices.getSelectedCourses} subjects:${DI.coursesServices.getSelectedSubjects}");
                                 },
