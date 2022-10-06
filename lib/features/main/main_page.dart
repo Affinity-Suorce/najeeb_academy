@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
       routes: DI.userInfo.isUnAuthenticated
           ? [
               const HomeRoute(),
-              const LecturesRoute(),
+              const CoursesRoute(),
             ]
           : [
               const HomeRoute(),
@@ -49,8 +49,8 @@ class MainPage extends StatelessWidget {
                         activeColor: AppColors.indigo,
                       ),
                       BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.book),
-                        title: const Text('دروسي'),
+                        icon: const Icon(CupertinoIcons.rectangle_stack),
+                        title: const Text('دوراتي'),
                         activeColor: AppColors.indigo,
                       ),
                     ]

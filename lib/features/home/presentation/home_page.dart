@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               _FrontLayer(
                 scrollController: _front,
               ),
-              PositionedDirectional(
+            DI.userInfo.isAuthenticated? PositionedDirectional(
                   end: 8.w,
                   top: 24.h,
                   child: IconButton(
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                  )),
+                  )):const SizedBox.shrink(),
             ],
           ),
           //TODO:Remove in production just for testing purposes
@@ -152,24 +152,28 @@ class _FrontLayer extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         controller: scrollController,
         child: Column(
-          children: const [
-            Padding(
+          children: [
+            const Padding(
               padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
               child: TopSection(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
-            SliderSection(),
-            SizedBox(
+            const SliderSection(),
+            const SizedBox(
               height: 24,
             ),
-            ProgramSection(),
-            SizedBox(
-              height: 24,
-            ),
-            HomePageBottomSection(),
-            SizedBox(
+            DI.userInfo.isAuthenticated
+                ? const ProgramSection()
+                : const SizedBox.shrink(),
+            DI.userInfo.isAuthenticated
+                ? const SizedBox(
+                    height: 24,
+                  )
+                : const SizedBox.shrink(),
+            const HomePageBottomSection(),
+            const SizedBox(
               height: 24,
             ),
           ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/gradient_slider.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
 
@@ -29,94 +32,119 @@ class TopSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 18),
           width: MediaQuery.of(context).size.width * 0.9,
           height: 120,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(13)),
-              boxShadow: [
+              image: DI.userInfo.isUnAuthenticated
+                  ? const DecorationImage(
+                      image: AssetImage('assets/images/calendar/August.png'),
+                      fit: BoxFit.cover)
+                  : null,
+              borderRadius: const BorderRadius.all(Radius.circular(13)),
+              boxShadow: const [
                 BoxShadow(
                     color: Color(0x669e9e9e),
                     spreadRadius: 0.5,
                     blurRadius: 7,
                     offset: Offset(2, 6))
               ]),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
+          child: DI.userInfo.isAuthenticated
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text(
-                      "تعلمت اليوم",
-                      textDirection: TextDirection.rtl,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        height: 1,
-                        fontSize: 17,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            "تعلمت اليوم",
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                              color: Colors.black54,
+                              height: 1,
+                              fontSize: 17,
+                            ),
+                          ),
+                          const Spacer(),
+                          InkWell(
+                            onTap: () {},
+                            child: const Material(
+                              child: Text(
+                                'دروسي',
+                                textDirection: TextDirection.rtl,
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 17,
+                                    height: 1),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () {},
-                      child: const Material(
-                        child: Text(
-                          'دروسي',
-                          textDirection: TextDirection.rtl,
-                          style: TextStyle(
-                              color: Colors.blue, fontSize: 17, height: 1),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            "60min/",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 19,
+                            ),
+                          ),
+                          Text(
+                            "48min",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: SizedBox(
+                        height: 10,
+                        child: SliderTheme(
+                            data: SliderThemeData(
+                                activeTickMarkColor: Colors.white,
+                                trackShape: GradientRectSliderTrackShape(
+                                    gradient: gradient, darkenInactive: false),
+                                thumbShape: SliderComponentShape.noThumb,
+                                activeTrackColor: Colors.white,
+                                trackHeight: 6),
+                            child: Slider(
+                              min: 0,
+                              max: 10,
+                              value: 7.5,
+                              onChanged: (double value) {},
+                            )),
                       ),
                     ),
                   ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
-                      "60min/",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 19,
+                )
+              : InkWell(
+                  onTap: () {
+                    DI.router.push(AllCoursesRoute());
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Center(
+                      child: Text(
+                        "إشترك في الدروس وسجل دخولك الان",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                    Text(
-                      "48min",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w700),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: SizedBox(
-                  height: 10,
-                  child: SliderTheme(
-                      data: SliderThemeData(
-                          activeTickMarkColor: Colors.white,
-                          trackShape: GradientRectSliderTrackShape(
-                              gradient: gradient, darkenInactive: false),
-                          thumbShape: SliderComponentShape.noThumb,
-                          activeTrackColor: Colors.white,
-                          trackHeight: 6),
-                      child: Slider(
-                        min: 0,
-                        max: 10,
-                        value: 7.5,
-                        onChanged: (double value) {},
-                      )),
-                ),
-              ),
-            ],
-          ),
         ),
       ],
     );

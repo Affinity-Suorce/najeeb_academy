@@ -42,7 +42,7 @@ class Navbar extends StatelessWidget {
 
   String getTitle() {
     return DI.userInfo.isUnAuthenticated
-        ? title!
+        ? 'أهلاً بك'
         : "أهلاً ${DI.userInfo.student?.name}";
   }
 }

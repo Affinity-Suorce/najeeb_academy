@@ -72,23 +72,13 @@ class SliderSection extends StatelessWidget {
                       margin: const EdgeInsets.only(right: 8),
                       child: ElevatedButton(
                         onPressed: () {
-                          if (index == 1) {
-                            //lectures
-                            AutoTabsRouter.of(context).setActiveIndex(2);
-                            return;
+                          if (DI.userInfo.isUnAuthenticated) {
+                            AutoTabsRouter.of(context).setActiveIndex(1);
+                          } else {
+                            index == 1
+                                ? AutoTabsRouter.of(context).setActiveIndex(1)
+                                : AutoTabsRouter.of(context).setActiveIndex(2);
                           }
-                          // DI.router.push(VideoPlayerRoute());
-                          
-                          // pushNewScreen(
-                          //   context,
-                          //   screen: index == 1
-                          //       ? const LecturesPage()
-                          //       : const VideoPlayerPage(subject: "الرياضيات"),
-                          //   withNavBar:
-                          //       false, // OPTIONAL VALUE. True by default.
-                          //   pageTransitionAnimation:
-                          //       PageTransitionAnimation.cupertino,
-                          // );
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -101,7 +91,7 @@ class SliderSection extends StatelessWidget {
                                 horizontal: 37, vertical: 6),
                             onPrimary: Colors.white),
                         child: Text(
-                          index == 1 ? 'ابدأ الآن' : 'اختر اليوم',
+                          index == 1 ? 'ابدأ الآن' : 'اختر الدرس',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
