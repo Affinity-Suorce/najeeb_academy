@@ -62,11 +62,11 @@ class _LecturesPageState extends State<LecturesPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.fromLTRB(12, 40, 12, 0),
                           child: TopSection(),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 28,
                         ),
                         LectureSection(

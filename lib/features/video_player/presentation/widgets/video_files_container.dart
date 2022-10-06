@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VideoFilesContainer extends StatelessWidget {
-  const VideoFilesContainer({Key? key, required this.lectureFiles})
-      : super(key: key);
-  final List<String> lectureFiles;
+  VideoFilesContainer({Key? key, required this.lectureFiles}) : super(key: key);
+  List<String> lectureFiles;
   @override
   Widget build(BuildContext context) {
+    lectureFiles = ['', ''];
     return Container(
       width: MediaQuery.of(context).size.width,
       // height: 250,
@@ -37,14 +37,15 @@ class VideoFilesContainer extends StatelessWidget {
                   height: 28,
                 ),
                 GridView.builder(
+                  shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 80,
+                    maxCrossAxisExtent: 160,
                     childAspectRatio: 3 / 2,
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20,
                   ),
                   itemBuilder: (context, index) {
-                    return fileColumn(index);
+                    return fileColumn(index + 1);
                   },
                   itemCount: lectureFiles.length,
                 )
@@ -53,14 +54,17 @@ class VideoFilesContainer extends StatelessWidget {
     );
   }
 
-  Widget fileColumn(int index) => Column(
-        children: [
-          const Icon(
-            FontAwesomeIcons.solidFilePdf,
-            color: Colors.red,
-            size: 58,
-          ),
-          Text('الملف $index')
-        ],
+  Widget fileColumn(int index) => SizedBox(
+        height: 80,
+        child: Column(
+          children: [
+            const Icon(
+              FontAwesomeIcons.solidFilePdf,
+              color: Colors.red,
+              size: 58,
+            ),
+            Text('الملف $index')
+          ],
+        ),
       );
 }
