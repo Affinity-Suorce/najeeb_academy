@@ -103,12 +103,12 @@ class _CoursesPageState extends State<CoursesPage>
                                       vertical: 16.h, horizontal: 16.w),
                                   separatorBuilder: (context, index) =>
                                       8.verticalSpace,
-                                  itemCount: courses[controller.index]
+                                  itemCount: courses[index]
                                       .subjects!
                                       .length,
                                   itemBuilder: (context, i) => SubjectWidget(
-                                    subject: courses[controller.index]
-                                        .subjects![index],
+                                    subject: courses[index]
+                                        .subjects![i],
                                   ),
                                 ),
                               ),

@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/schedule/schedule_widget.dart';
+import 'package:najeeb_academy/features/home/services/schedule_service.dart';
+import 'package:najeeb_academy/features/lectures/models/event.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
-class ProgramSection extends StatelessWidget {
+class ProgramSection extends StatefulWidget {
   const ProgramSection({Key? key}) : super(key: key);
+
+  @override
+  State<ProgramSection> createState() => _ProgramSectionState();
+}
+
+class _ProgramSectionState extends State<ProgramSection> {
+  List<EventModel>? events;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    events = context.read<ScheduleService>().events;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +32,10 @@ class ProgramSection extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => const Scaffold(
+              builder: (_) =>  Scaffold(
                 body: Directionality(
                   textDirection: TextDirection.ltr,
-                  child: ScheduleViewCalendar(),
+                  child: ScheduleViewCalendar(events: events!),
                 ),
               ),
             ),
@@ -57,14 +73,14 @@ class ProgramSection extends StatelessWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
-                    return programSectionWidget();
+                    return programSectionWidget(events![index]);
                   },
                   separatorBuilder: (context, index) {
                     return Container(
                       height: 2,
                     );
                   },
-                  itemCount: 2)
+                  itemCount: events!.length)
             ],
           ),
         ),
@@ -72,28 +88,30 @@ class ProgramSection extends StatelessWidget {
     );
   }
 
-  Widget programSectionWidget(
-      {String subject = "الرياضيات",
-      int done = 0,
-      int from = 40,
-      double progress = 0.0}) {
+  Widget programSectionWidget(EventModel event) {
     return Padding(
       padding: const EdgeInsets.only(right: 34, left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircularPercentIndicator(
-            radius: 17.0,
-            lineWidth: 2.5,
-            percent: progress,
-            center: const Text(""),
-            progressColor: Colors.green,
+          // CircularPercentIndicator(
+          //   radius: 17.0,
+          //   lineWidth: 2.5,
+          //   percent: progress,
+          //   center: const Text(""),
+          //   progressColor: Colors.green,
+          // ),
+          Container(
+            height: 6,
+            width: 15,
+            decoration: BoxDecoration(
+                color: Colors.black87, borderRadius: BorderRadius.circular(25)),
           ),
           const SizedBox(
             width: 12,
           ),
           Text(
-            subject,
+            event.subjectName ?? '',
             style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
@@ -101,16 +119,9 @@ class ProgramSection extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            "$from/",
+            event.myClassName ?? '',
             style: const TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-          Text(
-            "$done",
-            style: const TextStyle(
-              color: Colors.black54,
-              fontSize: 18,
-            ),
           ),
         ],
       ),

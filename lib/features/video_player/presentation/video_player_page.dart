@@ -123,6 +123,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       onPressed: () {
                         BottomSheetContainer(
                           child: VideoFilesContainer(
+                              lectureName: widget.lecture.name!,
                               lectureFiles: widget.lecture.filesPdf ?? []),
                         ).showAsBottomSheet<DateTime>(
                           context,

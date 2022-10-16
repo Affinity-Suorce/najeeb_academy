@@ -54,3 +54,12 @@ Subject getLectureSubject(List<Subject> subjects, int lectureSubjectId) {
   });
   return temp ?? subjects[0];
 }
+
+int getHourFromStringTime(String time) {
+  print(time.split(':'));
+  return int.parse(time.split(':')[0]);
+}
+
+int getMinuteFromStringTime(String time) {
+  return int.parse(time.split(':')[1].split(' ')[0]);
+}

@@ -1,10 +1,13 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/core/helpers/funcs.dart';
+import 'package:najeeb_academy/features/lectures/models/event.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class ScheduleViewCalendar extends StatefulWidget {
-  const ScheduleViewCalendar({Key? key}) : super(key: key);
-
+  const ScheduleViewCalendar({Key? key, required this.events})
+      : super(key: key);
+  final List<EventModel> events;
   @override
   State<ScheduleViewCalendar> createState() => _ScheduleViewCalendarState();
 }
@@ -23,17 +26,8 @@ class _ScheduleViewCalendarState extends State<ScheduleViewCalendar> {
   /// Method that creates the collection the data source for calendar, with
   /// required information.
   List<Appointment> _getAppointments() {
-    final List<String> subjectCollection = <String>[];
-    subjectCollection.add('رياضيات');
-    subjectCollection.add('فيزياء');
-    subjectCollection.add('كيمياء');
-    subjectCollection.add('علوم');
-    subjectCollection.add('رياضيات');
-    subjectCollection.add('انكليزي');
-    subjectCollection.add('فرنسي');
-    subjectCollection.add('عربي');
-    subjectCollection.add('فيزياء');
-
+    final Random random = Random();
+    DateTime date = DateTime.now();
     final List<Color> colorCollection = <Color>[];
     colorCollection.add(const Color(0xFF0F8644));
     colorCollection.add(const Color(0xFF8B1FA9));
@@ -46,33 +40,53 @@ class _ScheduleViewCalendarState extends State<ScheduleViewCalendar> {
     colorCollection.add(const Color(0xFF636363));
     colorCollection.add(const Color(0xFF0A8043));
 
-    final Random random = Random();
-    final DateTime rangeStartDate =
-        DateTime.now().add(const Duration(days: -(365 ~/ 2)));
+    List<Appointment> appointments = <Appointment>[];
+    appointments = List<Appointment>.from(widget.events.map((event) {
+      DateTime startDate = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          getHourFromStringTime(event.startTime!),
+          getMinuteFromStringTime(event.startTime!));
+      DateTime endDate = DateTime(
+          date.year,
+          date.month,
+          date.day,
+          getHourFromStringTime(event.endTime!),
+          getMinuteFromStringTime(event.endTime!));
+      return Appointment(
+        subject: event.subjectName ?? '',
+        startTime: startDate,
+        endTime: endDate,
+        color: colorCollection[random.nextInt(9)],
+      );
+    }));
+    // final DateTime rangeStartDate =
+    //     DateTime.now().add(const Duration(days: -(365 ~/ 2)));
 
-    final DateTime rangeEndDate = DateTime.now().add(const Duration(days: 365));
+    // final DateTime rangeEndDate = DateTime.now().add(const Duration(days: 365));
 
-    final List<Appointment> appointments = <Appointment>[];
+    // final List<Appointment> appointments = <Appointment>[];
 
-    for (DateTime i = rangeStartDate;
-        i.isBefore(rangeEndDate);
-        i = i.add(Duration(days: random.nextInt(10)))) {
-      final DateTime date = i;
-      final int count = 1 + random.nextInt(3);
-      for (int j = 0; j < count; j++) {
-        final DateTime startDate =
-            DateTime(date.year, date.month, date.day, 8 + random.nextInt(8));
-        appointments.add(Appointment(
-          subject: subjectCollection[random.nextInt(7)],
-          startTime: startDate,
-          endTime: startDate.add(Duration(hours: random.nextInt(3))),
-          color: colorCollection[random.nextInt(9)],
-        ));
-      }
-    }
+    // for (DateTime i = rangeStartDate;
+    //     i.isBefore(rangeEndDate);
+    //     i = i.add(Duration(days: random.nextInt(10)))) {
+    //   final DateTime date = i;
+    //   final int count = 1 + random.nextInt(3);
+    //   for (int j = 0; j < count; j++) {
+    //     final DateTime startDate =
+    //         DateTime(date.year, date.month, date.day, 8 + random.nextInt(8));
+    //     appointments.add(Appointment(
+    //       subject: subjectCollection[random.nextInt(7)],
+    //       startTime: startDate,
+    //       endTime: startDate.add(Duration(hours: random.nextInt(3))),
+    //       color: colorCollection[random.nextInt(9)],
+    //     ));
+    //   }
+    // }
 
-    DateTime date = DateTime.now();
-    date = DateTime(date.year, date.month, date.day, 11);
+    // DateTime date = DateTime.now();
+    // date = DateTime(date.year, date.month, date.day, 11);
     return appointments;
   }
 

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VideoFilesContainer extends StatelessWidget {
-  VideoFilesContainer({Key? key, required this.lectureFiles}) : super(key: key);
+  VideoFilesContainer(
+      {Key? key, required this.lectureFiles, required this.lectureName})
+      : super(key: key);
   List<String> lectureFiles;
+  String lectureName;
   @override
   Widget build(BuildContext context) {
     lectureFiles = ['', ''];
@@ -13,7 +16,7 @@ class VideoFilesContainer extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(24, 22, 24, 22),
       child: lectureFiles.isEmpty
           ? const Text(
-              'ليس هناك ملفات للجلسة',
+              'ليس هناك ملفات للدرس',
               textDirection: TextDirection.rtl,
               style: TextStyle(
                   color: Colors.black,
@@ -23,11 +26,11 @@ class VideoFilesContainer extends StatelessWidget {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(children: const [
+                Row(children: [
                   Text(
-                    'ملفات الجلسة:',
+                    'ملفات $lectureName:',
                     textDirection: TextDirection.rtl,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 24,
                         fontWeight: FontWeight.w700),

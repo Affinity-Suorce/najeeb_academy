@@ -11,6 +11,7 @@ import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/services/course_service.dart';
+import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
 import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:najeeb_academy/features/video_player/data/video_data_source.dart';
@@ -32,6 +33,7 @@ abstract class DI {
     di.registerFactory<WelcomeService>(
         () => WelcomeService(preferences, userInfo));
     di.registerFactory<NotificationsService>(() => NotificationsService(api));
+    di.registerFactory<ScheduleService>(() => ScheduleService(api));
     di.registerFactory<PaymentsService>(() => PaymentsService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
@@ -70,7 +72,7 @@ abstract class DI {
   static RegisterFormService registerFormServiceFactory() =>
       di.get<RegisterFormService>();
   static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
-  static NotificationsService notificationsServiceFactory() =>
-      di.get<NotificationsService>();
+  static NotificationsService notificationsServiceFactory() => di.get<NotificationsService>();
+  static ScheduleService scheduleServiceFactory() => di.get<ScheduleService>();
   static PaymentsService paymentsServiceFactory() => di.get<PaymentsService>();
 }

@@ -130,7 +130,7 @@ class TopSection extends StatelessWidget {
                 )
               : InkWell(
                   onTap: () {
-                    DI.router.push(AllCoursesRoute());
+                    DI.router.push(AllCoursesRoute()).then((value) => DI.coursesServices.resetLists());
                   },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),
