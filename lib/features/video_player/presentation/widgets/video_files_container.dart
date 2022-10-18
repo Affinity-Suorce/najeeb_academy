@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:najeeb_academy/core/helpers/download_file_funcs.dart';
 
 class VideoFilesContainer extends StatelessWidget {
   VideoFilesContainer(
@@ -9,10 +10,8 @@ class VideoFilesContainer extends StatelessWidget {
   String lectureName;
   @override
   Widget build(BuildContext context) {
-    lectureFiles = ['', ''];
     return Container(
       width: MediaQuery.of(context).size.width,
-      // height: 250,
       padding: const EdgeInsets.fromLTRB(24, 22, 24, 22),
       child: lectureFiles.isEmpty
           ? const Text(
@@ -48,7 +47,12 @@ class VideoFilesContainer extends StatelessWidget {
                     mainAxisSpacing: 20,
                   ),
                   itemBuilder: (context, index) {
-                    return fileColumn(index + 1);
+                    return InkWell(
+                      onTap: () async {
+                        downloadFile(lectureFiles[index], '-');
+                      },
+                      child: fileColumn(index + 1),
+                    );
                   },
                   itemCount: lectureFiles.length,
                 )

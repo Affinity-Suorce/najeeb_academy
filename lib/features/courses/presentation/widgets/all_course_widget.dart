@@ -80,6 +80,7 @@ class _CourseExpandableBodyWidgetState
                         onChanged: (value) {
                           subjectIdSelection(index, value);
                           coursesIdSelection();
+                          
                         },
                         activeColor: Colors.green,
                       )

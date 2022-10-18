@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/dialog_build_context.dart';
 import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/button.dart';
@@ -12,6 +13,7 @@ import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
 import 'package:expandable/expandable.dart';
+import 'package:najeeb_academy/features/courses/presentation/widgets/check_dialog.dart';
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
@@ -75,6 +77,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                 List<Subject> allSubjects = [];
                 for (var course in courses) {
                   allSubjects.addAll(course.subjects!);
+                  DI.coursesServices.setSubjects(allSubjects);
                 }
                 return SingleChildScrollView(
                   child: Column(
@@ -122,17 +125,29 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                           children: [
                             Expanded(
                               child: CustomElevatedButton(
-                                onPressed: () {
-                                  validateSelection();
-                                  if (DI.userInfo.isUnAuthenticated) {
-                                    DI.router.push(RegisterRoute(
-                                        myClassesIds: DI
-                                            .coursesServices.getSelectedCourses,
-                                        subjectsIds: DI.coursesServices
-                                            .getSelectedSubjects));
+                                onPressed: () async {
+                                  if (validateSelection()) {
+                                    DI.coursesServices
+                                        .setFullPriceOfSelectedCourses();
+                                    bool? result = await context.showDialog(
+                                        CheckDialog(
+                                            fullPrice: DI
+                                                .coursesServices.getfullPrice
+                                                .toString()),
+                                        barrierDismissible: false);
+                                    if (result!) {
+                                      if (DI.userInfo.isUnAuthenticated) {
+                                        DI.router.push(RegisterRoute(
+                                            myClassesIds: DI.coursesServices
+                                                .getSelectedCourses,
+                                            subjectsIds: DI.coursesServices
+                                                .getSelectedSubjects));
+                                      }
+                                    }
+
+                                    debugPrint(
+                                        "courses:${DI.coursesServices.getSelectedCourses} subjects:${DI.coursesServices.getSelectedSubjects}");
                                   }
-                                  debugPrint(
-                                      "courses:${DI.coursesServices.getSelectedCourses} subjects:${DI.coursesServices.getSelectedSubjects}");
                                 },
                                 buttonColor: AppColors.indigo,
                                 verticalPadding: 8,
@@ -141,7 +156,10 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 22,
+                      ),
                     ],
                   ),
                 );
@@ -152,10 +170,12 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
     );
   }
 
-  void validateSelection() {
+  bool validateSelection() {
     if (DI.coursesServices.getSelectedCourses.isEmpty &&
         DI.coursesServices.getSelectedSubjects.isEmpty) {
       context.showBasicSnackBar('الرجاء اختيار أحد المواد للإستمرار');
+      return false;
     }
+    return true;
   }
 }

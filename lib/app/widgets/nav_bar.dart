@@ -43,6 +43,8 @@ class Navbar extends StatelessWidget {
   String getTitle() {
     return DI.userInfo.isUnAuthenticated
         ? 'أهلاً بك'
-        : "أهلاً ${DI.userInfo.student?.name}";
+        : "أهلاً ${getNameFromTitle(DI.userInfo.student!.name)}";
   }
+
+  String getNameFromTitle(String title) => title.split('-')[0].toString();
 }

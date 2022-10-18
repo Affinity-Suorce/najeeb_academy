@@ -126,11 +126,15 @@ class LectureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        DI.router.push(VideoPlayerRoute(
-            lectureSubject: lectureSubject,
-            lecture: lecture,
-            lectureIndex: lectureIndex));
-        // DI.router.push(VideoPlayerRoute(id: 'الرياضيات'));
+        if (lecture.statusVideo!) {
+          DI.router.push(VideoPlayerRoute(
+              lectureSubject: lectureSubject,
+              lecture: lecture,
+              lectureIndex: lectureIndex));
+        } else {
+          context.showBasicSnackBar(
+              'لا يمكنك مشاهدة هذا الفيديو عليك دفع المترتب عليك');
+        }
       },
       child: Container(
         padding: const EdgeInsets.only(right: 12, bottom: 18, top: 8, left: 12),

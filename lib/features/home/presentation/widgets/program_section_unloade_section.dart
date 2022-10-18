@@ -27,7 +27,7 @@ class ProgramSectionNotLoadedWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "برنامج الإسبوع",
+            "برنامج الأسبوع",
             style: TextStyle(
                 color: Colors.black, fontSize: 22, fontWeight: FontWeight.w700),
           ),

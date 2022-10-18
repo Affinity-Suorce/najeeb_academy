@@ -72,9 +72,9 @@ class RegisterPage extends StatelessWidget {
                                     char > 1610)) {
                                   return 'الرجاء إدخال الاسم باللغة العربية';
                                 }
-                                if (input.trim().length < 2) {
-                                  return 'يجب إدخال حرفين على الأقل';
-                                }
+                                // if (input.trim().length < 2) {
+                                //   return 'يجب إدخال حرفين على الأقل';
+                                // }
                                 return null;
                               },
                               textInputAction: TextInputAction.next,
@@ -98,9 +98,9 @@ class RegisterPage extends StatelessWidget {
                                     char > 1610)) {
                                   return 'الرجاء إدخال الاسم باللغة العربية';
                                 }
-                                if (input.trim().length < 2) {
-                                  return 'يجب إدخال حرفين على الأقل';
-                                }
+                                // if (input.trim().length < 2) {
+                                //   return 'يجب إدخال حرفين على الأقل';
+                                // }
                                 return null;
                               },
                               textInputAction: TextInputAction.next,
@@ -125,9 +125,9 @@ class RegisterPage extends StatelessWidget {
                               (char < 1569 && char != 32) || char > 1610)) {
                             return 'الرجاء إدخال الاسم باللغة العربية';
                           }
-                          if (input.trim().length < 2) {
-                            return 'يجب إدخال حرفين على الأقل';
-                          }
+                          // if (input.trim().length < 2) {
+                          //   return 'يجب إدخال حرفين على الأقل';
+                          // }
                           return null;
                         },
                       ),
@@ -261,7 +261,16 @@ class RegisterPage extends StatelessWidget {
                       child: LinkText(
                         'لديك حساب بالفعل؟',
                         onTap: () {
-                          DI.router.replace(LoginRoute());
+                          DI.userInfo.logout().then((success) {
+                            if (success) {
+                              DI.router.replaceAll([
+                                WelcomeRoute(
+                                    service: DI.welcomeServiceFactory(),
+                                    lastPage: true)
+                              ]);
+                              DI.router.push(LoginRoute());
+                            }
+                          });
                         },
                       ),
                     ),

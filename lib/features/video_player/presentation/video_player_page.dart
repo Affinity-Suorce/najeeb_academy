@@ -90,6 +90,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             );
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
+            print("lectureIS:${lecture.filesPdf}");
             if (controller.initialVideoId !=
                 YoutubePlayer.convertUrlToId(lecture.videoUrl ?? "")) {
               _initController(lecture.videoUrl ?? "");
@@ -124,7 +125,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         BottomSheetContainer(
                           child: VideoFilesContainer(
                               lectureName: widget.lecture.name!,
-                              lectureFiles: widget.lecture.filesPdf ?? []),
+                              lectureFiles: lecture.filesPdf ?? []),
                         ).showAsBottomSheet<DateTime>(
                           context,
                           isScrollControlled: true,

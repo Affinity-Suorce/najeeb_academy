@@ -32,15 +32,10 @@ class TopSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 18),
           width: MediaQuery.of(context).size.width * 0.9,
           height: 120,
-          decoration: BoxDecoration(
+          decoration:const BoxDecoration(
               color: Colors.white,
-              image: DI.userInfo.isUnAuthenticated
-                  ? const DecorationImage(
-                      image: AssetImage('assets/images/calendar/August.png'),
-                      fit: BoxFit.cover)
-                  : null,
-              borderRadius: const BorderRadius.all(Radius.circular(13)),
-              boxShadow: const [
+              borderRadius: BorderRadius.all(Radius.circular(13)),
+              boxShadow: [
                 BoxShadow(
                     color: Color(0x669e9e9e),
                     spreadRadius: 0.5,
@@ -130,7 +125,9 @@ class TopSection extends StatelessWidget {
                 )
               : InkWell(
                   onTap: () {
-                    DI.router.push(AllCoursesRoute()).then((value) => DI.coursesServices.resetLists());
+                    DI.router
+                        .push(AllCoursesRoute())
+                        .then((value) => DI.coursesServices.resetLists());
                   },
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12),

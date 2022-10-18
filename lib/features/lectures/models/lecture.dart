@@ -8,6 +8,8 @@ class Lecture {
   Lecture({
     this.id,
     this.subjectId,
+    this.eventSubjectId,
+    this.statusVideo,
     this.name,
     this.description,
     this.monthNumber,
@@ -19,6 +21,8 @@ class Lecture {
 
   int? id;
   int? subjectId;
+  bool? statusVideo;
+  int? eventSubjectId;
   String? name;
   String? description;
   int? monthNumber;
@@ -30,6 +34,8 @@ class Lecture {
   factory Lecture.fromJson(Map<String, dynamic> json) => Lecture(
         id: json["id"],
         subjectId: json["subject_id"],
+        eventSubjectId: json["event_subject_id"],
+        statusVideo: json["status_video"],
         name: json["name"],
         description: json["description"],
         monthNumber: json["month_number"],

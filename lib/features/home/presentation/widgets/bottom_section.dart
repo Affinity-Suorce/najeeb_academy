@@ -39,7 +39,7 @@ class HomePageBottomSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'أكاديمية نجيب التعليمية',
+                  'نجيب معك يوم بيوم',
                   style: TextStyle(
                     color: AppColors.purple,
                     fontWeight: FontWeight.w700,

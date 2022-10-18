@@ -182,8 +182,26 @@ class _FrontLayer extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             const HomePageBottomSection(),
-            const SizedBox(
-              height: 24,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+              child: Card(
+                child: ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('سجل دخولك الاَن'),
+                  onTap: () {
+                    DI.userInfo.logout().then((success) {
+                      if (success) {
+                        DI.router.replaceAll([
+                          WelcomeRoute(
+                              service: DI.welcomeServiceFactory(),
+                              lastPage: true)
+                        ]);
+                        DI.router.push(LoginRoute());
+                      }
+                    });
+                  },
+                ),
+              ),
             ),
           ],
         ),
