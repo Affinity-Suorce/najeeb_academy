@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -35,8 +34,8 @@ class _LecturesPageState extends State<LecturesPage> {
             listener: (context, state) {},
             builder: (context, state) {
               if (state is LoadingState) {
-                return shimmer(Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                return shimmer(const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
                     child: ShimmerWidget3()));
               } else if (state is ErrorState) {
                 return ErrorOccuredTextWidget(

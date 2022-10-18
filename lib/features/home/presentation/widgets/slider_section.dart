@@ -2,8 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:najeeb_academy/app/router/app_router.dart';
-import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 class SliderSection extends StatelessWidget {
   const SliderSection({Key? key}) : super(key: key);

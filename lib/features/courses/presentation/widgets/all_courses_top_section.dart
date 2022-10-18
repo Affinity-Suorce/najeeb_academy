@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
-import 'package:najeeb_academy/app/widgets/text_form_field.dart';
 
 class AllCoursesTopSection extends StatelessWidget {
   const AllCoursesTopSection({Key? key}) : super(key: key);

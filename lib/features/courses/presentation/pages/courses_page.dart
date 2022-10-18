@@ -133,7 +133,7 @@ class _CoursesPageState extends State<CoursesPage>
                       "assets/images/boarding_0.png",
                       fit: BoxFit.cover,
                     ),
-                    Text(
+                    const Text(
                       "لعرض دروسك عليك اختيار المواد\nوتسجيل الدخول إضغط الزر في \nالأسفل",
                       textAlign: TextAlign.center,
                       style: TextStyle(

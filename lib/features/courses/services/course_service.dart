@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
-import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 class CoursesServices {
   List<Subject> _subjectList = [];

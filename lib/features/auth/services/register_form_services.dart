@@ -89,7 +89,6 @@ class RegisterFormService extends ChangeNotifier {
           ].contains(e.type)) {
             return onFailed('لايمكن الاتصال بالشبكة');
           }
-          print('ysh $e');
 
           onFailed('حدث خطأ غير متوقع');
           // onFailed(e.message);

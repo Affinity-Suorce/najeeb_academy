@@ -10,7 +10,6 @@ import 'package:najeeb_academy/core/helpers/funcs.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/lectures/presentation/widgets/wheel_date_picker_bottom_sheet.dart';
-import 'package:najeeb_academy/features/video_player/presentation/video_player_page.dart';
 
 class LectureSection extends StatefulWidget {
   const LectureSection({
@@ -210,7 +209,7 @@ class LectureWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                                 color: const Color(0xFFFFEBF0),
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Center(
+                            child: const Center(
                               child: Text(
                                 "الوصف",
                                 style: TextStyle(color: Color(0XFFFF6905)),

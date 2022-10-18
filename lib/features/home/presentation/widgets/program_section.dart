@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/schedule/schedule_widget.dart';
 import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/lectures/models/event.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class ProgramSection extends StatefulWidget {

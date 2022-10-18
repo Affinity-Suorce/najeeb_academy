@@ -36,9 +36,9 @@ class VideoWidget extends StatelessWidget {
                 textDirection: TextDirection.rtl,
               ),
               const Spacer(),
-              Text(
+              const Text(
                 "120 مشاهدة",
-                style: const TextStyle(
+                style: TextStyle(
                   height: 1.4,
                   color: AppColors.indigo,
                   fontSize: 20,

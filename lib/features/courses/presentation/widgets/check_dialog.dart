@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:najeeb_academy/app/router/app_router.dart';
 
 class CheckDialog extends StatelessWidget {
   const CheckDialog({Key? key, required this.fullPrice}) : super(key: key);

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
-import 'package:najeeb_academy/app/widgets/text_form_field.dart';
 
 class CoursesTopSection extends StatelessWidget {
   const CoursesTopSection({Key? key}) : super(key: key);
@@ -10,12 +7,12 @@ class CoursesTopSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        const Navbar(
+      children: const [
+        Navbar(
           title: "دوراتي",
           color: Colors.black,
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
         // Padding(
         //   padding: const EdgeInsets.symmetric(horizontal: 14.0),
         //   child: CustomTextFormField(

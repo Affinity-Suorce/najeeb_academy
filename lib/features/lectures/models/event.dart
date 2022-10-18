@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 List<EventModel> eventModelFromJson(List json) => List<EventModel>.from(json.map((x) => EventModel.fromJson(x)));
 

@@ -1,10 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/features/video_player/presentation/full_screen_video_page.dart';
-import 'package:najeeb_academy/features/video_player/presentation/widgets/quality_selector_widget.dart';
-import 'package:video_player/video_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoSection extends StatefulWidget {

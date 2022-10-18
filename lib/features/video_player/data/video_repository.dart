@@ -1,8 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:najeeb_academy/core/error/failures.dart';
 import 'package:najeeb_academy/core/network/repositories.dart';
-import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
-import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/data/video_data_source.dart';
 

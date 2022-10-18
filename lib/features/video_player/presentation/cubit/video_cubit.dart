@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
-import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/data/video_repository.dart';
 part 'video_state.dart';

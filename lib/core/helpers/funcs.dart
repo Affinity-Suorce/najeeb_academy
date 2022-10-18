@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:najeeb_academy/core/error/failures.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -49,14 +48,13 @@ String getSubjectImage(String subjectName) {
 // }
 Subject getLectureSubject(List<Subject> subjects, int lectureSubjectId) {
   Subject? temp;
-  subjects.forEach((subject) {
+  for (var subject in subjects) {
     if (subject.id == lectureSubjectId) temp = subject;
-  });
+  }
   return temp ?? subjects[0];
 }
 
 int getHourFromStringTime(String time) {
-  print(time.split(':'));
   return int.parse(time.split(':')[0]);
 }
 
