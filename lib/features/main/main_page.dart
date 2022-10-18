@@ -6,6 +6,7 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/hom_tab_on_back_pressed.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -13,79 +14,82 @@ class MainPage extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter(
-      inheritNavigatorObservers: true,
-      routes: DI.userInfo.isUnAuthenticated
-          ? [
-              const HomeRoute(),
-              const CoursesRoute(),
-            ]
-          : [
-              const HomeRoute(),
-              const CoursesRoute(),
-              const LecturesRoute(),
-              const PaymentsRoute(),
-              const ProfileRoute()
-            ],
-      builder: (context, child, animation) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return HomTabOnBackPressed(
-          child: Scaffold(
-            body: FadeTransition(
-              opacity: animation,
-              child: child,
+    return ChangeNotifierProvider(
+      create: (context) => DI.lectureServiceFactory(),
+      builder: (context, child) => AutoTabsRouter(
+        inheritNavigatorObservers: true,
+        routes: DI.userInfo.isUnAuthenticated
+            ? [
+                const HomeRoute(),
+                const CoursesRoute(),
+              ]
+            : [
+                const HomeRoute(),
+                const CoursesRoute(),
+                const LecturesRoute(),
+                const PaymentsRoute(),
+                const ProfileRoute()
+              ],
+        builder: (context, child, animation) {
+          final tabsRouter = AutoTabsRouter.of(context);
+          return HomTabOnBackPressed(
+            child: Scaffold(
+              body: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+              bottomNavigationBar: BottomNavyBar(
+                selectedIndex: tabsRouter.activeIndex,
+                showElevation: true, // use this to remove appBar's elevation
+                onItemSelected: (index) {
+                  tabsRouter.setActiveIndex(index);
+                },
+                items: DI.userInfo.isUnAuthenticated
+                    ? [
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.home),
+                          title: const Text('الرئيسية'),
+                          activeColor: AppColors.indigo,
+                        ),
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.rectangle_stack),
+                          title: const Text('دوراتي'),
+                          activeColor: AppColors.indigo,
+                        ),
+                      ]
+                    : [
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.home),
+                          title: const Text('الرئيسية'),
+                          activeColor: AppColors.indigo,
+                        ),
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.rectangle_stack),
+                          title: const Text('دوراتي'),
+                          activeColor: AppColors.indigo,
+                        ),
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.book),
+                          title: const Text('دروسي'),
+                          activeColor: AppColors.indigo,
+                        ),
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.calendar),
+                          title: const Text('الدفعات'),
+                          activeColor: AppColors.indigo,
+                        ),
+                        BottomNavyBarItem(
+                          icon: const Icon(CupertinoIcons.person),
+                          title: const Text('حسابي'),
+                          activeColor: AppColors.indigo,
+                        ),
+                      ],
+              ),
             ),
-            bottomNavigationBar: BottomNavyBar(
-              selectedIndex: tabsRouter.activeIndex,
-              showElevation: true, // use this to remove appBar's elevation
-              onItemSelected: (index) {
-                tabsRouter.setActiveIndex(index);
-              },
-              items: DI.userInfo.isUnAuthenticated
-                  ? [
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.home),
-                        title: const Text('الرئيسية'),
-                        activeColor: AppColors.indigo,
-                      ),
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.rectangle_stack),
-                        title: const Text('دوراتي'),
-                        activeColor: AppColors.indigo,
-                      ),
-                    ]
-                  : [
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.home),
-                        title: const Text('الرئيسية'),
-                        activeColor: AppColors.indigo,
-                      ),
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.rectangle_stack),
-                        title: const Text('دوراتي'),
-                        activeColor: AppColors.indigo,
-                      ),
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.book),
-                        title: const Text('دروسي'),
-                        activeColor: AppColors.indigo,
-                      ),
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.calendar),
-                        title: const Text('الدفعات'),
-                        activeColor: AppColors.indigo,
-                      ),
-                      BottomNavyBarItem(
-                        icon: const Icon(CupertinoIcons.person),
-                        title: const Text('حسابي'),
-                        activeColor: AppColors.indigo,
-                      ),
-                    ],
-            ),
-          ),
-        );
-      },
-      lazyLoad: true,
+          );
+        },
+        lazyLoad: true,
+      ),
     );
     // return PersistentTabView(
     //   context,

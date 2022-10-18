@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
+import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 class CoursesServices {
   List<Subject> _subjectList = [];
+
   List<int> _coursesIds = [];
   List<int> _subjectsIds = [];
   int _fullPrice = 0;
+  
+
   void setSubjects(List<Subject> subjects) {
     _subjectList = subjects;
   }
@@ -14,6 +18,7 @@ class CoursesServices {
     _fullPrice = 0;
   }
 
+  void setLecturesList() {}
   void setFullPriceOfSelectedCourses() {
     List<Subject> selectedSubjects = _subjectList
         .where((subject) => _subjectsIds.any((id) => id == subject.id))
@@ -59,4 +64,5 @@ class CoursesServices {
   List<int> get getSelectedCourses => _coursesIds;
   List<int> get getSelectedSubjects => _subjectsIds;
   int get getfullPrice => _fullPrice;
+  
 }

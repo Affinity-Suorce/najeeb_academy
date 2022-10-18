@@ -65,6 +65,7 @@ class _VideoSectionState extends State<VideoSection> {
                 ),
                 InkWell(
                   onTap: () {
+                    
                     // showDialog(
                     //     context: context,
                     //     builder: (context) => QualitySelectorWidget(

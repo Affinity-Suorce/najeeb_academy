@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -7,6 +8,7 @@ import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/lectures/presentation/widgets/lecture_section.dart';
 import 'package:najeeb_academy/features/lectures/presentation/widgets/top_section.dart';
+import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
 
 class LecturesPage extends StatefulWidget {
   const LecturesPage({Key? key}) : super(key: key);
@@ -53,6 +55,7 @@ class _LecturesPageState extends State<LecturesPage> {
                 }
                 for (var subject in allSubjects) {
                   allLectures.addAll(subject.lectures!);
+                  context.read<LectureServices>().setLectures(allLectures);
                 }
                 return RefreshIndicator(
                   onRefresh: () {

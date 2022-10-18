@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
+import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_files_container.dart';
@@ -54,7 +56,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         mute: false,
         autoPlay: true,
       ),
-    );
+    )..addListener(() {
+        if (controller.value.position == controller.metadata.duration) {
+          context
+              .read<LectureServices>()
+              .addWatchedLectureId(widget.lecture.id!);
+        }
+      });
   }
 
   @override
@@ -81,16 +89,19 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               child: CircularProgressIndicator(),
             ));
           } else if (state is ErrorState) {
-            return ErrorOccuredTextWidget(
-              message: state.message,
-              fun: () {
-                return BlocProvider.of<VideoCubit>(context)
-                    .getVideo(widget.lecture.id.toString());
-              },
+            return Scaffold(
+              body: Center(
+                child: ErrorOccuredTextWidget(
+                  message: state.message,
+                  fun: () {
+                    return BlocProvider.of<VideoCubit>(context)
+                        .getVideo(widget.lecture.id.toString());
+                  },
+                ),
+              ),
             );
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
-            print("lectureIS:${lecture.filesPdf}");
             if (controller.initialVideoId !=
                 YoutubePlayer.convertUrlToId(lecture.videoUrl ?? "")) {
               _initController(lecture.videoUrl ?? "");

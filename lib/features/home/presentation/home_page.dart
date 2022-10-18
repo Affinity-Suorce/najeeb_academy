@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     _controllers = LinkedScrollControllerGroup();
     _back = _controllers!.addAndGet();
     _front = _controllers!.addAndGet();
@@ -68,6 +67,7 @@ class _HomePageState extends State<HomePage> {
               return scheduleService;
             },
           ),
+          
         ],
         builder: (context, child) => Scaffold(
               body: Stack(
