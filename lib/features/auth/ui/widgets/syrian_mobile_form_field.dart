@@ -3,19 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SyrianMobileFormField extends StatelessWidget {
-  const SyrianMobileFormField({
-    super.key,
-    this.decoration = const InputDecoration(),
-    this.textInputAction = TextInputAction.next,
-    this.autofocus = false,
-    this.onFieldSubmitted,
-    this.onChanged,
-    this.required = true,
-    this.controller,
-    this.onSaved,
-    this.name = 'mobile',
-  });
+  const SyrianMobileFormField(
+      {super.key,
+      this.decoration = const InputDecoration(),
+      this.textInputAction = TextInputAction.next,
+      this.autofocus = false,
+      this.onFieldSubmitted,
+      this.onChanged,
+      this.required = true,
+      this.controller,
+      this.onSaved,
+      this.name = 'mobile',
+      this.withValidator = true});
   final String name;
+  final bool withValidator;
   final FormFieldSetter<String>? onSaved;
   final bool required;
   final InputDecoration decoration;
@@ -41,14 +42,18 @@ class SyrianMobileFormField extends StatelessWidget {
       ],
       onSaved: onSaved,
       validator: (input) {
-        if (input == null || input.trim().isEmpty) {
-          return required ? 'رقم الجوال مطلوب' : null;
+        if (withValidator) {
+          if (input == null || input.trim().isEmpty) {
+            return required ? 'رقم الجوال مطلوب' : null;
+          }
+          if (!RegExp(r'^((\+|00)?9639|0?9)([3-6]|[8,9])\d{7}$')
+              .hasMatch(input)) {
+            return 'الرجاء إدخال رقم جوال صالح';
+          }
+          return null;
+        } else {
+          return null;
         }
-        if (!RegExp(r'^((\+|00)?9639|0?9)([3-6]|[8,9])\d{7}$')
-            .hasMatch(input)) {
-          return 'الرجاء إدخال رقم جوال صالح';
-        }
-        return null;
       },
     );
   }

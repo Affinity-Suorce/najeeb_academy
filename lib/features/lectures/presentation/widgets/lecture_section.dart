@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
@@ -9,7 +10,7 @@ import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
-import 'package:najeeb_academy/features/lectures/presentation/widgets/wheel_date_picker_bottom_sheet.dart';
+import 'package:najeeb_academy/features/lectures/presentation/widgets/date_picker_widget.dart';
 
 class LectureSection extends StatefulWidget {
   const LectureSection({
@@ -25,10 +26,12 @@ class LectureSection extends StatefulWidget {
 
 class _LectureSectionState extends State<LectureSection> {
   late DateTime day;
+  List<Lecture> tempListOfLectures = [];
 
   @override
   void initState() {
     super.initState();
+    tempListOfLectures = widget.lectures;
     day = DateTimeHelper.today;
   }
 
@@ -53,25 +56,46 @@ class _LectureSectionState extends State<LectureSection> {
                       fontSize: 22,
                     ),
                   ),
-                  Text(
-                    day.formattedDate,
-                    style: Theme.of(context).textTheme.caption,
+                  Row(
+                    children: [
+                      Text(
+                        day.formattedDate,
+                        style: Theme.of(context).textTheme.caption,
+                      ),
+                      const SizedBox(width: 6),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            tempListOfLectures = widget.lectures;
+                          });
+                        },
+                        child: const Text(
+                          "اظهر كافة الدروس",
+                          style: TextStyle(
+                            height: 1,
+                            color: AppColors.indigo,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
               GestureDetector(
                 onTap: () async {
-                  final date = await WheelDatePickerBottomSheet(
-                    initialDate: day,
-                  ).showAsBottomSheet<DateTime>(
-                    context,
-                    isScrollControlled: true,
-                  );
-                  if (date != null) {
-                    setState(() {
-                      day = date;
-                    });
-                  }
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DatePickerWidget(
+                                  availableDates: getAvailableDates())))
+                      .then((date) {
+                    if (date != null) {
+                      setState(() {
+                        day = date;
+                        tempListOfLectures = getLecturesByDate(date);
+                      });
+                    }
+                  });
                 },
                 child: const Text(
                   "اختر يوماً آخر",
@@ -91,11 +115,11 @@ class _LectureSectionState extends State<LectureSection> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 Subject lectureSubject = getLectureSubject(
-                    widget.subjects, widget.lectures[index].subjectId ?? 1);
+                    widget.subjects, tempListOfLectures[index].subjectId ?? 1);
                 return LectureWidget(
-                  lecture: widget.lectures[index],
+                  lecture: tempListOfLectures[index],
                   lectureIndex: lectureSubject.lectures!.indexWhere(
-                      (lecture) => lecture.id == widget.lectures[index].id),
+                      (lecture) => lecture.id == tempListOfLectures[index].id),
                   lectureSubject: lectureSubject,
                 );
               },
@@ -104,10 +128,26 @@ class _LectureSectionState extends State<LectureSection> {
                   height: 22,
                 );
               },
-              itemCount: widget.lectures.length)
+              itemCount: tempListOfLectures.length)
         ],
       ),
     );
+  }
+
+  List<DateTime> getAvailableDates() {
+    ;
+    List<DateTime> listOfDates = [];
+    for (var lecture in widget.lectures) {
+      listOfDates.add(DateTime.parse(lecture.createdAt!.formattedDate2));
+    }
+    return listOfDates;
+  }
+
+  List<Lecture> getLecturesByDate(DateTime date) {
+    return widget.lectures
+        .where((lecture) =>
+            DateTime.parse(lecture.createdAt!.formattedDate2).isSameDate(date))
+        .toList();
   }
 }
 
@@ -138,7 +178,6 @@ class LectureWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(right: 12, bottom: 18, top: 8, left: 12),
         width: double.infinity,
-        height: 120,
         decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(13)),
@@ -186,15 +225,21 @@ class LectureWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Padding(
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
                           padding: const EdgeInsets.only(right: 8.0),
-                          child: Text(
-                            lecture.name ?? '  ',
-                            style: const TextStyle(
-                              height: 1,
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                lecture.name ?? '  ',
+                                style: const TextStyle(
+                                  height: 1.2,
+                                  color: Colors.black,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         const Spacer(),
@@ -225,19 +270,19 @@ class LectureWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: Row(
-                        children: const [
-                          Text(
-                            "عدد المشاهدات",
+                        children: [
+                          const Text(
+                            "تاريخ الدرس",
                             style: TextStyle(
                               height: 1,
                               color: Colors.black87,
                               fontSize: 16,
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
-                            " 127",
-                            style: TextStyle(
+                            lecture.createdAt!.formattedDate2,
+                            style: const TextStyle(
                               height: 1,
                               color: Colors.black87,
                               fontSize: 16,

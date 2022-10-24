@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
               return scheduleService;
             },
           ),
-          
         ],
         builder: (context, child) => Scaffold(
               body: Stack(
@@ -181,26 +180,8 @@ class _FrontLayer extends StatelessWidget {
                   )
                 : const SizedBox.shrink(),
             const HomePageBottomSection(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-              child: Card(
-                child: ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('سجل دخولك الاَن'),
-                  onTap: () {
-                    DI.userInfo.logout().then((success) {
-                      if (success) {
-                        DI.router.replaceAll([
-                          WelcomeRoute(
-                              service: DI.welcomeServiceFactory(),
-                              lastPage: true)
-                        ]);
-                        DI.router.push(LoginRoute());
-                      }
-                    });
-                  },
-                ),
-              ),
+            const SizedBox(
+              height: 24,
             ),
           ],
         ),

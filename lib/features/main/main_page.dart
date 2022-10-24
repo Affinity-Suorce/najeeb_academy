@@ -53,7 +53,7 @@ class MainPage extends StatelessWidget {
                         ),
                         BottomNavyBarItem(
                           icon: const Icon(CupertinoIcons.rectangle_stack),
-                          title: const Text('دوراتي'),
+                          title: const Text('صفوفي'),
                           activeColor: AppColors.indigo,
                         ),
                       ]
@@ -65,7 +65,7 @@ class MainPage extends StatelessWidget {
                         ),
                         BottomNavyBarItem(
                           icon: const Icon(CupertinoIcons.rectangle_stack),
-                          title: const Text('دوراتي'),
+                          title: const Text('صفوفي'),
                           activeColor: AppColors.indigo,
                         ),
                         BottomNavyBarItem(

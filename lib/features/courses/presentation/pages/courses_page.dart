@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
 import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
@@ -26,6 +27,9 @@ class _CoursesPageState extends State<CoursesPage>
   @override
   void initState() {
     super.initState();
+    if (DI.userInfo.isUnAuthenticated) {
+      DI.router.push(AllCoursesRoute());
+    }
     controller = TabController(length: 2, vsync: this);
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
     coursesCubit.getMyCourses(false);
@@ -65,9 +69,11 @@ class _CoursesPageState extends State<CoursesPage>
                     );
                   } else if (state is GotCoursesState) {
                     List<CourseModel> courses = state.courses;
-                    ////TODO temp code we have a bug here
-                    // if (courses.length == 1) courses.add(courses[0]);
-                    ///////
+                    if (courses.length == 1) {
+                      return CoursesPageWithSingleClass(
+                        course: courses[0],
+                      );
+                    }
                     return Column(
                       children: [
                         const Padding(
@@ -103,12 +109,9 @@ class _CoursesPageState extends State<CoursesPage>
                                       vertical: 16.h, horizontal: 16.w),
                                   separatorBuilder: (context, index) =>
                                       8.verticalSpace,
-                                  itemCount: courses[index]
-                                      .subjects!
-                                      .length,
+                                  itemCount: courses[index].subjects!.length,
                                   itemBuilder: (context, i) => SubjectWidget(
-                                    subject: courses[index]
-                                        .subjects![i],
+                                    subject: courses[index].subjects![i],
                                   ),
                                 ),
                               ),
@@ -144,6 +147,42 @@ class _CoursesPageState extends State<CoursesPage>
               ),
       ),
       floatingActionButton: const AllCoursesFloatingActionButton(),
+    );
+  }
+}
+
+class CoursesPageWithSingleClass extends StatelessWidget {
+  const CoursesPageWithSingleClass({Key? key, required this.course})
+      : super(key: key);
+  final CourseModel course;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 60, 12, 0),
+          child: CoursesTopSection(
+            classname: course.name,
+          ),
+        ),
+        const SizedBox(
+          height: 28,
+        ),
+        RefreshIndicator(
+          onRefresh: () {
+            return BlocProvider.of<CoursesCubit>(context).getMyCourses(false);
+          },
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            separatorBuilder: (context, index) => 8.verticalSpace,
+            itemCount: course.subjects!.length,
+            itemBuilder: (context, i) => SubjectWidget(
+              subject: course.subjects![i],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

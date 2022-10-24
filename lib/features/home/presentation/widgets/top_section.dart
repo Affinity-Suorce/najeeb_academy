@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/gradient_slider.dart';
+import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
 import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,9 @@ class _TopSectionState extends State<TopSection> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 2), (timer) => setState(() {}));
+    if (mounted) {
+      Timer.periodic(const Duration(seconds: 3), (timer) => setState(() {}));
+    }
   }
 
   @override
@@ -176,13 +179,48 @@ class _TopSectionState extends State<TopSection> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700),
-            ),
+            child: isUnAuth
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        text,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            height: 1.3,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          LinkText("لديك حساب؟", onTap: () {
+                            DI.userInfo.logout().then((success) {
+                              if (success) {
+                                DI.router.replaceAll([
+                                  WelcomeRoute(
+                                      service: DI.welcomeServiceFactory(),
+                                      lastPage: true)
+                                ]);
+                                DI.router.push(LoginRoute());
+                              }
+                            });
+                          })
+                        ],
+                      )
+                    ],
+                  )
+                : Text(
+                    text,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700),
+                  ),
           ),
         ),
       );

@@ -136,16 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           subtitle: Text(student?.phone ?? ''),
                         ),
                       ),
-                      // rowWidget('الجوال:', student?.phone ?? ''),
                     ],
-                    // const SizedBox(height: 12),
-                    // rowWidget('الجوال:', '0936289209'),
-                    // const SizedBox(height: 12),
-                    // rowWidget('التلفون:', '0116612043'),
-                    // const SizedBox(height: 12),
-                    // rowWidget('تاريخ الميلاد:', '1999/8/2'),
-                    // const SizedBox(height: 12),
-                    // rowWidget('الجنس:', 'male'),
                     const SizedBox(height: 12),
                     Card(
                       child: ListTile(
@@ -171,46 +162,4 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
-
-  // Widget rowWidget(String lable, String value) {
-  //   if (value.isEmpty || value.toLowerCase() == 'null') {
-  //     return const SizedBox.shrink();
-  //   }
-  //   if (value == 'null') value = '';
-
-  //   return Material(
-  //     shadowColor: AppColors.searchField,
-  //     elevation: 1.8,
-  //     borderRadius: BorderRadius.circular(4),
-  //     child: Container(
-  //         padding: const EdgeInsets.symmetric(horizontal: 12),
-  //         height: 55,
-  //         decoration: BoxDecoration(
-  //             borderRadius: BorderRadius.circular(6),
-  //             color: AppColors.searchField),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           children: [
-  //             Text(
-  //               lable,
-  //               style: const TextStyle(color: Colors.black54, fontSize: 16),
-  //             ),
-  //             Padding(
-  //               padding: const EdgeInsets.symmetric(horizontal: 8),
-  //               child: Expanded(
-  //                 child: Text(
-  //                   value,
-  //                   textAlign: TextAlign.end,
-  //                   overflow: TextOverflow.ellipsis,
-  //                   style: const TextStyle(
-  //                       color: Colors.black,
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.w600),
-  //                 ),
-  //               ),
-  //             )
-  //           ],
-  //         )),
-  //   );
-  // }
 }

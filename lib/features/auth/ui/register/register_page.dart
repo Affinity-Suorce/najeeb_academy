@@ -146,6 +146,9 @@ class RegisterPage extends StatelessWidget {
                         Expanded(
                           child: Card(
                             child: FormBuilderTextField(
+                              validator: (d) {
+                                return null;
+                              },
                               name: 'landline',
                               decoration: const InputDecoration(
                                 hintText: 'الهاتف الأرضي',
@@ -181,6 +184,7 @@ class RegisterPage extends StatelessWidget {
                     Card(
                       child: SyrianMobileFormField(
                         name: 'parent_mobile',
+                        withValidator: false,
                         decoration: const InputDecoration(
                           hintText: 'هاتف ولي الأمر',
                         ),

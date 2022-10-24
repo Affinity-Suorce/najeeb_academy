@@ -158,7 +158,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                         ),
                       ),
                       const SizedBox(
-                        height: 22,
+                        height: 40,
                       ),
                     ],
                   ),
