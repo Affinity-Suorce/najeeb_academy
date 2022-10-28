@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/loading.dart';
+import 'package:najeeb_academy/features/payment/presentation/widgets/bill_widget.dart';
 import 'package:najeeb_academy/features/payment/presentation/widgets/payment_widget.dart';
 import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:provider/provider.dart';
@@ -48,9 +49,9 @@ class PaymentsPage extends StatelessWidget {
               return ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
                 itemCount: payments.length,
-                itemBuilder: (context, i) => PaymentWidget(
-                  payment: payments[i],
-                ),
+                itemBuilder: (context, i) => BillWidget(
+                    payment: payments[i],
+                    ),
                 separatorBuilder: (BuildContext context, int index) =>
                     8.verticalSpace,
               );

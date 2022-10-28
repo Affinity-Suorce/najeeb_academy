@@ -1,40 +1,68 @@
+// To parse this JSON data, do
+//
+//     final eventModel = eventModelFromJson(jsonString);
 
-List<EventModel> eventModelFromJson(List json) => List<EventModel>.from(json.map((x) => EventModel.fromJson(x)));
+import 'dart:convert';
+
+import 'package:intl/intl.dart';
+
+EventModel eventModelFromJson(Map<String, dynamic> str) =>
+    EventModel.fromJson(str);
 
 // String eventModelToJson(EventModel data) => json.encode(data.toJson());
 
 class EventModel {
-    EventModel({
-        this.subjectName,
-        this.myClassName,
-        this.lectureName,
-        this.startTime,
-        this.endTime,
-        this.date,
-    });
+  EventModel({
+    this.monday = const [],
+    this.tuesday = const [],
+    this.wednesday = const [],
+    this.thursday = const [],
+    this.friday = const [],
+    this.saturday = const [],
+    this.sunday = const [],
+  });
 
-    String? subjectName;
-    String? myClassName;
-    String? lectureName;
-    String? startTime;
-    String? endTime;
-    DateTime? date;
+  List<String> monday;
+  List<String> tuesday;
+  List<String> wednesday;
+  List<String> thursday;
+  List<String> friday;
+  List<String> saturday;
+  List<String> sunday;
 
-    factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
-        subjectName: json["subject_name"],
-        myClassName: json["my_class_name"],
-        lectureName: json["lecture_name"],
-        startTime: json["start_time"],
-        endTime: json["end_time"],
-        date: DateTime.parse(json["date"]),
-    );
+  factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
+        monday: List<String>.from(json["Monday"].map((x) => x)),
+        tuesday: List<String>.from(json["Tuesday"].map((x) => x)),
+        wednesday: List<String>.from(json["Wednesday"].map((x) => x)),
+        thursday: List<String>.from(json["Thursday"].map((x) => x)),
+        friday: List<String>.from(json["Friday"].map((x) => x)),
+        saturday: List<String>.from(json["Saturday"].map((x) => x)),
+        sunday: List<String>.from(json["Sunday"].map((x) => x)),
+      );
 
-    // Map<String, dynamic> toJson() => {
-    //     "subject_name": subjectName,
-    //     "my_class_name": myClassName,
-    //     "lecture_name": lectureName,
-    //     "start_time": startTime,
-    //     "end_time": endTime,
-    //     "date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
-    // };
+  Map<String, dynamic> toJson() => {
+        "Monday": List<dynamic>.from(monday.map((x) => x)),
+        "Tuesday": List<dynamic>.from(tuesday.map((x) => x)),
+        "Wednesday": List<dynamic>.from(wednesday.map((x) => x)),
+        "Thursday": List<dynamic>.from(thursday.map((x) => x)),
+        "Friday": List<dynamic>.from(friday.map((x) => x)),
+        "Saturday": List<dynamic>.from(saturday.map((x) => x)),
+        "Sunday": List<dynamic>.from(sunday.map((x) => x)),
+      };
+
+  List<String> getAllInfo() {
+    List<String> tempList = [];
+    tempList.addAll(monday);
+    tempList.addAll(tuesday);
+    tempList.addAll(wednesday);
+    tempList.addAll(thursday);
+    tempList.addAll(friday);
+    tempList.addAll(saturday);
+    tempList.addAll(sunday);
+    return tempList;
+  }
+
+  void getCurrentDayInfo() {
+    print(DateFormat('EEEE').format(DateTime.now()).toString());
+  }
 }

@@ -17,6 +17,7 @@ class PaymentsService extends ChangeNotifier {
       if (response.statusCode == 200 &&
           data is Map<String, dynamic> &&
           data.containsKey('data')) {
+        print(data['data']);
         final List paymentsJson = data['data'];
 
         payments = List<Payment>.from(paymentsJson.reversed.map((paymentJson) {

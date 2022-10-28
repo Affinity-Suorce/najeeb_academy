@@ -163,7 +163,10 @@ class LectureWidget extends StatelessWidget {
   final int lectureIndex;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
+      onLongPress: () {
+        context.showBasicSnackBar(lecture.description ?? '');
+      },
       onTap: () {
         if (lecture.statusVideo!) {
           DI.router.push(VideoPlayerRoute(

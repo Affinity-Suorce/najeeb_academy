@@ -4,9 +4,10 @@ import 'dart:convert';
 class Payment {
   final int id;
   final int studentId;
+  final int paymentId;
   final int? refNo;
-  final int amtPaid;
-  final int balance;
+  final String amtPaid;
+  final String balance;
   final bool paid;
   final bool orderConfirm;
   final int studentMyClassId;
@@ -18,6 +19,7 @@ class Payment {
   const Payment({
     required this.id,
     required this.studentId,
+    required this.paymentId,
     this.refNo,
     required this.amtPaid,
     required this.balance,
@@ -34,8 +36,8 @@ class Payment {
     int? id,
     int? studentId,
     int? refNo,
-    int? amtPaid,
-    int? balance,
+    String? amtPaid,
+    String? balance,
     bool? paid,
     bool? orderConfirm,
     int? studentMyClassId,
@@ -47,6 +49,7 @@ class Payment {
     return Payment(
       id: id ?? this.id,
       studentId: studentId ?? this.studentId,
+      paymentId: paymentId,
       refNo: refNo ?? this.refNo,
       amtPaid: amtPaid ?? this.amtPaid,
       balance: balance ?? this.balance,
@@ -64,6 +67,7 @@ class Payment {
     return <String, dynamic>{
       'id': id,
       'student_id': studentId,
+      'payment_id': paymentId,
       'ref_no': refNo,
       'amt_paid': amtPaid,
       'balance': balance,
@@ -80,10 +84,11 @@ class Payment {
   factory Payment.fromMap(Map<String, dynamic> map) {
     return Payment(
       id: map['id'] as int,
+      paymentId: map['payment_id'] as int,
       studentId: map['student_id'] as int,
       refNo: map['ref_no'] != null ? map['ref_no'] as int : null,
-      amtPaid: map['amt_paid'] as int,
-      balance: map['balance'] as int,
+      amtPaid: map['amt_paid'] as String,
+      balance: map['balance'] as String,
       paid: map['paid'] == 1,
       orderConfirm: map['order_confirm'] == 1,
       studentMyClassId: map['student_my_class_id'] as int,

@@ -10,7 +10,7 @@ import 'package:najeeb_academy/features/lectures/models/event.dart';
 class ScheduleService extends ChangeNotifier {
   final Dio _api;
 
-  List<EventModel>? events;
+  EventModel? events;
   bool? isLoaded;
 
   ScheduleService(this._api);
@@ -19,12 +19,11 @@ class ScheduleService extends ChangeNotifier {
     try {
       final response = await _api.get(eventsUrl);
       final data = response.data;
-      print('data is : $data');
+      print('data is : ${data['data']}');
       if (response.statusCode == 200) {
         events = eventModelFromJson(data['data']);
         isLoaded = true;
         notifyListeners();
-
         return 'success';
       }
       return getResponseMessage(data);
