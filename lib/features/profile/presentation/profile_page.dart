@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/features/home/presentation/privacy_poilcy.dart';
 import 'package:najeeb_academy/features/profile/presentation/widgets/user_image.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -141,17 +141,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     Card(
                       child: ListTile(
                         leading: const Icon(Icons.logout),
-                        title: const Text('تسجيل الخروج'),
+                        title: const Text('سياسة الخصوصية'),
                         onTap: () {
-                          DI.userInfo.logout().then((success) {
-                            if (success) {
-                              DI.router.replaceAll([
-                                WelcomeRoute(
-                                    service: DI.welcomeServiceFactory(),
-                                    lastPage: true)
-                              ]);
-                            }
-                          });
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PrivacyPolicy()));
                         },
                       ),
                     ),

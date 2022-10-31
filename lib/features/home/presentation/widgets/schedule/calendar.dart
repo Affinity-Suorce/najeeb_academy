@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/lectures/models/event.dart';
 
+const widthRadius = 0.196;
+const heightRadius = 0.14;
+
 class Calendar extends StatefulWidget {
   const Calendar({Key? key, required this.events}) : super(key: key);
   final EventModel? events;
@@ -54,7 +57,7 @@ class DataWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: List.generate(7, (index) {
+          children: List.generate(8, (index) {
             final List<String> finalList = getList(index, events!);
             return DataRow(
               dataList: finalList,
@@ -98,22 +101,21 @@ class DataRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 1),
+      padding: const EdgeInsets.only(bottom: 0.7),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: List.generate(dataList.length > 10 ? 10 : dataList.length,
-              (index) {
-            List<String> reversedDataList = dataList..reversed;
+          children:
+              List.generate(dataList.length > 5 ? 5 : dataList.length, (index) {
             return SizedBox(
-              width: MediaQuery.of(context).size.width * 0.098,
-              height: MediaQuery.of(context).size.height * 0.158,
+              height: MediaQuery.of(context).size.height * heightRadius,
+              width: MediaQuery.of(context).size.width * widthRadius,
               child: Center(
                   child: Text(
-                reversedDataList[index],
+                dataList[index],
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 15,
+                  fontSize: 18,
                 ),
               )),
             );
@@ -133,25 +135,15 @@ class VerticalLines extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            horizontalSpacing(context),
+            spacingSizedBox(context),
             const Line(isVertical: true),
-            horizontalSpacing(context),
+            spacingSizedBox(context),
             const Line(isVertical: true),
-            horizontalSpacing(context),
+            spacingSizedBox(context),
             const Line(isVertical: true),
-            horizontalSpacing(context),
+            spacingSizedBox(context),
             const Line(isVertical: true),
-            horizontalSpacing(context),
-            const Line(isVertical: true),
-            horizontalSpacing(context),
-            const Line(isVertical: true),
-            horizontalSpacing(context),
-            const Line(isVertical: true),
-            horizontalSpacing(context),
-            const Line(isVertical: true),
-            horizontalSpacing(context),
-            const Line(isVertical: true),
-            horizontalSpacing(context),
+            spacingSizedBox(context),
           ],
         ));
   }
@@ -168,28 +160,34 @@ class HorizontalLines extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          veticalSpacing(context),
+          spacingSizedBox(context),
           const Line(),
-          veticalSpacing(context),
+          spacingSizedBox(context),
           const Line(),
-          veticalSpacing(context),
+          spacingSizedBox(context),
           const Line(),
-          veticalSpacing(context),
+          spacingSizedBox(context),
           const Line(),
-          veticalSpacing(context),
+          spacingSizedBox(context),
           const Line(),
-          veticalSpacing(context),
+          spacingSizedBox(context),
+          const Line(),
+          spacingSizedBox(context),
         ],
       ),
     );
   }
 }
 
-Widget horizontalSpacing(BuildContext context) => SizedBox(
-      width: MediaQuery.of(context).size.width * 0.098,
-    );
-Widget veticalSpacing(BuildContext context) => SizedBox(
-      height: MediaQuery.of(context).size.height * 0.1585,
+// Widget horizontalSpacing(BuildContext context) => SizedBox(
+//       width: MediaQuery.of(context).size.width * 0.18,
+//     );
+// Widget veticalSpacing(BuildContext context) => SizedBox(
+//       height: MediaQuery.of(context).size.height * 0.135,
+//     );
+SizedBox spacingSizedBox(BuildContext context) => SizedBox(
+      height: MediaQuery.of(context).size.height * heightRadius,
+      width: MediaQuery.of(context).size.width * widthRadius,
     );
 
 class Line extends StatelessWidget {

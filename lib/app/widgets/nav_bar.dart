@@ -3,10 +3,15 @@ import 'package:najeeb_academy/app/di.dart';
 
 class Navbar extends StatelessWidget {
   const Navbar(
-      {Key? key, this.title, this.color = Colors.white, this.withdrawer = true})
+      {Key? key,
+      this.title,
+      this.color = Colors.white,
+      this.withdrawer = true,
+      this.withBackButton = false})
       : super(key: key);
   final String? title;
   final Color color;
+  final bool withBackButton;
   final bool withdrawer;
   @override
   Widget build(BuildContext context) {
@@ -24,18 +29,18 @@ class Navbar extends StatelessWidget {
           textDirection: TextDirection.rtl,
         ),
         const Spacer(),
-        // withdrawer
-        //     ? InkWell(
-        //         onTap: () {
-        //           ZoomDrawer.of(context)!.open();
-        //         },
-        //         child: Icon(
-        //           Icons.menu_rounded,
-        //           color: color,
-        //           size: 35,
-        //         ),
-        //       )
-        //     : const SizedBox.shrink(),
+        withBackButton
+            ? InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: color,
+                  size: 30,
+                ),
+              )
+            : const SizedBox.shrink(),
       ],
     );
   }

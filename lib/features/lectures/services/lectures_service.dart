@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
-class LectureServices extends ChangeNotifier {
+class LectureServices{
   List<int> _watchedLecturesIds = [];
   List<Lecture> _lecturesList = [];
   void setLectures(List<Lecture> lectures) {

@@ -4,7 +4,6 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/loading.dart';
 import 'package:najeeb_academy/features/payment/presentation/widgets/bill_widget.dart';
-import 'package:najeeb_academy/features/payment/presentation/widgets/payment_widget.dart';
 import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:provider/provider.dart';
 

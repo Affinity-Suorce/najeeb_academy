@@ -39,7 +39,7 @@ class RegisterFormService extends ChangeNotifier {
       final fatherName = formState.fields['father_name']!.value;
       final mobile = formState.fields['mobile']!.value;
       final landline = formState.fields['landline']!.value;
-      final governorate = formState.fields['governorate']!.value;
+      // final governorate = formState.fields['governorate']!.value;
       final parentMobile = formState.fields['parent_mobile']!.value;
       final billNumber = formState.fields['bill_number']!.value;
       // final isInstallment = formState.fields['is_installment']!.value;
@@ -67,6 +67,7 @@ class RegisterFormService extends ChangeNotifier {
         final data = response.data;
         if (data is Map<String, dynamic>) {
           if (data.containsKey('data')) {
+            // ignore: use_build_context_synchronously
             context.showDialog(const RegistrationCompleteDialog(),
                 barrierDismissible: false);
           }

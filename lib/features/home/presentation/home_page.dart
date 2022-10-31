@@ -8,7 +8,6 @@ import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
-import 'package:najeeb_academy/features/home/presentation/privacy_poilcy.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/program_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/program_section_unloade_section.dart';
@@ -184,24 +183,7 @@ class _FrontLayer extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Card(
-                child: ListTile(
-                  leading: const Icon(Icons.privacy_tip),
-                  title: const Text('سياسة الخصوصية'),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PrivacyPolicy()));
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
+            
           ],
         ),
       ),

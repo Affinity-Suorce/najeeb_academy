@@ -35,12 +35,15 @@ abstract class DI {
         () => WelcomeService(preferences, userInfo));
     di.registerFactory<NotificationsService>(() => NotificationsService(api));
     di.registerFactory<ScheduleService>(() => ScheduleService(api));
-    di.registerFactory<LectureServices>(() => LectureServices());
+    // di.registerFactory<LectureServices>(() => LectureServices());
     di.registerFactory<PaymentsService>(() => PaymentsService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
     di.registerLazySingleton<CoursesServices>(
       () => CoursesServices(),
+    );
+    di.registerLazySingleton<LectureServices>(
+      () => LectureServices(),
     );
 
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
@@ -68,6 +71,7 @@ abstract class DI {
 
   static AppRouter get router => di.get<AppRouter>();
   static CoursesServices get coursesServices => di.get<CoursesServices>();
+  static LectureServices get lectureServices => di.get<LectureServices>();
   static UserInfoRepository get userInfo => di.get<UserInfoRepository>();
   static UserInfoService get userInfoService => di.get<UserInfoService>();
   static LoginFormService loginFormServiceFactory() =>
@@ -78,6 +82,6 @@ abstract class DI {
   static NotificationsService notificationsServiceFactory() =>
       di.get<NotificationsService>();
   static ScheduleService scheduleServiceFactory() => di.get<ScheduleService>();
-  static LectureServices lectureServiceFactory() => di.get<LectureServices>();
+  // static LectureServices lectureServiceFactory() => di.get<LectureServices>();
   static PaymentsService paymentsServiceFactory() => di.get<PaymentsService>();
 }

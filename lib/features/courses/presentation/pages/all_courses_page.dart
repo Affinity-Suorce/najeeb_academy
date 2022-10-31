@@ -14,6 +14,7 @@ import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
 import 'package:expandable/expandable.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/check_dialog.dart';
+import 'package:najeeb_academy/features/payment/presentation/widgets/payment_dialog.dart';
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
@@ -142,6 +143,10 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                                 .getSelectedCourses,
                                             subjectsIds: DI.coursesServices
                                                 .getSelectedSubjects));
+                                      } else {
+                                        context.showDialog(
+                                            const PaymentDialog(),
+                                            barrierDismissible: false);
                                       }
                                     }
 

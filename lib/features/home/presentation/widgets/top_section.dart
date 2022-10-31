@@ -7,8 +7,6 @@ import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/gradient_slider.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
-import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
-import 'package:provider/provider.dart';
 
 class TopSection extends StatefulWidget {
   const TopSection({Key? key}) : super(key: key);
@@ -62,7 +60,7 @@ class _TopSectionState extends State<TopSection> {
                       offset: Offset(2, 6))
                 ]),
             child: DI.userInfo.isAuthenticated
-                ? context.watch<LectureServices>().getLectures.isEmpty
+                ? DI.lectureServices.getLectures.isEmpty
                     ? alternativeWidget(
                         "إذهب إلى صفحة دروسي لتحديد ما عليك مشاهدته",
                         false,
@@ -112,14 +110,14 @@ class _TopSectionState extends State<TopSection> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "${context.watch<LectureServices>().getWatchedLecturesIds.length}",
+                                  "${DI.lectureServices.getWatchedLecturesIds.length}",
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 19,
                                   ),
                                 ),
                                 Text(
-                                  " درس من أصل ${context.watch<LectureServices>().getLectures.length}",
+                                  " درس من أصل ${DI.lectureServices.getLectures.length}",
                                   style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 19,
@@ -147,12 +145,10 @@ class _TopSectionState extends State<TopSection> {
                                   child: Slider(
                                     min: 0,
                                     max: 10,
-                                    value: context
-                                            .watch<LectureServices>()
+                                    value: DI.lectureServices
                                             .getWatchedLecturesIds
                                             .length /
-                                        context
-                                            .watch<LectureServices>()
+                                        DI.lectureServices
                                             .getLectures
                                             .length,
                                     onChanged: (double value) {},
@@ -184,7 +180,7 @@ class _TopSectionState extends State<TopSection> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(

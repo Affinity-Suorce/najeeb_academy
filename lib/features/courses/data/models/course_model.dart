@@ -117,6 +117,7 @@ class Subject {
   //     };
 }
 
+// ignore: constant_identifier_names
 enum Teacher { TEACHER_CHIKE }
 
 final teacherValues = EnumValues({"Teacher Chike": Teacher.TEACHER_CHIKE});

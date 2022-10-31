@@ -31,12 +31,10 @@ class _VideoSectionState extends State<VideoSection> {
             child: Container(
                 width: double.infinity,
                 color: Colors.black,
-                child: Container(
-                  child: Directionality(
-                      textDirection: TextDirection.ltr,
-                      child: AspectRatio(
-                          aspectRatio: 16 / 9, child: widget.player)),
-                )),
+                child: Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: AspectRatio(
+                        aspectRatio: 16 / 9, child: widget.player))),
           ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
@@ -60,7 +58,6 @@ class _VideoSectionState extends State<VideoSection> {
                 ),
                 InkWell(
                   onTap: () {
-                    
                     // showDialog(
                     //     context: context,
                     //     builder: (context) => QualitySelectorWidget(

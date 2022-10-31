@@ -19,7 +19,7 @@ class ScheduleService extends ChangeNotifier {
     try {
       final response = await _api.get(eventsUrl);
       final data = response.data;
-      print('data is : ${data['data']}');
+      debugPrint('data is : ${data['data']}');
       if (response.statusCode == 200) {
         events = eventModelFromJson(data['data']);
         isLoaded = true;

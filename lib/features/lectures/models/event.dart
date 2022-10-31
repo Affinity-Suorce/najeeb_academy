@@ -2,9 +2,8 @@
 //
 //     final eventModel = eventModelFromJson(jsonString);
 
-import 'dart:convert';
 
-import 'package:intl/intl.dart';
+
 
 EventModel eventModelFromJson(Map<String, dynamic> str) =>
     EventModel.fromJson(str);
@@ -62,7 +61,4 @@ class EventModel {
     return tempList;
   }
 
-  void getCurrentDayInfo() {
-    print(DateFormat('EEEE').format(DateTime.now()).toString());
-  }
 }

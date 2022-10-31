@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/app/extensions/snack_bar_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
@@ -17,9 +15,11 @@ class LectureSection extends StatefulWidget {
     Key? key,
     required this.lectures,
     required this.subjects,
+    required this.isAllLectures,
   }) : super(key: key);
   final List<Lecture> lectures;
   final List<Subject> subjects;
+  final bool isAllLectures;
   @override
   State<LectureSection> createState() => _LectureSectionState();
 }
@@ -31,7 +31,9 @@ class _LectureSectionState extends State<LectureSection> {
   @override
   void initState() {
     super.initState();
-    tempListOfLectures = widget.lectures;
+    widget.isAllLectures
+        ? tempListOfLectures = widget.lectures
+        : tempListOfLectures = getLecturesByDate(DateTime.now());
     day = DateTimeHelper.today;
   }
 
@@ -41,101 +43,113 @@ class _LectureSectionState extends State<LectureSection> {
       padding: const EdgeInsets.symmetric(horizontal: 26.0),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "الدروس ${day.agoDate}",
-                    style: const TextStyle(
-                      height: 1,
-                      color: Colors.black,
-                      fontSize: 22,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        day.formattedDate,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                      const SizedBox(width: 6),
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            tempListOfLectures = widget.lectures;
-                          });
-                        },
-                        child: const Text(
-                          "اظهر كافة الدروس",
-                          style: TextStyle(
+          widget.isAllLectures
+              ? const SizedBox.shrink()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "الدروس ${day.agoDate}",
+                          style: const TextStyle(
                             height: 1,
-                            color: AppColors.indigo,
+                            color: Colors.black,
+                            fontSize: 22,
                           ),
                         ),
+                        Row(
+                          children: [
+                            Text(
+                              day.formattedDate,
+                              style: Theme.of(context).textTheme.caption,
+                            ),
+                            const SizedBox(width: 6),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  tempListOfLectures = widget.lectures;
+                                });
+                              },
+                              child: const Text(
+                                "اظهر كافة الدروس",
+                                style: TextStyle(
+                                  height: 1,
+                                  color: AppColors.indigo,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DatePickerWidget(
+                                        availableDates: getAvailableDates())))
+                            .then((date) {
+                          if (date != null) {
+                            setState(() {
+                              day = date;
+                              tempListOfLectures = getLecturesByDate(date);
+                            });
+                          }
+                        });
+                      },
+                      child: const Text(
+                        "اختر يوماً آخر",
+                        style: TextStyle(
+                          height: 1,
+                          color: AppColors.indigo,
+                          fontSize: 18,
+                        ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () async {
-                  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DatePickerWidget(
-                                  availableDates: getAvailableDates())))
-                      .then((date) {
-                    if (date != null) {
-                      setState(() {
-                        day = date;
-                        tempListOfLectures = getLecturesByDate(date);
-                      });
-                    }
-                  });
-                },
-                child: const Text(
-                  "اختر يوماً آخر",
-                  style: TextStyle(
-                    height: 1,
-                    color: AppColors.indigo,
-                    fontSize: 18,
-                  ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: 8.h),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                Subject lectureSubject = getLectureSubject(
-                    widget.subjects, tempListOfLectures[index].subjectId ?? 1);
-                return LectureWidget(
-                  lecture: tempListOfLectures[index],
-                  lectureIndex: lectureSubject.lectures!.indexWhere(
-                      (lecture) => lecture.id == tempListOfLectures[index].id),
-                  lectureSubject: lectureSubject,
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 22,
-                );
-              },
-              itemCount: tempListOfLectures.length)
+          tempListOfLectures.isEmpty
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: const Center(
+                      child: Text(
+                    'لا يوجد دروس لليوم\nإختر يوماً اَخر',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black, fontSize: 32),
+                  )),
+                )
+              : ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: EdgeInsets.only(top: 8.h),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    Subject lectureSubject = getLectureSubject(widget.subjects,
+                        tempListOfLectures[index].subjectId ?? 1);
+                    return LectureWidget(
+                      lecture: tempListOfLectures[index],
+                      lectureIndex: lectureSubject.lectures!.indexWhere(
+                          (lecture) =>
+                              lecture.id == tempListOfLectures[index].id),
+                      lectureSubject: lectureSubject,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 22,
+                    );
+                  },
+                  itemCount: tempListOfLectures.length)
         ],
       ),
     );
   }
 
   List<DateTime> getAvailableDates() {
-    ;
     List<DateTime> listOfDates = [];
     for (var lecture in widget.lectures) {
       listOfDates.add(DateTime.parse(lecture.createdAt!.formattedDate2));

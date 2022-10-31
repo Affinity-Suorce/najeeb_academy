@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
 
 class SliderSection extends StatelessWidget {
   const SliderSection({Key? key}) : super(key: key);
@@ -75,7 +76,12 @@ class SliderSection extends StatelessWidget {
                           } else {
                             index == 1
                                 ? AutoTabsRouter.of(context).setActiveIndex(1)
-                                : AutoTabsRouter.of(context).setActiveIndex(2);
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LecturesPage(
+                                                isAllLectures: true)));
                           }
                         },
                         style: ElevatedButton.styleFrom(

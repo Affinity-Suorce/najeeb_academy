@@ -14,7 +14,7 @@ class GotVideoState extends VideoState {
   GotVideoState(this.lecture);
 }
 class ErrorState extends VideoState {
-  final message;
+  final String message;
 
   ErrorState(this.message);
 }

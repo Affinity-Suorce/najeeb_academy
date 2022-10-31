@@ -3,7 +3,7 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DatePickerWidget extends StatefulWidget {
-  const DatePickerWidget({required this.availableDates});
+  const DatePickerWidget({Key? key, required this.availableDates}):super(key: key);
   final List<DateTime> availableDates;
 
   @override
@@ -13,13 +13,13 @@ class DatePickerWidget extends StatefulWidget {
 class _DatePickerWidgetState extends State<DatePickerWidget> {
   @override
   Widget build(BuildContext context) {
-    DateRangePickerController _dateRangePickerController =
+    DateRangePickerController dateRangePickerController =
         DateRangePickerController();
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.only(top: 32),
+        padding: const EdgeInsets.only(top: 32, bottom: 36),
         child: SfDateRangePicker(
           backgroundColor: Colors.white,
           cancelText: "رجوع",
@@ -27,7 +27,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           selectionMode: DateRangePickerSelectionMode.single,
           selectionColor: AppColors.indigo,
           view: DateRangePickerView.month,
-          controller: _dateRangePickerController,
+          controller: dateRangePickerController,
           showActionButtons: true,
           showNavigationArrow: true,
           selectableDayPredicate: (date) {
@@ -39,8 +39,8 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           },
           monthViewSettings: const DateRangePickerMonthViewSettings(),
           monthCellStyle: DateRangePickerMonthCellStyle(
-              blackoutDatesDecoration:
-                  BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+              blackoutDatesDecoration: const BoxDecoration(
+                  color: Colors.red, shape: BoxShape.circle),
               todayCellDecoration: BoxDecoration(
                   border: Border.all(
                       color: AppColors.indigo, style: BorderStyle.solid),
@@ -55,5 +55,4 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       ),
     );
   }
-  
 }

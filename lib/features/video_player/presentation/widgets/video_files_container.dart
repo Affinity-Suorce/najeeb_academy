@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:najeeb_academy/core/helpers/download_file_funcs.dart';
 
 class VideoFilesContainer extends StatelessWidget {
-  VideoFilesContainer(
+  const VideoFilesContainer(
       {Key? key, required this.lectureFiles, required this.lectureName})
       : super(key: key);
-  List<String> lectureFiles;
-  String lectureName;
+  final List<String> lectureFiles;
+  final String lectureName;
   @override
   Widget build(BuildContext context) {
     return Container(

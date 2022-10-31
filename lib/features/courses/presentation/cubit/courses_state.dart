@@ -19,7 +19,7 @@ class GotAllCoursesState extends CoursesState {
   GotAllCoursesState(this.courses);
 }
 class ErrorState extends CoursesState {
-  final message;
+  final String message;
 
   ErrorState(this.message);
 }

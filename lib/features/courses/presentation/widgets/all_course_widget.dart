@@ -37,10 +37,8 @@ class CourseExpandableBodyWidget extends StatefulWidget {
 class _CourseExpandableBodyWidgetState
     extends State<CourseExpandableBodyWidget> {
   List<bool>? checkBoxesList;
-  // List checkBoxIdsList = [];
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     checkBoxesList =
         List.generate(widget.course.subjects!.length, (index) => false);

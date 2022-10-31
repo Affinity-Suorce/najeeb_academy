@@ -18,15 +18,15 @@ class BillWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       // !isSubscription
                       //     ? const Text('القسط:', style: textStyle1)
                       //     : const SizedBox.shrink(),
-                      const Text('رقم الفاتورة:', style: textStyle1),
-                      const Text('الدورة:', style: textStyle1),
-                      const Text('المبلغ المدفوع:', style: textStyle1),
-                      const Text('المبلغ المتبقي:', style: textStyle1),
-                      const Text('تاريخ:', style: textStyle1),
+                      Text('رقم الفاتورة:', style: textStyle1),
+                      Text('الدورة:', style: textStyle1),
+                      Text('المبلغ المدفوع:', style: textStyle1),
+                      Text('المبلغ المتبقي:', style: textStyle1),
+                      Text('تاريخ:', style: textStyle1),
                       // const Text('إلى تاريخ', style: textStyle1),
                     ],
                   ),

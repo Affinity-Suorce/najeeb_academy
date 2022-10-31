@@ -9,6 +9,7 @@ import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/logo.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/auth_app_bar.dart';
 import 'package:najeeb_academy/features/auth/ui/widgets/password_form_field.dart';
+import 'package:najeeb_academy/features/home/presentation/privacy_poilcy.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
@@ -70,9 +71,19 @@ class LoginPage extends StatelessWidget {
                     ),
                     16.verticalSpace,
                     ElevatedButton(
-                      onPressed: () => service.login(
-                          context: context,
-                          onFailed: (e) => onFailed(context, e)),
+                      onPressed: () async {
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const PrivacyPolicy())).then((value) {
+                          if (value) {
+                            return service.login(
+                                context: context,
+                                onFailed: (e) => onFailed(context, e));
+                          }
+                        });
+                      },
                       child: const Text('تسجيل الدخول'),
                     ),
                     8.verticalSpace,
@@ -91,7 +102,7 @@ class LoginPage extends StatelessWidget {
                       child: LinkText(
                         "للتواصل :0999999999",
                         onTap: () async {
-                          await _makePhoneCall();
+                          // await _makePhoneCall();
                         },
                       ),
                     ),
@@ -116,13 +127,13 @@ class LoginPage extends StatelessWidget {
   //   bool? res = await FlutterPhoneDirectCaller.callNumber(number);
   // }
 
-  Future<void> _makePhoneCall() async {
-    var uri = Uri(
-      scheme: 'tel',
-      path: '0999999999',
-    );
+  // Future<void> _makePhoneCall() async {
+  //   var uri = Uri(
+  //     scheme: 'tel',
+  //     path: '0999999999',
+    // );
     // if (!await launchUrl(uri)) {
     //   throw 'Could not launch $uri';
     // }
-  }
+  // }
 }

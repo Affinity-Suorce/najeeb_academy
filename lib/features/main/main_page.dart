@@ -6,7 +6,6 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/hom_tab_on_back_pressed.dart';
-import 'package:provider/provider.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -14,9 +13,7 @@ class MainPage extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DI.lectureServiceFactory(),
-      builder: (context, child) => AutoTabsRouter(
+    return AutoTabsRouter(
         inheritNavigatorObservers: true,
         routes: DI.userInfo.isUnAuthenticated
             ? [
@@ -89,8 +86,7 @@ class MainPage extends StatelessWidget {
           );
         },
         lazyLoad: true,
-      ),
-    );
+      );
     // return PersistentTabView(
     //   context,
     //   controller: _controller,
