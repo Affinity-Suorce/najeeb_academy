@@ -11,6 +11,7 @@ import 'package:najeeb_academy/features/courses/data/courses_data_source.dart';
 import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/services/course_service.dart';
+import 'package:najeeb_academy/features/courses/services/create_classes_order_service.dart';
 import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
@@ -37,6 +38,7 @@ abstract class DI {
     di.registerFactory<ScheduleService>(() => ScheduleService(api));
     // di.registerFactory<LectureServices>(() => LectureServices());
     di.registerFactory<PaymentsService>(() => PaymentsService(api));
+    di.registerFactory<CreateClassedOrderService>(() => CreateClassedOrderService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
     di.registerLazySingleton<CoursesServices>(
@@ -84,4 +86,5 @@ abstract class DI {
   static ScheduleService scheduleServiceFactory() => di.get<ScheduleService>();
   // static LectureServices lectureServiceFactory() => di.get<LectureServices>();
   static PaymentsService paymentsServiceFactory() => di.get<PaymentsService>();
+  static CreateClassedOrderService createClassedOrderServiceFactory() => di.get<CreateClassedOrderService>();
 }

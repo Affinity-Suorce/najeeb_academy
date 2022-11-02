@@ -15,6 +15,7 @@ import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_
 import 'package:expandable/expandable.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/check_dialog.dart';
 import 'package:najeeb_academy/features/payment/presentation/widgets/payment_dialog.dart';
+import 'package:provider/provider.dart';
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
@@ -144,8 +145,16 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                             subjectsIds: DI.coursesServices
                                                 .getSelectedSubjects));
                                       } else {
+                                        // ignore: use_build_context_synchronously
                                         context.showDialog(
-                                            const PaymentDialog(),
+                                            PaymentDialog(
+                                                myClassesIds: DI.coursesServices
+                                                    .getSelectedCourses,
+                                                subjectsIds: DI.coursesServices
+                                                    .getSelectedSubjects,
+                                                paidAmount: DI.coursesServices
+                                                    .getfullPrice
+                                                    .toString()),
                                             barrierDismissible: false);
                                       }
                                     }

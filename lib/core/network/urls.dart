@@ -8,6 +8,7 @@ const myNotificationsAllUrl = "${baseUrl}my_notifications_all";
 const myNotificationsUnseenUrl = "${baseUrl}my_notifications_unseen";
 const myNotificationsUrl = "${baseUrl}my_notifications";
 const myPaymentsUrl = "${baseUrl}my_payments";
+const myClassesOrderCreateUrl = "${baseUrl}student/ClassesOrderCreate";
 const eventsUrl = "${baseUrl}time_table";
 String videoUrl(String id) {
   return "${baseUrl}lecture/$id";
