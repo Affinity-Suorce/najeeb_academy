@@ -90,13 +90,6 @@ class _PaymentDialogState extends State<PaymentDialog> {
                     child: context.watch<CreateClassedOrderService>().isLoaded
                         ? CustomElevatedButton(
                             onPressed: () {
-                              final tempDataMap = {
-                                "subjectIds": widget.subjectsIds,
-                                "classesIds": widget.myClassesIds,
-                                "paidAmount": widget.paidAmount,
-                                "billNumber": _controller?.text
-                              };
-                              print(tempDataMap);
                               context
                                   .read<CreateClassedOrderService>()
                                   .addCourse(
@@ -104,11 +97,16 @@ class _PaymentDialogState extends State<PaymentDialog> {
                                       classesIds: widget.myClassesIds,
                                       paidAmount: widget.paidAmount,
                                       billNumber: _controller!.text)
-                                  .then((value) => value
-                                      ? context.showSuccessSnackBar(
-                                          'تم إنشاء الطلب ينجاح')
-                                      : context.showFailSnackBar(
-                                          'هناك مشكلة أعد المحاولة لاحقاً'));
+                                  .then((value) {
+                                if (value) {
+                                  Navigator.pop(context);
+                                  context.showSuccessSnackBar(
+                                      'تم إنشاء الطلب ينجاح');
+                                } else {
+                                  context.showFailSnackBar(
+                                      'هناك مشكلة أعد المحاولة لاحقاً');
+                                }
+                              });
                             },
                             buttonColor: AppColors.indigo,
                             title: "أدخل الفاتورة",

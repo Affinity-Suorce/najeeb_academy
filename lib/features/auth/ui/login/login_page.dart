@@ -100,7 +100,7 @@ class LoginPage extends StatelessWidget {
                     8.verticalSpace,
                     Align(
                       child: LinkText(
-                        "للتواصل :0999999999",
+                        "للتواصل :0954150060",
                         onTap: () async {
                           // await _makePhoneCall();
                         },

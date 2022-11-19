@@ -79,9 +79,9 @@ class DataWidget extends StatelessWidget {
       case 5:
         return [...getSubjectList(events.thursday), 'الخميس'];
       case 6:
-        return ['السبت', ...getSubjectList(events.saturday)];
+        return [...getSubjectList(events.friday), 'الجمعة'];
       case 7:
-        return ['الجمعة', ...getSubjectList(events.friday)];
+        return [...getSubjectList(events.saturday), 'السبت'];
     }
     return [];
   }

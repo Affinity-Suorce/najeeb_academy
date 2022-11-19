@@ -1,4 +1,4 @@
-const baseUrl = "http://hallogen.insoftonline.de/api/";
+const baseUrl = "http://najeeb-edu.sy/api/";
 const loginUrl = "${baseUrl}login";
 const userInfoUrl = "${baseUrl}user";
 const registerUrl = "${baseUrl}register";

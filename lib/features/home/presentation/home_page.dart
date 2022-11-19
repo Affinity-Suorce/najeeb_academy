@@ -172,7 +172,10 @@ class _FrontLayer extends StatelessWidget {
                 ? (context.watch<ScheduleService>().isLoaded != null &&
                         context.watch<ScheduleService>().isLoaded!)
                     ? const ProgramSection()
-                    : const ProgramSectionNotLoadedWidget()
+                    : const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                // : const ProgramSectionNotLoadedWidget()
                 : const SizedBox.shrink(),
             DI.userInfo.isAuthenticated
                 ? const SizedBox(
@@ -181,7 +184,7 @@ class _FrontLayer extends StatelessWidget {
                 : const SizedBox.shrink(),
             const HomePageBottomSection(),
             const SizedBox(
-              height: 24,
+              height: 32,
             ),
           ],
         ),

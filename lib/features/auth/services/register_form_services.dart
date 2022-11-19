@@ -48,14 +48,14 @@ class RegisterFormService extends ChangeNotifier {
         final response = await _api.post(
           registerUrl,
           data: {
-            'name': firstName + ' ' +  lastName,
+            'name': firstName + ' ' + lastName,
             'first_name': firstName,
             'last_name': lastName,
             'father_name': fatherName,
             'mobile': mobile,
-            'landline': landline,
+            'landline': landline ?? '6666666',
             // 'governorate': governorate.id,
-            'parent_phone': parentMobile,
+            'parent_phone': parentMobile ?? '0999999999',
             'my_class_id': myClassesIds,
             'bill_number': billNumber,
             'is_installment': 0,

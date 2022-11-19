@@ -52,6 +52,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
   @override
   void initState() {
     super.initState();
+    DI.coursesServices.clearFullPrice();
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
     coursesCubit.getMyCourses(true);
     expandableController = ExpandableController(initialExpanded: false);
@@ -107,7 +108,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                             borderRadius: BorderRadius.circular(15),
                             child: ExpandablePanel(
                               controller:
-                                  ExpandableController(initialExpanded: true),
+                                  ExpandableController(initialExpanded: false),
                               header: CourseExpandableHeaderWidget(
                                 course: courses[i],
                               ),
@@ -128,6 +129,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                             Expanded(
                               child: CustomElevatedButton(
                                 onPressed: () async {
+                                  debugPrint('entering ashtarek function');
                                   if (validateSelection()) {
                                     DI.coursesServices
                                         .setFullPriceOfSelectedCourses();

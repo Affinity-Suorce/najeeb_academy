@@ -67,20 +67,20 @@ class _LectureSectionState extends State<LectureSection> {
                               style: Theme.of(context).textTheme.caption,
                             ),
                             const SizedBox(width: 6),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  tempListOfLectures = widget.lectures;
-                                });
-                              },
-                              child: const Text(
-                                "اظهر كافة الدروس",
-                                style: TextStyle(
-                                  height: 1,
-                                  color: AppColors.indigo,
-                                ),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   onTap: () {
+                            //     setState(() {
+                            //       tempListOfLectures = widget.lectures;
+                            //     });
+                            //   },
+                            //   child: const Text(
+                            //     "اظهر كافة الدروس",
+                            //     style: TextStyle(
+                            //       height: 1,
+                            //       color: AppColors.indigo,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ],

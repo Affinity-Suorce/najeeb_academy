@@ -10,6 +10,7 @@ class PaymentsService extends ChangeNotifier {
   PaymentsService(this._api);
 
   Future<bool> load() async {
+    print('entered load payments function');
     try {
       final response = await _api.get(myPaymentsUrl);
 

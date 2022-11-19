@@ -40,7 +40,8 @@ class _ProgramSectionState extends State<ProgramSection> {
           );
         },
         child: Container(
-          padding: const EdgeInsets.only(right: 8, bottom: 36, top: 12),
+          // padding: const EdgeInsets.only(right: 8, bottom: 36, top: 12),
+          padding: const EdgeInsets.all(18),
           width: MediaQuery.of(context).size.width * 0.9,
           decoration: const BoxDecoration(
               color: Colors.white,
@@ -53,31 +54,31 @@ class _ProgramSectionState extends State<ProgramSection> {
                     offset: Offset(6, 6))
               ]),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Text(
                 "برنامج الإسبوع",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 22,
                     fontWeight: FontWeight.w700),
               ),
-              const SizedBox(
-                height: 2,
-              ),
-              ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return programSectionWidget(events!.getAllInfo()[index]);
-                  },
-                  separatorBuilder: (context, index) {
-                    return Container(
-                      height: 2,
-                    );
-                  },
-                  itemCount: events!.getAllInfo().length)
+              // const SizedBox(
+              //   height: 2,
+              // ),
+              // ListView.separated(
+              //     physics: const NeverScrollableScrollPhysics(),
+              //     shrinkWrap: true,
+              //     scrollDirection: Axis.vertical,
+              //     itemBuilder: (context, index) {
+              //       return programSectionWidget(events!.getAllInfo()[index]);
+              //     },
+              //     separatorBuilder: (context, index) {
+              //       return Container(
+              //         height: 2,
+              //       );
+              //     },
+              //     itemCount: events!.getAllInfo().length)
             ],
           ),
         ),
@@ -116,7 +117,7 @@ class _ProgramSectionState extends State<ProgramSection> {
           ),
           const Spacer(),
           Text(
-            event.split('/')[0] ,
+            event.split('/')[0],
             style: const TextStyle(
                 color: Colors.black, fontSize: 18, fontWeight: FontWeight.w700),
           ),
@@ -124,6 +125,4 @@ class _ProgramSectionState extends State<ProgramSection> {
       ),
     );
   }
-
-
 }

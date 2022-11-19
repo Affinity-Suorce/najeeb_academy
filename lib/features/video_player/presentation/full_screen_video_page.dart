@@ -84,20 +84,20 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                     const SizedBox(
                       width: 14,
                     ),
-                    InkWell(
-                      onTap: () {
+                    // InkWell(
+                      // onTap: () {
                         // showDialog(
                         //     context: context,
                         //     builder: (context) => QualitySelectorWidget(
                         //           changeVideo: widget.changeVideo,
                         //         ));
-                      },
-                      child: const Icon(
-                        CupertinoIcons.settings_solid,
-                        color: Colors.white,
-                        size: 26,
-                      ),
-                    ),
+                      // },
+                    //   child: const Icon(
+                    //     CupertinoIcons.settings_solid,
+                    //     color: Colors.white,
+                    //     size: 26,
+                    //   ),
+                    // ),
                     const Spacer(),
                     Row(
                       children: [

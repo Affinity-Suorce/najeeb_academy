@@ -140,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     const SizedBox(height: 12),
                     Card(
                       child: ListTile(
-                        leading: const Icon(Icons.logout),
+                        leading: const Icon(Icons.privacy_tip_outlined),
                         title: const Text('سياسة الخصوصية'),
                         onTap: () {
                           Navigator.push(
