@@ -7,7 +7,8 @@ import 'dart:convert';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 List<CourseModel> courseModelFromJson(String str) {
-  return List<CourseModel>.from(json.decode(str)["data"]["my_classes"]
+  return List<CourseModel>.from(json
+      .decode(str)["data"]["my_classes"]
       .map((x) => CourseModel.fromJson(x)));
 }
 
@@ -45,8 +46,10 @@ class CourseModel {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         classType: json["class_type"],
-        subjects: List<Subject>.from(
-            json["subjects"].map((x) => Subject.fromJson(x))),
+        subjects: json["subjects"] == null
+            ? []
+            : List<Subject>.from(
+                json["subjects"].map((x) => Subject.fromJson(x))),
       );
 
   // Map<String, dynamic> toJson() => {

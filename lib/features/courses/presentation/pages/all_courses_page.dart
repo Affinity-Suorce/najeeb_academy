@@ -79,7 +79,9 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                 List<CourseModel> courses = state.courses;
                 List<Subject> allSubjects = [];
                 for (var course in courses) {
-                  allSubjects.addAll(course.subjects!);
+                  if(course.subjects!=null) {
+                    allSubjects.addAll(course.subjects!);
+                  }
                   DI.coursesServices.setSubjects(allSubjects);
                 }
                 return SingleChildScrollView(
