@@ -320,7 +320,7 @@ class LectureWidget extends StatelessWidget {
                   image: DecorationImage(
                       image: AssetImage(
                           getSubjectImage(lectureSubject.name ?? '')),
-                      fit: BoxFit.cover)),
+                      fit: BoxFit.contain)),
             ),
           ],
         ),

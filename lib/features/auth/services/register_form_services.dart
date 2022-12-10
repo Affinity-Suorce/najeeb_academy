@@ -45,6 +45,21 @@ class RegisterFormService extends ChangeNotifier {
       // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
       try {
+        var d = {
+          'name': firstName + ' ' + lastName,
+          'first_name': firstName,
+          'last_name': lastName,
+          'father_name': fatherName,
+          'mobile': mobile,
+          'landline': landline ?? '6666666',
+          'parent_phone': parentMobile ?? '0999999999',
+          'my_class_id': myClassesIds,
+          'bill_number': billNumber,
+          'is_installment': 0,
+          'subject_id': subjectsIds,
+          'amount_paid': 0,
+        };
+        print(d);
         final response = await _api.post(
           registerUrl,
           data: {
@@ -54,7 +69,6 @@ class RegisterFormService extends ChangeNotifier {
             'father_name': fatherName,
             'mobile': mobile,
             'landline': landline ?? '6666666',
-            // 'governorate': governorate.id,
             'parent_phone': parentMobile ?? '0999999999',
             'my_class_id': myClassesIds,
             'bill_number': billNumber,

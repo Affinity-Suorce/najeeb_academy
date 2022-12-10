@@ -5,7 +5,7 @@ class Payment {
   final int id;
   final int studentId;
   final int paymentId;
-  final int? refNo;
+  // final String? refNo;
   final String amtPaid;
   final String balance;
   final bool paid;
@@ -20,7 +20,7 @@ class Payment {
     required this.id,
     required this.studentId,
     required this.paymentId,
-    this.refNo,
+    // this.refNo,
     required this.amtPaid,
     required this.balance,
     required this.paid,
@@ -35,7 +35,7 @@ class Payment {
   Payment copyWith({
     int? id,
     int? studentId,
-    int? refNo,
+    String? refNo,
     String? amtPaid,
     String? balance,
     bool? paid,
@@ -50,7 +50,7 @@ class Payment {
       id: id ?? this.id,
       studentId: studentId ?? this.studentId,
       paymentId: paymentId,
-      refNo: refNo ?? this.refNo,
+      // refNo: refNo ?? this.refNo,
       amtPaid: amtPaid ?? this.amtPaid,
       balance: balance ?? this.balance,
       paid: paid ?? this.paid,
@@ -68,7 +68,7 @@ class Payment {
       'id': id,
       'student_id': studentId,
       'payment_id': paymentId,
-      'ref_no': refNo,
+      // 'ref_no': refNo,
       'amt_paid': amtPaid,
       'balance': balance,
       'paid': paid ? 1 : 0,
@@ -82,11 +82,12 @@ class Payment {
   }
 
   factory Payment.fromMap(Map<String, dynamic> map) {
+    print(map);
     return Payment(
       id: map['id'] as int,
       paymentId: map['payment_id'] as int,
       studentId: map['student_id'] as int,
-      refNo: map['ref_no'] != null ? map['ref_no'] as int : null,
+      // refNo: map['ref_no'] != null ? map['ref_no'] as String : null,
       amtPaid: map['amt_paid'] as String,
       balance: map['balance'] as String,
       paid: map['paid'] == 1,
@@ -106,7 +107,7 @@ class Payment {
 
   @override
   String toString() {
-    return 'Payment(id: $id, studentId: $studentId, refNo: $refNo, amtPaid: $amtPaid, balance: $balance, paid: $paid, orderConfirm: $orderConfirm, studentMyClassId: $studentMyClassId, year: $year, monthNumber: $monthNumber, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Payment(id: $id, studentId: $studentId, amtPaid: $amtPaid, balance: $balance, paid: $paid, orderConfirm: $orderConfirm, studentMyClassId: $studentMyClassId, year: $year, monthNumber: $monthNumber, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -115,7 +116,7 @@ class Payment {
 
     return other.id == id &&
         other.studentId == studentId &&
-        other.refNo == refNo &&
+        // other.refNo == refNo &&
         other.amtPaid == amtPaid &&
         other.balance == balance &&
         other.paid == paid &&
@@ -131,7 +132,7 @@ class Payment {
   int get hashCode {
     return id.hashCode ^
         studentId.hashCode ^
-        refNo.hashCode ^
+        // refNo.hashCode ^
         amtPaid.hashCode ^
         balance.hashCode ^
         paid.hashCode ^

@@ -167,7 +167,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                 },
                                 buttonColor: AppColors.indigo,
                                 verticalPadding: 8,
-                                title: 'إشترك',
+                                title: 'اشترك',
                               ),
                             ),
                           ],

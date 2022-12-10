@@ -1,6 +1,6 @@
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
-class LectureServices{
+class LectureServices {
   List<int> _watchedLecturesIds = [];
   List<Lecture> _lecturesList = [];
   void setLectures(List<Lecture> lectures) {
@@ -8,10 +8,11 @@ class LectureServices{
   }
 
   void addWatchedLectureId(int id) {
-    List<int> temp = [];
+    List<int> temp = _watchedLecturesIds;
     temp.add(id);
-    temp.toSet().toList();
-    _watchedLecturesIds = temp;
+
+    _watchedLecturesIds = temp.toSet().toList();
+    print('watchedLectures:${_watchedLecturesIds}');
   }
 
   List<Lecture> get getLectures => _lecturesList;

@@ -49,6 +49,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   }
 
   void _initController(String link) {
+    bool added = false;
     controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(link)!,
       flags: const YoutubePlayerFlags(
@@ -56,11 +57,17 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         autoPlay: true,
       ),
     )..addListener(() {
-        debugPrint('${controller.value.position}  ${controller.metadata.duration}');
-        if (controller.value.position == controller.metadata.duration) {
+        debugPrint(
+            '${controller.value.position.inSeconds} ${controller.metadata.duration.inSeconds - 1}');
+
+        if (controller.value.position.inSeconds
+                    .compareTo(controller.metadata.duration.inSeconds - 1) ==
+                0 &&
+            controller.value.hasPlayed &&
+            !added) {
           debugPrint('added watched video');
-          DI.lectureServices
-              .addWatchedLectureId(widget.lecture.id!);
+          DI.lectureServices.addWatchedLectureId(widget.lecture.id!);
+          added = true;
         }
       });
   }

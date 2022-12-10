@@ -7,8 +7,14 @@ import 'dart:convert';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 List<CourseModel> courseModelFromJson(String str) {
-  return List<CourseModel>.from(json.decode(str)["data"]["my_classes"]
+  List<CourseModel> list = List<CourseModel>.from(json
+      .decode(str)["data"]["my_classes"]
       .map((x) => CourseModel.fromJson(x)));
+  for (CourseModel course in list) {
+    course.subjects = List<Subject>.from(course.subjects!
+        .where((subject) => (subject.forMe == null || subject.forMe == true)));
+  }
+  return list;
 }
 
 // String courseModelToJson(List<CourseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
@@ -45,8 +51,12 @@ class CourseModel {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         classType: json["class_type"],
-        subjects: List<Subject>.from(
-            json["subjects"].map((x) => Subject.fromJson(x))),
+        subjects: List<Subject>.from(json["subjects"].map((x) =>
+                // if (x["for_me"] == null || x["for_me"] == true) {
+                // return
+                Subject.fromJson(x)
+            // }
+            )),
       );
 
   // Map<String, dynamic> toJson() => {
@@ -67,6 +77,7 @@ class Subject {
     this.id,
     this.name,
     this.slug,
+    this.forMe,
     this.cost,
     this.myClassId,
     this.teacherId,
@@ -77,6 +88,7 @@ class Subject {
   });
 
   dynamic id;
+  bool? forMe;
   String? name;
   String? slug;
   String? cost;
@@ -97,6 +109,7 @@ class Subject {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         teacher: teacherValues.map![json["teacher"]],
+        forMe: json["for_me"],
         lectures: json["lectures"] != null
             ? List<Lecture>.from(
                 json["lectures"].map((x) => Lecture.fromJson(x)))

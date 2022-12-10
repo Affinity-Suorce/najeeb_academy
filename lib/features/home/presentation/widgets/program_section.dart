@@ -57,7 +57,7 @@ class _ProgramSectionState extends State<ProgramSection> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               Text(
-                "برنامج الإسبوع",
+                "برنامج الاسبوع",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 22,

@@ -59,7 +59,7 @@ class SubjectWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(getSubjectImage(subject.name!)),
-                        fit: BoxFit.cover)),
+                        fit: BoxFit.contain)),
               ),
             ],
           ),

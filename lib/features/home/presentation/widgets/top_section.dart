@@ -35,7 +35,7 @@ class _TopSectionState extends State<TopSection> {
         Container(
           alignment: Alignment.centerRight,
           child: const Text(
-            "إبدأ التعلم معنا الآن",
+            "ابدأ التعلم معنا الآن",
             style: TextStyle(
               height: 1.4,
               color: Colors.white,
@@ -145,12 +145,11 @@ class _TopSectionState extends State<TopSection> {
                                   child: Slider(
                                     min: 0,
                                     max: 10,
-                                    value: DI.lectureServices
-                                            .getWatchedLecturesIds
-                                            .length /
-                                        DI.lectureServices
-                                            .getLectures
-                                            .length,
+                                    value: (DI.lectureServices
+                                                .getWatchedLecturesIds.length /
+                                            DI.lectureServices.getLectures
+                                                .length) *
+                                        10,
                                     onChanged: (double value) {},
                                   )),
                             ),
@@ -158,7 +157,7 @@ class _TopSectionState extends State<TopSection> {
                         ],
                       )
                 : alternativeWidget(
-                    "إشترك في الدروس وسجل دخولك الان", true, context)),
+                    "اشترك في الدروس وسجل دخولك الان", true, context)),
       ],
     );
   }

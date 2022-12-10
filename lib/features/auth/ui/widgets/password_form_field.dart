@@ -8,6 +8,7 @@ class PasswordFormField extends StatefulWidget {
     this.decoration,
     this.textInputAction = TextInputAction.next,
     this.autofocus = false,
+    this.isLogin = false,
     this.onFieldSubmitted,
     this.onChanged,
     this.controller,
@@ -15,6 +16,7 @@ class PasswordFormField extends StatefulWidget {
     this.name = 'password',
   });
   final String name;
+  final bool isLogin;
   final InputDecoration? decoration;
   final TextInputAction textInputAction;
   final bool autofocus;
@@ -50,8 +52,10 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         if (input == null || input.trim().isEmpty) {
           return 'هذا الحقل مطلوب';
         }
-        if (input.trim().length < 6) {
-          return 'يجب أن تكون كلمة المرور أطول من 6 محارف';
+        if (!widget.isLogin) {
+          if (input.trim().length < 6) {
+            return 'يجب أن تكون كلمة المرور أطول من 6 محارف';
+          }
         }
         final validator = widget.validator;
         if (validator != null) {

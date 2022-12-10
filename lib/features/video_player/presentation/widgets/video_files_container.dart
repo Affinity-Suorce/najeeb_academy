@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:najeeb_academy/core/helpers/download_file_funcs.dart';
+import 'package:najeeb_academy/features/video_player/presentation/widgets/pdf_page.dart';
 
 class VideoFilesContainer extends StatelessWidget {
   const VideoFilesContainer(
@@ -49,7 +50,18 @@ class VideoFilesContainer extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () async {
-                        downloadFile(lectureFiles[index], '-');
+                        var permission = await requestPermission();
+                        print('lectureFiles:$lectureFiles index:$index');
+                        if (permission) {
+                          getFileFromUrl(lectureFiles[index],
+                                  name: index.toString())
+                              .then((file) => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => PdfPage(
+                                            pdfPath: file.path,
+                                          ))));
+                        }
                       },
                       child: fileColumn(index + 1),
                     );

@@ -10,17 +10,14 @@ class PaymentsService extends ChangeNotifier {
   PaymentsService(this._api);
 
   Future<bool> load() async {
-    print('entered load payments function');
     try {
       final response = await _api.get(myPaymentsUrl);
-
       final data = response.data;
       if (response.statusCode == 200 &&
           data is Map<String, dynamic> &&
           data.containsKey('data')) {
-        debugPrint(data['data']);
+        debugPrint(data['data'].toString());
         final List paymentsJson = data['data'];
-
         payments = List<Payment>.from(paymentsJson.reversed.map((paymentJson) {
           return Payment.fromMap(paymentJson);
         }));

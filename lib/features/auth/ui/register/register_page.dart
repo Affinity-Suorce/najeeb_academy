@@ -72,9 +72,9 @@ class RegisterPage extends StatelessWidget {
                                     char > 1610)) {
                                   return 'الرجاء إدخال الاسم باللغة العربية';
                                 }
-                                // if (input.trim().length < 2) {
-                                //   return 'يجب إدخال حرفين على الأقل';
-                                // }
+                                if (input.trim().length < 2) {
+                                  return 'يجب إدخال 2 أحرف على الأقل';
+                                }
                                 return null;
                               },
                               textInputAction: TextInputAction.next,
@@ -98,9 +98,9 @@ class RegisterPage extends StatelessWidget {
                                     char > 1610)) {
                                   return 'الرجاء إدخال الاسم باللغة العربية';
                                 }
-                                // if (input.trim().length < 2) {
-                                //   return 'يجب إدخال حرفين على الأقل';
-                                // }
+                                if (input.trim().length < 2) {
+                                  return 'يجب إدخال 2 أحرف على الأقل';
+                                }
                                 return null;
                               },
                               textInputAction: TextInputAction.next,
@@ -197,6 +197,7 @@ class RegisterPage extends StatelessWidget {
                     Card(
                       child: FormBuilderTextField(
                         name: 'bill_number',
+                        keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
                           hintText: 'رقم الفاتورة',
                         ),

@@ -63,6 +63,7 @@ class LoginPage extends StatelessWidget {
                       child: PasswordFormField(
                         decoration:
                             const InputDecoration(hintText: 'كلمة المرور'),
+                        isLogin: true,
                         textInputAction: TextInputAction.go,
                         onFieldSubmitted: (_) => service.login(
                             context: context,
@@ -131,9 +132,9 @@ class LoginPage extends StatelessWidget {
   //   var uri = Uri(
   //     scheme: 'tel',
   //     path: '0999999999',
-    // );
-    // if (!await launchUrl(uri)) {
-    //   throw 'Could not launch $uri';
-    // }
+  // );
+  // if (!await launchUrl(uri)) {
+  //   throw 'Could not launch $uri';
+  // }
   // }
 }
