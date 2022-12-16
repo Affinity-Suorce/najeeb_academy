@@ -49,8 +49,8 @@ class PaymentsPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
                 itemCount: payments.length,
                 itemBuilder: (context, i) => BillWidget(
-                    payment: payments[i],
-                    ),
+                  payment: payments[i],
+                ),
                 separatorBuilder: (BuildContext context, int index) =>
                     8.verticalSpace,
               );

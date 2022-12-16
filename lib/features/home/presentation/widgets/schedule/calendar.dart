@@ -88,9 +88,12 @@ class DataWidget extends StatelessWidget {
 
   List<String> getSubjectList(List<String> list) {
     List<String> tempList = [];
-    for (String element in list) {
-      tempList.add(element.split('/')[0]);
+     for (int i = list.length - 1; i >= 0;i--) {
+      tempList.add(list[i].split('/')[0]);
     }
+    // for (String element in list) {
+    //   tempList.add(element.split('/')[0]);
+    // }
     return tempList;
   }
 }
