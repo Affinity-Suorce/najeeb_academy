@@ -72,6 +72,12 @@ dependencies:
   flutter_pdfview: ^1.2.5
   # flowder: ^0.2.0
 
+  piped_api:
+    git:
+      url: https://github.com/TeamPiped/piped_dart
+  built_collection: ^5.1.1
+  pod_player: ^0.0.8
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

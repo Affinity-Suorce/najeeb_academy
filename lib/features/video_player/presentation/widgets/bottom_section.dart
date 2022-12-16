@@ -4,21 +4,17 @@ import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_widget.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPageBottomSection extends StatefulWidget {
   const VideoPageBottomSection(
       {Key? key,
       required this.subject,
       required this.lecture,
-      required this.lectureIndex,
-      this.changeVideo,
-      required this.controller})
+      required this.lectureIndex, this.changeVideo,})
       : super(key: key);
   final Subject subject;
   final Lecture lecture;
   final int lectureIndex;
-  final YoutubePlayerController controller;
   final Function(int index)? changeVideo;
 
   @override
@@ -95,7 +91,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                     isSelected: widget.lectureIndex == index,
                     index: index + 1,
                     title: widget.subject.lectures![index].name ?? '',
-                    date:widget.lecture.createdAt!.formattedDate2
+                    date:widget.lecture.timePush!.formattedDate2
                   ),
                 );
               },

@@ -152,7 +152,7 @@ class _LectureSectionState extends State<LectureSection> {
   List<DateTime> getAvailableDates() {
     List<DateTime> listOfDates = [];
     for (var lecture in widget.lectures) {
-      listOfDates.add(DateTime.parse(lecture.createdAt!.formattedDate2));
+      listOfDates.add(DateTime.parse(lecture.timePush!.formattedDate2));
     }
     return listOfDates;
   }
@@ -160,7 +160,7 @@ class _LectureSectionState extends State<LectureSection> {
   List<Lecture> getLecturesByDate(DateTime date) {
     return widget.lectures
         .where((lecture) =>
-            DateTime.parse(lecture.createdAt!.formattedDate2).isSameDate(date))
+            DateTime.parse(lecture.timePush!.formattedDate2).isSameDate(date))
         .toList();
   }
 }
@@ -298,7 +298,7 @@ class LectureWidget extends StatelessWidget {
                           ),
                           const Spacer(),
                           Text(
-                            lecture.createdAt!.formattedDate2,
+                            lecture.timePush!.formattedDate2,
                             style: const TextStyle(
                               height: 1,
                               color: Colors.black87,

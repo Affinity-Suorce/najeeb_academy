@@ -27,7 +27,6 @@ class _PaymentDialogState extends State<PaymentDialog> {
   TextEditingController? _controller;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = TextEditingController();
   }

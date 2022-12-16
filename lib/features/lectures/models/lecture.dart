@@ -13,7 +13,7 @@ class Lecture {
     this.name,
     this.description,
     this.monthNumber,
-    this.createdAt,
+    this.timePush,
     this.updatedAt,
     this.videoUrl,
     this.filesPdf,
@@ -26,7 +26,7 @@ class Lecture {
   String? name;
   String? description;
   int? monthNumber;
-  DateTime? createdAt;
+  DateTime? timePush;
   DateTime? updatedAt;
   String? videoUrl;
   List<String>? filesPdf;
@@ -39,7 +39,7 @@ class Lecture {
         name: json["name"],
         description: json["description"],
         monthNumber: json["month_number"],
-        createdAt: DateTime.parse(json["created_at"]),
+        timePush: DateTime.parse(json["time_push"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         videoUrl: json["video_url"] ?? "",
         filesPdf: json["files_pdf"] != null

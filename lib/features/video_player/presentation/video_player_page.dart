@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/bottom_sheet_widget.dart';
 import 'package:najeeb_academy/app/widgets/bottom_sheet_container.dart';
 import 'package:najeeb_academy/app/widgets/error_occured_widget.dart';
@@ -11,7 +10,6 @@ import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cu
 import 'package:najeeb_academy/features/video_player/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_files_container.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/video_section.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   const VideoPlayerPage({
@@ -29,7 +27,6 @@ class VideoPlayerPage extends StatefulWidget {
 }
 
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
-  late YoutubePlayerController controller;
   late final VideoCubit videoCubit;
   String defaultStream = 'https://www.youtube.com/watch?v=dfmK3dIihXY';
   bool isFullScreen = false;
@@ -39,49 +36,23 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   void initState() {
     super.initState();
     customLectureIndex = widget.lectureIndex;
-    _initController("https://www.youtube.com/watch?v=AjWfY7SnMBI");
     videoCubit = BlocProvider.of<VideoCubit>(context);
     videoCubit.getVideo(widget.lecture.id.toString());
   }
 
-  void getVideo(String lectureId) {
+  Future<void> getVideo(String lectureId) async {
     videoCubit.getVideo(lectureId);
   }
 
-  void _initController(String link) {
-    bool added = false;
-    controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(link)!,
-      flags: const YoutubePlayerFlags(
-        mute: false,
-        autoPlay: true,
-      ),
-    )..addListener(() {
-        debugPrint(
-            '${controller.value.position.inSeconds} ${controller.metadata.duration.inSeconds - 1}');
-
-        if (controller.value.position.inSeconds
-                    .compareTo(controller.metadata.duration.inSeconds - 1) ==
-                0 &&
-            controller.value.hasPlayed &&
-            !added) {
-          debugPrint('added watched video');
-          DI.lectureServices.addWatchedLectureId(widget.lecture.id!);
-          added = true;
-        }
-      });
-  }
 
   @override
   void deactivate() {
     // Pauses video while navigating to next page.
-    controller.pause();
     super.deactivate();
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -109,33 +80,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             );
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
-            if (controller.initialVideoId !=
-                YoutubePlayer.convertUrlToId(lecture.videoUrl ?? "")) {
-              _initController(lecture.videoUrl ?? "");
-            }
             debugPrint("lectureIdIs:${lecture.id}");
-            return YoutubePlayerBuilder(
-                onEnterFullScreen: () => isFullScreen = true,
-                onExitFullScreen: () => isFullScreen = false,
-                player: YoutubePlayer(
-                  controller: controller,
-                  showVideoProgressIndicator: true,
-                  bottomActions: controller.value.isFullScreen
-                      ? [
-                          FullScreenButton(),
-                          const PlaybackSpeedButton(),
-                          ProgressBar(isExpanded: true),
-                          CurrentPosition(),
-                          RemainingDuration(),
-                        ]
-                      : [
-                          CurrentPosition(),
-                          RemainingDuration(),
-                          ProgressBar(isExpanded: true),
-                          const PlaybackSpeedButton(),
-                        ],
-                ),
-                builder: (context, player) {
                   return Scaffold(
                     backgroundColor: Colors.grey.shade900,
                     floatingActionButton: FloatingActionButton(
@@ -158,8 +103,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                         child: Column(
                           children: [
                             VideoSection(
-                              controller: controller,
-                              player: player,
                               changeVideo: (index) {
                                 // print(
                                 //     "lectureIndex:${widget.lectureIndex}lectureSubject.lectures!.length:${widget.lectureSubject.lectures!.length}indexIs:$index");
@@ -186,12 +129,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                 }
                                 // _ChangeVideo(stream2);
                               },
+                              url: state.lecture.videoUrl!,
+
                             ),
                             VideoPageBottomSection(
                                 subject: widget.lectureSubject,
                                 lecture: widget.lecture,
                                 lectureIndex: customLectureIndex,
-                                controller: controller,
                                 changeVideo: (index) {
                                   customLectureIndex = index;
                                   videoCubit.getVideo(widget
@@ -203,7 +147,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       ),
                     ),
                   );
-                });
           }
           return ErrorOccuredTextWidget(
             fun: () {
