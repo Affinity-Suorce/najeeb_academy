@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 class LectureServices {
@@ -12,7 +13,7 @@ class LectureServices {
     temp.add(id);
 
     _watchedLecturesIds = temp.toSet().toList();
-    print('watchedLectures:${_watchedLecturesIds}');
+    debugPrint('watchedLectures:$_watchedLecturesIds');
   }
 
   List<Lecture> get getLectures => _lecturesList;

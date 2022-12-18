@@ -51,7 +51,7 @@ class VideoFilesContainer extends StatelessWidget {
                     return InkWell(
                       onTap: () async {
                         var permission = await requestPermission();
-                        print('lectureFiles:$lectureFiles index:$index');
+                        debugPrint('lectureFiles:$lectureFiles index:$index');
                         if (permission) {
                           getFileFromUrl(lectureFiles[index],
                                   name: index.toString())

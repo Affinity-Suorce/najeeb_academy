@@ -56,17 +56,22 @@ class ShimmerWidget3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        SizedBox(
-          height: 86,
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: const [
+            SizedBox(
+              height: 86,
+            ),
+            ShimmerWidget1(height: 45),
+            SizedBox(
+              height: 28,
+            ),
+            ShimmerWidget2(),
+          ],
         ),
-        ShimmerWidget1(height: 45),
-        SizedBox(
-          height: 28,
-        ),
-        ShimmerWidget2(),
-      ],
+      ),
     );
   }
 }

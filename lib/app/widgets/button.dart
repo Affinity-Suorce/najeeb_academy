@@ -10,7 +10,7 @@ class CustomElevatedButton extends StatelessWidget {
   final String? title;
   final IconData? icon;
   final OnPressed? onPressed;
-  final double? horizantalPadding;
+  final double? horizontalPadding;
   final double? verticalPadding;
 
   const CustomElevatedButton({
@@ -22,7 +22,7 @@ class CustomElevatedButton extends StatelessWidget {
     this.title,
     this.icon,
     this.onPressed,
-    this.horizantalPadding,
+    this.horizontalPadding,
     this.verticalPadding,
   }) : super(key: key);
 
@@ -47,11 +47,11 @@ class CustomElevatedButton extends StatelessWidget {
             color: Colors.transparent,
             width: 0,
           ),
-          primary: buttonColor,
+          backgroundColor: buttonColor,
           padding: EdgeInsets.symmetric(
-              horizontal: horizantalPadding ?? 16,
+              horizontal: horizontalPadding ?? 16,
               vertical: verticalPadding ?? 16),
-          onPrimary: splashColor),
+          foregroundColor: splashColor),
       child: Text(
         title == null ? 'Button' : title!,
         style: TextStyle(

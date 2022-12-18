@@ -23,9 +23,9 @@ class CreateClassedOrderService extends ChangeNotifier {
         "bill_number": billNumber
       });
 
-      final data = response.data;
+      // final data = response.data;
       if (response.statusCode == 200) {
-        debugPrint("data['data']");
+        // debugPrint("data['data']");
         isLoaded = true;
         notifyListeners();
         return true;

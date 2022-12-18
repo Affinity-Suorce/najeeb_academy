@@ -8,7 +8,6 @@
 //   AuthGuard(this.userInfo);
 //   @override
 //   void onNavigation(NavigationResolver resolver, StackRouter router) async {
-//     print('ysh ${resolver.route.path}');
 //     if (userInfo.isAuthenticated) {
 //       return resolver.next(true);
 //     }

@@ -71,7 +71,7 @@ class _WheelDatePickerBottomSheetState
             onPressed: () {
               Navigator.pop(context, currentDate);
             },
-            horizantalPadding: MediaQuery.of(context).size.width * 0.36,
+            horizontalPadding: MediaQuery.of(context).size.width * 0.36,
           )
         ],
       ),

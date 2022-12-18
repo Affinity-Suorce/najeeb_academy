@@ -88,12 +88,12 @@ class SliderSection extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(7)),
                             side: BorderSide.none,
-                            primary: index == 1
+                            backgroundColor: index == 1
                                 ? AppColors.orange700
                                 : AppColors.purple,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 37, vertical: 6),
-                            onPrimary: Colors.white),
+                            foregroundColor: Colors.white),
                         child: Text(
                           index == 1 ? 'ابدأ الآن' : 'اختر الدرس',
                           style: const TextStyle(

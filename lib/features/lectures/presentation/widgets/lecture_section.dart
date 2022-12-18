@@ -159,8 +159,9 @@ class _LectureSectionState extends State<LectureSection> {
 
   List<Lecture> getLecturesByDate(DateTime date) {
     return widget.lectures
-        .where((lecture) =>
-            DateTime.parse(lecture.timePush!.formattedDate2).isSameDate(date))
+        .where((lecture) => DateTime.parse(
+                lecture.timePush!.formattedDate2)
+            .isSameDate(date))
         .toList();
   }
 }

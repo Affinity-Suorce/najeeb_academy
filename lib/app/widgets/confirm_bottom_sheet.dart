@@ -42,8 +42,8 @@ class ConfirmBottomSheet extends StatelessWidget {
                 child: ElevatedButton(
                   style: type == _deleteType
                       ? ElevatedButton.styleFrom(
-                          primary: theme.colorScheme.error,
-                          onPrimary: theme.colorScheme.onError,
+                          backgroundColor: theme.colorScheme.error,
+                          foregroundColor: theme.colorScheme.onError,
                         )
                       : null,
                   onPressed: () {

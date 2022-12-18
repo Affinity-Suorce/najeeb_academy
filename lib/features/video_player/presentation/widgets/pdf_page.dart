@@ -19,13 +19,13 @@ class _PdfPageState extends State<PdfPage> {
         autoSpacing: false,
         pageFling: false,
         onError: (error) {
-          print(error.toString());
+          debugPrint(error.toString());
         },
         onPageError: (page, error) {
-          print('$page: ${error.toString()}');
+          debugPrint('$page: ${error.toString()}');
         },
         onPageChanged: (int? page, int? total) {
-          print('page change: $page/$total');
+          debugPrint('page change: $page/$total');
         },
       ),
     );

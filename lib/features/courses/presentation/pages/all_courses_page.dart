@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,10 +13,9 @@ import 'package:najeeb_academy/app/widgets/shimmer.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/all_course_widget.dart';
-import 'package:expandable/expandable.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/check_dialog.dart';
 import 'package:najeeb_academy/features/payment/presentation/widgets/payment_dialog.dart';
-import 'package:provider/provider.dart';
+
 import '../widgets/all_courses_top_section.dart';
 
 class AllCoursesPage extends StatelessWidget {
@@ -79,7 +79,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                 List<CourseModel> courses = state.courses;
                 List<Subject> allSubjects = [];
                 for (var course in courses) {
-                  if(course.subjects!=null) {
+                  if (course.subjects != null) {
                     allSubjects.addAll(course.subjects!);
                   }
                   DI.coursesServices.setSubjects(allSubjects);

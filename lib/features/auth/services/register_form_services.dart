@@ -59,7 +59,7 @@ class RegisterFormService extends ChangeNotifier {
           'subject_id': subjectsIds,
           'amount_paid': 0,
         };
-        print(d);
+        debugPrint(d.toString());
         final response = await _api.post(
           registerUrl,
           data: {

@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:najeeb_academy/core/error/excpetions.dart';
+import 'package:najeeb_academy/core/error/exceptions.dart';
 import 'package:najeeb_academy/core/error/failures.dart';
 
 Future<Either<Failure, T>> repository<T>(

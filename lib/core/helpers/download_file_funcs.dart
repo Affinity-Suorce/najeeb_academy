@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,7 +15,7 @@ Future<File> getFileFromUrl(String url, {name}) async {
     var bytes = data.bodyBytes;
     var dir = await getApplicationDocumentsDirectory();
     File file = File("${dir.path}/" + fileName + ".pdf");
-    print(dir.path);
+    debugPrint(dir.path);
     File urlFile = await file.writeAsBytes(bytes);
     return urlFile;
   } catch (e) {

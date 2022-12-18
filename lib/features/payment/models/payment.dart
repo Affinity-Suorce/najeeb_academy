@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/rendering.dart';
+
 class Payment {
   final int id;
   final int studentId;
@@ -82,7 +84,7 @@ class Payment {
   }
 
   factory Payment.fromMap(Map<String, dynamic> map) {
-    print(map);
+    debugPrint(map.toString());
     return Payment(
       id: map['id'] as int,
       paymentId: map['payment_id'] as int,
