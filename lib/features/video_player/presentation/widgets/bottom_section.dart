@@ -91,7 +91,7 @@ class _BottomSectionState extends State<VideoPageBottomSection> {
                     isSelected: widget.lectureIndex == index,
                     index: index + 1,
                     title: widget.subject.lectures![index].name ?? '',
-                    date:widget.lecture.timePush!.formattedDate2
+                    date:widget.subject.lectures![index].timePush!.formattedDate2
                   ),
                 );
               },

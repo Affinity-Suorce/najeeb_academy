@@ -39,9 +39,12 @@ class Lecture {
         name: json["name"],
         description: json["description"],
         monthNumber: json["month_number"],
-        timePush: json.containsKey('time_push')
-            ? DateTime.tryParse(json["time_push"])
-            : DateTime.now(),
+        timePush: DateTime.fromMillisecondsSinceEpoch(
+            int.parse(
+              json['time_publish'],
+            ) *
+                1000,
+            isUtc: true),
         updatedAt: DateTime.parse(json["updated_at"]),
         videoUrl: json["video_url"] ?? "",
         filesPdf: json["files_pdf"] != null
