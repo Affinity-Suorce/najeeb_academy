@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
+import '../lectures_page.dart';
+
 class DatePickerWidget extends StatefulWidget {
   const DatePickerWidget({Key? key, required this.availableDates}):super(key: key);
   final List<DateTime> availableDates;

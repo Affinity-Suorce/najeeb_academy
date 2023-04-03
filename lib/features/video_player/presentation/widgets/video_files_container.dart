@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:najeeb_academy/core/helpers/download_file_funcs.dart';
-import 'package:najeeb_academy/features/video_player/presentation/widgets/pdf_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VideoFilesContainer extends StatelessWidget {
   const VideoFilesContainer(
@@ -55,12 +55,11 @@ class VideoFilesContainer extends StatelessWidget {
                         if (permission) {
                           getFileFromUrl(lectureFiles[index],
                                   name: index.toString())
-                              .then((file) => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PdfPage(
-                                            pdfPath: file.path,
-                                          ))));
+                              .then((file) {
+                            launchUrl(
+                                mode: LaunchMode.externalNonBrowserApplication,
+                                Uri.file(file));
+                          });
                         }
                       },
                       child: fileColumn(index + 1),

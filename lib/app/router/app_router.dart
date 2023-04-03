@@ -44,15 +44,15 @@ part 'app_router.gr.dart';
       children: [
         AutoRoute(path: '', page: HomePage),
         AutoRoute(path: 'courses', page: CoursesPage),
-        AutoRoute(path: 'lectures', page: LecturesPage),
+        AutoRoute(path: 'all-courses', page: AllCoursesPage),
         AutoRoute(path: 'payments', page: PaymentsPage),
         AutoRoute(path: 'profile', page: ProfilePage),
       ],
     ),
-    AutoRoute(
-      path: '/all-courses',
-      page: AllCoursesPage,
-    ),
+    // AutoRoute(
+    //   path: '/all-courses',
+    //   page: AllCoursesPage,
+    // ),
     AutoRoute(path: '/lectures/video/:id', page: VideoPlayerPage),
     AutoRoute(
       path: '/notifications',

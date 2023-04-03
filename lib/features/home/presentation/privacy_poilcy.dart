@@ -9,17 +9,12 @@ class PrivacyPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double sp = 8.0;
-    return Scaffold(
-      body: SingleChildScrollView(
+    return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(14, 32, 14, 28),
+          padding: const EdgeInsets.fromLTRB(5, 0, 5, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Navbar(
-                title: 'سياسة الخصوصية:',
-                color: Colors.black,
-              ),
               const SizedBox(height: 12),
               getTextHeader('تمهيد:'),
               getText1(
@@ -66,28 +61,11 @@ class PrivacyPolicy extends StatelessWidget {
                   "نرحب بتلقي كافة الملاحظات والاستفسارات والاقتراحات المتعلقة بسياسة خصوصية 'نجيب' على البريد الإلكتروني"),
               getTextHeader("najeeb@najeeb-nb.sy"),
               SizedBox(height: sp),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context, true);
-                        },
-                        buttonColor: AppColors.indigo,
-                        verticalPadding: 8,
-                        title: 'موافق',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   Padding getText1(String text) {

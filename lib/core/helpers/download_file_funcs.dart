@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
-Future<File> getFileFromUrl(String url, {name}) async {
+Future<String> getFileFromUrl(String url, {name}) async {
   var fileName = 'najeeb_file';
   if (name != null) {
     fileName = name + ' pdf';
@@ -13,11 +13,12 @@ Future<File> getFileFromUrl(String url, {name}) async {
   try {
     var data = await http.get(Uri.parse(url));
     var bytes = data.bodyBytes;
-    var dir = await getApplicationDocumentsDirectory();
-    File file = File("${dir.path}/" + fileName + ".pdf");
+    var dir = await getExternalStorageDirectory();
+    String filePath = "${dir!.path}/" + fileName + ".pdf";
+    File file = File(filePath);
     debugPrint(dir.path);
     File urlFile = await file.writeAsBytes(bytes);
-    return urlFile;
+    return urlFile.path;
   } catch (e) {
     throw Exception("Error opening url file${e.toString()}");
   }

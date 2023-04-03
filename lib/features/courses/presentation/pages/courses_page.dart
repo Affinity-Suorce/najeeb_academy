@@ -9,7 +9,6 @@ import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/presentation/widgets/tab_bar_item.dart';
 
-import '../widgets/all_courses_floating_action_button.dart';
 import '../widgets/subject_widget.dart';
 import '../widgets/top_section.dart';
 
@@ -146,7 +145,6 @@ class _CoursesPageState extends State<CoursesPage>
                 ),
               ),
       ),
-      floatingActionButton: const AllCoursesFloatingActionButton(),
     );
   }
 }

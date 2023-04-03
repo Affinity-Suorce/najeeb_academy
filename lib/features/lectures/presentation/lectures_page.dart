@@ -10,8 +10,9 @@ import 'package:najeeb_academy/features/lectures/presentation/widgets/lecture_se
 import 'package:najeeb_academy/features/lectures/presentation/widgets/top_section.dart';
 
 class LecturesPage extends StatefulWidget {
-  const LecturesPage({Key? key, this.isAllLectures = false}) : super(key: key);
+  const LecturesPage({Key? key, this.isAllLectures = false, this.date}) : super(key: key);
   final bool isAllLectures;
+  final dynamic date;
   @override
   State<LecturesPage> createState() => _LecturesPageState();
 }
@@ -22,6 +23,7 @@ class _LecturesPageState extends State<LecturesPage> {
     super.initState();
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
     coursesCubit.getMyCourses(false);
+    
   }
 
   @override
@@ -74,7 +76,8 @@ class _LecturesPageState extends State<LecturesPage> {
                         LectureSection(
                             lectures: allLectures,
                             subjects: allSubjects,
-                            isAllLectures: widget.isAllLectures),
+                            isAllLectures: widget.isAllLectures,
+                            date: widget.date),
                       ],
                     ),
                   ),

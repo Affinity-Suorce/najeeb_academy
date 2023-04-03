@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
+
+import '../../../lectures/presentation/widgets/date_picker_widget.dart';
 
 class SliderSection extends StatelessWidget {
   const SliderSection({Key? key}) : super(key: key);
@@ -28,6 +32,8 @@ class SliderSection extends StatelessWidget {
   }
 
   Widget sliderContainer(BuildContext context, int index) {
+    final coursesCubit = BlocProvider.of<CoursesCubit>(context);
+    coursesCubit.getMyCourses(false);
     return Container(
       height: double.infinity,
       width: 340,
@@ -75,13 +81,32 @@ class SliderSection extends StatelessWidget {
                             AutoTabsRouter.of(context).setActiveIndex(1);
                           } else {
                             index == 1
-                                ? AutoTabsRouter.of(context).setActiveIndex(1)
-                                : Navigator.push(
+                                ? Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             const LecturesPage(
-                                                isAllLectures: true)));
+                                              isAllLectures: false,
+                                            )))
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DatePickerWidget(
+                                              availableDates:
+                                              [DateTime.now()]
+                                                  // getAvailableDates(),
+                                            ))).then((date) {
+                                    if (date != null) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => LecturesPage(
+                                              isAllLectures: false,
+                                              date: date,
+                                            ),
+                                          ));
+                                    }
+                                  });
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -95,7 +120,7 @@ class SliderSection extends StatelessWidget {
                                 horizontal: 37, vertical: 6),
                             foregroundColor: Colors.white),
                         child: Text(
-                          index == 1 ? 'ابدأ الآن' : 'اختر الدرس',
+                          index == 1 ? 'دروسي' : 'اختر الدرس',
                           style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,

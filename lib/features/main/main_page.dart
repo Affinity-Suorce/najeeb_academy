@@ -23,7 +23,7 @@ class MainPage extends StatelessWidget {
             : [
                 const HomeRoute(),
                 const CoursesRoute(),
-                const LecturesRoute(),
+                AllCoursesRoute(),
                 const PaymentsRoute(),
                 const ProfileRoute()
               ],
@@ -66,8 +66,8 @@ class MainPage extends StatelessWidget {
                           activeColor: AppColors.indigo,
                         ),
                         BottomNavyBarItem(
-                          icon: const Icon(CupertinoIcons.book),
-                          title: const Text('دروسي'),
+                          icon: const Icon(CupertinoIcons.rectangle_stack_badge_plus),
+                          title: const Text('أضف دورة'),
                           activeColor: AppColors.indigo,
                         ),
                         BottomNavyBarItem(
