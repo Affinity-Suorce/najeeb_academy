@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +16,7 @@ import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
+import 'package:najeeb_academy/firebase_options.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -27,6 +29,9 @@ class NajeebAcademyApp extends StatelessWidget {
     FlutterNativeSplash.preserve(
         widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
 
+    await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+    );
     _Localization.initLocalization();
     await DI.init();
     await SystemChrome.setPreferredOrientations(

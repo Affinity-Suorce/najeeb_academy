@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "513241213795",
+    "project_id": "najeeb-test-2bebb",
+    "storage_bucket": "najeeb-test-2bebb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513241213795:android:7ff90ba1c5ec88ffe54156",
+        "android_client_info": {
+          "package_name": "com.ysh.najeeb_academy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "513241213795-1361sm6uq1tmtgug7g2frksq51lemn92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgQkyhsRyEceP1Yzgidh59pKZuCiYSnso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "513241213795-1361sm6uq1tmtgug7g2frksq51lemn92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
