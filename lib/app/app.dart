@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,15 +12,17 @@ import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/firebase_fcm.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
-import 'package:najeeb_academy/firebase_options.dart';
+import 'package:najeeb_academy/app/firebase_options.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
+import 'notificationservice.dart';
 
 part 'app_localization.dart';
 part 'app_theme.dart';
@@ -32,6 +35,11 @@ class NajeebAcademyApp extends StatelessWidget {
     await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
     );
+    await FirebaseFCM.initialize();
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    debugPrint(fcmToken);
+    NotificationService().initNotification();
+    
     _Localization.initLocalization();
     await DI.init();
     await SystemChrome.setPreferredOrientations(

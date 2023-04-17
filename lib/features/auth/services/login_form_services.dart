@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/dialog_build_context.dart';
+import 'package:najeeb_academy/app/firebase_fcm.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/loading.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
@@ -32,6 +34,7 @@ class LoginFormService extends ChangeNotifier {
       });
       final username = formState.fields['username']!.value;
       final password = formState.fields['password']!.value;
+      final fcm_token = await FirebaseMessaging.instance.getToken();
 
       try {
         final response = await (_api.post(
@@ -39,6 +42,7 @@ class LoginFormService extends ChangeNotifier {
           data: {
             'username': username,
             'password': password,
+            'fcm_token':fcm_token,
           },
           cancelToken: cancelToken,
         )).then((value) {
