@@ -31,32 +31,19 @@ class _LoginPageState extends State<LoginPage> {
       await showDialog<String>(
         barrierDismissible: false,
         context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: Text('سياسة الخصوصية:'),
-              content: SizedBox(
-                height: 250,
-                child: PrivacyPolicy()
-                ),
-              actions: [
-               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CustomElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        buttonColor: AppColors.indigo,
-                        verticalPadding: 8,
-                        title: 'موافق',
-                      ),
-                    ),
-                  ],
-                ),
+        builder: (BuildContext context) => WillPopScope(
+          onWillPop: () => Future.value(false),
+          child: AlertDialog(
+                title: const Text('سياسة الخصوصية:'),
+                content: const SizedBox(
+                  height: 250,
+                  child: PrivacyPolicy()
+                  ),
+                // actions: [
+                 
+                // ],
               ),
-              ],
-            ),
+        ),
       );
     });
   }

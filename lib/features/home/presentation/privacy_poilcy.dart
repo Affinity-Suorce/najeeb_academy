@@ -15,7 +15,7 @@ class PrivacyPolicy extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 12),
+              // const SizedBox(height: 12),
               getTextHeader('تمهيد:'),
               getText1(
                   "توضح هذه الصفحة بنود سياسة خصوصية تطبيق 'نجيب' وكيفية تعاملها مع بيانات المستخدمين. مجرد استخدامك للتطبيق وخدماته يعتبر موافقة منك على بنود هذه السياسة، فلذلك يرجى قراءة واستيعاب ما تحويه السياسة قبل الاستخدام."),
@@ -61,7 +61,23 @@ class PrivacyPolicy extends StatelessWidget {
                   "نرحب بتلقي كافة الملاحظات والاستفسارات والاقتراحات المتعلقة بسياسة خصوصية 'نجيب' على البريد الإلكتروني"),
               getTextHeader("najeeb@najeeb-nb.sy"),
               SizedBox(height: sp),
-              
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: CustomElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          buttonColor: AppColors.indigo,
+                          verticalPadding: 8,
+                          title: 'موافق',
+                        ),
+                      ),
+                    ],
+                  ),
+                )
             ],
           ),
         ),

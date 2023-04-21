@@ -87,7 +87,7 @@ class _TopSectionState extends State<TopSection> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "${DI.lectureServices.getWatchedLecturesIds.length}",
+                                  "${DI.lectureServices.getWatchedLecturesCount}",
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 19,

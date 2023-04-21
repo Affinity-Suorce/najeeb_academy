@@ -130,6 +130,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                 // _ChangeVideo(stream2);
                               },
                               url: state.lecture.videoUrl!,
+                              id: state.lecture.id!,
 
                             ),
                             VideoPageBottomSection(

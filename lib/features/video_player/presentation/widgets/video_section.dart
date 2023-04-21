@@ -6,10 +6,12 @@ class VideoSection extends StatefulWidget {
     Key? key,
     required this.changeVideo,
     required this.url,
+    required this.id,
   }) : super(key: key);
 
   final Function(int index)? changeVideo;
   final String url;
+  final int id;
 
   @override
   State<VideoSection> createState() => _VideoSectionState();
@@ -34,6 +36,7 @@ class _VideoSectionState extends State<VideoSection> {
                   aspectRatio: 16 / 9,
                   child: Player(
                     url: widget.url,
+                    id: widget.id,
                   ),
                 ),
               ),

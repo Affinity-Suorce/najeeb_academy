@@ -45,7 +45,7 @@ abstract class DI {
       () => CoursesServices(),
     );
     di.registerLazySingleton<LectureServices>(
-      () => LectureServices(),
+      () => LectureServices(preferences),
     );
 
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
