@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAgQkyhsRyEceP1Yzgidh59pKZuCiYSnso',
-    appId: '1:513241213795:android:7ff90ba1c5ec88ffe54156',
-    messagingSenderId: '513241213795',
-    projectId: 'najeeb-test-2bebb',
-    storageBucket: 'najeeb-test-2bebb.appspot.com',
+    apiKey: 'AIzaSyC4hPVYqbyRkxl4055jM69kRzEZeQxVMCY',
+    appId: '1:188670040025:android:5c9c396a91e67121eb2bc8',
+    messagingSenderId: '188670040025',
+    projectId: 'najeebed-d077e',
+    storageBucket: 'najeebed-d077e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB3CWS7WuBJvI15n7sWOhnO3dDIfLMSCj4',
-    appId: '1:513241213795:ios:b7aa30b25f96eff9e54156',
-    messagingSenderId: '513241213795',
-    projectId: 'najeeb-test-2bebb',
-    storageBucket: 'najeeb-test-2bebb.appspot.com',
-    iosClientId: '513241213795-i6lmd2qn1irggv1073icn3kl6kcm9idj.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCDZPKKsKghvNyBd81Pp1n_PZPiGnzkUvU',
+    appId: '1:188670040025:ios:dca6ad3a0ea8772ceb2bc8',
+    messagingSenderId: '188670040025',
+    projectId: 'najeebed-d077e',
+    storageBucket: 'najeebed-d077e.appspot.com',
+    iosClientId: '188670040025-e3blkr3tb2ihg0lnki5q138286in35lh.apps.googleusercontent.com',
     iosBundleId: 'sy.academy.najeeb.najeebAcademy',
   );
 }
