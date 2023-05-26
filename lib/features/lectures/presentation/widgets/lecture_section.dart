@@ -16,10 +16,12 @@ class LectureSection extends StatefulWidget {
     required this.lectures,
     required this.subjects,
     required this.isAllLectures,
+    this.date,
   }) : super(key: key);
   final List<Lecture> lectures;
   final List<Subject> subjects;
   final bool isAllLectures;
+  final dynamic date;
   @override
   State<LectureSection> createState() => _LectureSectionState();
 }
@@ -31,10 +33,10 @@ class _LectureSectionState extends State<LectureSection> {
   @override
   void initState() {
     super.initState();
-    widget.isAllLectures
-        ? tempListOfLectures = widget.lectures
-        : tempListOfLectures = getLecturesByDate(DateTime.now());
-    day = DateTimeHelper.today;
+      widget.isAllLectures
+          ? tempListOfLectures = widget.lectures
+          : tempListOfLectures = getLecturesByDate(widget.date??DateTime.now());
+      day = DateTimeHelper.today;
   }
 
   @override
@@ -88,11 +90,11 @@ class _LectureSectionState extends State<LectureSection> {
                     GestureDetector(
                       onTap: () async {
                         Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DatePickerWidget(
-                                        availableDates: getAvailableDates())))
-                            .then((date) {
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DatePickerWidget(
+                                      availableDates: getAvailableDates(),
+                                    ))).then((date) {
                           if (date != null) {
                             setState(() {
                               day = date;
@@ -159,9 +161,8 @@ class _LectureSectionState extends State<LectureSection> {
 
   List<Lecture> getLecturesByDate(DateTime date) {
     return widget.lectures
-        .where((lecture) => DateTime.parse(
-                lecture.timePush!.formattedDate2)
-            .isSameDate(date))
+        .where((lecture) =>
+            DateTime.parse(lecture.timePush!.formattedDate2).isSameDate(date))
         .toList();
   }
 }

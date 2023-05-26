@@ -20,117 +20,188 @@ class _$AppRouter extends RootStackRouter {
     WelcomeRoute.name: (routeData) {
       final args = routeData.argsAs<WelcomeRouteArgs>();
       return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: WelcomePage(
-              key: args.key, service: args.service, lastPage: args.lastPage));
+        routeData: routeData,
+        child: WelcomePage(
+          key: args.key,
+          service: args.service,
+          lastPage: args.lastPage,
+        ),
+      );
     },
     LoginRoute.name: (routeData) {
       final args = routeData.argsAs<LoginRouteArgs>(
           orElse: () => const LoginRouteArgs());
       return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: LoginPage(key: args.key),
-          fullscreenDialog: true);
+        routeData: routeData,
+        child: LoginPage(key: args.key),
+        fullscreenDialog: true,
+      );
     },
     RegisterRoute.name: (routeData) {
       final args = routeData.argsAs<RegisterRouteArgs>();
       return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: RegisterPage(
-              key: args.key,
-              subjectsIds: args.subjectsIds,
-              myClassesIds: args.myClassesIds),
-          fullscreenDialog: true);
+        routeData: routeData,
+        child: RegisterPage(
+          key: args.key,
+          subjectsIds: args.subjectsIds,
+          myClassesIds: args.myClassesIds,
+        ),
+        fullscreenDialog: true,
+      );
     },
     MainRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
-          routeData: routeData, child: const MainPage());
+        routeData: routeData,
+        child: const MainPage(),
+      );
+    },
+    VideoPlayerRoute.name: (routeData) {
+      final args = routeData.argsAs<VideoPlayerRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: VideoPlayerPage(
+          key: args.key,
+          lectureSubject: args.lectureSubject,
+          lecture: args.lecture,
+          lectureIndex: args.lectureIndex,
+        ),
+      );
+    },
+    NotificationsRoute.name: (routeData) {
+      final args = routeData.argsAs<NotificationsRouteArgs>();
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: NotificationsPage(
+          key: args.key,
+          service: args.service,
+        ),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const HomePage(),
+      );
+    },
+    CoursesRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const CoursesPage(),
+      );
     },
     AllCoursesRoute.name: (routeData) {
       final args = routeData.argsAs<AllCoursesRouteArgs>(
           orElse: () => const AllCoursesRouteArgs());
       return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: AllCoursesPage(key: args.key, onResult: args.onResult));
-    },
-    VideoPlayerRoute.name: (routeData) {
-      final args = routeData.argsAs<VideoPlayerRouteArgs>();
-      return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: VideoPlayerPage(
-              key: args.key,
-              lectureSubject: args.lectureSubject,
-              lecture: args.lecture,
-              lectureIndex: args.lectureIndex));
-    },
-    NotificationsRoute.name: (routeData) {
-      final args = routeData.argsAs<NotificationsRouteArgs>();
-      return AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: NotificationsPage(key: args.key, service: args.service));
-    },
-    HomeRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-          routeData: routeData, child: const HomePage());
-    },
-    CoursesRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-          routeData: routeData, child: const CoursesPage());
-    },
-    LecturesRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-          routeData: routeData, child: const LecturesPage());
+        routeData: routeData,
+        child: AllCoursesPage(
+          key: args.key,
+          onResult: args.onResult,
+        ),
+      );
     },
     PaymentsRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
-          routeData: routeData, child: const PaymentsPage());
+        routeData: routeData,
+        child: const PaymentsPage(),
+      );
     },
     ProfileRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
-          routeData: routeData, child: const ProfilePage());
-    }
+        routeData: routeData,
+        child: const ProfilePage(),
+      );
+    },
   };
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig('/#redirect',
-            path: '/', redirectTo: '/login', fullMatch: true),
-        RouteConfig(WelcomeRoute.name, path: '/welcome'),
-        RouteConfig(LoginRoute.name, path: '/login'),
-        RouteConfig(RegisterRoute.name, path: '/register'),
-        RouteConfig(MainRoute.name, path: '', children: [
-          RouteConfig(HomeRoute.name, path: '', parent: MainRoute.name),
-          RouteConfig(CoursesRoute.name,
-              path: 'courses', parent: MainRoute.name),
-          RouteConfig(LecturesRoute.name,
-              path: 'lectures', parent: MainRoute.name),
-          RouteConfig(PaymentsRoute.name,
-              path: 'payments', parent: MainRoute.name),
-          RouteConfig(ProfileRoute.name,
-              path: 'profile', parent: MainRoute.name)
-        ]),
-        RouteConfig(AllCoursesRoute.name, path: '/all-courses'),
-        RouteConfig(VideoPlayerRoute.name, path: '/lectures/video/:id'),
-        RouteConfig(NotificationsRoute.name, path: '/notifications')
+        RouteConfig(
+          '/#redirect',
+          path: '/',
+          redirectTo: '/login',
+          fullMatch: true,
+        ),
+        RouteConfig(
+          WelcomeRoute.name,
+          path: '/welcome',
+        ),
+        RouteConfig(
+          LoginRoute.name,
+          path: '/login',
+        ),
+        RouteConfig(
+          RegisterRoute.name,
+          path: '/register',
+        ),
+        RouteConfig(
+          MainRoute.name,
+          path: '',
+          children: [
+            RouteConfig(
+              HomeRoute.name,
+              path: '',
+              parent: MainRoute.name,
+            ),
+            RouteConfig(
+              CoursesRoute.name,
+              path: 'courses',
+              parent: MainRoute.name,
+            ),
+            RouteConfig(
+              AllCoursesRoute.name,
+              path: 'all-courses',
+              parent: MainRoute.name,
+            ),
+            RouteConfig(
+              PaymentsRoute.name,
+              path: 'payments',
+              parent: MainRoute.name,
+            ),
+            RouteConfig(
+              ProfileRoute.name,
+              path: 'profile',
+              parent: MainRoute.name,
+            ),
+          ],
+        ),
+        RouteConfig(
+          VideoPlayerRoute.name,
+          path: '/lectures/video/:id',
+        ),
+        RouteConfig(
+          NotificationsRoute.name,
+          path: '/notifications',
+        ),
       ];
 }
 
 /// generated route for
 /// [WelcomePage]
 class WelcomeRoute extends PageRouteInfo<WelcomeRouteArgs> {
-  WelcomeRoute(
-      {Key? key, required WelcomeService service, bool lastPage = false})
-      : super(WelcomeRoute.name,
-            path: '/welcome',
-            args: WelcomeRouteArgs(
-                key: key, service: service, lastPage: lastPage));
+  WelcomeRoute({
+    Key? key,
+    required WelcomeService service,
+    bool lastPage = false,
+  }) : super(
+          WelcomeRoute.name,
+          path: '/welcome',
+          args: WelcomeRouteArgs(
+            key: key,
+            service: service,
+            lastPage: lastPage,
+          ),
+        );
 
   static const String name = 'WelcomeRoute';
 }
 
 class WelcomeRouteArgs {
-  const WelcomeRouteArgs(
-      {this.key, required this.service, this.lastPage = false});
+  const WelcomeRouteArgs({
+    this.key,
+    required this.service,
+    this.lastPage = false,
+  });
 
   final Key? key;
 
@@ -148,7 +219,11 @@ class WelcomeRouteArgs {
 /// [LoginPage]
 class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
   LoginRoute({Key? key})
-      : super(LoginRoute.name, path: '/login', args: LoginRouteArgs(key: key));
+      : super(
+          LoginRoute.name,
+          path: '/login',
+          args: LoginRouteArgs(key: key),
+        );
 
   static const String name = 'LoginRoute';
 }
@@ -167,23 +242,29 @@ class LoginRouteArgs {
 /// generated route for
 /// [RegisterPage]
 class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
-  RegisterRoute(
-      {Key? key,
-      required List<int> subjectsIds,
-      required List<int> myClassesIds})
-      : super(RegisterRoute.name,
-            path: '/register',
-            args: RegisterRouteArgs(
-                key: key,
-                subjectsIds: subjectsIds,
-                myClassesIds: myClassesIds));
+  RegisterRoute({
+    Key? key,
+    required List<int> subjectsIds,
+    required List<int> myClassesIds,
+  }) : super(
+          RegisterRoute.name,
+          path: '/register',
+          args: RegisterRouteArgs(
+            key: key,
+            subjectsIds: subjectsIds,
+            myClassesIds: myClassesIds,
+          ),
+        );
 
   static const String name = 'RegisterRoute';
 }
 
 class RegisterRouteArgs {
-  const RegisterRouteArgs(
-      {this.key, required this.subjectsIds, required this.myClassesIds});
+  const RegisterRouteArgs({
+    this.key,
+    required this.subjectsIds,
+    required this.myClassesIds,
+  });
 
   final Key? key;
 
@@ -201,60 +282,44 @@ class RegisterRouteArgs {
 /// [MainPage]
 class MainRoute extends PageRouteInfo<void> {
   const MainRoute({List<PageRouteInfo>? children})
-      : super(MainRoute.name, path: '', initialChildren: children);
+      : super(
+          MainRoute.name,
+          path: '',
+          initialChildren: children,
+        );
 
   static const String name = 'MainRoute';
 }
 
 /// generated route for
-/// [AllCoursesPage]
-class AllCoursesRoute extends PageRouteInfo<AllCoursesRouteArgs> {
-  AllCoursesRoute({Key? key, void Function(bool)? onResult})
-      : super(AllCoursesRoute.name,
-            path: '/all-courses',
-            args: AllCoursesRouteArgs(key: key, onResult: onResult));
-
-  static const String name = 'AllCoursesRoute';
-}
-
-class AllCoursesRouteArgs {
-  const AllCoursesRouteArgs({this.key, this.onResult});
-
-  final Key? key;
-
-  final void Function(bool)? onResult;
-
-  @override
-  String toString() {
-    return 'AllCoursesRouteArgs{key: $key, onResult: $onResult}';
-  }
-}
-
-/// generated route for
 /// [VideoPlayerPage]
 class VideoPlayerRoute extends PageRouteInfo<VideoPlayerRouteArgs> {
-  VideoPlayerRoute(
-      {Key? key,
-      required Subject lectureSubject,
-      required Lecture lecture,
-      required int lectureIndex})
-      : super(VideoPlayerRoute.name,
-            path: '/lectures/video/:id',
-            args: VideoPlayerRouteArgs(
-                key: key,
-                lectureSubject: lectureSubject,
-                lecture: lecture,
-                lectureIndex: lectureIndex));
+  VideoPlayerRoute({
+    Key? key,
+    required Subject lectureSubject,
+    required Lecture lecture,
+    required int lectureIndex,
+  }) : super(
+          VideoPlayerRoute.name,
+          path: '/lectures/video/:id',
+          args: VideoPlayerRouteArgs(
+            key: key,
+            lectureSubject: lectureSubject,
+            lecture: lecture,
+            lectureIndex: lectureIndex,
+          ),
+        );
 
   static const String name = 'VideoPlayerRoute';
 }
 
 class VideoPlayerRouteArgs {
-  const VideoPlayerRouteArgs(
-      {this.key,
-      required this.lectureSubject,
-      required this.lecture,
-      required this.lectureIndex});
+  const VideoPlayerRouteArgs({
+    this.key,
+    required this.lectureSubject,
+    required this.lecture,
+    required this.lectureIndex,
+  });
 
   final Key? key;
 
@@ -273,16 +338,26 @@ class VideoPlayerRouteArgs {
 /// generated route for
 /// [NotificationsPage]
 class NotificationsRoute extends PageRouteInfo<NotificationsRouteArgs> {
-  NotificationsRoute({Key? key, required NotificationsService service})
-      : super(NotificationsRoute.name,
-            path: '/notifications',
-            args: NotificationsRouteArgs(key: key, service: service));
+  NotificationsRoute({
+    Key? key,
+    required NotificationsService service,
+  }) : super(
+          NotificationsRoute.name,
+          path: '/notifications',
+          args: NotificationsRouteArgs(
+            key: key,
+            service: service,
+          ),
+        );
 
   static const String name = 'NotificationsRoute';
 }
 
 class NotificationsRouteArgs {
-  const NotificationsRouteArgs({this.key, required this.service});
+  const NotificationsRouteArgs({
+    this.key,
+    required this.service,
+  });
 
   final Key? key;
 
@@ -297,7 +372,11 @@ class NotificationsRouteArgs {
 /// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '');
+  const HomeRoute()
+      : super(
+          HomeRoute.name,
+          path: '',
+        );
 
   static const String name = 'HomeRoute';
 }
@@ -305,23 +384,57 @@ class HomeRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [CoursesPage]
 class CoursesRoute extends PageRouteInfo<void> {
-  const CoursesRoute() : super(CoursesRoute.name, path: 'courses');
+  const CoursesRoute()
+      : super(
+          CoursesRoute.name,
+          path: 'courses',
+        );
 
   static const String name = 'CoursesRoute';
 }
 
 /// generated route for
-/// [LecturesPage]
-class LecturesRoute extends PageRouteInfo<void> {
-  const LecturesRoute() : super(LecturesRoute.name, path: 'lectures');
+/// [AllCoursesPage]
+class AllCoursesRoute extends PageRouteInfo<AllCoursesRouteArgs> {
+  AllCoursesRoute({
+    Key? key,
+    void Function(bool)? onResult,
+  }) : super(
+          AllCoursesRoute.name,
+          path: 'all-courses',
+          args: AllCoursesRouteArgs(
+            key: key,
+            onResult: onResult,
+          ),
+        );
 
-  static const String name = 'LecturesRoute';
+  static const String name = 'AllCoursesRoute';
+}
+
+class AllCoursesRouteArgs {
+  const AllCoursesRouteArgs({
+    this.key,
+    this.onResult,
+  });
+
+  final Key? key;
+
+  final void Function(bool)? onResult;
+
+  @override
+  String toString() {
+    return 'AllCoursesRouteArgs{key: $key, onResult: $onResult}';
+  }
 }
 
 /// generated route for
 /// [PaymentsPage]
 class PaymentsRoute extends PageRouteInfo<void> {
-  const PaymentsRoute() : super(PaymentsRoute.name, path: 'payments');
+  const PaymentsRoute()
+      : super(
+          PaymentsRoute.name,
+          path: 'payments',
+        );
 
   static const String name = 'PaymentsRoute';
 }
@@ -329,7 +442,11 @@ class PaymentsRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute() : super(ProfileRoute.name, path: 'profile');
+  const ProfileRoute()
+      : super(
+          ProfileRoute.name,
+          path: 'profile',
+        );
 
   static const String name = 'ProfileRoute';
 }

@@ -53,6 +53,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
   void initState() {
     super.initState();
     DI.coursesServices.clearFullPrice();
+    DI.coursesServices.resetLists();
     final coursesCubit = BlocProvider.of<CoursesCubit>(context);
     coursesCubit.getMyCourses(true);
     expandableController = ExpandableController(initialExpanded: false);

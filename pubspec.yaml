@@ -69,7 +69,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.3.50
   permission_handler: ^10.2.0
   path_provider: ^2.0.11
-  flutter_pdfview: ^1.2.5
+  url_launcher: ^6.1.10
   flutter_windowmanager: ^0.2.0
   screen_protector: ^1.2.0
   # flowder: ^0.2.0

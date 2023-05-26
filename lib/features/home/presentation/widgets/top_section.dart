@@ -69,39 +69,16 @@ class _TopSectionState extends State<TopSection> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                const Text(
-                                  "تعلمت اليوم",
-                                  textDirection: TextDirection.rtl,
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    height: 1,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                const Spacer(),
-                                InkWell(
-                                  onTap: () {
-                                    AutoTabsRouter.of(context)
-                                        .setActiveIndex(2);
-                                  },
-                                  child: const Material(
-                                    child: Text(
-                                      'دروسي',
-                                      textDirection: TextDirection.rtl,
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 17,
-                                          height: 1),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "تعلمت اليوم",
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                color: Colors.black54,
+                                height: 1,
+                                fontSize: 17,
+                              ),
                             ),
                           ),
                           Padding(
@@ -110,7 +87,7 @@ class _TopSectionState extends State<TopSection> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "${DI.lectureServices.getWatchedLecturesIds.length}",
+                                  "${DI.lectureServices.getWatchedLecturesCount}",
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 19,
