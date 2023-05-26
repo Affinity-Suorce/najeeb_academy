@@ -30,6 +30,7 @@ class CourseModel {
     this.updatedAt,
     this.classType,
     this.subjects,
+    this.subscribed,
   });
 
   dynamic id;
@@ -40,6 +41,7 @@ class CourseModel {
   dynamic createdAt;
   dynamic updatedAt;
   String? classType;
+  bool? subscribed;
   List<Subject>? subjects;
 
   factory CourseModel.fromJson(Map<String, dynamic> json) => CourseModel(
@@ -51,6 +53,8 @@ class CourseModel {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         classType: json["class_type"],
+        subscribed: true,
+        // subscribed: json["subscribed"]==0?false:true,
         subjects: List<Subject>.from(json["subjects"].map((x) =>
                 // if (x["for_me"] == null || x["for_me"] == true) {
                 // return

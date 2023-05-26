@@ -2,14 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import 'notificationservice.dart';
+import 'local_notification_service.dart';
 
-class FirebaseFCM {
+class FirebaseFCMHandler {
   static late BuildContext context;
 
   static Future<void> _messageHandler(RemoteMessage message) async {
     print(message.data);
-    NotificationService().showAlertNotification(1, message.data["title"],
+    LocalNotificationService().showAlertNotification(1, message.data["title"],
         message.data["body"]);
   }
 
@@ -21,14 +21,14 @@ class FirebaseFCM {
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {
       print("foreground message recieved");
       print(event.data);
-      NotificationService().showAlertNotification(
+      LocalNotificationService().showAlertNotification(
           1, event.data["title"], event.data["body"]);
     });
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       print("FirebaseMessaging.instance.getInitialMessage");
       if (message != null) {
         print(message.data);
-        NotificationService().showAlertNotification(1, message.data["title"],
+        LocalNotificationService().showAlertNotification(1, message.data["title"],
             message.data["body"]);
       }
     });

@@ -6,6 +6,7 @@ class NotificationModel {
   final String description;
   final bool seen;
   final DateTime createdAt;
+  final dynamic timePublish;
 
   const NotificationModel({
     required this.id,
@@ -13,6 +14,7 @@ class NotificationModel {
     required this.description,
     required this.seen,
     required this.createdAt,
+    required this.timePublish,
   });
 
   NotificationModel copyWith({
@@ -20,7 +22,9 @@ class NotificationModel {
     String? title,
     String? description,
     bool? seen,
+    dynamic timePublish,
     DateTime? updateAt,
+    
   }) {
     return NotificationModel(
       id: id ?? this.id,
@@ -28,6 +32,7 @@ class NotificationModel {
       description: description ?? this.description,
       seen: seen ?? this.seen,
       createdAt: updateAt ?? createdAt,
+      timePublish: timePublish?? this.timePublish,
     );
   }
 
@@ -38,6 +43,7 @@ class NotificationModel {
       'description': description,
       'created_at': createdAt.toIso8601String(),
       'seen': seen ? 1 : 0,
+      'time_publish':timePublish
     };
   }
 
@@ -48,6 +54,7 @@ class NotificationModel {
       description: map['description'] as String,
       createdAt: DateTime.parse(map['created_at'] as String),
       seen: map['seen'] == 1,
+      timePublish: map['time_publish']
     );
   }
 

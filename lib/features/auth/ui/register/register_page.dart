@@ -184,7 +184,7 @@ class RegisterPage extends StatelessWidget {
                     Card(
                       child: SyrianMobileFormField(
                         name: 'parent_mobile',
-                        withValidator: false,
+                        withValidator: true,
                         decoration: const InputDecoration(
                           hintText: 'هاتف ولي الأمر',
                         ),

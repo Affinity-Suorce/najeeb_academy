@@ -39,27 +39,12 @@ class RegisterFormService extends ChangeNotifier {
       final fatherName = formState.fields['father_name']!.value;
       final mobile = formState.fields['mobile']!.value;
       final landline = formState.fields['landline']!.value;
-      // final governorate = formState.fields['governorate']!.value;
+      final governorate = formState.fields['governorate']!.value;
       final parentMobile = formState.fields['parent_mobile']!.value;
       final billNumber = formState.fields['bill_number']!.value;
       // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
       try {
-        var d = {
-          'name': firstName + ' ' + lastName,
-          'first_name': firstName,
-          'last_name': lastName,
-          'father_name': fatherName,
-          'mobile': mobile,
-          'landline': landline ?? '6666666',
-          'parent_phone': parentMobile ?? '0999999999',
-          'my_class_id': myClassesIds,
-          'bill_number': billNumber,
-          'is_installment': 0,
-          'subject_id': subjectsIds,
-          'amount_paid': 0,
-        };
-        debugPrint(d.toString());
         final response = await _api.post(
           registerUrl,
           data: {
@@ -69,12 +54,8 @@ class RegisterFormService extends ChangeNotifier {
             'father_name': fatherName,
             'mobile': mobile,
             'landline': landline ?? '6666666',
-            'parent_phone': parentMobile ?? '0999999999',
-            'my_class_id': myClassesIds,
-            'bill_number': billNumber,
-            'is_installment': 0,
-            'subject_id': subjectsIds,
-            'amount_paid': 0,
+            'parent_phone': parentMobile,
+            'governorate': governorate
           },
         );
 

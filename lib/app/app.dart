@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:najeeb_academy/app/constants/assets.dart';
 import 'package:najeeb_academy/app/constants/orientation.dart';
 import 'package:najeeb_academy/app/di.dart';
-import 'package:najeeb_academy/app/firebase_fcm.dart';
+import 'package:najeeb_academy/app/firebase_fcm_handler.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
@@ -22,7 +22,7 @@ import 'package:najeeb_academy/app/firebase_options.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
-import 'notificationservice.dart';
+import 'local_notification_service.dart';
 
 part 'app_localization.dart';
 part 'app_theme.dart';
@@ -35,10 +35,10 @@ class NajeebAcademyApp extends StatelessWidget {
     await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
     );
-    await FirebaseFCM.initialize();
+    await FirebaseFCMHandler.initialize();
     final fcmToken = await FirebaseMessaging.instance.getToken();
     debugPrint(fcmToken);
-    NotificationService().initNotification();
+    LocalNotificationService().initNotification();
     
     _Localization.initLocalization();
     await DI.init();

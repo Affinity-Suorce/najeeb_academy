@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 
@@ -72,6 +73,7 @@ class _CourseExpandableBodyWidgetState
                         ),
                       ),
                       const Spacer(),
+                      !widget.course.subscribed! ?
                       Checkbox(
                         value: checkBoxesList![index],
                         onChanged: (value) {
@@ -80,7 +82,13 @@ class _CourseExpandableBodyWidgetState
                           
                         },
                         activeColor: Colors.green,
-                      )
+                      ):
+                      const Text(
+                        'تم الاشتراك',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,),)
                     ],
                   ),
               separatorBuilder: (context, index) => const SizedBox(
