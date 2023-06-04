@@ -7,7 +7,6 @@ import 'package:najeeb_academy/features/courses/presentation/pages/all_courses_p
 import 'package:najeeb_academy/features/courses/presentation/pages/courses_page.dart';
 import 'package:najeeb_academy/features/home/presentation/home_page.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
-import 'package:najeeb_academy/features/lectures/presentation/lectures_page.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
 import 'package:najeeb_academy/features/notifications/ui/notifications_page.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';

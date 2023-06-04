@@ -8,7 +8,6 @@ class FirebaseFCMHandler {
   static late BuildContext context;
 
   static Future<void> _messageHandler(RemoteMessage message) async {
-    print(message.data);
     LocalNotificationService().showAlertNotification(1, message.data["title"],
         message.data["body"]);
   }
@@ -19,15 +18,11 @@ class FirebaseFCMHandler {
     FirebaseMessaging.instance.getToken();
     FirebaseMessaging.onBackgroundMessage(_messageHandler);
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {
-      print("foreground message recieved");
-      print(event.data);
-      LocalNotificationService().showAlertNotification(
+    LocalNotificationService().showAlertNotification(
           1, event.data["title"], event.data["body"]);
     });
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      print("FirebaseMessaging.instance.getInitialMessage");
       if (message != null) {
-        print(message.data);
         LocalNotificationService().showAlertNotification(1, message.data["title"],
             message.data["body"]);
       }

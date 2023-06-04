@@ -33,11 +33,11 @@ class HomePageBottomSection extends StatelessWidget {
                       fit: BoxFit.contain)),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   'نجيب معك يوم بيوم',
                   style: TextStyle(

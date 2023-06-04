@@ -37,8 +37,8 @@ class ProgramSectionNotLoadedWidget extends StatelessWidget {
                 Container(
                   width: 90,
                   margin: const EdgeInsets.only(right: 12),
-                  child: Column(
-                    children: const [
+                  child: const Column(
+                    children: [
                       ShimmerWidget1(
                         height: 10,
                       ),
@@ -61,8 +61,8 @@ class ProgramSectionNotLoadedWidget extends StatelessWidget {
                 Container(
                   width: 40,
                   margin: const EdgeInsets.only(left: 14),
-                  child: Column(
-                    children: const [
+                  child: const Column(
+                    children: [
                       ShimmerWidget1(
                         height: 10,
                       ),

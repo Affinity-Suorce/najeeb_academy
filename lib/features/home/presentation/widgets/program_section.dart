@@ -53,9 +53,9 @@ class _ProgramSectionState extends State<ProgramSection> {
                     blurRadius: 6,
                     offset: Offset(6, 6))
               ]),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Text(
                 "برنامج الاسبوع",
                 style: TextStyle(

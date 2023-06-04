@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/widgets/button.dart';
-import 'package:najeeb_academy/app/widgets/nav_bar.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   const PrivacyPolicy({Key? key, this.isInLogin = false}) : super(key: key);

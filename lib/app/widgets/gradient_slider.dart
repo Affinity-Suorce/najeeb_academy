@@ -17,16 +17,17 @@ class GradientRectSliderTrackShape extends SliderTrackShape
 
   @override
   void paint(
-    PaintingContext context,
-    Offset offset, {
-    required RenderBox parentBox,
-    required SliderThemeData sliderTheme,
-    required Animation<double> enableAnimation,
-    required TextDirection textDirection,
-    required Offset thumbCenter,
-    bool isDiscrete = false,
-    bool isEnabled = false,
-    double additionalActiveTrackHeight = 2,
+      PaintingContext context,
+      Offset offset, {
+      required RenderBox parentBox,
+      required SliderThemeData sliderTheme,
+      required Animation<double> enableAnimation,
+      required TextDirection textDirection,
+      required Offset thumbCenter,
+      Offset? secondaryOffset,
+      bool isDiscrete = false,
+      bool isEnabled = false,
+      double additionalActiveTrackHeight = 2,
   }) {
     assert(sliderTheme.disabledActiveTrackColor != null);
     assert(sliderTheme.disabledInactiveTrackColor != null);

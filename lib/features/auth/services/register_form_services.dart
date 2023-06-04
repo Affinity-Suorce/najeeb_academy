@@ -41,7 +41,7 @@ class RegisterFormService extends ChangeNotifier {
       final landline = formState.fields['landline']!.value;
       final governorate = formState.fields['governorate']!.value;
       final parentMobile = formState.fields['parent_mobile']!.value;
-      final billNumber = formState.fields['bill_number']!.value;
+      // final billNumber = formState.fields['bill_number']!.value;
       // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
       try {

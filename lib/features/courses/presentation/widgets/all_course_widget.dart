@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 

@@ -15,10 +15,10 @@ class BillWidget extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       // !isSubscription
                       //     ? const Text('القسط:', style: textStyle1)
                       //     : const SizedBox.shrink(),

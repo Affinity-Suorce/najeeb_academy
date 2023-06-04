@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/features/notifications/models/notification_model.dart';
 
 class NotificationWidget extends StatelessWidget {

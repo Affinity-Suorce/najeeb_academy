@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badge;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +10,6 @@ import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/program_section.dart';
-import 'package:najeeb_academy/features/home/presentation/widgets/program_section_unloade_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/slider_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/top_section.dart';
 import 'package:najeeb_academy/features/home/services/schedule_service.dart';
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                                       context.read<NotificationsService>()));
                             },
                             tooltip: 'الإشعارات',
-                            icon: Badge(
+                            icon: badge.Badge(
                               alignment: AlignmentDirectional.topEnd,
                               showBadge: context
                                   .watch<NotificationsService>()
