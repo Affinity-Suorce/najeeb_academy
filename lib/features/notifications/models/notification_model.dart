@@ -6,7 +6,7 @@ class NotificationModel {
   final String description;
   final bool seen;
   final DateTime createdAt;
-  final dynamic timePublish;
+  final DateTime timePublish;
 
   const NotificationModel({
     required this.id,
@@ -22,7 +22,7 @@ class NotificationModel {
     String? title,
     String? description,
     bool? seen,
-    dynamic timePublish,
+    DateTime? timePublish,
     DateTime? updateAt,
     
   }) {
@@ -52,9 +52,9 @@ class NotificationModel {
       id: map['id'].toString(),
       title: map['title'] as String,
       description: map['description'] as String,
-      createdAt: DateTime.parse(map['created_at'] as String),
+      createdAt: DateTime.parse(map['createdAt'] as String),
       seen: map['seen'] == 1,
-      timePublish: map['time_publish']
+      timePublish: DateTime.parse(map['time_publish'] as String)
     );
   }
 

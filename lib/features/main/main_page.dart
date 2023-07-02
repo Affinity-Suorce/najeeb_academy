@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
         routes: DI.userInfo.isUnAuthenticated
             ? [
                 const HomeRoute(),
-                const CoursesRoute(),
+                AllCoursesRoute(),
               ]
             : [
                 const HomeRoute(),

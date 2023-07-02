@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
 
@@ -17,11 +18,16 @@ class ScheduleService extends ChangeNotifier {
 
   Future<String> getEvents() async {
     try {
-      final response = await _api.get(eventsUrl);
+      final response = await Dio().get(eventsUrl,
+      options: Options (
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType:ResponseType.json,
+          headers: {"Authorization":"Bearer ${DI.userInfo.token}"}
+          ));
       final data = response.data;
-      debugPrint('data is : ${data['data']}');
       if (response.statusCode == 200) {
-        events = eventModelFromJson(data['data']);
+        events = eventModelFromJson(data);
         isLoaded = true;
         notifyListeners();
         return 'success';

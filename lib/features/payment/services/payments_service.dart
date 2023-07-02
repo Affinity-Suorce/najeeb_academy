@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
 import 'package:najeeb_academy/features/payment/models/payment.dart';
 
@@ -10,8 +11,14 @@ class PaymentsService extends ChangeNotifier {
   PaymentsService(this._api);
 
   Future<bool> load() async {
-    try {
-      final response = await _api.get(myPaymentsUrl);
+    // try {
+      final response = await Dio().get(myPaymentsUrl,
+      options: Options (
+          contentType: Headers.jsonContentType,
+          responseType:ResponseType.json,
+          headers: {"Authorization":"Bearer ${DI.userInfo.token}"}
+          )
+      );
       final data = response.data;
       if (response.statusCode == 200 &&
           data is Map<String, dynamic> &&
@@ -26,8 +33,9 @@ class PaymentsService extends ChangeNotifier {
         return true;
       }
       return false;
-    } catch (e) {
-      return false;
-    }
+    // } catch (e) {
+    //   debugPrint("we have got an error\t"+e.toString());
+    //   return false;
+    // }
   }
 }

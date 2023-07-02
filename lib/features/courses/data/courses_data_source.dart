@@ -1,4 +1,3 @@
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/core/network/data_source.dart';
@@ -9,15 +8,17 @@ class CoursesDataSource {
   final Client _client;
   CoursesDataSource(this._client);
   Future<List<CourseModel>> getMyCourses(bool isAllCourses) async {
-    debugPrint(DI.userInfo.token);
-    return dataSource(
-      () => _client.get(
-        Uri.parse(isAllCourses ? allCoursesUrl : myCoursesUrl),
+    return await dataSource(
+      () async {
+        Response res = await _client.get(
+        Uri.parse(isAllCourses ? (DI.userInfo.isAuthenticated ?  allCoursesUrl: guestCoursesUrl) : myCoursesUrl),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${DI.userInfo.token}'
         },
-      ),
+      );
+      return res;
+      },
       courseModelFromJson,
     );
   }

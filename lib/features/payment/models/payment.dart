@@ -12,11 +12,11 @@ class Payment {
   final String balance;
   final bool paid;
   final bool orderConfirm;
-  final int studentMyClassId;
-  final String year;
-  final int monthNumber;
+  final int? studentMyClassId;
+  final String? year;
+  final int? monthNumber;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   const Payment({
     required this.id,
@@ -27,11 +27,11 @@ class Payment {
     required this.balance,
     required this.paid,
     required this.orderConfirm,
-    required this.studentMyClassId,
-    required this.year,
-    required this.monthNumber,
+    this.studentMyClassId,
+    this.year,
+    this.monthNumber,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
   });
 
   Payment copyWith({
@@ -79,26 +79,26 @@ class Payment {
       'year': year,
       'month_number': monthNumber,
       'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+      'updated_at': updatedAt!= null ? updatedAt!.toIso8601String() : null,
     };
   }
 
   factory Payment.fromMap(Map<String, dynamic> map) {
     debugPrint(map.toString());
     return Payment(
-      id: map['id'] as int,
+      id: map['payment_id'] as int,
       paymentId: map['payment_id'] as int,
-      studentId: map['student_id'] as int,
+      studentId: map['student_id'],
       // refNo: map['ref_no'] != null ? map['ref_no'] as String : null,
       amtPaid: map['amt_paid'] as String,
-      balance: map['balance'] as String,
-      paid: map['paid'] == 1,
-      orderConfirm: map['order_confirm'] == 1,
-      studentMyClassId: map['student_my_class_id'] as int,
-      year: map['year'] as String,
-      monthNumber: map['month_number'] as int,
+      balance: map['balance'].toString(),
+      paid: map['paid'],
+      orderConfirm: map['order_confirm'],
+      // studentMyClassId: map['student_my_class_id'] as int,
+      // year: map['year'] as String,
+      // monthNumber: map['month_number'] as int,
       createdAt: DateTime.parse(map['created_at'] as String),
-      updatedAt: DateTime.parse(map['updated_at'] as String),
+      // updatedAt: DateTime.parse(map['updated_at'] as String),
     );
   }
 

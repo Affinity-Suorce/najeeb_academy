@@ -29,11 +29,9 @@ class _$AppRouter extends RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
-      final args = routeData.argsAs<LoginRouteArgs>(
-          orElse: () => const LoginRouteArgs());
       return AdaptivePage<dynamic>(
         routeData: routeData,
-        child: LoginPage(key: args.key),
+        child: const LoginPage(),
         fullscreenDialog: true,
       );
     },
@@ -45,6 +43,7 @@ class _$AppRouter extends RootStackRouter {
           key: args.key,
           subjectsIds: args.subjectsIds,
           myClassesIds: args.myClassesIds,
+          amount: args.amount,
         ),
         fullscreenDialog: true,
       );
@@ -217,26 +216,14 @@ class WelcomeRouteArgs {
 
 /// generated route for
 /// [LoginPage]
-class LoginRoute extends PageRouteInfo<LoginRouteArgs> {
-  LoginRoute({Key? key})
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute()
       : super(
           LoginRoute.name,
           path: '/login',
-          args: LoginRouteArgs(key: key),
         );
 
   static const String name = 'LoginRoute';
-}
-
-class LoginRouteArgs {
-  const LoginRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'LoginRouteArgs{key: $key}';
-  }
 }
 
 /// generated route for
@@ -246,6 +233,7 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
     Key? key,
     required List<int> subjectsIds,
     required List<int> myClassesIds,
+    required int amount,
   }) : super(
           RegisterRoute.name,
           path: '/register',
@@ -253,6 +241,7 @@ class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
             key: key,
             subjectsIds: subjectsIds,
             myClassesIds: myClassesIds,
+            amount: amount,
           ),
         );
 
@@ -264,6 +253,7 @@ class RegisterRouteArgs {
     this.key,
     required this.subjectsIds,
     required this.myClassesIds,
+    required this.amount,
   });
 
   final Key? key;
@@ -272,9 +262,11 @@ class RegisterRouteArgs {
 
   final List<int> myClassesIds;
 
+  final int amount;
+
   @override
   String toString() {
-    return 'RegisterRouteArgs{key: $key, subjectsIds: $subjectsIds, myClassesIds: $myClassesIds}';
+    return 'RegisterRouteArgs{key: $key, subjectsIds: $subjectsIds, myClassesIds: $myClassesIds, amount: $amount}';
   }
 }
 

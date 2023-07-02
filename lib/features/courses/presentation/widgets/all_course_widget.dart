@@ -72,7 +72,7 @@ class _CourseExpandableBodyWidgetState
                         ),
                       ),
                       const Spacer(),
-                      !widget.course.subscribed! ?
+                      !(widget.course.subjects![index].subscribed ?? false) ?
                       Checkbox(
                         value: checkBoxesList![index],
                         onChanged: (value) {

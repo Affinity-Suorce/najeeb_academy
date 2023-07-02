@@ -6,10 +6,10 @@ class AllCoursesTopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Row(
-          children: const [
+          children: [
             BackButton(),
             Expanded(
               child: Navbar(
@@ -19,7 +19,7 @@ class AllCoursesTopSection extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 24),
+        SizedBox(height: 24),
       ],
     );
   }

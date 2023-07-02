@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/core/network/urls.dart';
+
+import '../../../app/di.dart';
 
 class CreateClassedOrderService extends ChangeNotifier {
   final Dio _api;
@@ -15,14 +19,18 @@ class CreateClassedOrderService extends ChangeNotifier {
     try {
       isLoaded = false;
       notifyListeners();
-      final response = await _api.post(myClassesOrderCreateUrl, data: {
-        "is_installment": 0,
+      final response = await Dio().post(myClassesOrderCreateUrl, data: {
+        "payment_method_id": 1,
         "my_class_id": classesIds,
-        "subject_id": subjectIds,
-        "amount_paid": paidAmount,
+        "ids": jsonEncode(subjectIds),
+        "amount": int.parse(paidAmount),
         "bill_number": billNumber
-      });
-
+      },
+      options: Options (
+          contentType: Headers.jsonContentType,
+          responseType:ResponseType.json,
+          headers: {"Authorization":"Bearer ${DI.userInfo.token}"}
+          ));
       // final data = response.data;
       if (response.statusCode == 200) {
         // debugPrint("data['data']");

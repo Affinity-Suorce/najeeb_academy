@@ -19,6 +19,7 @@ class CoursesServices {
 
   void setLecturesList() {}
   void setFullPriceOfSelectedCourses() {
+
     List<Subject> selectedSubjects = _subjectList
         .where((subject) => _subjectsIds.any((id) => id == subject.id))
         .toList();

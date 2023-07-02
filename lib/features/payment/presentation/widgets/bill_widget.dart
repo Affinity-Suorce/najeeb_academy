@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/features/payment/models/payment.dart';
 import 'package:najeeb_academy/features/payment/presentation/payments_page.dart';
 
@@ -23,7 +24,6 @@ class BillWidget extends StatelessWidget {
                       //     ? const Text('القسط:', style: textStyle1)
                       //     : const SizedBox.shrink(),
                       Text('رقم الفاتورة:', style: textStyle1),
-                      Text('الدورة:', style: textStyle1),
                       Text('المبلغ المدفوع:', style: textStyle1),
                       Text('المبلغ المتبقي:', style: textStyle1),
                       Text('تاريخ:', style: textStyle1),
@@ -43,10 +43,6 @@ class BillWidget extends StatelessWidget {
                         style: textStyle2,
                       ),
                       Text(
-                        payment.studentMyClassId.toString(),
-                        style: textStyle2,
-                      ),
-                      Text(
                         payment.amtPaid.toString(),
                         style: textStyle2,
                       ),
@@ -55,7 +51,7 @@ class BillWidget extends StatelessWidget {
                         style: textStyle2,
                       ),
                       Text(
-                        payment.createdAt.toString(),
+                        payment.createdAt.formattedDate2,
                         style: textStyle2,
                       ),
                       // Text(

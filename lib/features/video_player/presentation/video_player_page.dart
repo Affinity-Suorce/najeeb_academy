@@ -81,6 +81,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           } else if (state is GotVideoState) {
             Lecture lecture = state.lecture;
             debugPrint("lectureIdIs:${lecture.id}");
+            debugPrint("url:${state.lecture.toString()}");
                   return Scaffold(
                     backgroundColor: Colors.grey.shade900,
                     floatingActionButton: FloatingActionButton(

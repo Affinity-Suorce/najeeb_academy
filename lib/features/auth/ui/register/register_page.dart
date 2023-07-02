@@ -13,10 +13,12 @@ import 'package:najeeb_academy/features/auth/ui/widgets/syrian_mobile_form_field
 class RegisterPage extends StatelessWidget {
   final List<int> subjectsIds;
   final List<int> myClassesIds;
+  final int amount;
   RegisterPage({
     super.key,
     required this.subjectsIds,
-    required this.myClassesIds,
+    required this.myClassesIds, 
+    required this.amount,
   });
   final service = DI.registerFormServiceFactory();
   @override
@@ -207,6 +209,7 @@ class RegisterPage extends StatelessWidget {
                           onFailed: (message) => onFailed(context, message),
                           subjectsIds: subjectsIds,
                           myClassesIds: myClassesIds,
+                          amount: amount.toInt(),
                         ),
                         validator: (input) {
                           if (input == null || input.trim().isEmpty) {
@@ -258,6 +261,7 @@ class RegisterPage extends StatelessWidget {
                         onFailed: (message) => onFailed(context, message),
                         subjectsIds: subjectsIds,
                         myClassesIds: myClassesIds,
+                        amount: amount.toInt(),
                       ),
                       child: const Text('إنشاء الحساب'),
                     ),

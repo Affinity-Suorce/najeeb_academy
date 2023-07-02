@@ -59,8 +59,8 @@ class ShimmerWidget3 extends StatelessWidget {
     return SingleChildScrollView(
       child: SizedBox(
         height: MediaQuery.of(context).size.height,
-        child: Column(
-          children: const [
+        child: const Column(
+          children: [
             SizedBox(
               height: 86,
             ),

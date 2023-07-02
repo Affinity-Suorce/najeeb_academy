@@ -26,6 +26,7 @@ class RegisterFormService extends ChangeNotifier {
     required void Function(String message) onFailed,
     required List<int> subjectsIds,
     required List<int> myClassesIds,
+    required int amount,
   }) async {
     final formState = formKey.currentState;
     if (formState != null && formState.validate()) {
@@ -39,23 +40,26 @@ class RegisterFormService extends ChangeNotifier {
       final fatherName = formState.fields['father_name']!.value;
       final mobile = formState.fields['mobile']!.value;
       final landline = formState.fields['landline']!.value;
-      final governorate = formState.fields['governorate']!.value;
+      final governorate = formState.fields['governorate']!.value.name;
       final parentMobile = formState.fields['parent_mobile']!.value;
-      // final billNumber = formState.fields['bill_number']!.value;
+      final billNumber = formState.fields['bill_number']!.value;
       // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
       try {
-        final response = await _api.post(
+        final response = await Dio().post(
           registerUrl,
           data: {
-            'name': firstName + ' ' + lastName,
             'first_name': firstName,
             'last_name': lastName,
             'father_name': fatherName,
-            'mobile': mobile,
+            'phone': mobile,
             'landline': landline ?? '6666666',
             'parent_phone': parentMobile,
-            'governorate': governorate
+            'governorate': governorate,
+            'subjects_ids' : subjectsIds,
+            'payment_method_id' : 1,
+            'amount' : amount,
+            'bill_number' : billNumber,
           },
         );
 
@@ -85,9 +89,8 @@ class RegisterFormService extends ChangeNotifier {
           ].contains(e.type)) {
             return onFailed('لايمكن الاتصال بالشبكة');
           }
-
+          print(e.toString());
           onFailed('حدث خطأ غير متوقع');
-          // onFailed(e.message);
         }
       }
     }

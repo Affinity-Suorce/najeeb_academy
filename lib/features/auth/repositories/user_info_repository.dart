@@ -18,11 +18,11 @@ class UserInfoRepository {
       : _preferences.setString(_studentKey, student.toJson());
 
   Future<bool> storeFromApiData(dynamic data) async {
-    final token = data['api_token'];
+    final token = data['token'];
     final student = Student(
       id: data['id'].toString(),
       name: data['name'],
-      username: data['username'],
+      username: data['user_name'],
       token: token,
       imageUrl: data['photo'],
       phone: data['phone'],

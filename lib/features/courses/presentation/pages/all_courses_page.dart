@@ -136,10 +136,11 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                   if (validateSelection()) {
                                     DI.coursesServices
                                         .setFullPriceOfSelectedCourses();
+                                      int fullPrice = DI
+                                                .coursesServices.getfullPrice;
                                     bool? result = await context.showDialog(
                                         CheckDialog(
-                                            fullPrice: DI
-                                                .coursesServices.getfullPrice
+                                            fullPrice: fullPrice
                                                 .toString()),
                                         barrierDismissible: false);
                                     if (result!) {
@@ -148,7 +149,8 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                             myClassesIds: DI.coursesServices
                                                 .getSelectedCourses,
                                             subjectsIds: DI.coursesServices
-                                                .getSelectedSubjects));
+                                                .getSelectedSubjects,
+                                                amount: fullPrice));
                                       } else {
                                         // ignore: use_build_context_synchronously
                                         context.showDialog(
@@ -157,9 +159,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                                     .getSelectedCourses,
                                                 subjectsIds: DI.coursesServices
                                                     .getSelectedSubjects,
-                                                paidAmount: DI.coursesServices
-                                                    .getfullPrice
-                                                    .toString()),
+                                                paidAmount: fullPrice.toString()),
                                             barrierDismissible: false);
                                       }
                                     }

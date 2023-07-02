@@ -14,7 +14,7 @@ class LocalNotificationService {
 
   Future<void> initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-     AndroidInitializationSettings('ic_launcher');
+     AndroidInitializationSettings('mipmap/ic_launcher');
 
     const IOSInitializationSettings initializationSettingsIOS =
      IOSInitializationSettings(

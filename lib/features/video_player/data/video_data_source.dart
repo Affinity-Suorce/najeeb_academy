@@ -8,14 +8,17 @@ class VideoDataSource {
   final Client _client;
   VideoDataSource(this._client);
   Future<Lecture> getVideo(String videoId) async {
-    return dataSource(
-      () => _client.get(
+    return await dataSource(
+      () async {
+        var res = await _client.get(
         Uri.parse(videoUrl(videoId)),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${DI.userInfo.token}'
         },
-      ),
+      );
+      return res;
+      },
       lectureFromJson,
     );
   }

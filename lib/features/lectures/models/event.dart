@@ -30,23 +30,23 @@ class EventModel {
   List<String> sunday;
 
   factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
-        monday: List<String>.from(json["Monday"].map((x) => x)),
-        tuesday: List<String>.from(json["Tuesday"].map((x) => x)),
-        wednesday: List<String>.from(json["Wednesday"].map((x) => x)),
-        thursday: List<String>.from(json["Thursday"].map((x) => x)),
-        friday: List<String>.from(json["Friday"].map((x) => x)),
-        saturday: List<String>.from(json["Saturday"].map((x) => x)),
-        sunday: List<String>.from(json["Sunday"].map((x) => x)),
+        monday: List<String>.from(json["monday"].map((x) => x)),
+        tuesday: List<String>.from(json["tuesday"].map((x) => x)),
+        wednesday: List<String>.from(json["wednesday"].map((x) => x)),
+        thursday: List<String>.from(json["thursday"].map((x) => x)),
+        friday: List<String>.from(json["friday"].map((x) => x)),
+        saturday: List<String>.from(json["saturday"].map((x) => x)),
+        sunday: List<String>.from(json["sunday"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "Monday": List<dynamic>.from(monday.map((x) => x)),
-        "Tuesday": List<dynamic>.from(tuesday.map((x) => x)),
-        "Wednesday": List<dynamic>.from(wednesday.map((x) => x)),
-        "Thursday": List<dynamic>.from(thursday.map((x) => x)),
-        "Friday": List<dynamic>.from(friday.map((x) => x)),
-        "Saturday": List<dynamic>.from(saturday.map((x) => x)),
-        "Sunday": List<dynamic>.from(sunday.map((x) => x)),
+        "monday": List<dynamic>.from(monday.map((x) => x)),
+        "tuesday": List<dynamic>.from(tuesday.map((x) => x)),
+        "wednesday": List<dynamic>.from(wednesday.map((x) => x)),
+        "thursday": List<dynamic>.from(thursday.map((x) => x)),
+        "friday": List<dynamic>.from(friday.map((x) => x)),
+        "saturday": List<dynamic>.from(saturday.map((x) => x)),
+        "sunday": List<dynamic>.from(sunday.map((x) => x)),
       };
 
   List<String> getAllInfo() {

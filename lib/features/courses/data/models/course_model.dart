@@ -30,7 +30,6 @@ class CourseModel {
     this.updatedAt,
     this.classType,
     this.subjects,
-    this.subscribed,
   });
 
   dynamic id;
@@ -41,10 +40,10 @@ class CourseModel {
   dynamic createdAt;
   dynamic updatedAt;
   String? classType;
-  bool? subscribed;
   List<Subject>? subjects;
 
-  factory CourseModel.fromJson(Map<String, dynamic> json) => CourseModel(
+  factory CourseModel.fromJson(Map<String, dynamic> json) {
+    return CourseModel(
         id: json["id"],
         name: json["name"],
         classTypeId: json["class_type_id"],
@@ -53,7 +52,6 @@ class CourseModel {
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         classType: json["class_type"],
-        subscribed: true,
         // subscribed: json["subscribed"]==0?false:true,
         subjects: List<Subject>.from(json["subjects"].map((x) =>
                 // if (x["for_me"] == null || x["for_me"] == true) {
@@ -62,6 +60,7 @@ class CourseModel {
             // }
             )),
       );
+  }
 
   // Map<String, dynamic> toJson() => {
   //     "id": id,
@@ -83,12 +82,13 @@ class Subject {
     this.slug,
     this.forMe,
     this.cost,
-    this.myClassId,
+    this.package_id,
     this.teacherId,
     this.createdAt,
     this.updatedAt,
     this.teacher,
     this.lectures,
+    this.subscribed,
   });
 
   dynamic id;
@@ -96,29 +96,33 @@ class Subject {
   String? name;
   String? slug;
   String? cost;
-  dynamic myClassId;
+  dynamic package_id;
   dynamic teacherId;
   dynamic createdAt;
   dynamic updatedAt;
   Teacher? teacher;
   List<Lecture>? lectures;
+  bool? subscribed;
 
-  factory Subject.fromJson(Map<String, dynamic> json) => Subject(
+  factory Subject.fromJson(Map<String, dynamic> json) {
+    return Subject(
         id: json["id"],
         name: json["name"] ?? '',
         slug: json["slug"] ?? '',
-        cost: json["cost"],
-        myClassId: json["my_class_id"],
+        cost: json["cost"].toString() ?? '0',
+        package_id: json["package_id"],
         teacherId: json["teacher_id"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
         teacher: teacherValues.map![json["teacher"]],
         forMe: json["for_me"],
+        subscribed: json["subscribed"],
         lectures: json["lectures"] != null
             ? List<Lecture>.from(
                 json["lectures"].map((x) => Lecture.fromJson(x)))
             : [],
       );
+  }
 
   // Map<String, dynamic> toJson() => {
   //       "id": id,

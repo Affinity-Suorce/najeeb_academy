@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:najeeb_academy/app/di.dart';
@@ -31,20 +30,25 @@ class LoginFormService extends ChangeNotifier {
           .then((value) {
         cancelToken.cancel('cancel');
       });
-      final username = formState.fields['username']!.value;
-      final password = formState.fields['password']!.value;
-      final fcm_token = await FirebaseMessaging.instance.getToken();
-
+      String username = formState.fields['username']!.value;
+      String password = formState.fields['password']!.value;
+      // final fcm_token = await FirebaseMessaging.instance.getToken();
+      Dio api=Dio();
       try {
-        final response = await (_api.post(
+        final response = await api.post(
           loginUrl,
           data: {
             'username': username,
             'password': password,
-            'fcm_token':fcm_token,
+            // 'fcm_token':fcm_token,
           },
           cancelToken: cancelToken,
-        )).then((value) {
+          options: Options (
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType:ResponseType.json,
+          )
+        ).then((value) {
           Navigator.pop(context);
           return value;
         });
@@ -57,7 +61,7 @@ class LoginFormService extends ChangeNotifier {
             return onFailed('لا يمكنك التسجيل حالياً, الرجاء المحاولة لاحقاً');
           }
           await _userInfo
-              .storeFromApiData(data['data']['user'])
+              .storeFromApiData(data['data'])
               .then((success) {
             if (!success) {
               return onFailed('حدث خطأ غير متوقع');
@@ -65,6 +69,7 @@ class LoginFormService extends ChangeNotifier {
             DI.router.replaceAll([const MainRoute()]);
           });
         }
+        return onFailed(data['message']);
       } on DioError catch (e) {
         if ([
           DioErrorType.other,

@@ -31,9 +31,9 @@ class _LoginPageState extends State<LoginPage> {
         context: context,
         builder: (BuildContext context) => WillPopScope(
           onWillPop: () => Future.value(false),
-          child: AlertDialog(
-                title: const Text('سياسة الخصوصية:'),
-                content: const SizedBox(
+          child: const AlertDialog(
+                title: Text('سياسة الخصوصية:'),
+                content: SizedBox(
                   height: 250,
                   child: PrivacyPolicy()
                   ),
