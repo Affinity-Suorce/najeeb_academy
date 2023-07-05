@@ -45,10 +45,24 @@ class RegisterFormService extends ChangeNotifier {
       final billNumber = formState.fields['bill_number']!.value;
       // final isInstallment = formState.fields['is_installment']!.value;
       // final classId = formState.fields['class']!.value;
+      print({
+            'first_name': firstName,
+            'last_name': lastName,
+            'father_name': fatherName,
+            'phone': mobile,
+            'landline': landline ?? '6666666',
+            'parent_phone': parentMobile,
+            'governorate': governorate,
+            'subjects_ids' : subjectsIds,
+            'payment_method_id' : 1,
+            'amount' : amount,
+            'bill_number' : billNumber,
+          });
       try {
         final response = await Dio().post(
           registerUrl,
           data: {
+            'name':firstName+" "+lastName,
             'first_name': firstName,
             'last_name': lastName,
             'father_name': fatherName,
@@ -61,9 +75,18 @@ class RegisterFormService extends ChangeNotifier {
             'amount' : amount,
             'bill_number' : billNumber,
           },
+          options: Options (
+          validateStatus: (_) => true,
+          contentType: Headers.jsonContentType,
+          responseType:ResponseType.json,
+          headers: {
+            'Accept': 'application/json',
+          },
+          )
         );
 
         final data = response.data;
+        print(data);
         if (data is Map<String, dynamic>) {
           if (data.containsKey('data')) {
             // ignore: use_build_context_synchronously
@@ -76,9 +99,11 @@ class RegisterFormService extends ChangeNotifier {
           Navigator.pop(context);
           final data = e.response?.data;
           if (data is Map<String, dynamic>) {
-            if (data.containsKey('message') &&
-                data['message'].contains('invalid')) {
-              return onFailed('تم استخدام رقم الفاتورة من قبل');
+            if (data.containsKey('message')) {
+                  if(data['message'].contains('invalid')){
+                    return onFailed('تم استخدام رقم الفاتورة من قبل');
+                  }
+                  return onFailed(data['message']);
             }
           }
           if ([

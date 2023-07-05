@@ -21,16 +21,21 @@ class CreateClassedOrderService extends ChangeNotifier {
       notifyListeners();
       final response = await Dio().post(myClassesOrderCreateUrl, data: {
         "payment_method_id": 1,
-        "my_class_id": classesIds,
-        "ids": jsonEncode(subjectIds),
+        // "subjects_ids": classesIds,
+        "subjects_ids": jsonEncode(subjectIds),
         "amount": int.parse(paidAmount),
         "bill_number": billNumber
       },
       options: Options (
+        validateStatus: (_) => true,
           contentType: Headers.jsonContentType,
           responseType:ResponseType.json,
-          headers: {"Authorization":"Bearer ${DI.userInfo.token}"}
+          headers: {
+            "Authorization":"Bearer ${DI.userInfo.token}",
+            'Accept': 'application/json',
+            }
           ));
+      print(response.data);
       // final data = response.data;
       if (response.statusCode == 200) {
         // debugPrint("data['data']");
@@ -44,6 +49,7 @@ class CreateClassedOrderService extends ChangeNotifier {
       }
     } catch (e) {
       isLoaded = true;
+      print(e.toString());
       notifyListeners();
       return false;
     }
