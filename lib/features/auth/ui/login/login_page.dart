@@ -109,16 +109,24 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text('تسجيل الدخول'),
                     ),
                     8.verticalSpace,
-                    Align(
-                      child: LinkText(
-                        'تصفح الدورات والإشتراك',
-                        onTap: () {
-                          DI.router.replaceAll([
+                    ElevatedButton(
+                      onPressed: () {
+                        DI.router.replaceAll([
                             const MainRoute(children: [CoursesRoute()])
                           ]);
-                        },
-                      ),
+                      },
+                      child: const Text('اشتراك'),
                     ),
+                    // Align(
+                    //   child: LinkText(
+                    //     'تصفح الدورات والإشتراك',
+                    //     onTap: () {
+                    //       DI.router.replaceAll([
+                    //         const MainRoute(children: [CoursesRoute()])
+                    //       ]);
+                    //     },
+                    //   ),
+                    // ),
                     8.verticalSpace,
                     Align(
                       child: LinkText(

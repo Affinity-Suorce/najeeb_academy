@@ -153,7 +153,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                                 amount: fullPrice));
                                       } else {
                                         // ignore: use_build_context_synchronously
-                                        context.showDialog(
+                                        await context.showDialog(
                                             PaymentDialog(
                                                 myClassesIds: DI.coursesServices
                                                     .getSelectedCourses,
@@ -161,6 +161,7 @@ class _AllCoursesPageImplState extends State<AllCoursesPageImpl> {
                                                     .getSelectedSubjects,
                                                 paidAmount: fullPrice.toString()),
                                             barrierDismissible: false);
+                                        BlocProvider.of<CoursesCubit>(context).getMyCourses(true);
                                       }
                                     }
 

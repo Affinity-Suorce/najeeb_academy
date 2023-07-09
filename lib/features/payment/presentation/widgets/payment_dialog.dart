@@ -98,7 +98,7 @@ class _PaymentDialogState extends State<PaymentDialog> {
                                       billNumber: _controller!.text)
                                   .then((value) {
                                 if (value) {
-                                  Navigator.pop(context);
+                                  Navigator.pop(context,true);
                                   context.showSuccessSnackBar(
                                       'تم إنشاء الطلب ينجاح');
                                 } else {

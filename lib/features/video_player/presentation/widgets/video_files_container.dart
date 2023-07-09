@@ -1,3 +1,5 @@
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:najeeb_academy/core/helpers/download_file_funcs.dart';
@@ -52,15 +54,27 @@ class VideoFilesContainer extends StatelessWidget {
                       onTap: () async {
                         var permission = await requestPermission();
                         debugPrint('lectureFiles:$lectureFiles index:$index');
-                        if (permission) {
-                          getFileFromUrl(lectureFiles[index],
-                                  name: index.toString())
-                              .then((file) {
-                            launchUrl(
-                                mode: LaunchMode.externalNonBrowserApplication,
-                                Uri.file(file));
-                          });
-                        }
+                        final AndroidIntent intent = AndroidIntent(
+                            action: 'action_view',
+                            data: lectureFiles[index],
+                            type: 'application/pdf',
+                            flags: [
+                              Flag.FLAG_GRANT_READ_URI_PERMISSION,
+                              Flag.FLAG_GRANT_PERSISTABLE_URI_PERMISSION,
+                              Flag.FLAG_ACTIVITY_NEW_TASK
+                            ],
+                          );
+                          intent.launch();
+                        // if (permission) {
+                        // getFileFromUrl(lectureFiles[index],
+                        //         name: index.toString())
+                        //     .then((file) {
+                        //   // launchUrl(
+                        //   //     mode: LaunchMode.externalNonBrowserApplication,
+                        //   //     Uri.file('content:/'+file));
+                          
+                        // });
+                        // }
                       },
                       child: fileColumn(index + 1),
                     );

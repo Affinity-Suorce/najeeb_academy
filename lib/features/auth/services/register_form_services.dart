@@ -93,6 +93,14 @@ class RegisterFormService extends ChangeNotifier {
             context.showDialog(const RegistrationCompleteDialog(),
                 barrierDismissible: false);
           }
+          
+          if (data.containsKey('message')) {
+            Navigator.pop(context);
+            if(data['message'].contains('phone has already been taken')){
+                    return onFailed('تم استخدام رقم الهاتف من قبل');
+                  }
+              return onFailed(data['message']);
+          }
         }
       } on DioError catch (e) {
         if (e.message != 'cancel') {

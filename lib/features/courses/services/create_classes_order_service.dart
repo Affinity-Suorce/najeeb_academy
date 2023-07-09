@@ -19,10 +19,17 @@ class CreateClassedOrderService extends ChangeNotifier {
     try {
       isLoaded = false;
       notifyListeners();
-      final response = await Dio().post(myClassesOrderCreateUrl, data: {
+      print({
         "payment_method_id": 1,
         // "subjects_ids": classesIds,
         "subjects_ids": jsonEncode(subjectIds),
+        "amount": int.parse(paidAmount),
+        "bill_number": billNumber
+      });
+      final response = await Dio().post(myClassesOrderCreateUrl, data: {
+        "payment_method_id": 1,
+        // "subjects_ids": classesIds,
+        "subjects_ids": subjectIds,
         "amount": int.parse(paidAmount),
         "bill_number": billNumber
       },
@@ -33,6 +40,7 @@ class CreateClassedOrderService extends ChangeNotifier {
           headers: {
             "Authorization":"Bearer ${DI.userInfo.token}",
             'Accept': 'application/json',
+            'Content-Type': 'application/json',
             }
           ));
       print(response.data);
