@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/date_time_helper.dart';
 import 'package:najeeb_academy/features/courses/data/models/course_model.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';

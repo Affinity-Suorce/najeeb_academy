@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:najeeb_academy/features/lectures/models/lecture.dart';
 
 List<CourseModel> courseModelFromJson(String str) {
+  debugPrint(json.decode(str).toString());
   List<CourseModel> list = List<CourseModel>.from(json
       .decode(str)["data"]["my_classes"]
       .map((x) => CourseModel.fromJson(x)));

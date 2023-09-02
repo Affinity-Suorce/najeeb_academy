@@ -10,17 +10,19 @@ class Student {
   final String token;
   final String? imageUrl;
   final String? phone;
+  int numberViews;
 
-  Student({
-    required this.id,
-    required this.name,
-    required this.username,
-    required this.token,
-    this.imageUrl,
-    this.phone,
-  });
+  Student(
+      {required this.id,
+      required this.name,
+      required this.username,
+      required this.token,
+      this.imageUrl,
+      this.phone,
+      this.numberViews = 0});
 
   NetworkImage? _image;
+
   NetworkImage? get image {
     final url = imageUrl;
     if (url != null && _image == null) {
@@ -29,22 +31,22 @@ class Student {
     return _image;
   }
 
-  Student copyWith({
-    String? id,
-    String? name,
-    String? username,
-    String? token,
-    String? imageUrl,
-    String? phone,
-  }) {
+  Student copyWith(
+      {String? id,
+      String? name,
+      String? username,
+      String? token,
+      String? imageUrl,
+      String? phone,
+      int? numberViews}) {
     return Student(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      username: username ?? this.username,
-      token: token ?? this.token,
-      imageUrl: imageUrl ?? this.imageUrl,
-      phone: phone ?? this.phone,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        username: username ?? this.username,
+        token: token ?? this.token,
+        imageUrl: imageUrl ?? this.imageUrl,
+        phone: phone ?? this.phone,
+        numberViews: numberViews ?? this.numberViews);
   }
 
   Map<String, dynamic> toMap() {
@@ -55,6 +57,7 @@ class Student {
       'token': token,
       'imageUrl': imageUrl,
       'phone': phone,
+      'numberViews': numberViews
     };
   }
 
@@ -76,7 +79,7 @@ class Student {
 
   @override
   String toString() {
-    return 'Student(id: $id, name: $name, username: $username, token: $token, imageUrl: $imageUrl, phone: $phone)';
+    return 'Student(id: $id, name: $name, username: $username, token: $token, imageUrl: $imageUrl, phone: $phone, numberViews $numberViews)';
   }
 
   @override
@@ -88,7 +91,8 @@ class Student {
         other.username == username &&
         other.token == token &&
         other.imageUrl == imageUrl &&
-        other.phone == phone;
+        other.phone == phone &&
+        other.numberViews == numberViews;
   }
 
   @override

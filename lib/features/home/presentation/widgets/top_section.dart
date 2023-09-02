@@ -2,11 +2,15 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/gradient_slider.dart';
 import 'package:najeeb_academy/app/widgets/link_text.dart';
 import 'package:najeeb_academy/app/widgets/nav_bar.dart';
+import 'package:najeeb_academy/core/Enum/enum.dart';
+import 'package:najeeb_academy/core/error/failures.dart';
+import 'package:najeeb_academy/features/home/bloc/home_bloc.dart';
 
 class TopSection extends StatefulWidget {
   const TopSection({Key? key}) : super(key: key);
@@ -19,7 +23,7 @@ class _TopSectionState extends State<TopSection> {
   @override
   void initState() {
     super.initState();
-    if (mounted) {
+    if (!mounted) {
       Timer.periodic(const Duration(seconds: 3), (timer) => setState(() {}));
     }
   }
@@ -60,12 +64,23 @@ class _TopSectionState extends State<TopSection> {
                       offset: Offset(2, 6))
                 ]),
             child: DI.userInfo.isAuthenticated
-                ? DI.lectureServices.getLectures.isEmpty
-                    ? alternativeWidget(
-                        "إذهب إلى صفحة دروسي لتحديد ما عليك مشاهدته",
-                        false,
-                        context)
-                    : Column(
+                ? BlocConsumer<HomeBloc,HomeState>(
+              builder:(context,state){
+                if(state is HomeLoad){
+                  return const Text(
+                    "ابدأ التعلم معنا الآن",
+                    style: TextStyle(
+                      height: 1.4,
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
+                    textDirection: TextDirection.rtl,
+                  );
+                }
+                if(state is GetNumberOfViewsState){
+                  switch(state.requestState){
+                    case RequestState.loading:
+                      return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -86,9 +101,9 @@ class _TopSectionState extends State<TopSection> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "${DI.lectureServices.getWatchedLecturesCount}",
-                                  style: const TextStyle(
+                                const Text(
+                                  "0",
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 19,
                                   ),
@@ -123,16 +138,126 @@ class _TopSectionState extends State<TopSection> {
                                     min: 0,
                                     max: 10,
                                     value: (DI.lectureServices
-                                                .getWatchedLecturesIds.length /
-                                            DI.lectureServices.getLectures
-                                                .length) *
+                                        .getWatchedLecturesIds.length /
+                                        DI.lectureServices.getLectures
+                                            .length) *
                                         10,
                                     onChanged: (double value) {},
                                   )),
                             ),
                           ),
                         ],
-                      )
+                      );
+                    case RequestState.loaded:
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "تعلمت اليوم",
+                              textDirection: TextDirection.rtl,
+                              style: TextStyle(
+                                color: Colors.black54,
+                                height: 1,
+                                fontSize: 17,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${state.numberOfViews}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 19,
+                                  ),
+                                ),
+                                Text(
+                                  " درس من أصل ${DI.lectureServices.getLectures.length}",
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: SizedBox(
+                              height: 10,
+                              child: SliderTheme(
+                                  data: SliderThemeData(
+                                      activeTickMarkColor: Colors.white,
+                                      trackShape: GradientRectSliderTrackShape(
+                                          gradient: gradient,
+                                          darkenInactive: false),
+                                      thumbShape: SliderComponentShape.noThumb,
+                                      activeTrackColor: Colors.white,
+                                      trackHeight: 6),
+                                  child: Slider(
+                                    min: 0,
+                                    max: DI.lectureServices.getLectures.length.toDouble() == 0 ? 10 : DI.lectureServices.getLectures.length.toDouble(),
+                                    value:state.numberOfViews.toDouble(),
+                                    onChanged: (double value) {},
+                                  )),
+                            ),
+                          ),
+                        ],
+                      );
+                    case RequestState.error:
+                      var failure = state.failure;
+                      if(failure is ServerFailure){
+                        return const Text(
+                          'خطأ غير معروف',
+                          style: TextStyle(
+                            height: 1.4,
+                            color: Colors.white,
+                            fontSize: 24,
+                          ),
+                          textDirection: TextDirection.rtl,
+                        );
+                      }if(failure is HttpFailure){
+                        return Text(
+                          failure.message,
+                          style:const TextStyle(
+                            height: 1.4,
+                            color: Colors.white,
+                            fontSize: 24,
+                          ),
+                          textDirection: TextDirection.rtl,
+                        );
+                      }
+                      return const Text(
+                        "ابدأ التعلم معنا الآن",
+                        style: TextStyle(
+                          height: 1.4,
+                          color: Colors.white,
+                          fontSize: 24,
+                        ),
+                        textDirection: TextDirection.rtl,
+                      );
+                  }
+                }
+                return const Text(
+                  "ابدأ التعلم معنا الآن",
+                  style: TextStyle(
+                    height: 1.4,
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                  textDirection: TextDirection.rtl,
+                );
+              } ,
+              listener: (context,state){},)
                 : alternativeWidget(
                     "اشترك في الدروس وسجل دخولك الان", true, context)),
       ],
@@ -178,7 +303,7 @@ class _TopSectionState extends State<TopSection> {
                                       service: DI.welcomeServiceFactory(),
                                       lastPage: true)
                                 ]);
-                                DI.router.push(LoginRoute());
+                                DI.router.push(const LoginRoute());
                               }
                             });
                           })

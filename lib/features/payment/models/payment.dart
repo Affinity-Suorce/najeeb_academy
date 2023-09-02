@@ -9,59 +9,32 @@ class Payment {
   final int paymentId;
   // final String? refNo;
   final String amtPaid;
-  final String balance;
-  final bool paid;
-  final bool orderConfirm;
-  final int? studentMyClassId;
-  final String? year;
-  final int? monthNumber;
-  final DateTime createdAt;
-  final DateTime? updatedAt;
+  final DateTime paymentDate;
+  final int billNumber;
 
   const Payment({
     required this.id,
     required this.studentId,
     required this.paymentId,
-    // this.refNo,
     required this.amtPaid,
-    required this.balance,
-    required this.paid,
-    required this.orderConfirm,
-    this.studentMyClassId,
-    this.year,
-    this.monthNumber,
-    required this.createdAt,
-    this.updatedAt,
+    required this.billNumber,
+    required this.paymentDate,
   });
 
   Payment copyWith({
     int? id,
     int? studentId,
-    String? refNo,
     String? amtPaid,
-    String? balance,
-    bool? paid,
-    bool? orderConfirm,
-    int? studentMyClassId,
-    String? year,
-    int? monthNumber,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    int? billNumber,
+    DateTime? paymentDate,
   }) {
     return Payment(
       id: id ?? this.id,
       studentId: studentId ?? this.studentId,
       paymentId: paymentId,
-      // refNo: refNo ?? this.refNo,
       amtPaid: amtPaid ?? this.amtPaid,
-      balance: balance ?? this.balance,
-      paid: paid ?? this.paid,
-      orderConfirm: orderConfirm ?? this.orderConfirm,
-      studentMyClassId: studentMyClassId ?? this.studentMyClassId,
-      year: year ?? this.year,
-      monthNumber: monthNumber ?? this.monthNumber,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
+      billNumber: billNumber?? this.billNumber,
+      paymentDate: paymentDate?? this.paymentDate
     );
   }
 
@@ -70,16 +43,9 @@ class Payment {
       'id': id,
       'student_id': studentId,
       'payment_id': paymentId,
-      // 'ref_no': refNo,
-      'amt_paid': amtPaid,
-      'balance': balance,
-      'paid': paid ? 1 : 0,
-      'order_confirm': orderConfirm ? 1 : 0,
-      'student_my_class_id': studentMyClassId,
-      'year': year,
-      'month_number': monthNumber,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt!= null ? updatedAt!.toIso8601String() : null,
+      'amount': amtPaid,
+      'bill_number':billNumber,
+      'payment_date':paymentDate.toIso8601String()
     };
   }
 
@@ -89,16 +55,9 @@ class Payment {
       id: map['payment_id'] as int,
       paymentId: map['payment_id'] as int,
       studentId: map['student_id'],
-      // refNo: map['ref_no'] != null ? map['ref_no'] as String : null,
-      amtPaid: map['amt_paid'] as String,
-      balance: map['balance'].toString(),
-      paid: map['paid'],
-      orderConfirm: map['order_confirm'],
-      // studentMyClassId: map['student_my_class_id'] as int,
-      // year: map['year'] as String,
-      // monthNumber: map['month_number'] as int,
-      createdAt: DateTime.parse(map['created_at'] as String),
-      // updatedAt: DateTime.parse(map['updated_at'] as String),
+      amtPaid: map['amount'].toString(),
+      billNumber: int.parse(map['bill_number']),
+      paymentDate: DateTime.parse(map['payment_date'].toString())
     );
   }
 
@@ -109,7 +68,7 @@ class Payment {
 
   @override
   String toString() {
-    return 'Payment(id: $id, studentId: $studentId, amtPaid: $amtPaid, balance: $balance, paid: $paid, orderConfirm: $orderConfirm, studentMyClassId: $studentMyClassId, year: $year, monthNumber: $monthNumber, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Payment(id: $id, studentId: $studentId, amtPaid: $amtPaid,billNumber $billNumber,paymentDate $paymentDate)';
   }
 
   @override
@@ -118,31 +77,17 @@ class Payment {
 
     return other.id == id &&
         other.studentId == studentId &&
-        // other.refNo == refNo &&
         other.amtPaid == amtPaid &&
-        other.balance == balance &&
-        other.paid == paid &&
-        other.orderConfirm == orderConfirm &&
-        other.studentMyClassId == studentMyClassId &&
-        other.year == year &&
-        other.monthNumber == monthNumber &&
-        other.createdAt == createdAt &&
-        other.updatedAt == updatedAt;
+        other.billNumber == billNumber &&
+        other.paymentDate == paymentDate;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
         studentId.hashCode ^
-        // refNo.hashCode ^
         amtPaid.hashCode ^
-        balance.hashCode ^
-        paid.hashCode ^
-        orderConfirm.hashCode ^
-        studentMyClassId.hashCode ^
-        year.hashCode ^
-        monthNumber.hashCode ^
-        createdAt.hashCode ^
-        updatedAt.hashCode;
+    billNumber.hashCode ^
+    paymentDate.hashCode;
   }
 }

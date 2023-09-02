@@ -5,12 +5,14 @@
 
 
 
+import 'package:equatable/equatable.dart';
+
 EventModel eventModelFromJson(Map<String, dynamic> str) =>
     EventModel.fromJson(str);
 
 // String eventModelToJson(EventModel data) => json.encode(data.toJson());
 
-class EventModel {
+class EventModel extends Equatable {
   EventModel({
     this.monday = const [],
     this.tuesday = const [],
@@ -60,5 +62,9 @@ class EventModel {
     tempList.addAll(sunday);
     return tempList;
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [monday,tuesday,wednesday,thursday,friday,saturday,sunday];
 
 }

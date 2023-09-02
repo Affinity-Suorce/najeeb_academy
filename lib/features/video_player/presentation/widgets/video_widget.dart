@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/core/helpers/funcs.dart';
 
@@ -35,19 +36,19 @@ class VideoWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: GoogleFonts.varela(
                   height: 1.4,
                   color: Colors.black54,
-                  fontSize: 21,
+                  fontSize: 16,
                 ),
                 textDirection: TextDirection.rtl,
               ),
               Text(
                 date,
-                style: const TextStyle(
+                style: GoogleFonts.varela(
                   height: 1.4,
                   color: AppColors.indigo,
-                  fontSize: 18,
+                  fontSize: 14,
                 ),
                 textDirection: TextDirection.rtl,
               ),

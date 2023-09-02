@@ -13,11 +13,19 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+
+  int numberOfLine = 0;
+
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    for(var element in widget.events!.props){
+      if(element is List<String>){
+        if(element.length > numberOfLine){
+          numberOfLine = element.length;
+        }
+      }
+    }
     super.initState();
   }
 
@@ -36,20 +44,33 @@ class _CalendarState extends State<Calendar> {
           color: Colors.white,
           child: Stack(
             children: [
-              const VerticalLines(),
-              const HorizontalLines(),
-              DataWidget(events: widget.events),
+            const VHLine(),
+              DataWidget(events: widget.events,numberOfLine: numberOfLine,),
             ],
           ),
-        ),
-      ),
+        )),
     );
   }
 }
 
+class VHLine extends StatelessWidget {
+  const VHLine({super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return const Stack(
+      children: [
+      HorizontalLines()
+    ],);
+  }
+}
+
+
 class DataWidget extends StatelessWidget {
-  const DataWidget({Key? key, required this.events}) : super(key: key);
+  const DataWidget({Key? key, required this.events,required this.numberOfLine}) : super(key: key);
   final EventModel? events;
+  final int numberOfLine;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -57,11 +78,20 @@ class DataWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: List.generate(8, (index) {
+          children: List.generate(7, (index) {
             final List<String> finalList = getList(index, events!);
-            return DataRow(
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+                physics:const AlwaysScrollableScrollPhysics(),
+            child:SizedBox(
+                height: MediaQuery.of(context).size.height * heightRadius,
+                child: Stack(
+              children: [
+                VerticalLines(numberOfLine: numberOfLine,),
+                DataRow(
               dataList: finalList,
-            );
+            )
+              ])));
           })),
     );
   }
@@ -72,15 +102,15 @@ class DataWidget extends StatelessWidget {
         return [...getSubjectList(events.sunday), 'الأحد'];
       case 1:
         return [...getSubjectList(events.monday), 'الإثنين'];
-      case 3:
+      case 2:
         return [...getSubjectList(events.tuesday), 'الثلاثاء'];
-      case 4:
+      case 3:
         return [...getSubjectList(events.wednesday), 'الأربعاء'];
-      case 5:
+      case 4:
         return [...getSubjectList(events.thursday), 'الخميس'];
-      case 6:
+      case 5:
         return [...getSubjectList(events.friday), 'الجمعة'];
-      case 7:
+      case 6:
         return [...getSubjectList(events.saturday), 'السبت'];
     }
     return [];
@@ -103,7 +133,8 @@ class DataRow extends StatelessWidget {
   final List<String> dataList;
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.only(bottom: 0.7),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -128,26 +159,23 @@ class DataRow extends StatelessWidget {
 }
 
 class VerticalLines extends StatelessWidget {
-  const VerticalLines({Key? key}) : super(key: key);
+  const VerticalLines({Key? key,required this.numberOfLine}) : super(key: key);
+
+  final int numberOfLine;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: Row(
+        child:Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            spacingSizedBox(context),
-            const Line(isVertical: true),
-            spacingSizedBox(context),
-            const Line(isVertical: true),
-            spacingSizedBox(context),
-            const Line(isVertical: true),
-            spacingSizedBox(context),
-            const Line(isVertical: true),
-            spacingSizedBox(context),
-          ],
+          children:List.generate(numberOfLine + 2, (index) => Row(
+            children: [
+              spacingSizedBox(context),
+            const Line(isVertical: true)
+            ]
+          )),
         ));
   }
 }
@@ -200,7 +228,7 @@ class Line extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black87,
-      height: isVertical ? double.infinity : 1,
+      height: isVertical ? MediaQuery.of(context).size.height * heightRadius : 1,
       width: isVertical ? 1 : double.infinity,
     );
   }

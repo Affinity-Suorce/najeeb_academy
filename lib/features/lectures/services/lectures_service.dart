@@ -24,5 +24,8 @@ class LectureServices {
 
   List<Lecture> get getLectures => _lecturesList;
   List<int> get getWatchedLecturesIds => _watchedLecturesIds;
-  int get getWatchedLecturesCount => _preferences.getInt('watched_lectures') ?? 0;
+  int get getWatchedLecturesCount {
+    debugPrint(_preferences.getInt('watched_lectures').toString());
+    return _preferences.getInt('watched_lectures') ?? 0;
+  }
 }

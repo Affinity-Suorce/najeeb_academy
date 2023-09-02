@@ -33,7 +33,7 @@ class _SliderSectionState extends State<SliderSection> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 230,
+      height: MediaQuery.of(context).size.height * 0.3,
       // color: Colors.,
       child: ListView(
         padding: const EdgeInsets.only(right: 24, left: 24),
@@ -55,9 +55,7 @@ class _SliderSectionState extends State<SliderSection> {
         listener: (context, state) {},
         builder: (context, state) {
         if (state is LoadingState) {
-                return shimmer(const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: ShimmerWidget3()));
+                return shimmer(const ShimmerWidget3());
               } else if (state is ErrorState) {
                 return ErrorOccuredTextWidget(
                   message: state.message,
@@ -101,7 +99,7 @@ class _SliderSectionState extends State<SliderSection> {
               ),
               Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(right: 8, bottom: 36, top: 12),
+                  padding: const EdgeInsets.only(right: 8, bottom: 34, top: 12),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

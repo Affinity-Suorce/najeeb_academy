@@ -1,6 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:najeeb_academy/app/constants/colors.dart';
-import 'package:najeeb_academy/app/widgets/button.dart';
 
 class PrivacyPolicy extends StatelessWidget {
   const PrivacyPolicy({Key? key, this.isInLogin = false}) : super(key: key);
@@ -8,7 +6,7 @@ class PrivacyPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double sp = 8.0;
-    return SingleChildScrollView(
+    return Scaffold(body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(5, 0, 5, 20),
           child: Column(
@@ -60,27 +58,11 @@ class PrivacyPolicy extends StatelessWidget {
                   "نرحب بتلقي كافة الملاحظات والاستفسارات والاقتراحات المتعلقة بسياسة خصوصية 'نجيب' على البريد الإلكتروني"),
               getTextHeader("najeeb@najeeb-nb.sy"),
               SizedBox(height: sp),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CustomElevatedButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          buttonColor: AppColors.indigo,
-                          verticalPadding: 8,
-                          title: 'موافق',
-                        ),
-                      ),
-                    ],
-                  ),
-                )
             ],
           ),
         ),
-      );
+      )
+    );
   }
 
   Padding getText1(String text) {

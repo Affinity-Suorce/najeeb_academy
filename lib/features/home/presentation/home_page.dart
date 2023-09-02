@@ -9,10 +9,8 @@ import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/bottom_section.dart';
-import 'package:najeeb_academy/features/home/presentation/widgets/program_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/slider_section.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/top_section.dart';
-import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
 import 'package:provider/provider.dart';
 
@@ -81,21 +79,13 @@ class _HomePageState extends State<HomePage> {
                           top: 24.h,
                           child: IconButton(
                             onPressed: () {
-                              DI.router.push(NotificationsRoute(
-                                  service:
-                                      context.read<NotificationsService>()));
+                              DI.router.push(NotificationsRoute(service: context.read<NotificationsService>()));
                             },
                             tooltip: 'الإشعارات',
                             icon: badge.Badge(
                               alignment: AlignmentDirectional.topEnd,
-                              showBadge: context
-                                  .watch<NotificationsService>()
-                                  .hasUnseenNotifications,
-                              badgeContent: Text(
-                                context
-                                    .watch<NotificationsService>()
-                                    .unseenNotificationsCount
-                                    .toString(),
+                              showBadge: context.watch<NotificationsService>().hasUnseenNotifications,
+                              badgeContent: Text(context.watch<NotificationsService>().unseenNotificationsCount.toString(),
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   color: Colors.white,
@@ -167,15 +157,15 @@ class _FrontLayer extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            DI.userInfo.isAuthenticated
-                ? (context.watch<ScheduleService>().isLoaded != null &&
-                        context.watch<ScheduleService>().isLoaded!)
-                    ? const ProgramSection()
-                    : const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                // : const ProgramSectionNotLoadedWidget()
-                : const SizedBox.shrink(),
+            // DI.userInfo.isAuthenticated
+            //     ? (context.watch<ScheduleService>().isLoaded != null &&
+            //             context.watch<ScheduleService>().isLoaded!)
+            //         ? const ProgramSection()
+            //         : const Center(
+            //             child: CircularProgressIndicator(),
+            //           )
+            //     // : const ProgramSectionNotLoadedWidget()
+            //     : const SizedBox.shrink(),
             DI.userInfo.isAuthenticated
                 ? const SizedBox(
                     height: 24,

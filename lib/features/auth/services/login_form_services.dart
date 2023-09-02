@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:najeeb_academy/app/app.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/extensions/dialog_build_context.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
@@ -9,11 +10,9 @@ import 'package:najeeb_academy/core/network/urls.dart';
 import 'package:najeeb_academy/features/auth/repositories/user_info_repository.dart';
 
 class LoginFormService extends ChangeNotifier {
-  final Dio _api;
   final UserInfoRepository _userInfo;
 
   LoginFormService(
-    this._api,
     this._userInfo,
   );
   final formKey = GlobalKey<FormBuilderState>();
@@ -40,7 +39,7 @@ class LoginFormService extends ChangeNotifier {
           data: {
             'username': username,
             'password': password,
-            // 'fcm_token':fcm_token,
+            'fcm_token':NajeebAcademyApp.fcmToken,
           },
           cancelToken: cancelToken,
           options: Options (
@@ -69,7 +68,7 @@ class LoginFormService extends ChangeNotifier {
             DI.router.replaceAll([const MainRoute()]);
           });
         }
-        return onFailed(data['message']);
+        return onFailed(data['message']??"");
       } on DioError catch (e) {
         if ([
           DioErrorType.other,

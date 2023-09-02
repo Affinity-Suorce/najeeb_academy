@@ -53,14 +53,14 @@ class SubjectWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(getSubjectImage(subject.name!)),
-                        fit: BoxFit.contain)),
-              ),
+              // Container(
+              //   width: 50,
+              //   height: 50,
+              //   decoration: BoxDecoration(
+              //       image: DecorationImage(
+              //           image: AssetImage(getSubjectImage(subject.name!)),
+              //           fit: BoxFit.contain)),
+              // ),
             ],
           ),
         ),

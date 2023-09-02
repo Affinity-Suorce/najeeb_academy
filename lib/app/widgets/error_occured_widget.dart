@@ -11,15 +11,19 @@ class ErrorOccuredTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       height: 200,
-      child: Center(
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               "$message!!",
-              style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 28),
+              style: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20),
+              textAlign: TextAlign.center,
             ),
             InkWell(
               onTap: () {

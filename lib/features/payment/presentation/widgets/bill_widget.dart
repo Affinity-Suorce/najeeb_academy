@@ -16,7 +16,7 @@ class BillWidget extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -25,7 +25,7 @@ class BillWidget extends StatelessWidget {
                       //     : const SizedBox.shrink(),
                       Text('رقم الفاتورة:', style: textStyle1),
                       Text('المبلغ المدفوع:', style: textStyle1),
-                      Text('المبلغ المتبقي:', style: textStyle1),
+                      // Text('المبلغ المتبقي:', style: textStyle1),
                       Text('تاريخ:', style: textStyle1),
                       // const Text('إلى تاريخ', style: textStyle1),
                     ],
@@ -39,19 +39,19 @@ class BillWidget extends StatelessWidget {
                       //     ? Text(installment.toString(), style: textStyle2)
                       //     : const SizedBox.shrink(),
                       Text(
-                        payment.id.toString(),
+                        payment.billNumber.toString(),
                         style: textStyle2,
                       ),
                       Text(
                         payment.amtPaid.toString(),
                         style: textStyle2,
                       ),
+                      // Text(
+                      //   payment.balance.toString(),
+                      //   style: textStyle2,
+                      // ),
                       Text(
-                        payment.balance.toString(),
-                        style: textStyle2,
-                      ),
-                      Text(
-                        payment.createdAt.formattedDate2,
+                        payment.paymentDate.formattedDate2,
                         style: textStyle2,
                       ),
                       // Text(

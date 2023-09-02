@@ -108,25 +108,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                 // print(
                                 //     "lectureIndex:${widget.lectureIndex}lectureSubject.lectures!.length:${widget.lectureSubject.lectures!.length}indexIs:$index");
                                 if (index == -1) {
-                                  videoCubit.getVideo(widget
-                                      .lectureSubject
-                                      .lectures![widget.lectureIndex == 0
-                                          ? widget.lectureSubject.lectures!
-                                                  .length -
-                                              1
-                                          : widget.lectureIndex - 1]
-                                      .id
-                                      .toString());
+                                  videoCubit.getVideo(widget.lectureSubject.lectures![widget.lectureIndex == 0 ? widget.lectureSubject.lectures!.length - 1 : widget.lectureIndex - 1].id.toString());
                                 } else if (index == 1) {
-                                  videoCubit.getVideo(widget
-                                      .lectureSubject
-                                      .lectures![widget.lectureIndex ==
-                                              widget.lectureSubject.lectures!
-                                                  .length
-                                          ? 0
-                                          : widget.lectureIndex + 1]
-                                      .id
-                                      .toString());
+                                  videoCubit.getVideo(widget.lectureSubject.lectures![widget.lectureIndex == widget.lectureSubject.lectures!.length ? 0 : widget.lectureIndex + 1].id.toString());
                                 }
                                 // _ChangeVideo(stream2);
                               },

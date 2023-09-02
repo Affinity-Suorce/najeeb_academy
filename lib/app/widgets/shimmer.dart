@@ -14,7 +14,7 @@ class ShimmerWidget1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height ?? 200,
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: Colors.black.withOpacity(0.3),
         borderRadius: BorderRadius.circular(25),
@@ -35,7 +35,7 @@ class ShimmerWidget2 extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index) => Container(
             height: 115,
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.3),
               borderRadius: BorderRadius.circular(15),
@@ -58,11 +58,13 @@ class ShimmerWidget3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: const Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 86,
+              height: 28,
             ),
             ShimmerWidget1(height: 45),
             SizedBox(

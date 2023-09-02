@@ -11,6 +11,8 @@ const myNotificationsUrl = "${baseUrl}my_notifications";
 const myPaymentsUrl = "${baseUrl}my_payments";
 const myClassesOrderCreateUrl = "${baseUrl}class_order_create";
 const eventsUrl = "${baseUrl}time_table";
+const getNumberOfViews = "${baseUrl}getTodayAttendences";
+const setNumberOfViews = "${baseUrl}setAttendence";
 String videoUrl(String id) {
   return "${baseUrl}lecture/$id";
 }

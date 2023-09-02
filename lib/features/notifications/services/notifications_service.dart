@@ -62,7 +62,7 @@ class NotificationsService extends ChangeNotifier {
           data is Map<String, dynamic> &&
           data.containsKey('data')) {
         final List notificationsJson = data['data'];
-        unseenNotificationsCount = notificationsJson.length;
+        unseenNotificationsCount = notificationsJson.where((element) => element["seen"] == 0).length;
         hasUnseenNotifications = notificationsJson.isNotEmpty;
         notifyListeners();
         return true;

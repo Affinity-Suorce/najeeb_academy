@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "188670040025-ub2bfm3qcnf6vb9fcjl0qvt7jp2lh2fd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ysh.najeeb_academy",
+            "certificate_hash": "db44ae29793e3929091e17f5ef5eeb84ef62b7fb"
+          }
+        },
+        {
           "client_id": "188670040025-j2nmsb62suu1bou64mcg4otltqbmp8qj.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "188670040025-j2nmsb62suu1bou64mcg4otltqbmp8qj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "188670040025-e3blkr3tb2ihg0lnki5q138286in35lh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sy.academy.najeeb.najeebAcademy"
+              }
             }
           ]
         }

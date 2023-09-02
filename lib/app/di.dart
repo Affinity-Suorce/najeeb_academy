@@ -12,6 +12,8 @@ import 'package:najeeb_academy/features/courses/data/courses_repositories.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
 import 'package:najeeb_academy/features/courses/services/course_service.dart';
 import 'package:najeeb_academy/features/courses/services/create_classes_order_service.dart';
+import 'package:najeeb_academy/features/home/bloc/home_bloc.dart';
+import 'package:najeeb_academy/features/home/services/get_number_of_views_repository_and_dataBase.dart';
 import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/lectures/services/lectures_service.dart';
 import 'package:najeeb_academy/features/notifications/services/notifications_service.dart';
@@ -30,10 +32,9 @@ abstract class DI {
     final userInfo = UserInfoRepository(preferences);
 
     final api = Dio()..interceptors.add(AuthInterceptor(userInfo));
-    di.registerFactory<LoginFormService>(() => LoginFormService(api, userInfo));
+    di.registerFactory<LoginFormService>(() => LoginFormService(userInfo));
     di.registerFactory<RegisterFormService>(() => RegisterFormService(api));
-    di.registerFactory<WelcomeService>(
-        () => WelcomeService(preferences, userInfo));
+    di.registerFactory<WelcomeService>(() => WelcomeService(preferences, userInfo));
     di.registerFactory<NotificationsService>(() => NotificationsService(api));
     di.registerFactory<ScheduleService>(() => ScheduleService(api));
     // di.registerFactory<LectureServices>(() => LectureServices());
@@ -41,15 +42,15 @@ abstract class DI {
     di.registerFactory<CreateClassedOrderService>(() => CreateClassedOrderService(api));
     di.registerSingleton<AppRouter>(AppRouter());
     di.registerSingleton<UserInfoRepository>(userInfo);
-    di.registerLazySingleton<CoursesServices>(
-      () => CoursesServices(),
-    );
-    di.registerLazySingleton<LectureServices>(
-      () => LectureServices(preferences),
-    );
+    di.registerLazySingleton<CoursesServices>(() => CoursesServices(),);
+    di.registerLazySingleton<LectureServices>(() => LectureServices(preferences),);
 
     di.registerSingleton<UserInfoService>(UserInfoService(api, userInfo));
     di.registerLazySingleton<Client>(() => Client());
+    di.registerLazySingleton<BaseDataSource<int,GetNumberOfViewsEvent>>(() => GetNumberOfViewsDataSource());
+    di.registerLazySingleton<BaseDataSource<String,SetNumberOfViewsEvent>>(() => SetNumberOfViewsDataSource());
+    di.registerLazySingleton<BaseRepositoryGetNumberOfViews<int,GetNumberOfViewsEvent>>(() => GetNumberOfViewsRepository(getNumberOfViewsDataSource));
+    di.registerLazySingleton<BaseRepositorySetNumberOfViews<String,SetNumberOfViewsEvent>>(() => SetNumberOfViewsRepository(setNumberOfViewsDataSource));
     registerCourses();
     registerVideo();
   }
@@ -71,6 +72,11 @@ abstract class DI {
     di.registerFactory<VideoCubit>(() => VideoCubit(di<VideoRepositories>()));
   }
 
+
+  static BaseDataSource<int,GetNumberOfViewsEvent> get getNumberOfViewsDataSource => di.get<BaseDataSource<int,GetNumberOfViewsEvent>>();
+  static BaseDataSource<String,SetNumberOfViewsEvent> get setNumberOfViewsDataSource => di.get<BaseDataSource<String,SetNumberOfViewsEvent>>();
+  static BaseRepositoryGetNumberOfViews<int,GetNumberOfViewsEvent> get getNumberOfViewsRepository => di.get<BaseRepositoryGetNumberOfViews<int,GetNumberOfViewsEvent>>();
+  static BaseRepositorySetNumberOfViews<String,SetNumberOfViewsEvent> get setNumberOfViewsRepository => di.get<BaseRepositorySetNumberOfViews<String,SetNumberOfViewsEvent>>();
   static AppRouter get router => di.get<AppRouter>();
   static CoursesServices get coursesServices => di.get<CoursesServices>();
   static LectureServices get lectureServices => di.get<LectureServices>();
@@ -81,8 +87,7 @@ abstract class DI {
   static RegisterFormService registerFormServiceFactory() =>
       di.get<RegisterFormService>();
   static WelcomeService welcomeServiceFactory() => di.get<WelcomeService>();
-  static NotificationsService notificationsServiceFactory() =>
-      di.get<NotificationsService>();
+  static NotificationsService notificationsServiceFactory() => di.get<NotificationsService>();
   static ScheduleService scheduleServiceFactory() => di.get<ScheduleService>();
   // static LectureServices lectureServiceFactory() => di.get<LectureServices>();
   static PaymentsService paymentsServiceFactory() => di.get<PaymentsService>();

@@ -178,7 +178,7 @@ class _CourseExpandableBodyWidgetState
 //                 height: 80,
 //                 decoration: const BoxDecoration(
 //                     image: DecorationImage(
-//                         image: AssetImage('assets/images/logo.png'),
+//                         image: AssetImage('assets/images/logo.jpg'),
 //                         fit: BoxFit.contain)),
 //               ),
 //             ],

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:najeeb_academy/app/di.dart';
+import 'package:najeeb_academy/app/extensions/dialog_build_context.dart';
+import 'package:najeeb_academy/app/router/app_router.dart';
+import 'package:najeeb_academy/features/auth/ui/login/login_page.dart';
 import 'package:najeeb_academy/features/home/presentation/privacy_poilcy.dart';
 import 'package:najeeb_academy/features/profile/presentation/widgets/user_image.dart';
 
@@ -146,7 +150,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const PrivacyPolicy()));
+                                  builder: (context) => const PrivacyPolicy(isInLogin: true,)));
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 12),Card(
+                      child: ListTile(
+                        leading: const Icon(Icons.logout_outlined),
+                        title: const Text('تسجيل الخروج'),
+                        onTap: () async {
+                          await context.showDialog(const AreYouLogOut());
                         },
                       ),
                     ),
@@ -155,6 +168,51 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       ),
+    );
+  }
+}
+class AreYouLogOut extends StatelessWidget {
+  const AreYouLogOut({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape:const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20.0)),borderSide: BorderSide(width: 0.0)),
+      title:Row(
+          children: [
+        const Icon(Icons.info_outline_rounded,color: Colors.black38),
+        const SizedBox(width: 10.0,),
+        Text("تسجيل خروج",style: GoogleFonts.varela(color: Colors.redAccent),)
+      ]),
+      content: Text("لن تستطيع تسجيل الدخول لمدة يوم كامل\n\n هل انت متأكد من تسجيل الخروج ؟",style: GoogleFonts.varela(fontSize: 16),),
+      actions: [
+      SizedBox(
+      height: 35.0,
+      width: 60.0,
+      child:ElevatedButton(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+              backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+            ),
+            onPressed: () {
+              DI.userInfo.logout();
+              DI.router.replaceAll([const LoginRoute()]);
+            },
+            child: Text("نعم",style: GoogleFonts.varela(),))),
+        SizedBox(
+          height: 35.0,
+        width: 60.0,
+        child:ElevatedButton(
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+                backgroundColor: MaterialStateProperty.all(Colors.green)
+            ),
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("لا",style: GoogleFonts.varela()))),
+      ],
+      actionsAlignment: MainAxisAlignment.spaceAround,
     );
   }
 }

@@ -10,9 +10,8 @@ class VideoCubit extends Cubit<VideoState> {
   Future<void> getVideo(String videoId) async {
     emit(LoadingState());
     final either = await _videoRepositories.getVideo(videoId);
-    either.fold((error) async {
-      final errorMessage = getErrorMessage(error);
-      emit(ErrorState(errorMessage));
+    either.fold((error) {
+      emit(ErrorState(getErrorMessage(error)));
     }, (data) {
       emit(GotVideoState(data));
     });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:najeeb_academy/app/constants/colors.dart';
 import 'package:najeeb_academy/app/di.dart';
 import 'package:najeeb_academy/app/widgets/loading.dart';
@@ -7,16 +8,16 @@ import 'package:najeeb_academy/features/payment/presentation/widgets/bill_widget
 import 'package:najeeb_academy/features/payment/services/payments_service.dart';
 import 'package:provider/provider.dart';
 
-const TextStyle textStyle1 = TextStyle(
+TextStyle textStyle1 = GoogleFonts.varela(
   color: AppColors.purple,
   height: 1.4,
   fontSize: 18,
   fontWeight: FontWeight.normal,
 );
-const TextStyle textStyle2 = TextStyle(
+TextStyle textStyle2 = GoogleFonts.varela(
   color: AppColors.red600,
-  fontSize: 18,
-  height: 1.4,
+  fontSize: 16,
+  height: 1.8,
   fontWeight: FontWeight.normal,
 );
 

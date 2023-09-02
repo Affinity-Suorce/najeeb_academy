@@ -14,7 +14,8 @@ class SyrianMobileFormField extends StatelessWidget {
       this.controller,
       this.onSaved,
       this.name = 'mobile',
-      this.withValidator = true});
+      this.withValidator = true,
+      this.focusNode});
   final String name;
   final bool withValidator;
   final FormFieldSetter<String>? onSaved;
@@ -25,10 +26,12 @@ class SyrianMobileFormField extends StatelessWidget {
   final ValueChanged<String?>? onFieldSubmitted;
   final ValueChanged<String?>? onChanged;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      focusNode: focusNode?? FocusNode(),
       name: name,
       decoration: decoration,
       controller: controller,

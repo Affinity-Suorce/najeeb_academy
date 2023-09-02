@@ -16,9 +16,11 @@ import 'package:najeeb_academy/app/firebase_fcm_handler.dart';
 import 'package:najeeb_academy/app/router/app_router.dart';
 import 'package:najeeb_academy/app/widgets/fixed_scale_text_widget.dart';
 import 'package:najeeb_academy/features/courses/presentation/cubit/courses_cubit.dart';
+import 'package:najeeb_academy/features/home/bloc/home_bloc.dart';
 import 'package:najeeb_academy/features/video_player/presentation/cubit/video_cubit.dart';
 import 'package:najeeb_academy/features/welcome/services/welcome_service.dart';
 import 'package:najeeb_academy/app/firebase_options.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'constants/colors.dart';
@@ -28,6 +30,7 @@ part 'app_localization.dart';
 part 'app_theme.dart';
 
 class NajeebAcademyApp extends StatelessWidget {
+  static String fcmToken = "";
   static Future<void> init() async {
     FlutterNativeSplash.preserve(
         widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
@@ -36,10 +39,16 @@ class NajeebAcademyApp extends StatelessWidget {
     options: DefaultFirebaseOptions.currentPlatform,
     );
     await FirebaseFCMHandler.initialize();
-    final fcmToken = await FirebaseMessaging.instance.getToken();
+    fcmToken = await FirebaseMessaging.instance.getToken() ?? "";
     debugPrint(fcmToken);
     LocalNotificationService().initNotification();
-    
+
+    await Permission.notification.isDenied.then((value) {
+      if (value) {
+        Permission.notification.request();
+      }
+    });
+
     _Localization.initLocalization();
     await DI.init();
     await SystemChrome.setPreferredOrientations(
@@ -80,6 +89,7 @@ class NajeebAcademyApp extends StatelessWidget {
           BlocProvider(
             create: (_) => DI.di<VideoCubit>(),
           ),
+          BlocProvider(create: (BuildContext context) => HomeBloc()..add(GetNumberOfViewsEvent())),
         ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,

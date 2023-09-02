@@ -16,7 +16,12 @@ String getErrorMessage(Failure error) {
 }
 
 String getResponseMessage(Map response) {
-  return response["status"]["original"]["msg"].toString();
+  if(response["status"] != null) {
+    return response["status"]["original"]["msg"].toString();
+  }else if (response["message"] != null){
+    return response["message"].toString();
+  }
+  return "Error";
 }
 
 String getUserName(String text) =>
@@ -39,7 +44,7 @@ String getSubjectImage(String subjectName) {
     case 'رياضيات':
       return 'assets/images/subjects/math.png';
     default:
-      return 'assets/images/logo.png';
+      return 'assets/images/logo.jpg';
   }
 }
 

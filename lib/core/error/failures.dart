@@ -1,4 +1,6 @@
-class Failure {}
+class Failure {
+  const Failure();
+}
 
 class ServerFailure extends Failure {}
 

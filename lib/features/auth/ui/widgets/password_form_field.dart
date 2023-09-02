@@ -14,6 +14,7 @@ class PasswordFormField extends StatefulWidget {
     this.controller,
     this.validator,
     this.name = 'password',
+    this.focusNode,
   });
   final String name;
   final bool isLogin;
@@ -24,6 +25,7 @@ class PasswordFormField extends StatefulWidget {
   final ValueChanged<String?>? onChanged;
   final TextEditingController? controller;
   final String? Function(String input)? validator;
+  final FocusNode? focusNode;
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();
@@ -35,6 +37,8 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      focusNode: widget.focusNode?? FocusNode(),
       name: widget.name,
       obscureText: obscureText,
       controller: widget.controller,

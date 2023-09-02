@@ -89,7 +89,7 @@ class _CoursesPageState extends State<CoursesPage>
                             courses.length,
                             (i) => TabBarItem(
                               title: courses[i].name!,
-                              // imagePath: 'assets/images/logo.png',
+                              // imagePath: 'assets/images/logo.jpg',
                             ),
                           ),
                         ),
@@ -153,33 +153,39 @@ class CoursesPageWithSingleClass extends StatelessWidget {
   const CoursesPageWithSingleClass({Key? key, required this.course})
       : super(key: key);
   final CourseModel course;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 60, 12, 0),
-          child: CoursesTopSection(
-            classname: course.name,
-          ),
-        ),
-        const SizedBox(
-          height: 28,
-        ),
-        RefreshIndicator(
-          onRefresh: () {
-            return BlocProvider.of<CoursesCubit>(context).getMyCourses(false);
-          },
-          child: ListView.separated(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
-            separatorBuilder: (context, index) => 8.verticalSpace,
-            itemCount: course.subjects!.length,
-            itemBuilder: (context, i) => SubjectWidget(
-              subject: course.subjects![i],
-            ),
-          ),
-        ),
+        Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 60, 12, 0),
+              child: CoursesTopSection(
+                classname: course.name,
+              ),
+            )),
+        // const SizedBox(
+        //   height: 28,
+        // ),
+        Expanded(
+            flex: 4,
+            child: RefreshIndicator(
+              onRefresh: () {
+                return BlocProvider.of<CoursesCubit>(context)
+                    .getMyCourses(false);
+              },
+              child: ListView.separated(
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+                separatorBuilder: (context, index) => 8.verticalSpace,
+                itemCount: course.subjects!.length,
+                itemBuilder: (context, i) => SubjectWidget(
+                  subject: course.subjects![i],
+                ),
+              ),
+            )),
       ],
     );
   }

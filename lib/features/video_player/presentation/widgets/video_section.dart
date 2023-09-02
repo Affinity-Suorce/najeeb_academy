@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:najeeb_academy/features/video_player/presentation/widgets/player.dart';
 
-class VideoSection extends StatefulWidget {
+class VideoSection extends StatelessWidget {
   const VideoSection({
     Key? key,
     required this.changeVideo,
@@ -13,11 +13,6 @@ class VideoSection extends StatefulWidget {
   final String url;
   final int id;
 
-  @override
-  State<VideoSection> createState() => _VideoSectionState();
-}
-
-class _VideoSectionState extends State<VideoSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,9 +29,9 @@ class _VideoSectionState extends State<VideoSection> {
                 textDirection: TextDirection.ltr,
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Player(
-                    url: widget.url,
-                    id: widget.id,
+                  child:  Player(
+                    url: url,
+                    id: id,
                   ),
                 ),
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:najeeb_academy/features/home/presentation/widgets/schedule/calendar.dart';
 import 'package:najeeb_academy/features/home/services/schedule_service.dart';
 import 'package:najeeb_academy/features/lectures/models/event.dart';
@@ -26,7 +25,6 @@ class _ProgramSectionState extends State<ProgramSection> {
       elevation: 0,
       child: InkWell(
         onTap: () {
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
           Navigator.push(
             context,
             MaterialPageRoute(
